@@ -166,7 +166,7 @@ footer {
   padding: 1rem 2rem;
   text-align: center;
   font-size: 0.9rem;
-  margin-top: 2rem;
+  margin-top: auto;
   border-top: 2px solid #f2aa4c;
 }
 
@@ -185,17 +185,4 @@ footer {
     align-items: center;
   }
 }
-/* Sticky footer support */
-html, body {
-  height: 100%;
-}
 
-body {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
-footer {
-  margin-top: auto;
-}
