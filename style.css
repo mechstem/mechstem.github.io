@@ -1,0 +1,111 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: sans-serif; background-color: #0f172a; color: white; }
+
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: #1e293b;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 24px;
+  z-index: 1000;
+}
+.nav-left, .nav-right {
+  display: flex;
+  align-items: center;
+}
+.nav-left img.logo {
+  height: 32px;
+  margin-right: 16px;
+}
+.nav-item {
+  margin: 0 10px;
+  color: white;
+  cursor: pointer;
+  position: relative;
+}
+.nav-item:hover::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background-color: #0ea5e9;
+  bottom: -6px;
+  left: 0;
+}
+.nav-icon {
+  width: 20px;
+  height: 20px;
+  margin-left: 16px;
+  cursor: pointer;
+}
+
+.hero {
+  height: 100vh;
+  background: url('ChatGPT Image Jun 13, 2025, 11_19_03 PM.png') center/cover no-repeat;
+  animation: zoomBg 20s infinite alternate ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 60px;
+  text-align: center;
+}
+.hero-overlay {
+  background-color: rgba(0,0,0,0.5);
+  padding: 40px;
+  border-radius: 12px;
+}
+.hero-overlay img {
+  width: 120px;
+  margin-bottom: 16px;
+}
+.hero-overlay h1 {
+  font-size: 2.5rem;
+  margin-bottom: 8px;
+}
+.hero-overlay p {
+  font-size: 1.2rem;
+  margin-bottom: 16px;
+}
+.cta-button {
+  background-color: #0ea5e9;
+  padding: 10px 20px;
+  border-radius: 6px;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+@keyframes zoomBg {
+  0% { background-size: 100% 100%; }
+  100% { background-size: 110% 110%; }
+}
+
+#news {
+  background: #1e293b;
+  padding: 60px 20px;
+  text-align: center;
+}
+.carousel {
+  max-width: 800px;
+  margin: auto;
+  position: relative;
+}
+.slide {
+  width: 100%;
+  display: none;
+  border-radius: 10px;
+}
+.dot {
+  height: 12px;
+  width: 12px;
+  margin: 0 4px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  cursor: pointer;
+}
+.active {
+  background-color: #0ea5e9;
+}
