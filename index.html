@@ -24,18 +24,31 @@
 <body>
 
   <!-- Navigation -->
-  <div class="navbar">
-    <div class="nav-left">
-      <img src="assets/logo.png" alt="MechStem Logo" class="logo" />
-      <div class="nav-item">Home</div>
-      <div class="nav-item">News</div>
-      <div class="nav-item">About</div>
-    </div>
-    <div class="nav-right">
-      <img src="assets/search-icon.svg" alt="Search" class="nav-icon" />
-      <img src="assets/menu-icon.svg" alt="Menu" class="nav-icon" />
-    </div>
+  <!-- Navigation Bar -->
+<div class="navbar">
+  <div class="menu-toggle" id="mobile-menu-toggle">
+    <img src="assets/menu-icon.svg" alt="Menu" class="nav-icon" />
   </div>
+
+  <div class="nav-left">
+    <a href="index.html" class="nav-item">Home</a>
+
+    <div class="dropdown">
+      <div class="nav-item dropdown-toggle">Solutions ▼</div>
+      <div class="dropdown-content">
+        <a href="products.html">Products</a>
+        <a href="training.html">Training Programs</a>
+      </div>
+    </div>
+
+    <a href="support.html" class="nav-item">About</a>
+  </div>
+
+  <div class="nav-right">
+    <img src="assets/search-icon.svg" alt="Search" class="nav-icon" />
+  </div>
+</div>
+
 
   <!-- Hero Section -->
   <section class="hero">
