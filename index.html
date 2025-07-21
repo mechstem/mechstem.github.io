@@ -86,11 +86,39 @@
     </div>
   </div>
 </section>
-
   
   <!-- Footer -->
   <footer style="text-align: center; padding: 20px; font-size: 0.9rem;">
     <p>© 2025 MechStem. Built with 💡 by future engineers.</p>
   </footer>
+  
+  <script>
+  const slides = document.getElementById('slides');
+  const dots = document.querySelectorAll('.dot');
+  const totalSlides = dots.length;
+  let currentIndex = 0;
+  let slideInterval = setInterval(nextSlide, 4000);
+
+  function goToSlide(index) {
+    slides.style.transform = `translateX(-${index * 100}%)`;
+    dots.forEach(dot => dot.classList.remove('active'));
+    dots[index].classList.add('active');
+    currentIndex = index;
+  }
+
+  function nextSlide() {
+    let nextIndex = (currentIndex + 1) % totalSlides;
+    goToSlide(nextIndex);
+  }
+
+  dots.forEach(dot => {
+    dot.addEventListener('click', () => {
+      clearInterval(slideInterval);
+      goToSlide(parseInt(dot.dataset.index));
+      slideInterval = setInterval(nextSlide, 4000);
+    });
+  });
+</script>
+
 </body>
 </html>
