@@ -169,6 +169,35 @@ footer {
   margin-top: auto;
   border-top: 2px solid #f2aa4c;
 }
+footer .social-links {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+}
+
+.social-icon img {
+  width: 26px;
+  height: 26px;
+  filter: grayscale(40%);
+  transition: filter 0.3s, transform 0.2s;
+  vertical-align: middle;
+}
+
+.social-icon:hover img {
+  filter: none;
+  transform: scale(1.1) rotate(-8deg);
+}
+
+@media (max-width: 600px) {
+  footer .social-links {
+    gap: 12px;
+  }
+  .social-icon img {
+    width: 22px;
+    height: 22px;
+  }
+}
 
 @media (max-width: 768px) {
   .hero-overlay {
