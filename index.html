@@ -23,32 +23,28 @@
 </head>
 <body>
 
-  <!-- Navigation -->
   <!-- Navigation Bar -->
-<div class="navbar">
-  <div class="menu-toggle" id="mobile-menu-toggle">
-    <img src="assets/menu-icon.svg" alt="Menu" class="nav-icon" />
-  </div>
-
-  <div class="nav-left">
-    <a href="index.html" class="nav-item">Home</a>
-
-    <div class="dropdown">
-      <div class="nav-item dropdown-toggle">Solutions ▼</div>
-      <div class="dropdown-content">
-        <a href="products.html">Products</a>
-        <a href="training.html">Training Programs</a>
-      </div>
+  <div class="navbar">
+    <div class="menu-toggle" id="mobile-menu-toggle">
+      <img src="assets/menu-icon.svg" alt="Menu" class="nav-icon" />
     </div>
 
-    <a href="support.html" class="nav-item">About</a>
-  </div>
+    <div class="nav-left">
+      <a href="index.html" class="nav-item">Home</a>
+      <div class="dropdown">
+        <div class="nav-item dropdown-toggle">Solutions ▼</div>
+        <div class="dropdown-content">
+          <a href="products.html">Products</a>
+          <a href="training.html">Training Programs</a>
+        </div>
+      </div>
+      <a href="support.html" class="nav-item">About</a>
+    </div>
 
-  <div class="nav-right">
-    <img src="assets/search-icon.svg" alt="Search" class="nav-icon" />
+    <div class="nav-right">
+      <img src="assets/search-icon.svg" alt="Search" class="nav-icon" />
+    </div>
   </div>
-</div>
-
 
   <!-- Hero Section -->
   <section class="hero">
@@ -60,10 +56,9 @@
     </div>
   </section>
 
-  <!-- News Section -->
+  <!-- News/Carousel Section -->
   <section id="news">
     <h2>📰 Featured News</h2>
-
     <div class="carousel">
       <div class="slide" style="display: block;">
         <img src="assets/project-1.jpg" alt="Project 1: Autonomous Rover" class="slide-img" />
@@ -74,7 +69,6 @@
       <div class="slide">
         <img src="assets/project-3.jpg" alt="Project 3: Mechatronics Showcase" class="slide-img" />
       </div>
-
       <div>
         <span class="dot active"></span>
         <span class="dot"></span>
@@ -84,9 +78,57 @@
   </section>
 
   <!-- Footer -->
-  <footer style="text-align: center; padding: 20px; font-size: 0.9rem;">
+  <footer>
     <p>© 2025 MechStem. Built with 💡 by future engineers.</p>
   </footer>
 
+  <!-- CAROUSEL JS + MOBILE NAV -->
+  <script>
+    // Carousel
+    let slideIndex = 0;
+    const slides = document.querySelectorAll('.slide');
+    const dots = document.querySelectorAll('.dot');
+    let carouselTimer = null;
+
+    function showSlide(index) {
+      slides.forEach((slide, i) => {
+        slide.style.display = (i === index) ? "block" : "none";
+        dots[i].classList.toggle('active', i === index);
+      });
+      slideIndex = index;
+    }
+
+    function nextSlide() {
+      slideIndex = (slideIndex + 1) % slides.length;
+      showSlide(slideIndex);
+    }
+
+    function startCarousel() {
+      carouselTimer = setInterval(nextSlide, 3500);
+    }
+
+    function stopCarousel() {
+      clearInterval(carouselTimer);
+    }
+
+    dots.forEach((dot, i) => {
+      dot.addEventListener('click', () => {
+        showSlide(i);
+        stopCarousel();
+        startCarousel();
+      });
+    });
+
+    showSlide(0);
+    startCarousel();
+
+    // Mobile Menu Toggle
+    const menuToggle = document.getElementById('mobile-menu-toggle');
+    const navbar = document.querySelector('.navbar');
+
+    menuToggle.addEventListener('click', () => {
+      navbar.classList.toggle('active');
+    });
+  </script>
 </body>
 </html>
