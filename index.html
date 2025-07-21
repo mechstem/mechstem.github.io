@@ -1,116 +1,72 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MechStem | Mechanical Meets Intelligence</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
-  <style>
-    body {
-      font-family: 'Roboto', sans-serif;
-      margin: 0;
-      background-color: #f9f9f9;
-      color: #333;
-    }
-    header {
-      background: #1e293b;
-      color: white;
-      padding: 60px 20px;
-      text-align: center;
-    }
-    header h1 {
-      font-size: 3em;
-      margin-bottom: 10px;
-    }
-    header p {
-      font-size: 1.2em;
-    }
-    section {
-      padding: 40px 20px;
-      max-width: 1000px;
-      margin: auto;
-    }
-    .projects, .videos {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-      justify-content: center;
-    }
-    .card {
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      padding: 20px;
-      flex: 1 1 300px;
-      text-align: center;
-    }
-    .card h3 {
-      margin-top: 0;
-    }
-    iframe {
-      width: 100%;
-      height: 200px;
-      border: none;
-      border-radius: 10px;
-    }
-    footer {
-      background: #1e293b;
-      color: white;
-      text-align: center;
-      padding: 20px;
-    }
-    a {
-      color: #0ea5e9;
-      text-decoration: none;
-    }
-  </style>
+  <title>Mechstem</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header>
-    <h1>⚙️ MechStem</h1>
-    <p>Where Mechanical Systems Meet Intelligence</p>
-    <p><a href="https://www.youtube.com/@MechStem" target="_blank">📺 Visit Our YouTube Channel</a></p>
+  <nav class="navbar">
+    <div class="nav-left">
+      <img src="logo.png" alt="Mechstem Logo" class="logo" />
+      <div class="nav-item">Products & Solutions</div>
+      <div class="nav-item">Industries</div>
+    </div>
+    <div class="nav-right">
+      <img src="icon_shop.png" class="nav-icon" title="Shop" />
+      <img src="icon_support.png" class="nav-icon" title="Support" />
+      <img src="icon_search.png" class="nav-icon" title="Search" />
+      <img src="icon_globe.png" class="nav-icon" title="Language" />
+      <img src="icon_user.png" class="nav-icon" title="Account" />
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-overlay">
+      <img src="logo.png" alt="Mechstem Logo" />
+      <h1>Mechstem</h1>
+      <p>Where Engineering Meets Ingenuity</p>
+      <a href="https://youtube.com/@MechStem" target="_blank" class="cta-button">Watch on YouTube</a>
+    </div>
   </header>
 
-  <section>
-    <h2>About MechStem</h2>
-    <p>MechStem explores the intersection of mechanical engineering, embedded systems, and AI through hands-on projects, real-world applications, and educational tutorials. Whether you're a student, hobbyist, or professional, MechStem helps you build smart mechanical systems that move and think.</p>
-  </section>
-
-  <section>
-    <h2>🔧 Featured Projects</h2>
-    <div class="projects">
-      <div class="card">
-        <h3>PID Controlled Fan</h3>
-        <p>Learn how to implement a real-time temperature-based fan using Arduino and PID logic.</p>
-        <a href="#">View on GitHub</a> | <a href="#">Watch Video</a>
-      </div>
-      <div class="card">
-        <h3>Smart Conveyor System</h3>
-        <p>Build a weight-sensing conveyor using ESP32, load cell, and OLED display.</p>
-        <a href="#">View on GitHub</a> | <a href="#">Watch Video</a>
-      </div>
-      <div class="card">
-        <h3>AI-based Vibration Monitor</h3>
-        <p>Use Edge Impulse to classify machine conditions from vibration sensor data.</p>
-        <a href="#">View on GitHub</a> | <a href="#">Watch Video</a>
-      </div>
+  <section id="news">
+    <h2>📰 MechStem News</h2>
+    <div class="carousel">
+      <img src="https://via.placeholder.com/800x300?text=News+1" class="slide" style="display:block;">
+      <img src="https://via.placeholder.com/800x300?text=News+2" class="slide">
+      <img src="https://via.placeholder.com/800x300?text=News+3" class="slide">
+    </div>
+    <div style="margin-top: 10px;">
+      <span class="dot" onclick="showSlide(0)"></span>
+      <span class="dot" onclick="showSlide(1)"></span>
+      <span class="dot" onclick="showSlide(2)"></span>
     </div>
   </section>
 
-  <section>
-    <h2>🎥 Latest Videos</h2>
-    <div class="videos">
-      <div class="card">
-        <iframe src="https://www.youtube.com/embed/videoseries?list=PLMechStemSample" allowfullscreen></iframe>
-        <p>Subscribe for weekly engineering tutorials, demos, and project builds.</p>
-      </div>
-    </div>
-  </section>
+  <script>
+    let slideIndex = 0;
+    const slides = document.getElementsByClassName("slide");
+    const dots = document.getElementsByClassName("dot");
 
-  <footer>
-    <p>&copy; 2025 MechStem | Created by Hafiz | <a href="https://github.com/mechstem" target="_blank">GitHub</a> | <a href="mailto:contact@mechstem.com">Contact</a></p>
-  </footer>
+    function showSlide(index) {
+      for (let i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+        dots[i].classList.remove("active");
+      }
+      slides[index].style.display = "block";
+      dots[index].classList.add("active");
+      slideIndex = index;
+    }
+
+    function autoSlide() {
+      slideIndex = (slideIndex + 1) % slides.length;
+      showSlide(slideIndex);
+    }
+
+    setInterval(autoSlide, 3000);
+    document.addEventListener("DOMContentLoaded", () => showSlide(slideIndex));
+  </script>
 </body>
 </html>
