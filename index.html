@@ -4,36 +4,60 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MechStem – Mechanical Engineering News & Innovation</title>
-  
+
   <!-- SEO Meta Tags -->
-  <meta name="description" content="Stay updated with mechanical engineering news, innovation, and student projects at MechStem." />
-  <meta name="keywords" content="mechanical engineering, robotics, CAD, MechStem, student projects, innovation" />
-  <meta name="author" content="MechStem Team" />
+  <meta name="description" content="Stay updated with MechStem – your source for news, projects, and innovation in mechanical engineering and technology." />
+  <meta name="keywords" content="MechStem, mechanical engineering, robotics, design, innovation, engineering news, student projects" />
+  <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://mechstem.github.io/" />
 
-  <!-- Social Sharing -->
+  <!-- Social Meta Tags -->
   <meta property="og:title" content="MechStem – Mechanical Engineering News & Innovation" />
-  <meta property="og:description" content="Explore cutting-edge mechanical engineering projects, robotics news, and student innovations." />
+  <meta property="og:description" content="Follow MechStem for updates on robotics, mechanical design, and student-led engineering innovations." />
   <meta property="og:url" content="https://mechstem.github.io/" />
   <meta property="og:image" content="https://mechstem.github.io/assets/og-image.png" />
   <meta name="twitter:card" content="summary_large_image" />
 
-  <!-- CSS -->
+  <!-- Stylesheet -->
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <!-- Navigation Bar -->
+  <!-- NAVIGATION -->
   <header class="navbar">
     <div class="nav-left">
       <img src="assets/logo.png" alt="MechStem Logo" class="logo" />
-      <a href="#" class="nav-item active">Home</a>
-      <a href="#" class="nav-item">Solution</a>
-      <a href="#" class="nav-item">Training</a>
+      
+      <div class="dropdown">
+        <div class="nav-item">Topics</div>
+        <div class="mega-menu">
+          <div class="mega-column">
+            <h4>Core Engineering</h4>
+            <a href="#">Thermodynamics</a>
+            <a href="#">Fluid Mechanics</a>
+            <a href="#">Materials</a>
+          </div>
+          <div class="mega-column">
+            <h4>AI in Mechanical</h4>
+            <a href="#">Simulation</a>
+            <a href="#">AI-powered CAD</a>
+            <a href="#">ML & Robotics</a>
+          </div>
+          <div class="mega-column">
+            <h4>Student Projects</h4>
+            <a href="#">Mini Projects</a>
+            <a href="#">Hardware Prototypes</a>
+            <a href="#">Research Papers</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-item"><a href="#news" style="text-decoration: none; color: inherit;">News</a></div>
+      <div class="nav-item">About</div>
     </div>
+
     <div class="nav-right">
-      <img src="assets/search-icon.svg" alt="Search icon" class="nav-icon" />
-      <img src="assets/menu-icon.svg" alt="Menu icon" class="nav-icon" />
+      <img src="assets/search-icon.svg" alt="Search" class="nav-icon" />
     </div>
   </header>
 
@@ -41,26 +65,28 @@
   <section class="hero">
     <div class="hero-overlay">
       <img src="assets/mech-logo.png" alt="Mechanical Engineering Illustration" />
-      <h1>Engineering Innovation Starts Here</h1>
-      <p>Mechanical design, robotics, and student-led exploration at your fingertips.</p>
-      <a href="#news" class="cta-button">Explore News</a>
+      <h1>MechStem: Engineering News, Ideas & Innovation</h1>
+      <p>Explore groundbreaking ideas in mechanical design, robotics, and student-driven research.</p>
+      <a href="#news" class="cta-button">Read Latest News</a>
     </div>
   </section>
 
   <!-- News Section -->
   <section id="news">
-    <h2>🛠️ Featured Projects</h2>
+    <h2>📰 Featured News</h2>
+
     <div class="carousel">
       <div class="slide" style="display: block;">
-        <img src="assets/project-1.jpg" alt="Autonomous Rover Project" class="slide-img" />
+        <img src="assets/project-1.jpg" alt="Project 1: Autonomous Rover" class="slide-img" />
       </div>
       <div class="slide">
-        <img src="assets/project-2.jpg" alt="3D Printed Engine" class="slide-img" />
+        <img src="assets/project-2.jpg" alt="Project 2: 3D Printed Engine" class="slide-img" />
       </div>
       <div class="slide">
-        <img src="assets/project-3.jpg" alt="Mechatronics Showcase" class="slide-img" />
+        <img src="assets/project-3.jpg" alt="Project 3: Mechatronics Showcase" class="slide-img" />
       </div>
-      <div class="dots">
+
+      <div>
         <span class="dot active"></span>
         <span class="dot"></span>
         <span class="dot"></span>
@@ -69,9 +95,38 @@
   </section>
 
   <!-- Footer -->
-  <footer>
-    <p>&copy; 2025 MechStem. Crafted with passion by future engineers. 🚀</p>
+  <footer style="text-align: center; padding: 20px; font-size: 0.9rem;">
+    <p>© 2025 MechStem. Built with 💡 by future engineers.</p>
   </footer>
 
+  <!-- Carousel Script -->
+  <script>
+    let index = 0;
+    const slides = document.querySelectorAll('.slide');
+    const dots = document.querySelectorAll('.dot');
+
+    function showSlide(i) {
+      slides.forEach((s, idx) => {
+        s.style.display = idx === i ? 'block' : 'none';
+        dots[idx].classList.toggle('active', idx === i);
+      });
+    }
+
+    function nextSlide() {
+      index = (index + 1) % slides.length;
+      showSlide(index);
+    }
+
+    setInterval(nextSlide, 4000);
+
+    dots.forEach((dot, idx) => {
+      dot.addEventListener('click', () => {
+        index = idx;
+        showSlide(index);
+      });
+    });
+
+    showSlide(index);
+  </script>
 </body>
 </html>
