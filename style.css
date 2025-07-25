@@ -252,12 +252,13 @@ body {
 .products-background {
   position: relative;
   padding: 5em 1.5em 3em 1.5em;
-  background: url('assets/products-bg.jpg') center center/cover no-repeat !important;
+  background: url('assets/products-bg.gif') center center/cover no-repeat !important;
   min-height: 80vh;
   display: flex;
   align-items: flex-start;
   justify-content: center;
 }
+
 
 .products-overlay {
   position: absolute;
