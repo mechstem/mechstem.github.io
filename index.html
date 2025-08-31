@@ -3,227 +3,134 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>MechStem – Tech-Driven Innovation in Engineering</title>
+<title>MechStem – Our Products</title>
 
 <style>
 :root{
   --bg:#0f1014; --text:#e6e9ef; --muted:#9aa3b2;
-  --blue:#1E88E5; --green:#43A047; --red:#E53935; --yellow:#FBC02D;
-  --radius:18px; --shadow:0 10px 30px rgba(0,0,0,.25); --maxw:1200px;
+  --blue:#1E88E5; --green:#43A047; --yellow:#FBC02D;
+  --radius:18px; --maxw:1200px;
 }
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-body {
-  font-family: system-ui, sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  line-height: 1.6;
-}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:system-ui,sans-serif;background:var(--bg);color:var(--text);}
 
 /* Navbar */
-.navbar {
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  backdrop-filter: blur(10px);
-  background: rgba(15,16,20,.85);
-  border-bottom: 1px solid rgba(255,255,255,.08);
+.navbar{
+  position:sticky;top:0;z-index:50;backdrop-filter:blur(10px);
+  background:rgba(15,16,20,.85);border-bottom:1px solid rgba(255,255,255,.08);
+  display:flex;justify-content:space-between;align-items:center;padding:12px 20px;max-width:var(--maxw);margin:0 auto
+}
+.nav-left{display:flex;align-items:center;gap:18px}
+.logo{height:40px;animation:floaty 6s ease-in-out infinite}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+.nav-item{cursor:pointer;transition:color .3s}
+.nav-item:hover,.nav-active{color:var(--blue)}
+.contact-button{padding:8px 16px;border-radius:999px;background:linear-gradient(90deg,var(--blue),var(--green));color:#fff;font-weight:600;transition:.3s;position:relative;overflow:hidden}
+.contact-button:hover{box-shadow:0 0 15px var(--yellow);transform:translateY(-2px)}
+.contact-button::after{content:"";position:absolute;inset:0;background:linear-gradient(120deg,transparent 0%,rgba(255,255,255,.35) 45%,transparent 80%);transform:translateX(-200%)}
+.contact-button:hover::after{animation:sheen .9s ease}
+
+/* Products Section */
+.products-background{position:relative;padding:60px 20px;text-align:center;max-width:var(--maxw);margin:0 auto}
+.products-background h1{font-size:clamp(28px,4vw,40px);margin-bottom:10px;color:var(--blue)}
+.products-background p{color:var(--muted);margin-bottom:40px}
+
+/* Horizontal scroll products list */
+.products-list {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px 20px;
-  max-width: var(--maxw);
-  margin: 0 auto;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding-bottom: 10px;
+  -webkit-overflow-scrolling: touch;
 }
-.nav-left {
-  display: flex;
-  align-items: center;
-  gap: 18px;
+
+/* Remove transform transition */
+.product-card {
+  flex: 0 0 calc(33.33% - 20px);
+  background: rgba(255,255,255,.03);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: var(--radius);
+  margin: 0;
+  padding: 20px;
+  text-align: center;
+  transition: border-color .3s, box-shadow .3s, transform .3s;
+  position: relative;
 }
-.logo {
-  height: 40px;
-  animation: floaty 6s ease-in-out infinite;
+.product-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: var(--radius);
+  margin-bottom: 15px;
 }
-@keyframes floaty {
-  0%, 100% {transform: translateY(0);}
-  50% {transform: translateY(-4px);}
+.product-card h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: var(--green);
 }
-.nav-item {
-  cursor: pointer;
-  opacity: .95;
-  transition: color .3s;
+.product-card p {
+  font-size: 14px;
+  color: var(--muted);
+  white-space: pre-line;
 }
-.nav-item:hover,
-.nav-active {
-  color: var(--blue);
+.product-card:hover {
+  border-color: var(--blue);
+  box-shadow: 0 0 20px var(--green);
+  transform: translateY(-5px);
 }
-.contact-button {
-  padding: 8px 16px;
+.product-card::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--blue), var(--green));
+  border-radius: 999px;
+  transition: width .3s ease;
+}
+.product-card:hover::after {
+  width: 100%;
+}
+
+/* Know More Button */
+.know-more-button {
+  margin-top: 15px;
+  padding: 8px 18px;
   border-radius: 999px;
   background: linear-gradient(90deg, var(--blue), var(--green));
+  border: none;
   color: #fff;
   font-weight: 600;
-  transition: .3s;
+  cursor: pointer;
+  transition: box-shadow 0.3s, transform 0.3s;
   position: relative;
   overflow: hidden;
-  text-decoration: none;
-  display: inline-block;
+  font-size: 14px;
 }
-.contact-button:hover {
+
+.know-more-button:hover {
   box-shadow: 0 0 15px var(--yellow);
   transform: translateY(-2px);
 }
-.contact-button::after {
+
+.know-more-button::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,.35) 45%, transparent 80%);
+  background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.35) 45%, transparent 80%);
   transform: translateX(-200%);
-} 
-.contact-button:hover::after {
-  animation: sheen .9s ease forwards;
+  transition: transform 0.9s ease;
 }
+
+.know-more-button:hover::after {
+  animation: sheen 0.9s ease forwards;
+}
+
 @keyframes sheen {
-  to {transform: translateX(200%);}
-}
-
-/* Slider */
-.slider {
-  position: relative;
-  width: 100%;
-  max-width: var(--maxw);
-  margin: 40px auto;
-  overflow: hidden;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  aspect-ratio: 16 / 7;
-}
-.slides {
-  display: flex;
-  transition: transform 2.5s ease; /* Slower transition */
-  width: 400%; /* 4 slides */
-  height: 100%;
-}
-.slide {
-  min-width: 100%;
-  height: 100%;
-  position: relative;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  color: var(--text);
-}
-.slide-content {
-  position: absolute;
-  left: 30px;
-  bottom: 40px;
-  max-width: 40%;
-  background: rgba(0,0,0,0.5);
-  padding: 20px 30px;
-  border-radius: 14px;
-  box-shadow: 0 0 12px rgba(0,0,0,0.6);
-}
-.slide-content h1 {
-  font-size: clamp(28px, 3vw, 42px);
-  margin-bottom: 12px;
-  line-height: 1.2;
-}
-.slide-content p {
-  font-size: clamp(14px, 1.2vw, 18px);
-  color: var(--muted);
-  margin-bottom: 18px;
-}
-.slide-content .cta-button {
-  margin-top: 0;
-  padding: 10px 18px;
-  font-size: 1rem;
-}
-
-/* Mobile responsive */
-@media (max-width:768px){
-  .slide-content {
-    position: static;
-    max-width: 100%;
-    margin: 0 auto;
-    background: rgba(0,0,0,0.65);
-    padding: 16px 20px;
-    border-radius: 12px;
-    text-align: center;
-  }
-  .slide {
-    justify-content: center;
-  }
-}
-
-/* Prev/Next Arrows */
-.prev, .next {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(0,0,0,0.4);
-  color: #fff;
-  border: none;
-  font-size: 24px;
-  padding: 12px;
-  border-radius: 50%;
-  cursor: pointer;
-  z-index: 10;
-  transition: background .3s;
-  user-select: none;
-}
-.prev:hover, .next:hover {
-  background: rgba(0,0,0,0.6);
-}
-.prev {
-  left: 15px;
-}
-.next {
-  right: 15px;
-}
-
-/* Dots */
-.dots {
-  text-align: center;
-  margin-top: 16px;
-}
-.dot {
-  height: 12px;
-  width: 12px;
-  margin: 0 6px;
-  background-color: rgba(255,255,255,.35);
-  border-radius: 50%;
-  display: inline-block;
-  cursor: pointer;
-  transition: background-color .3s;
-}
-.dot.active:nth-child(1) {
-  background: var(--blue);
-  animation: pulse 2.6s ease-in-out infinite;
-}
-.dot.active:nth-child(2) {
-  background: var(--green);
-  animation: pulse 2.6s ease-in-out infinite;
-}
-.dot.active:nth-child(3) {
-  background: var(--yellow);
-  animation: pulse 2.6s ease-in-out infinite;
-}
-.dot.active:nth-child(4) {
-  background: var(--red);
-  animation: pulse 2.6s ease-in-out infinite;
-}
-@keyframes pulse {
-  0%, 100% {
-    box-shadow: 0 0 0 rgba(0,0,0,0);
-  }
-  50% {
-    box-shadow: 0 0 16px rgba(251,192,45,.35);
+  to {
+    transform: translateX(200%);
   }
 }
 
@@ -239,17 +146,21 @@ body {
   filter: blur(0);
   transition: opacity .8s ease, transform .8s ease, filter .8s ease;
 }
-.delay-1 {
-  transition-delay: .1s;
+.delay-1 {transition-delay:.1s}
+.delay-2 {transition-delay:.2s}
+.delay-3 {transition-delay:.3s}
+.delay-4 {transition-delay:.4s}
+
+/* Responsive */
+@media(max-width:992px) {
+  .product-card {
+    flex: 0 0 calc(50% - 20px);
+  }
 }
-.delay-2 {
-  transition-delay: .2s;
-}
-.delay-3 {
-  transition-delay: .3s;
-}
-.delay-4 {
-  transition-delay: .4s;
+@media(max-width:600px) {
+  .product-card {
+    flex: 0 0 calc(100% - 20px);
+  }
 }
 
 /* Footer */
@@ -258,7 +169,7 @@ footer {
   color: var(--muted);
   text-align: center;
   border-top: 1px solid rgba(255,255,255,.08);
-  margin-top: 40px;
+  margin-top: 60px;
 }
 .social-links {
   display: flex;
@@ -270,6 +181,65 @@ footer {
   height: 28px;
   width: 28px;
 }
+
+/* Info Section */
+.info-section {
+  max-width: var(--maxw);
+  margin: 60px auto 0;
+  padding: 0 20px 60px;
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  flex-wrap: wrap;
+  text-align: center;
+}
+
+.info-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius);
+  padding: 24px 20px;
+  flex: 1 1 280px;
+  max-width: 360px;
+  color: var(--text);
+  transition: box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.info-card img {
+  width: 140px;
+  height: auto;
+  margin-bottom: 20px;
+  filter: drop-shadow(0 2px 2px rgba(0,0,0,0.3));
+}
+
+.info-card h2 {
+  color: var(--blue);
+  font-size: 24px;
+  margin-bottom: 12px;
+}
+
+.info-card p {
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.info-card:hover {
+  box-shadow: 0 0 25px var(--green);
+  transform: translateY(-5px);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .info-section {
+    flex-direction: column;
+    gap: 40px;
+  }
+}
 </style>
 </head>
 <body>
@@ -278,54 +248,70 @@ footer {
 <div class="navbar reveal delay-1">
   <div class="nav-left">
     <img src="assets/logo.png" alt="MechStem Logo" class="logo" />
-    <div class="nav-item nav-active" onclick="location.href='index.html'">Home</div>
-    <div class="nav-item" onclick="location.href='Products.html'">Products</div>
+    <div class="nav-item" onclick="location.href='index.html'">Home</div>
+    <div class="nav-item nav-active" onclick="location.href='Products.html'">Products</div>
     <div class="nav-item" onclick="location.href='services.html'">Services</div>
   </div>
   <a href="#contact" class="contact-button">Contact</a>
 </div>
 
-<!-- Slider -->
-<section>
-  <div class="slider" id="slider">
-    <button class="prev" aria-label="Previous Slide">&#10094;</button>
-    <div class="slides" id="slides">
-      <div class="slide" style="background: url('assets/project-1.jpg') center/cover no-repeat;">
-        <div class="slide-content reveal delay-1">
-          <h1>Engineering Innovation for the Future</h1>
-          <p>Empowering industries with AI, embedded systems, and mechanical solutions.</p>
-          <a href="#news" class="contact-button cta-button">Read Latest News</a>
-        </div>
+<!-- Products -->
+<div class="products-background">
+  <h1 class="reveal delay-1">Our Products</h1>
+  <p class="reveal delay-2">Discover our innovative offerings</p>
+
+  <div class="carousel-container">
+    <div class="products-list" id="products-list">
+      <div class="product-card reveal delay-1">
+        <img src="assets/product1.jpg" alt="Product 1" />
+        <h2>Embedded Kit</h2>
+        <p>Microcontroller-based learning kit<br>Easy prototyping<br>Hands-on exercises</p>
+        <button class="know-more-button" onclick="alert('More details coming soon!')">Know More</button>
       </div>
-      <div class="slide" style="background: url('assets/project-2.jpg') center/cover no-repeat;">
-        <div class="slide-content reveal delay-1">
-          <h1>Innovating Smart Infrastructure</h1>
-          <p>Sustainable buildings with IoT and advanced analytics.</p>
-          <a href="#news" class="contact-button cta-button">Explore More</a>
-        </div>
+      <div class="product-card reveal delay-2">
+        <img src="assets/product2.jpg" alt="Product 2" />
+        <h2>AI Vision Kit</h2>
+        <p>Camera modules<br>Edge AI ready<br>Computer vision projects</p>
+        <button class="know-more-button" onclick="alert('More details coming soon!')">Know More</button>
       </div>
-      <div class="slide" style="background: url('assets/project-3.jpg') center/cover no-repeat;">
-        <div class="slide-content reveal delay-1">
-          <h1>Advanced Automation in Machinery</h1>
-          <p>Boosting efficiency with robotics and automation.</p>
-          <a href="#news" class="contact-button cta-button">See How</a>
-        </div>
+      <div class="product-card reveal delay-3">
+        <img src="assets/product3.jpg" alt="Product 3" />
+        <h2>Robotics Kit</h2>
+        <p>Actuators & sensors<br>Programming exercises<br>Educational robotics</p>
+        <button class="know-more-button" onclick="alert('More details coming soon!')">Know More</button>
       </div>
-      <div class="slide" style="background: url('assets/project-4.jpg') center/cover no-repeat;">
-        <div class="slide-content reveal delay-1">
-          <h1>Leading Aerospace Systems</h1>
-          <p>State-of-the-art avionics and flight technology.</p>
-          <a href="#news" class="contact-button cta-button">Discover More</a>
-        </div>
+      <div class="product-card reveal delay-1">
+        <img src="assets/product4.jpg" alt="Product 4" />
+        <h2>Mechanical CAD Kit</h2>
+        <p>CAD designs<br>Simulation software<br>Hands-on mechanical learning</p>
+        <button class="know-more-button" onclick="alert('More details coming soon!')">Know More</button>
+      </div>
+      <div class="product-card reveal delay-2">
+        <img src="assets/product5.jpg" alt="Product 5" />
+        <h2>IoT Starter Kit</h2>
+        <p>ESP32/Arduino based<br>Sensor interfacing<br>Real-world IoT projects</p>
+        <button class="know-more-button" onclick="alert('More details coming soon!')">Know More</button>
       </div>
     </div>
-    <button class="next" aria-label="Next Slide">&#10095;</button>
-    <div class="dots" id="dots">
-      <span class="dot active" data-index="0"></span>
-      <span class="dot" data-index="1"></span>
-      <span class="dot" data-index="2"></span>
-      <span class="dot" data-index="3"></span>
-    </div>
+  </div>
+</div>
+
+<!-- New Stacked Info Section -->
+<section class="info-section">
+  <div class="info-card reveal delay-1">
+    <img src="https://unpkg.com/undraw@latest/undraw_teamwork_re_ow29.svg" alt="About Us" />
+    <h2>About Us</h2>
+    <p>We’re passionate engineers committed to inspiring the next generation through hands-on STEM learning and innovative tech products.</p>
+  </div>
+  <div class="info-card reveal delay-2">
+    <img src="https://unpkg.com/undraw@latest/undraw_code_review_re_woeb.svg" alt="What We Do" />
+    <h2>What We Do</h2>
+    <p>We design and deliver cutting-edge educational kits combining embedded systems, AI, robotics, and IoT to empower learners worldwide.</p>
+  </div>
+  <div class="info-card reveal delay-3">
+    <img src="https://unpkg.com/undraw@latest/undraw_career_progress_re_iv6q.svg" alt="Careers with Us" />
+    <h2>Careers with Us</h2>
+    <p>Join our team of innovators! Collaborate, create, and grow while making a meaningful impact on education and technology.</p>
   </div>
 </section>
 
@@ -339,64 +325,15 @@ footer {
 </footer>
 
 <script>
-const slidesContainer = document.getElementById('slides');
-const slides = document.querySelectorAll('.slide');
-const dots = document.querySelectorAll('.dot');
-let currentIndex = 0;
-let slideInterval = setInterval(nextSlide, 8000);
-
-function goToSlide(index) {
-  if(index < 0) index = slides.length - 1;
-  if(index >= slides.length) index = 0;
-
-  slidesContainer.style.transform = `translateX(-${index * 100}%)`;
-
-  dots.forEach(d => d.classList.remove('active'));
-  dots[index].classList.add('active');
-
-  currentIndex = index;
-}
-
-function nextSlide() {
-  goToSlide(currentIndex + 1);
-}
-
-function prevSlide() {
-  goToSlide(currentIndex - 1);
-}
-
-// Dot click events
-dots.forEach(dot => {
-  dot.addEventListener('click', () => {
-    clearInterval(slideInterval);
-    goToSlide(parseInt(dot.dataset.index));
-    slideInterval = setInterval(nextSlide, 8000);
-  });
-});
-
-// Prev/Next button events
-document.querySelector('.prev').addEventListener('click', () => {
-  clearInterval(slideInterval);
-  prevSlide();
-  slideInterval = setInterval(nextSlide, 8000);
-});
-document.querySelector('.next').addEventListener('click', () => {
-  clearInterval(slideInterval);
-  nextSlide();
-  slideInterval = setInterval(nextSlide, 8000);
-});
-
-goToSlide(0);
-
 /* Reveal-on-scroll */
-const io = new IntersectionObserver((entries) => {
+const io = new IntersectionObserver((entries)=>{
   entries.forEach(e => {
-    if (e.isIntersecting) {
+    if(e.isIntersecting){
       e.target.classList.add('in');
       io.unobserve(e.target);
     }
   });
-}, { threshold: .2 });
+},{threshold: 0.2});
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 </script>
 
