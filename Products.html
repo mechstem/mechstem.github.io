@@ -1,61 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Products - My Website</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>MechStem – Products</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- Navbar -->
-  <nav class="navbar">
-    <div class="nav-left">
-      <img src="logo.png" alt="Logo" class="logo">
-      <div class="nav-item"><a href="index.html">Home</a></div>
-      <div class="nav-item nav-active">Products</div>
-      <div class="nav-item"><a href="services.html">Services</a></div>
-    </div>
-    <a href="contact.html" class="contact-button">Contact</a>
-    <div class="hamburger" onclick="toggleMenu()">
-      <span></span><span></span><span></span>
-    </div>
-  </nav>
+<!-- Header -->
+<div class="navbar reveal delay-1">
+  <div class="nav-left">
+    <img src="assets/logo.png" alt="MechStem Logo" class="logo" />
+    <div class="nav-item" onclick="location.href='index.html'">Home</div>
+    <div class="nav-item" onclick="location.href='Products.html'">Products</div>
+    <div class="nav-item" onclick="location.href='services.html'">Services</div>
+  </div>
+  <a href="#contact" class="contact-button">Contact</a>
+</div>
 
-  <!-- Products Carousel -->
-  <section class="products-background">
-    <h1>Our Products</h1>
-    <p>High-quality solutions designed for modern businesses.</p>
-
-    <div class="carousel-container">
-      <div class="products-list">
-        <div class="product-card">
-          <img src="product1.jpg" alt="Product 1">
-          <h2>Product One</h2>
-          <p>Innovative and reliable product for all industries.</p>
-        </div>
-        <div class="product-card">
-          <img src="product2.jpg" alt="Product 2">
-          <h2>Product Two</h2>
-          <p>Engineered for performance and longevity.</p>
-        </div>
-        <div class="product-card">
-          <img src="product3.jpg" alt="Product 3">
-          <h2>Product Three</h2>
-          <p>Cutting-edge technology for modern challenges.</p>
-        </div>
-      </div>
-      <div class="carousel-controls">
-        <button class="carousel-button" onclick="prevProduct()">&#10094;</button>
-        <button class="carousel-button" onclick="nextProduct()">&#10095;</button>
+<!-- Products Section -->
+<main class="reveal delay-1" style="padding:40px; max-width:var(--maxw); margin:0 auto;">
+  <h1 style="text-align:center; margin-bottom:32px;">Our Products</h1>
+  <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:24px;">
+    <!-- Product Card Example -->
+    <div style="background:#1a1b1f; border-radius:var(--radius); box-shadow:var(--shadow); overflow:hidden;">
+      <img src="assets/product-1.jpg" alt="Product 1" style="width:100%; height:200px; object-fit:cover;">
+      <div style="padding:16px;">
+        <h2>Product 1</h2>
+        <p style="color:var(--muted); font-size:14px;">Brief description of Product 1.</p>
+        <a href="#" class="contact-button" style="margin-top:10px; display:inline-block;">Learn More</a>
       </div>
     </div>
-  </section>
 
-  <footer>
-    &copy; 2025 My Company. All rights reserved.
-  </footer>
+    <div style="background:#1a1b1f; border-radius:var(--radius); box-shadow:var(--shadow); overflow:hidden;">
+      <img src="assets/product-2.jpg" alt="Product 2" style="width:100%; height:200px; object-fit:cover;">
+      <div style="padding:16px;">
+        <h2>Product 2</h2>
+        <p style="color:var(--muted); font-size:14px;">Brief description of Product 2.</p>
+        <a href="#" class="contact-button" style="margin-top:10px; display:inline-block;">Learn More</a>
+      </div>
+    </div>
 
-  <script src="carousel.js"></script>
+    <!-- Add more products as needed -->
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="reveal delay-1">
+  <p>© 2025 MechStem. Built with 💡 by future engineers.</p>
+  <div class="social-links">
+    <a href="https://www.linkedin.com/company/mechstem/" target="_blank"><img src="assets/linkedin-icon.png" alt="LinkedIn" /></a>
+    <a href="https://www.youtube.com/@mechstem" target="_blank"><img src="assets/youtube-icon.png" alt="YouTube" /></a>
+    <a href="https://twitter.com/YOUR_TWITTER_HANDLE" target="_blank"><img src="assets/twitter-icon.png" alt="Twitter" /></a>
+  </div>
+</footer>
+
+<script src="script.js"></script>
 </body>
 </html>
