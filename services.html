@@ -3,141 +3,196 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>MechStem – Services</title>
-<link rel="stylesheet" href="style.css">
+<title>MechStem – Services & Industries</title>
+<link rel="stylesheet" href="style.css" />
+<style>
+  :root {
+    --bg: #0f1014;
+    --text: #e6e9ef;
+    --muted: #9aa3b2;
+    --blue: #1E88E5;
+    --green: #43A047;
+    --yellow: #FBC02D;
+    --radius: 14px;
+  }
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+  }
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 20px;
+    background: rgba(15,16,20,0.95);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+  .nav-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .nav-item {
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: var(--radius);
+    transition: 0.3s;
+    font-size: 15px;
+  }
+  .nav-item:hover, .nav-active { color: var(--blue); }
+  .logo { height: 36px; }
+  .contact-button {
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--blue), var(--green));
+    color: #fff;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 14px;
+    transition: 0.3s;
+  }
+  .contact-button:hover { box-shadow: 0 0 15px var(--yellow); transform: translateY(-2px); }
+
+  main.content {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 0 20px;
+  }
+
+  h2 { color: var(--blue); margin-bottom: 16px; }
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+  .card {
+    background: #121418;
+    border-radius: var(--radius);
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.7); }
+  .register-link {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 8px 14px;
+    background: var(--blue);
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+  }
+  .register-link:hover { background: var(--green); }
+
+  footer {
+    margin-top: 40px;
+    padding: 16px;
+    background: rgba(15,16,20,0.95);
+    text-align: center;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    font-size: 14px;
+  }
+
+  .social-links { margin-top: 12px; display: flex; justify-content: center; gap: 14px; }
+  .social-icon img { width: 22px; height: 22px; filter: brightness(0) invert(1); transition: 0.3s; }
+  .social-icon img:hover { filter: brightness(1) invert(0); }
+
+</style>
 </head>
 <body>
 
-<!-- Header -->
-<div class="navbar reveal delay-1">
+<!-- Navbar -->
+<div class="navbar">
   <div class="nav-left">
     <img src="assets/logo.png" alt="MechStem Logo" class="logo" />
-    <div class="nav-item" onclick="location.href='index.html'">Home</div>
-    <div class="nav-item" onclick="location.href='Products.html'">Products</div>
-    <div class="nav-item" onclick="location.href='services.html'">Services</div>
+    <div class="nav-item" onclick="window.location.href='index.html'">Home</div>
+    <div class="nav-item" onclick="window.location.href='Products.html'">Products</div>
+    <div class="nav-item nav-active">Services</div>
   </div>
   <a href="#contact" class="contact-button">Contact</a>
 </div>
 
-<!-- Services Hero Slider -->
-<section>
-  <div class="slider" id="slider-services">
-    <button class="prev">&#10094;</button>
-    <div class="slides" id="slides-services">
-      <div class="slide" style="background:url('assets/service-automation.jpg') center/cover no-repeat;">
-        <div class="left reveal delay-1">
-          <h1>Industrial Automation</h1>
-          <a href="#details" class="contact-button cta-button">Explore</a>
-        </div>
-        <div class="right reveal delay-2">
-          <p>Boosting efficiency in machinery through robotics and automation solutions.</p>
-        </div>
+<!-- Content -->
+<main class="content">
+  <!-- Workshops -->
+  <section id="workshops">
+    <h2>🔔 Workshops</h2>
+    <div class="cards">
+      <div class="card">
+        <strong>Embedded Systems</strong><br>
+        Date: --- | Location: Online<br>
+        Hands-on microcontrollers & firmware projects.<br>
+        <a href="#" class="register-link">Register</a>
       </div>
-      <div class="slide" style="background:url('assets/service-iot.jpg') center/cover no-repeat;">
-        <div class="left reveal delay-1">
-          <h1>IoT & Smart Infrastructure</h1>
-          <a href="#details" class="contact-button cta-button">Discover</a>
-        </div>
-        <div class="right reveal delay-2">
-          <p>Integrating IoT and AI to create sustainable, connected buildings.</p>
-        </div>
+      <div class="card">
+        <strong>Prototyping</strong><br>
+        Date: --- | Location: ---<br>
+        Sensors, actuators & rapid prototyping.<br>
+        <a href="#" class="register-link">Register</a>
       </div>
-      <div class="slide" style="background:url('assets/service-aerospace.jpg') center/cover no-repeat;">
-        <div class="left reveal delay-1">
-          <h1>Aerospace Systems</h1>
-          <a href="#details" class="contact-button cta-button">Learn More</a>
-        </div>
-        <div class="right reveal delay-2">
-          <p>Advanced avionics and flight technologies for modern aerospace solutions.</p>
-        </div>
+      <div class="card">
+        <strong>Mechanical CAD</strong><br>
+        Date: --- | Location: ---<br>
+        CAD design & simulation workshops.<br>
+        <a href="#" class="register-link">Register</a>
       </div>
     </div>
-    <button class="next">&#10095;</button>
-    <div class="dots" id="dots-services">
-      <span class="dot active" data-index="0"></span>
-      <span class="dot" data-index="1"></span>
-      <span class="dot" data-index="2"></span>
-    </div>
-  </div>
-</section>
+  </section>
 
-<!-- Services Details Section -->
-<main id="details" class="reveal delay-1" style="padding:40px; max-width:var(--maxw); margin:0 auto;">
-  <h1 style="text-align:center; margin-bottom:32px;">Our Services</h1>
-  <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:24px;">
-    <div style="background:#1a1b1f; border-radius:var(--radius); box-shadow:var(--shadow); overflow:hidden;">
-      <img src="assets/service-robotics.jpg" alt="Robotics Service" style="width:100%; height:200px; object-fit:cover;">
-      <div style="padding:16px;">
-        <h2>Robotics Solutions</h2>
-        <p style="color:var(--muted); font-size:14px;">Custom automation and robotic integration for industrial setups.</p>
+  <!-- Internships -->
+  <section id="internships" style="margin-top:50px;">
+    <h2>🎓 Internships & Training Programs</h2>
+    <div class="cards">
+      <div class="card">
+        Pursuing <strong>B.E, B.Tech, M.Tech, BCA, MCA</strong>?<br>
+        Gain real-world technical skills with <strong>industrial internships</strong>.<br>
+        📌 Online & Offline | 📌 Live Projects | 📌 Fast Track (20 days) or 1 Month<br>
+        <strong>Fee:</strong> ₹3000 | <strong>Batch Size:</strong> 150 students<br>
+        <a href="#" class="register-link">Register Now</a>
       </div>
     </div>
-    <div style="background:#1a1b1f; border-radius:var(--radius); box-shadow:var(--shadow); overflow:hidden;">
-      <img src="assets/service-ai.jpg" alt="AI & ML Service" style="width:100%; height:200px; object-fit:cover;">
-      <div style="padding:16px;">
-        <h2>AI & Machine Learning</h2>
-        <p style="color:var(--muted); font-size:14px;">Predictive maintenance, analytics, and AI-driven decision making.</p>
-      </div>
+  </section>
+
+  <!-- Trainings -->
+  <section id="trainings" style="margin-top:50px;">
+    <h2>📚 Trainings We Offer</h2>
+    <div class="cards">
+      <div class="card">Embedded Systems: Microcontrollers, firmware, interfacing</div>
+      <div class="card">AI & Machine Learning: Model building, deployment, edge AI</div>
+      <div class="card">Mechanical Design & ArchiCAD: CAD, simulation, prototyping</div>
+      <div class="card">Corporate Workshops: Tailored sessions for companies</div>
     </div>
-    <div style="background:#1a1b1f; border-radius:var(--radius); box-shadow:var(--shadow); overflow:hidden;">
-      <img src="assets/service-iot-devices.jpg" alt="IoT Devices" style="width:100%; height:200px; object-fit:cover;">
-      <div style="padding:16px;">
-        <h2>IoT Device Integration</h2>
-        <p style="color:var(--muted); font-size:14px;">Connecting devices for real-time monitoring and control.</p>
-      </div>
+  </section>
+
+  <!-- Industries -->
+  <section id="industries" style="margin-top:50px;">
+    <h2>🔧 Industries We Serve</h2>
+    <div class="cards">
+      <div class="card">Architecture & Built Environment: Smart Infrastructure, Interiors & Exteriors, Sustainable Design</div>
+      <div class="card">Mechanical Systems & Automation: Industrial Automation, Mechanical Design</div>
+      <div class="card">Transportation & Mobility: Aerospace, Predictive Maintenance, ADAS, EV Systems</div>
     </div>
-  </div>
+  </section>
 </main>
 
 <!-- Footer -->
-<footer class="reveal delay-1">
+<footer>
   <p>© 2025 MechStem. Built with 💡 by future engineers.</p>
   <div class="social-links">
-    <a href="https://www.linkedin.com/company/mechstem/" target="_blank"><img src="assets/linkedin-icon.png" alt="LinkedIn" /></a>
-    <a href="https://www.youtube.com/@mechstem" target="_blank"><img src="assets/youtube-icon.png" alt="YouTube" /></a>
-    <a href="https://twitter.com/YOUR_TWITTER_HANDLE" target="_blank"><img src="assets/twitter-icon.png" alt="Twitter" /></a>
+    <a href="https://www.linkedin.com/company/mechstem/" target="_blank" class="social-icon">
+      <img src="assets/linkedin-icon.png" alt="LinkedIn" />
+    </a>
+    <a href="https://www.youtube.com/@mechstem" target="_blank" class="social-icon">
+      <img src="assets/youtube-icon.png" alt="YouTube" />
+    </a>
+    <a href="https://twitter.com/YOUR_TWITTER_HANDLE" target="_blank" class="social-icon">
+      <img src="assets/twitter-icon.png" alt="Twitter" />
+    </a>
   </div>
 </footer>
-
-<script src="script.js"></script>
-<script>
-const slidesContainerS = document.getElementById('slides-services');
-const slidesS = document.querySelectorAll('#slides-services .slide');
-const dotsS = document.querySelectorAll('#dots-services .dot');
-let currentIndexS = 0;
-let slideIntervalS = setInterval(nextSlideS, 10000);
-
-function goToSlideS(index){
-  slidesContainerS.style.transform = `translateX(-${index*100}%)`;
-  dotsS.forEach(d=>d.classList.remove('active'));
-  dotsS[index].classList.add('active');
-  currentIndexS = index;
-}
-
-function nextSlideS(){goToSlideS((currentIndexS+1)%slidesS.length);}
-function prevSlideS(){goToSlideS((currentIndexS-1+slidesS.length)%slidesS.length);}
-
-dotsS.forEach(dot=>{
-  dot.addEventListener('click',()=>{
-    clearInterval(slideIntervalS);
-    goToSlideS(parseInt(dot.dataset.index));
-    slideIntervalS = setInterval(nextSlideS,10000);
-  });
-});
-
-document.querySelector('#slider-services .prev').addEventListener('click',()=>{
-  clearInterval(slideIntervalS);
-  prevSlideS();
-  slideIntervalS = setInterval(nextSlideS,10000);
-});
-document.querySelector('#slider-services .next').addEventListener('click',()=>{
-  clearInterval(slideIntervalS);
-  nextSlideS();
-  slideIntervalS = setInterval(nextSlideS,10000);
-});
-
-goToSlideS(0);
-</script>
 
 </body>
 </html>
