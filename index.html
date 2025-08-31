@@ -3,23 +3,99 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>MechStem – Home</title>
-<link rel="stylesheet" href="style.css">
+<title>MechStem – Tech-Driven Innovation in Engineering</title>
+
+<style>
+:root{
+  --bg:#0f1014; --text:#e6e9ef; --muted:#9aa3b2;
+  --blue:#1E88E5; --green:#43A047; --red:#E53935; --yellow:#FBC02D;
+  --radius:18px; --shadow:0 10px 30px rgba(0,0,0,.25); --maxw:1200px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+
+/* Navbar */
+.navbar{position:sticky;top:0;z-index:50;backdrop-filter:blur(10px);
+  background:rgba(15,16,20,.85);border-bottom:1px solid rgba(255,255,255,.08);
+  display:flex;justify-content:space-between;align-items:center;padding:12px 20px;max-width:var(--maxw);margin:0 auto}
+.nav-left{display:flex;align-items:center;gap:18px}
+.logo{height:40px;animation:floaty 6s ease-in-out infinite}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+.nav-item{cursor:pointer;opacity:.95;transition:color .3s}
+.nav-item:hover,.nav-active{color:var(--blue)}
+.contact-button{padding:8px 16px;border-radius:999px;background:linear-gradient(90deg,var(--blue),var(--green));
+  color:#fff;font-weight:600;transition:.3s;position:relative;overflow:hidden;text-decoration:none;display:inline-block}
+.contact-button:hover{box-shadow:0 0 15px var(--yellow);transform:translateY(-2px)}
+.contact-button::after{content:"";position:absolute;inset:0;background:linear-gradient(120deg,transparent 0%,rgba(255,255,255,.35) 45%,transparent 80%);
+  transform:translateX(-200%)} 
+.contact-button:hover::after{animation:sheen .9s ease}
+@keyframes sheen{to{transform:translateX(200%)}}
+
+/* Slider */
+.slider{position:relative;width:100%;max-width:var(--maxw);margin:40px auto;overflow:hidden;border-radius:var(--radius);box-shadow:var(--shadow);aspect-ratio:16/7}
+.slides{display:flex;transition:transform 1.2s ease;width:400%}
+.slide{min-width:100%;display:flex;align-items:center;justify-content:space-between;padding:40px;color:var(--text);background-size:cover;background-position:center;background-repeat:no-repeat}
+.slide .left{flex:1;text-align:left}
+.slide .left h1{font-size:clamp(28px,3vw,42px);margin-bottom:16px}
+.slide .left .cta-button{margin-top:10px}
+.slide .right{flex:1;text-align:right}
+.slide .right p{font-size:clamp(14px,1.5vw,18px);max-width:90%;margin-left:auto;color:var(--muted)}
+
+/* Mobile responsive */
+@media (max-width:768px){
+  .slide{flex-direction:column;text-align:center;padding:20px}
+  .slide .left,.slide .right{flex:unset;width:100%;text-align:center}
+  .slide .right p{max-width:100%;margin:20px auto 0}
+}
+
+/* Prev/Next Arrows */
+.prev, .next {
+  position:absolute;top:50%;transform:translateY(-50%);
+  background:rgba(0,0,0,0.4);color:#fff;border:none;
+  font-size:24px;padding:12px;border-radius:50%;cursor:pointer;z-index:10;
+  transition:background .3s;
+}
+.prev:hover, .next:hover{background:rgba(0,0,0,0.6)}
+.prev{left:15px}.next{right:15px}
+
+/* Dots */
+.dots{text-align:center;margin-top:16px}
+.dot{height:12px;width:12px;margin:0 6px;background-color:rgba(255,255,255,.35);
+  border-radius:50%;display:inline-block;cursor:pointer;transition:background-color .3s}
+.dot.active:nth-child(1){background:var(--blue);animation:pulse 2.6s ease-in-out infinite}
+.dot.active:nth-child(2){background:var(--green);animation:pulse 2.6s ease-in-out infinite}
+.dot.active:nth-child(3){background:var(--yellow);animation:pulse 2.6s ease-in-out infinite}
+.dot.active:nth-child(4){background:var(--red);animation:pulse 2.6s ease-in-out infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 rgba(0,0,0,0)}50%{box-shadow:0 0 16px rgba(251,192,45,.35)}}
+
+/* Reveal-on-scroll */
+.reveal{opacity:0;transform:translateY(16px);filter:blur(2px)}
+.reveal.in{opacity:1;transform:none;filter:blur(0);
+  transition:opacity .8s ease,transform .8s ease,filter .8s ease}
+.delay-1{transition-delay:.1s}.delay-2{transition-delay:.2s}
+.delay-3{transition-delay:.3s}.delay-4{transition-delay:.4s}
+
+/* Footer */
+footer{padding:32px 0 60px;color:var(--muted);text-align:center;
+  border-top:1px solid rgba(255,255,255,.08);margin-top:40px}
+.social-links{display:flex;justify-content:center;gap:14px;margin-top:12px}
+.social-links img{height:28px;width:28px}
+</style>
 </head>
 <body>
 
-<!-- Header -->
+<!-- Navbar -->
 <div class="navbar reveal delay-1">
   <div class="nav-left">
     <img src="assets/logo.png" alt="MechStem Logo" class="logo" />
-    <div class="nav-item" onclick="location.href='index.html'">Home</div>
+    <div class="nav-item nav-active" onclick="location.href='index.html'">Home</div>
     <div class="nav-item" onclick="location.href='Products.html'">Products</div>
     <div class="nav-item" onclick="location.href='services.html'">Services</div>
   </div>
   <a href="#contact" class="contact-button">Contact</a>
 </div>
 
-<!-- Main Slider Section -->
+<!-- Slider -->
 <section>
   <div class="slider" id="slider">
     <button class="prev">&#10094;</button>
@@ -33,7 +109,33 @@
           <p>Empowering industries with AI, embedded systems, and mechanical solutions.</p>
         </div>
       </div>
-      <!-- Add more slides as needed -->
+      <div class="slide" style="background:url('assets/project-2.jpg') center/cover no-repeat;">
+        <div class="left reveal delay-1">
+          <h1>Innovating Smart Infrastructure</h1>
+          <a href="#news" class="contact-button cta-button">Explore More</a>
+        </div>
+        <div class="right reveal delay-2">
+          <p>Sustainable buildings with IoT and advanced analytics.</p>
+        </div>
+      </div>
+      <div class="slide" style="background:url('assets/project-3.jpg') center/cover no-repeat;">
+        <div class="left reveal delay-1">
+          <h1>Advanced Automation in Machinery</h1>
+          <a href="#news" class="contact-button cta-button">See How</a>
+        </div>
+        <div class="right reveal delay-2">
+          <p>Boosting efficiency with robotics and automation.</p>
+        </div>
+      </div>
+      <div class="slide" style="background:url('assets/project-4.jpg') center/cover no-repeat;">
+        <div class="left reveal delay-1">
+          <h1>Leading Aerospace Systems</h1>
+          <a href="#news" class="contact-button cta-button">Discover More</a>
+        </div>
+        <div class="right reveal delay-2">
+          <p>State-of-the-art avionics and flight technology.</p>
+        </div>
+      </div>
     </div>
     <button class="next">&#10095;</button>
     <div class="dots" id="dots">
@@ -45,7 +147,6 @@
   </div>
 </section>
 
-<!-- Footer -->
 <footer class="reveal delay-1">
   <p>© 2025 MechStem. Built with 💡 by future engineers.</p>
   <div class="social-links">
@@ -55,6 +156,49 @@
   </div>
 </footer>
 
-<script src="script.js"></script>
+<script>
+const slidesContainer = document.getElementById('slides');
+const slides = document.querySelectorAll('.slide');
+const dots = document.querySelectorAll('.dot');
+let currentIndex = 0;
+let slideInterval = setInterval(nextSlide, 8000);
+
+function goToSlide(index){
+  slidesContainer.style.transform = `translateX(-${index*100}%)`;
+  dots.forEach(d=>d.classList.remove('active'));
+  dots[index].classList.add('active');
+  currentIndex = index;
+}
+function nextSlide(){goToSlide((currentIndex+1)%slides.length);}
+function prevSlide(){goToSlide((currentIndex-1+slides.length)%slides.length);}
+
+dots.forEach(dot=>{
+  dot.addEventListener('click',()=>{
+    clearInterval(slideInterval);
+    goToSlide(parseInt(dot.dataset.index));
+    slideInterval = setInterval(nextSlide,8000);
+  });
+});
+document.querySelector('.prev').addEventListener('click',()=>{
+  clearInterval(slideInterval);
+  prevSlide();
+  slideInterval = setInterval(nextSlide,8000);
+});
+document.querySelector('.next').addEventListener('click',()=>{
+  clearInterval(slideInterval);
+  nextSlide();
+  slideInterval = setInterval(nextSlide,8000);
+});
+goToSlide(0);
+
+/* Reveal-on-scroll */
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}
+  });
+},{threshold:.2});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+
 </body>
 </html>
