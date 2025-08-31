@@ -3,134 +3,227 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>MechStem – Our Products</title>
+<title>MechStem – Tech-Driven Innovation in Engineering</title>
 
 <style>
 :root{
   --bg:#0f1014; --text:#e6e9ef; --muted:#9aa3b2;
-  --blue:#1E88E5; --green:#43A047; --yellow:#FBC02D;
-  --radius:18px; --maxw:1200px;
+  --blue:#1E88E5; --green:#43A047; --red:#E53935; --yellow:#FBC02D;
+  --radius:18px; --shadow:0 10px 30px rgba(0,0,0,.25); --maxw:1200px;
 }
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:system-ui,sans-serif;background:var(--bg);color:var(--text);}
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
 
 /* Navbar */
-.navbar{
-  position:sticky;top:0;z-index:50;backdrop-filter:blur(10px);
-  background:rgba(15,16,20,.85);border-bottom:1px solid rgba(255,255,255,.08);
-  display:flex;justify-content:space-between;align-items:center;padding:12px 20px;max-width:var(--maxw);margin:0 auto
-}
-.nav-left{display:flex;align-items:center;gap:18px}
-.logo{height:40px;animation:floaty 6s ease-in-out infinite}
-@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
-.nav-item{cursor:pointer;transition:color .3s}
-.nav-item:hover,.nav-active{color:var(--blue)}
-.contact-button{padding:8px 16px;border-radius:999px;background:linear-gradient(90deg,var(--blue),var(--green));color:#fff;font-weight:600;transition:.3s;position:relative;overflow:hidden}
-.contact-button:hover{box-shadow:0 0 15px var(--yellow);transform:translateY(-2px)}
-.contact-button::after{content:"";position:absolute;inset:0;background:linear-gradient(120deg,transparent 0%,rgba(255,255,255,.35) 45%,transparent 80%);transform:translateX(-200%)}
-.contact-button:hover::after{animation:sheen .9s ease}
-
-/* Products Section */
-.products-background{position:relative;padding:60px 20px;text-align:center;max-width:var(--maxw);margin:0 auto}
-.products-background h1{font-size:clamp(28px,4vw,40px);margin-bottom:10px;color:var(--blue)}
-.products-background p{color:var(--muted);margin-bottom:40px}
-
-/* Horizontal scroll products list */
-.products-list {
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  backdrop-filter: blur(10px);
+  background: rgba(15,16,20,.85);
+  border-bottom: 1px solid rgba(255,255,255,.08);
   display: flex;
-  gap: 20px;
-  overflow-x: auto;
-  scroll-behavior: smooth;
-  padding-bottom: 10px;
-  -webkit-overflow-scrolling: touch;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 20px;
+  max-width: var(--maxw);
+  margin: 0 auto;
 }
-
-/* Remove transform transition */
-.product-card {
-  flex: 0 0 calc(33.33% - 20px);
-  background: rgba(255,255,255,.03);
-  border: 1px solid rgba(255,255,255,.08);
-  border-radius: var(--radius);
-  margin: 0;
-  padding: 20px;
-  text-align: center;
-  transition: border-color .3s, box-shadow .3s, transform .3s;
-  position: relative;
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 18px;
 }
-.product-card img {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-  border-radius: var(--radius);
-  margin-bottom: 15px;
+.logo {
+  height: 40px;
+  animation: floaty 6s ease-in-out infinite;
 }
-.product-card h2 {
-  font-size: 20px;
-  margin-bottom: 10px;
-  color: var(--green);
+@keyframes floaty {
+  0%, 100% {transform: translateY(0);}
+  50% {transform: translateY(-4px);}
 }
-.product-card p {
-  font-size: 14px;
-  color: var(--muted);
-  white-space: pre-line;
+.nav-item {
+  cursor: pointer;
+  opacity: .95;
+  transition: color .3s;
 }
-.product-card:hover {
-  border-color: var(--blue);
-  box-shadow: 0 0 20px var(--green);
-  transform: translateY(-5px);
+.nav-item:hover,
+.nav-active {
+  color: var(--blue);
 }
-.product-card::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--blue), var(--green));
-  border-radius: 999px;
-  transition: width .3s ease;
-}
-.product-card:hover::after {
-  width: 100%;
-}
-
-/* Know More Button */
-.know-more-button {
-  margin-top: 15px;
-  padding: 8px 18px;
+.contact-button {
+  padding: 8px 16px;
   border-radius: 999px;
   background: linear-gradient(90deg, var(--blue), var(--green));
-  border: none;
   color: #fff;
   font-weight: 600;
-  cursor: pointer;
-  transition: box-shadow 0.3s, transform 0.3s;
+  transition: .3s;
   position: relative;
   overflow: hidden;
-  font-size: 14px;
+  text-decoration: none;
+  display: inline-block;
 }
-
-.know-more-button:hover {
+.contact-button:hover {
   box-shadow: 0 0 15px var(--yellow);
   transform: translateY(-2px);
 }
-
-.know-more-button::after {
+.contact-button::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.35) 45%, transparent 80%);
+  background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,.35) 45%, transparent 80%);
   transform: translateX(-200%);
-  transition: transform 0.9s ease;
+} 
+.contact-button:hover::after {
+  animation: sheen .9s ease forwards;
 }
-
-.know-more-button:hover::after {
-  animation: sheen 0.9s ease forwards;
-}
-
 @keyframes sheen {
-  to {
-    transform: translateX(200%);
+  to {transform: translateX(200%);}
+}
+
+/* Slider */
+.slider {
+  position: relative;
+  width: 100%;
+  max-width: var(--maxw);
+  margin: 40px auto;
+  overflow: hidden;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  aspect-ratio: 16 / 7;
+}
+.slides {
+  display: flex;
+  transition: transform 2.5s ease; /* Slower transition */
+  width: 400%; /* 4 slides */
+  height: 100%;
+}
+.slide {
+  min-width: 100%;
+  height: 100%;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  color: var(--text);
+}
+.slide-content {
+  position: absolute;
+  left: 30px;
+  bottom: 40px;
+  max-width: 40%;
+  background: rgba(0,0,0,0.5);
+  padding: 20px 30px;
+  border-radius: 14px;
+  box-shadow: 0 0 12px rgba(0,0,0,0.6);
+}
+.slide-content h1 {
+  font-size: clamp(28px, 3vw, 42px);
+  margin-bottom: 12px;
+  line-height: 1.2;
+}
+.slide-content p {
+  font-size: clamp(14px, 1.2vw, 18px);
+  color: var(--muted);
+  margin-bottom: 18px;
+}
+.slide-content .cta-button {
+  margin-top: 0;
+  padding: 10px 18px;
+  font-size: 1rem;
+}
+
+/* Mobile responsive */
+@media (max-width:768px){
+  .slide-content {
+    position: static;
+    max-width: 100%;
+    margin: 0 auto;
+    background: rgba(0,0,0,0.65);
+    padding: 16px 20px;
+    border-radius: 12px;
+    text-align: center;
+  }
+  .slide {
+    justify-content: center;
+  }
+}
+
+/* Prev/Next Arrows */
+.prev, .next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.4);
+  color: #fff;
+  border: none;
+  font-size: 24px;
+  padding: 12px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 10;
+  transition: background .3s;
+  user-select: none;
+}
+.prev:hover, .next:hover {
+  background: rgba(0,0,0,0.6);
+}
+.prev {
+  left: 15px;
+}
+.next {
+  right: 15px;
+}
+
+/* Dots */
+.dots {
+  text-align: center;
+  margin-top: 16px;
+}
+.dot {
+  height: 12px;
+  width: 12px;
+  margin: 0 6px;
+  background-color: rgba(255,255,255,.35);
+  border-radius: 50%;
+  display: inline-block;
+  cursor: pointer;
+  transition: background-color .3s;
+}
+.dot.active:nth-child(1) {
+  background: var(--blue);
+  animation: pulse 2.6s ease-in-out infinite;
+}
+.dot.active:nth-child(2) {
+  background: var(--green);
+  animation: pulse 2.6s ease-in-out infinite;
+}
+.dot.active:nth-child(3) {
+  background: var(--yellow);
+  animation: pulse 2.6s ease-in-out infinite;
+}
+.dot.active:nth-child(4) {
+  background: var(--red);
+  animation: pulse 2.6s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 rgba(0,0,0,0);
+  }
+  50% {
+    box-shadow: 0 0 16px rgba(251,192,45,.35);
   }
 }
 
@@ -146,21 +239,17 @@ body{font-family:system-ui,sans-serif;background:var(--bg);color:var(--text);}
   filter: blur(0);
   transition: opacity .8s ease, transform .8s ease, filter .8s ease;
 }
-.delay-1 {transition-delay:.1s}
-.delay-2 {transition-delay:.2s}
-.delay-3 {transition-delay:.3s}
-.delay-4 {transition-delay:.4s}
-
-/* Responsive */
-@media(max-width:992px) {
-  .product-card {
-    flex: 0 0 calc(50% - 20px);
-  }
+.delay-1 {
+  transition-delay: .1s;
 }
-@media(max-width:600px) {
-  .product-card {
-    flex: 0 0 calc(100% - 20px);
-  }
+.delay-2 {
+  transition-delay: .2s;
+}
+.delay-3 {
+  transition-delay: .3s;
+}
+.delay-4 {
+  transition-delay: .4s;
 }
 
 /* Footer */
@@ -169,7 +258,7 @@ footer {
   color: var(--muted);
   text-align: center;
   border-top: 1px solid rgba(255,255,255,.08);
-  margin-top: 60px;
+  margin-top: 40px;
 }
 .social-links {
   display: flex;
@@ -182,63 +271,39 @@ footer {
   width: 28px;
 }
 
-/* Info Section */
-.info-section {
+/* About & Career Section */
+.about-career-section {
   max-width: var(--maxw);
-  margin: 60px auto 0;
-  padding: 0 20px 60px;
-  display: flex;
-  gap: 30px;
-  justify-content: center;
-  flex-wrap: wrap;
-  text-align: center;
+  margin: 40px auto;
+  padding: 0 20px;
 }
-
-.info-card {
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: var(--radius);
-  padding: 24px 20px;
-  flex: 1 1 280px;
-  max-width: 360px;
-  color: var(--text);
-  transition: box-shadow 0.3s ease;
+.about-career-block {
   display: flex;
-  flex-direction: column;
   align-items: center;
+  gap: 24px;
+  margin-bottom: 48px;
+  flex-wrap: wrap;
 }
-
-.info-card img {
-  width: 140px;
-  height: auto;
-  margin-bottom: 20px;
-  filter: drop-shadow(0 2px 2px rgba(0,0,0,0.3));
+.about-career-block:last-child {
+  margin-bottom: 0;
 }
-
-.info-card h2 {
-  color: var(--blue);
-  font-size: 24px;
+.about-career-block img {
+  flex: 1 1 280px;
+  max-width: 300px;
+  border-radius: var(--radius);
+}
+.about-career-content {
+  flex: 2 1 400px;
+  color: var(--text);
+}
+.about-career-content h2 {
+  font-size: clamp(24px, 3vw, 32px);
   margin-bottom: 12px;
 }
-
-.info-card p {
+.about-career-content p {
+  font-size: clamp(16px, 1.2vw, 18px);
   color: var(--muted);
-  font-size: 16px;
   line-height: 1.5;
-}
-
-.info-card:hover {
-  box-shadow: 0 0 25px var(--green);
-  transform: translateY(-5px);
-  transition: box-shadow 0.3s ease, transform 0.3s ease;
-}
-
-/* Responsive */
-@media (max-width: 900px) {
-  .info-section {
-    flex-direction: column;
-    gap: 40px;
-  }
 }
 </style>
 </head>
@@ -248,93 +313,169 @@ footer {
 <div class="navbar reveal delay-1">
   <div class="nav-left">
     <img src="assets/logo.png" alt="MechStem Logo" class="logo" />
-    <div class="nav-item" onclick="location.href='index.html'">Home</div>
-    <div class="nav-item nav-active" onclick="location.href='Products.html'">Products</div>
+    <div class="nav-item nav-active" onclick="location.href='index.html'">Home</div>
+    <div class="nav-item" onclick="location.href='Products.html'">Products</div>
     <div class="nav-item" onclick="location.href='services.html'">Services</div>
   </div>
   <a href="#contact" class="contact-button">Contact</a>
 </div>
 
-<!-- Products -->
-<div class="products-background">
-  <h1 class="reveal delay-1">Our Products</h1>
-  <p class="reveal delay-2">Discover our innovative offerings</p>
-
-  <div class="carousel-container">
-    <div class="products-list" id="products-list">
-      <div class="product-card reveal delay-1">
-        <img src="assets/product1.jpg" alt="Product 1" />
-        <h2>Embedded Kit</h2>
-        <p>Microcontroller-based learning kit<br>Easy prototyping<br>Hands-on exercises</p>
-        <button class="know-more-button" onclick="alert('More details coming soon!')">Know More</button>
+<!-- Slider -->
+<section>
+  <div class="slider" id="slider">
+    <button class="prev" aria-label="Previous Slide">&#10094;</button>
+    <div class="slides" id="slides">
+      <div class="slide" style="background: url('assets/project-1.jpg') center/cover no-repeat;">
+        <div class="slide-content reveal delay-1">
+          <h1>Engineering Innovation for the Future</h1>
+          <p>Empowering industries with AI, embedded systems, and mechanical solutions.</p>
+          <a href="#news" class="contact-button cta-button">Read Latest News</a>
+        </div>
       </div>
-      <div class="product-card reveal delay-2">
-        <img src="assets/product2.jpg" alt="Product 2" />
-        <h2>AI Vision Kit</h2>
-        <p>Camera modules<br>Edge AI ready<br>Computer vision projects</p>
-        <button class="know-more-button" onclick="alert('More details coming soon!')">Know More</button>
+      <div class="slide" style="background: url('assets/project-2.jpg') center/cover no-repeat;">
+        <div class="slide-content reveal delay-1">
+          <h1>Innovating Smart Infrastructure</h1>
+          <p>Sustainable buildings with IoT and advanced analytics.</p>
+          <a href="#news" class="contact-button cta-button">Explore More</a>
+        </div>
       </div>
-      <div class="product-card reveal delay-3">
-        <img src="assets/product3.jpg" alt="Product 3" />
-        <h2>Robotics Kit</h2>
-        <p>Actuators & sensors<br>Programming exercises<br>Educational robotics</p>
-        <button class="know-more-button" onclick="alert('More details coming soon!')">Know More</button>
+      <div class="slide" style="background: url('assets/project-3.jpg') center/cover no-repeat;">
+        <div class="slide-content reveal delay-1">
+          <h1>Advanced Automation in Machinery</h1>
+          <p>Boosting efficiency with robotics and automation.</p>
+          <a href="#news" class="contact-button cta-button">See How</a>
+        </div>
       </div>
-      <div class="product-card reveal delay-1">
-        <img src="assets/product4.jpg" alt="Product 4" />
-        <h2>Mechanical CAD Kit</h2>
-        <p>CAD designs<br>Simulation software<br>Hands-on mechanical learning</p>
-        <button class="know-more-button" onclick="alert('More details coming soon!')">Know More</button>
-      </div>
-      <div class="product-card reveal delay-2">
-        <img src="assets/product5.jpg" alt="Product 5" />
-        <h2>IoT Starter Kit</h2>
-        <p>ESP32/Arduino based<br>Sensor interfacing<br>Real-world IoT projects</p>
-        <button class="know-more-button" onclick="alert('More details coming soon!')">Know More</button>
+      <div class="slide" style="background: url('assets/project-4.jpg') center/cover no-repeat;">
+        <div class="slide-content reveal delay-1">
+          <h1>Leading Aerospace Systems</h1>
+          <p>State-of-the-art avionics and flight technology.</p>
+          <a href="#news" class="contact-button cta-button">Discover More</a>
+        </div>
       </div>
     </div>
-  </div>
-</div>
-
-<!-- New Stacked Info Section -->
-<section class="info-section">
-  <div class="info-card reveal delay-1">
-    <img src="https://unpkg.com/undraw@latest/undraw_teamwork_re_ow29.svg" alt="About Us" />
-    <h2>About Us</h2>
-    <p>We’re passionate engineers committed to inspiring the next generation through hands-on STEM learning and innovative tech products.</p>
-  </div>
-  <div class="info-card reveal delay-2">
-    <img src="https://unpkg.com/undraw@latest/undraw_code_review_re_woeb.svg" alt="What We Do" />
-    <h2>What We Do</h2>
-    <p>We design and deliver cutting-edge educational kits combining embedded systems, AI, robotics, and IoT to empower learners worldwide.</p>
-  </div>
-  <div class="info-card reveal delay-3">
-    <img src="https://unpkg.com/undraw@latest/undraw_career_progress_re_iv6q.svg" alt="Careers with Us" />
-    <h2>Careers with Us</h2>
-    <p>Join our team of innovators! Collaborate, create, and grow while making a meaningful impact on education and technology.</p>
+    <button class="prev" aria-label="Previous Slide">&#10094;</button>
+    <button class="next" aria-label="Next Slide">&#10095;</button>
+    <div class="dots" id="dots">
+      <span class="dot active" data-index="0"></span>
+      <span class="dot" data-index="1"></span>
+      <span class="dot" data-index="2"></span>
+      <span class="dot" data-index="3"></span>
+    </div>
   </div>
 </section>
 
-<footer class="reveal delay-1">
-  <p>© 2025 MechStem. Built with 💡 by future engineers.</p>
+<!-- About & Career Section -->
+<section class="about-career-section">
+  <div class="about-career-block reveal delay-2">
+    <!-- About Us Vector SVG -->
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" class="about-career-block-img" style="flex: 1 1 280px; max-width: 300px; border-radius: var(--radius);">
+      <circle cx="32" cy="20" r="12" stroke="var(--blue)" stroke-width="3" />
+      <path stroke="var(--blue)" stroke-width="3" stroke-linecap="round" d="M16 52c0-8 32-8 32 0" />
+      <path stroke="var(--blue)" stroke-width="3" stroke-linecap="round" d="M22 34h20" />
+      <path stroke="var(--blue)" stroke-width="3" stroke-linecap="round" d="M32 34v18" />
+    </svg>
+    <div class="about-career-content">
+      <h2>About Us</h2>
+      <p>
+        MechStem is a pioneering engineering company that thrives on tech-driven innovation. 
+        We combine AI, embedded systems, and mechanical expertise to craft sustainable, efficient solutions that shape the future of industries worldwide.
+      </p>
+    </div>
+  </div>
+
+  <div class="about-career-block reveal delay-3">
+    <!-- Career with Us Vector SVG -->
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" class="about-career-block-img" style="flex: 1 1 280px; max-width: 300px; border-radius: var(--radius);">
+      <rect x="14" y="18" width="36" height="28" stroke="var(--green)" stroke-width="3" rx="6" ry="6" />
+      <path stroke="var(--green)" stroke-width="3" stroke-linecap="round" d="M22 18v-6h20v6" />
+      <path stroke="var(--green)" stroke-width="3" stroke-linejoin="round" d="M32 32v10" />
+      <circle cx="32" cy="46" r="4" stroke="var(--green)" stroke-width="3" />
+    </svg>
+    <div class="about-career-content">
+      <h2>Career with Us</h2>
+      <p>
+        Join MechStem and become part of a dynamic team shaping tomorrow’s technology. 
+        We foster innovation, growth, and collaboration to empower engineers and visionaries to thrive.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="reveal delay-4">
+  &copy; 2025 MechStem. All rights reserved.
   <div class="social-links">
-    <a href="https://www.linkedin.com/company/mechstem/" target="_blank" rel="noopener"><img src="assets/linkedin-icon.png" alt="LinkedIn" /></a>
-    <a href="https://www.youtube.com/@mechstem" target="_blank" rel="noopener"><img src="assets/youtube-icon.png" alt="YouTube" /></a>
-    <a href="https://twitter.com/YOUR_TWITTER_HANDLE" target="_blank" rel="noopener"><img src="assets/twitter-icon.png" alt="Twitter" /></a>
+    <a href="#" aria-label="Facebook"><img src="assets/facebook.svg" alt="Facebook" /></a>
+    <a href="#" aria-label="Twitter"><img src="assets/twitter.svg" alt="Twitter" /></a>
+    <a href="#" aria-label="LinkedIn"><img src="assets/linkedin.svg" alt="LinkedIn" /></a>
   </div>
 </footer>
 
 <script>
-/* Reveal-on-scroll */
-const io = new IntersectionObserver((entries)=>{
-  entries.forEach(e => {
-    if(e.isIntersecting){
-      e.target.classList.add('in');
-      io.unobserve(e.target);
-    }
+// Slider JavaScript
+const slides = document.getElementById('slides');
+const slideCount = slides.children.length;
+const dots = document.getElementById('dots').children;
+const prevBtn = document.querySelector('.prev');
+const nextBtn = document.querySelector('.next');
+let currentIndex = 0;
+let slideInterval;
+
+function goToSlide(index) {
+  if(index < 0) index = slideCount - 1;
+  if(index >= slideCount) index = 0;
+  slides.style.transform = `translateX(-${index * 100}%)`;
+  for(let dot of dots) dot.classList.remove('active');
+  dots[index].classList.add('active');
+  currentIndex = index;
+}
+function nextSlide() {
+  goToSlide(currentIndex + 1);
+}
+function prevSlideFunc() {
+  goToSlide(currentIndex - 1);
+}
+function startSlideShow() {
+  slideInterval = setInterval(nextSlide, 7000);
+}
+function stopSlideShow() {
+  clearInterval(slideInterval);
+}
+
+for(let dot of dots) {
+  dot.addEventListener('click', e => {
+    stopSlideShow();
+    goToSlide(parseInt(e.target.dataset.index));
+    startSlideShow();
   });
-},{threshold: 0.2});
-document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+}
+nextBtn.addEventListener('click', () => {
+  stopSlideShow();
+  nextSlide();
+  startSlideShow();
+});
+prevBtn.addEventListener('click', () => {
+  stopSlideShow();
+  prevSlideFunc();
+  startSlideShow();
+});
+goToSlide(0);
+startSlideShow();
+
+// Reveal on scroll
+function revealOnScroll() {
+  const reveals = document.querySelectorAll('.reveal');
+  const windowHeight = window.innerHeight;
+  for (const reveal of reveals) {
+    const revealTop = reveal.getBoundingClientRect().top;
+    if (revealTop < windowHeight - 80) {
+      reveal.classList.add('in');
+    }
+  }
+}
+window.addEventListener('scroll', revealOnScroll);
+window.addEventListener('load', revealOnScroll);
 </script>
 
 </body>
