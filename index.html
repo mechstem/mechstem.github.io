@@ -1,69 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Home - My Website</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>MechStem – Home</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- Navbar -->
-  <nav class="navbar">
-    <div class="nav-left">
-      <img src="logo.png" alt="Logo" class="logo">
-      <div class="nav-item nav-active">Home</div>
-      <div class="nav-item"><a href="Products.html">Products</a></div>
-      <div class="nav-item"><a href="services.html">Services</a></div>
-    </div>
-    <a href="contact.html" class="contact-button">Contact</a>
-    <div class="hamburger" onclick="toggleMenu()">
-      <span></span><span></span><span></span>
-    </div>
-  </nav>
+<!-- Header -->
+<div class="navbar reveal delay-1">
+  <div class="nav-left">
+    <img src="assets/logo.png" alt="MechStem Logo" class="logo" />
+    <div class="nav-item" onclick="location.href='index.html'">Home</div>
+    <div class="nav-item" onclick="location.href='Products.html'">Products</div>
+    <div class="nav-item" onclick="location.href='services.html'">Services</div>
+  </div>
+  <a href="#contact" class="contact-button">Contact</a>
+</div>
 
-  <!-- Slider -->
-  <div class="slider">
-    <div class="slides">
-      <div class="slide" style="background-image:url('slide1.jpg')">
-        <div class="left">
-          <h1>Welcome to Our Company</h1>
-          <p>Innovative solutions for modern problems.</p>
-          <a href="products.html" class="cta-button contact-button">Explore Products</a>
+<!-- Main Slider Section -->
+<section>
+  <div class="slider" id="slider">
+    <button class="prev">&#10094;</button>
+    <div class="slides" id="slides">
+      <div class="slide" style="background:url('assets/project-1.jpg') center/cover no-repeat;">
+        <div class="left reveal delay-1">
+          <h1>Engineering Innovation for the Future</h1>
+          <a href="#news" class="contact-button cta-button">Read Latest News</a>
         </div>
-        <div class="right">
-          <p>High-quality services and products tailored for your needs.</p>
-        </div>
-      </div>
-      <div class="slide" style="background-image:url('slide2.jpg')">
-        <div class="left">
-          <h1>Expertise & Innovation</h1>
-          <p>We deliver cutting-edge solutions in tech and industry.</p>
-          <a href="services.html" class="cta-button contact-button">Our Services</a>
-        </div>
-        <div class="right">
-          <p>Driven by passion and experience across multiple domains.</p>
+        <div class="right reveal delay-2">
+          <p>Empowering industries with AI, embedded systems, and mechanical solutions.</p>
         </div>
       </div>
+      <!-- Add more slides as needed -->
     </div>
-    <button class="prev" onclick="prevSlide()">&#10094;</button>
-    <button class="next" onclick="nextSlide()">&#10095;</button>
-    <div class="dots">
-      <span class="dot active" onclick="currentSlide(0)"></span>
-      <span class="dot" onclick="currentSlide(1)"></span>
+    <button class="next">&#10095;</button>
+    <div class="dots" id="dots">
+      <span class="dot active" data-index="0"></span>
+      <span class="dot" data-index="1"></span>
+      <span class="dot" data-index="2"></span>
+      <span class="dot" data-index="3"></span>
     </div>
   </div>
+</section>
 
-  <!-- Footer -->
-  <footer>
-    &copy; 2025 My Company. All rights reserved.
-    <div class="social-links">
-      <a href="#"><img src="twitter.svg" alt="Twitter"></a>
-      <a href="#"><img src="linkedin.svg" alt="LinkedIn"></a>
-      <a href="#"><img src="github.svg" alt="GitHub"></a>
-    </div>
-  </footer>
+<!-- Footer -->
+<footer class="reveal delay-1">
+  <p>© 2025 MechStem. Built with 💡 by future engineers.</p>
+  <div class="social-links">
+    <a href="https://www.linkedin.com/company/mechstem/" target="_blank"><img src="assets/linkedin-icon.png" alt="LinkedIn" /></a>
+    <a href="https://www.youtube.com/@mechstem" target="_blank"><img src="assets/youtube-icon.png" alt="YouTube" /></a>
+    <a href="https://twitter.com/YOUR_TWITTER_HANDLE" target="_blank"><img src="assets/twitter-icon.png" alt="Twitter" /></a>
+  </div>
+</footer>
 
-  <script src="slider.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
