@@ -34,18 +34,72 @@ body{font-family:system-ui,sans-serif;background:var(--bg);color:var(--text);lin
 /* Slider */
 .slider{position:relative;width:100%;max-width:var(--maxw);margin:40px auto;overflow:hidden;border-radius:var(--radius);box-shadow:var(--shadow);aspect-ratio:16/7}
 .slides{display:flex;transition:transform 1.2s ease;width:400%}
-.slide{min-width:100%;display:flex;align-items:center;justify-content:space-between;padding:40px;color:var(--text);background-size:cover;background-position:center;background-repeat:no-repeat}
-.slide .left{flex:1;text-align:left}
-.slide .left h1{font-size:clamp(28px,3vw,42px);margin-bottom:16px}
-.slide .left .cta-button{margin-top:10px}
-.slide .right{flex:1;text-align:right}
-.slide .right p{font-size:clamp(14px,1.5vw,18px);max-width:90%;margin-left:auto;color:var(--muted)}
+.slide {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 40px;
+  color: var(--text);
+  overflow: hidden;
+  min-height: 320px;
+}
+.slide img {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 600px;
+  height: 360px;
+  object-fit: cover;
+  transform: translate(-50%, -50%) scale(1);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  z-index: 0;
+  animation: imageZoomIn 8s ease-in-out infinite alternate;
+  filter: brightness(0.7);
+}
+@keyframes imageZoomIn {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.05);
+  }
+}
+.slide .left, .slide .right {
+  position: relative;
+  z-index: 1;
+}
+.headline-desc {
+  font-size: clamp(14px, 1.3vw, 18px);
+  color: var(--yellow);
+  margin-top: 8px;
+  max-width: 90%;
+  font-weight: 500;
+}
 
 /* Mobile responsive */
 @media (max-width:768px){
-  .slide{flex-direction:column;text-align:center;padding:20px}
-  .slide .left,.slide .right{flex:unset;width:100%;text-align:center}
-  .slide .right p{max-width:100%;margin:20px auto 0}
+  .slide {
+    flex-direction: column;
+    padding: 20px;
+    min-height: auto;
+  }
+  .slide img {
+    position: relative;
+    left: auto;
+    top: auto;
+    width: 100%;
+    height: auto;
+    transform: none;
+    margin-bottom: 20px;
+    animation: none;
+    filter: brightness(0.85);
+  }
+  .slide .left, .slide .right {
+    width: 100%;
+    text-align: center;
+  }
 }
 
 /* Prev/Next Arrows */
@@ -100,42 +154,55 @@ footer{padding:32px 0 60px;color:var(--muted);text-align:center;
   <div class="slider" id="slider">
     <button class="prev">&#10094;</button>
     <div class="slides" id="slides">
-      <div class="slide" style="background:url('assets/project-1.jpg') center/cover no-repeat;">
+
+      <div class="slide">
+        <img src="assets/project-1.jpg" alt="Engineering Innovation" />
         <div class="left reveal delay-1">
           <h1>Engineering Innovation for the Future</h1>
+          <p class="headline-desc">Pioneering AI and embedded systems to revolutionize industry standards.</p>
           <a href="#news" class="contact-button cta-button">Read Latest News</a>
         </div>
         <div class="right reveal delay-2">
           <p>Empowering industries with AI, embedded systems, and mechanical solutions.</p>
         </div>
       </div>
-      <div class="slide" style="background:url('assets/project-2.jpg') center/cover no-repeat;">
+
+      <div class="slide">
+        <img src="assets/project-2.jpg" alt="Smart Infrastructure" />
         <div class="left reveal delay-1">
           <h1>Innovating Smart Infrastructure</h1>
+          <p class="headline-desc">Creating sustainable buildings integrated with IoT and advanced data analytics.</p>
           <a href="#news" class="contact-button cta-button">Explore More</a>
         </div>
         <div class="right reveal delay-2">
           <p>Sustainable buildings with IoT and advanced analytics.</p>
         </div>
       </div>
-      <div class="slide" style="background:url('assets/project-3.jpg') center/cover no-repeat;">
+
+      <div class="slide">
+        <img src="assets/project-3.jpg" alt="Automation in Machinery" />
         <div class="left reveal delay-1">
           <h1>Advanced Automation in Machinery</h1>
+          <p class="headline-desc">Boosting production efficiency using cutting-edge robotics and automation tech.</p>
           <a href="#news" class="contact-button cta-button">See How</a>
         </div>
         <div class="right reveal delay-2">
           <p>Boosting efficiency with robotics and automation.</p>
         </div>
       </div>
-      <div class="slide" style="background:url('assets/project-4.jpg') center/cover no-repeat;">
+
+      <div class="slide">
+        <img src="assets/project-4.jpg" alt="Aerospace Systems" />
         <div class="left reveal delay-1">
           <h1>Leading Aerospace Systems</h1>
+          <p class="headline-desc">Developing state-of-the-art avionics and flight technologies for the future.</p>
           <a href="#news" class="contact-button cta-button">Discover More</a>
         </div>
         <div class="right reveal delay-2">
           <p>State-of-the-art avionics and flight technology.</p>
         </div>
       </div>
+
     </div>
     <button class="next">&#10095;</button>
     <div class="dots" id="dots">
