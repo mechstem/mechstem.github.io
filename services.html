@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>MechStem – Services & Industries</title>
 <style>
   :root {
@@ -54,8 +54,15 @@
     text-decoration: none;
     font-size: 14px;
     transition: 0.3s;
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
   }
-  .contact-button:hover { box-shadow: 0 0 15px var(--yellow); transform: translateY(-2px); }
+  .contact-button:hover {
+    box-shadow: 0 0 15px var(--yellow);
+    transform: translateY(-2px);
+    animation: buttonGlow 1.5s ease-in-out infinite;
+  }
 
   main.content {
     max-width: 1100px;
@@ -75,10 +82,6 @@
       opacity: 1;
       transform: translateY(0);
     }
-  }
-  .card.fade-in {
-    animation: fadeInUp 0.6s ease forwards;
-    opacity: 0;
   }
 
   /* Cards */
@@ -109,9 +112,22 @@
     font-weight: bold;
     transition: 0.3s;
     cursor: pointer;
+    position: relative;
+    overflow: hidden;
   }
   .button:hover {
     background: var(--green);
+    animation: buttonGlow 1.5s ease-in-out infinite;
+  }
+
+  /* Button glowing animation */
+  @keyframes buttonGlow {
+    0%, 100% {
+      box-shadow: 0 0 5px var(--green), 0 0 10px var(--green), 0 0 20px var(--green);
+    }
+    50% {
+      box-shadow: 0 0 20px var(--yellow), 0 0 30px var(--yellow), 0 0 40px var(--yellow);
+    }
   }
 
   footer {
@@ -137,6 +153,92 @@
   }
   .social-icon img:hover {
     filter: brightness(1) invert(0);
+  }
+
+  /* Industries Section */
+
+  .industry-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+  }
+
+  .industry-card {
+    background: #121418;
+    border-radius: var(--radius);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    transition: transform 0.3s, box-shadow 0.3s;
+    opacity: 0; /* Start hidden for animation */
+    transform: translateY(30px);
+  }
+
+  /* Animation keyframes */
+  @keyframes fadeSlideUp {
+    0% {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .industry-card.animate {
+    animation: fadeSlideUp 0.7s ease forwards;
+  }
+
+  .industry-card:hover {
+    transform: translateY(-6px) scale(1.03);
+    box-shadow: 0 10px 30px rgba(67, 160, 71, 0.8); /* green glow */
+  }
+
+  .industry-card img {
+    width: 140px;
+    object-fit: cover;
+    border-top-left-radius: var(--radius);
+    border-bottom-left-radius: var(--radius);
+    transition: transform 0.4s ease;
+  }
+
+  .industry-card:hover img {
+    transform: scale(1.1);
+  }
+
+  .industry-info {
+    padding: 16px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .industry-info h3 {
+    margin: 0 0 10px 0;
+    color: var(--green);
+  }
+
+  .industry-info p {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  /* Responsive for smaller screens */
+  @media (max-width: 600px) {
+    .industry-card {
+      flex-direction: column;
+      opacity: 1 !important; /* disable animation on mobile for simplicity */
+      transform: none !important;
+    }
+    .industry-card img {
+      width: 100%;
+      height: 180px;
+      border-radius: var(--radius) var(--radius) 0 0;
+      transform: none !important;
+    }
   }
 </style>
 </head>
@@ -193,94 +295,114 @@
 
   <!-- Industries -->
   <section id="industries" style="margin-top:50px;">
-    <h2>🔧 Industries We Serve</h2>
-    <div class="cards">
-      <div class="card">Architecture & Built Environment: Smart Infrastructure, Interiors & Exteriors, Sustainable Design</div>
-      <div class="card">Mechanical Systems & Automation: Industrial Automation, Mechanical Design</div>
-      <div class="card">Transportation & Mobility: Aerospace, Predictive Maintenance, ADAS, EV Systems</div>
+    <h2>🌟 Sectors Where We Make an Impact</h2>
+    <div class="industry-cards">
+
+      <div class="industry-card">
+        <img src="assets/architecture.jpg" alt="Architecture & Built Environment" />
+        <div class="industry-info">
+          <h3>Architecture & Built Environment</h3>
+          <p>We empower architects and designers to create smart, sustainable spaces through cutting-edge technologies in smart infrastructure, interiors, and exteriors. Our solutions help optimize energy efficiency and enhance aesthetic appeal while focusing on eco-friendly practices.</p>
+        </div>
+      </div>
+
+      <div class="industry-card">
+        <img src="assets/mechanical-systems.jpg" alt="Mechanical Systems & Automation" />
+        <div class="industry-info">
+          <h3>Mechanical Systems & Automation</h3>
+          <p>Specializing in industrial automation and mechanical design, we help companies streamline their manufacturing processes with precision engineering, robotics integration, and advanced simulation tools, boosting productivity and reducing downtime.</p>
+        </div>
+      </div>
+
+      <div class="industry-card">
+        <img src="assets/transportation.jpg" alt="Transportation & Mobility" />
+        <div class="industry-info">
+          <h3>Transportation & Mobility</h3>
+          <p>From aerospace engineering to electric vehicles and predictive maintenance systems, we drive innovation in mobility. Our expertise includes ADAS technologies and sustainable transport solutions for the future of smart mobility.</p>
+        </div>
+      </div>
+
     </div>
   </section>
+
 </main>
 
 <!-- Footer -->
-<footer>
-  <p>© 2025 MechStem. Built with 💡 by future engineers.</p>
-  <div class="social-links">
-    <a href="https://www.linkedin.com/company/mechstem/" target="_blank" class="social-icon">
-      <img src="assets/linkedin-icon.png" alt="LinkedIn" />
+<footer id="contact">
+  Contact us: info@mechstem.in | +91 12345 67890
+  <div class="social-links" style="margin-top:10px;">
+    <a href="https://instagram.com/mechstem" target="_blank" class="social-icon">
+      <img src="assets/instagram.svg" alt="Instagram" />
     </a>
-    <a href="https://www.youtube.com/@mechstem" target="_blank" class="social-icon">
-      <img src="assets/youtube-icon.png" alt="YouTube" />
+    <a href="https://linkedin.com/company/mechstem" target="_blank" class="social-icon">
+      <img src="assets/linkedin.svg" alt="LinkedIn" />
     </a>
-    <a href="https://twitter.com/YOUR_TWITTER_HANDLE" target="_blank" class="social-icon">
-      <img src="assets/twitter-icon.png" alt="Twitter" />
+    <a href="https://youtube.com/mechstem" target="_blank" class="social-icon">
+      <img src="assets/youtube.svg" alt="YouTube" />
     </a>
   </div>
 </footer>
 
-<!-- Scripts -->
 <script>
+  // Animate industry cards when they come into view
+  function isInViewport(element) {
+    const rect = element.getBoundingClientRect();
+    return (
+      rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.9
+    );
+  }
+
+  function animateIndustryCards() {
+    const cards = document.querySelectorAll('.industry-card');
+    cards.forEach(card => {
+      if (isInViewport(card)) {
+        card.classList.add('animate');
+      }
+    });
+  }
+  window.addEventListener('scroll', animateIndustryCards);
+  window.addEventListener('load', animateIndustryCards);
+
+  // Events array for upcoming events example (replace with your own)
   const events = [
     {
-      date: '2025-09-12',
+      date: '2025-09-15',
       title: 'Embedded Systems Workshop',
-      description: 'Hands-on microcontroller & firmware session. Online via Zoom. Duration: 2 hrs.',
-      link: 'https://forms.gle/your-google-form-link'
+      description: 'Learn Microcontroller Programming & Interfacing.',
+      seats: 12
     },
     {
-      date: '2025-09-18',
-      title: 'Mechanical CAD Workshop',
-      description: '3D CAD design using Fusion 360 and simulation tools. Offline (Bangalore).',
-      link: 'https://forms.gle/your-google-form-link'
+      date: '2025-09-28',
+      title: 'AI & Machine Learning Bootcamp',
+      description: 'Build and deploy ML models for real applications.',
+      seats: 8
     },
     {
-      date: '2025-09-25',
-      title: 'AI Vision & Edge AI',
-      description: 'Image recognition & model deployment on edge devices. Online + Kit access.',
-      link: 'https://forms.gle/your-google-form-link'
-    },
-    {
-      date: '2025-10-02',
-      title: 'Industrial IoT & Automation',
-      description: 'Explore PLCs, sensors & industrial control systems. Offline (Chennai).',
-      link: 'https://forms.gle/your-google-form-link'
+      date: '2025-10-05',
+      title: 'Mechanical CAD Training',
+      description: 'Master ArchiCAD and mechanical design basics.',
+      seats: 5
     }
   ];
 
-  function renderUpcomingEvents() {
-    const container = document.getElementById("events-container");
-    container.innerHTML = "";
-
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-
-    const upcoming = events
-      .filter(event => {
-        const eventDate = new Date(event.date);
-        eventDate.setHours(0, 0, 0, 0);
-        return eventDate >= today;
-      })
-      .slice(0, 3);
-
-    if (upcoming.length === 0) {
-      container.innerHTML = `<div class="card">🎉 No upcoming events at the moment. Stay tuned!</div>`;
-      return;
-    }
-
-    upcoming.forEach((event, index) => {
-      const card = document.createElement("div");
-      card.className = "card fade-in";
-      card.style.animationDelay = `${index * 0.2}s`;
+  function renderEvents() {
+    const container = document.getElementById('events-container');
+    if (!container) return;
+    container.innerHTML = '';
+    events.forEach(event => {
+      const card = document.createElement('div');
+      card.classList.add('card');
       card.innerHTML = `
-        <strong>📅 ${new Date(event.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' })}:</strong> ${event.title}<br />
-        ${event.description}
-        <br /><a href="${event.link}" target="_blank" class="button">Register</a>
+        <strong>${new Date(event.date).toLocaleDateString()}</strong><br>
+        <strong>${event.title}</strong><br>
+        ${event.description}<br>
+        <strong>Seats Left:</strong> ${event.seats}<br>
+        <a href="https://forms.gle/your-google-form-link" target="_blank" class="button">Register</a>
       `;
       container.appendChild(card);
     });
   }
-
-  renderUpcomingEvents();
+  window.addEventListener('load', renderEvents);
 </script>
 
 </body>
