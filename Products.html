@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>MechStem – Our Products</title>
 
 <style>
@@ -29,44 +29,158 @@ body{font-family:system-ui,sans-serif;background:var(--bg);color:var(--text);}
 .contact-button:hover{box-shadow:0 0 15px var(--yellow);transform:translateY(-2px)}
 .contact-button::after{content:"";position:absolute;inset:0;background:linear-gradient(120deg,transparent 0%,rgba(255,255,255,.35) 45%,transparent 80%);transform:translateX(-200%)}
 .contact-button:hover::after{animation:sheen .9s ease}
-@keyframes sheen{to{transform:translateX(200%)}}
 
 /* Products Section */
 .products-background{position:relative;padding:60px 20px;text-align:center;max-width:var(--maxw);margin:0 auto}
 .products-background h1{font-size:clamp(28px,4vw,40px);margin-bottom:10px;color:var(--blue)}
 .products-background p{color:var(--muted);margin-bottom:40px}
 
-/* Carousel */
-.carousel-container{position:relative;overflow:hidden}
-.products-list{display:flex;transition:transform 0.8s cubic-bezier(0.77,0,0.175,1);}
-.product-card{flex:0 0 calc(33.33% - 20px);background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);
-  border-radius:var(--radius);margin:0 10px;padding:20px;text-align:center;transition:.3s;position:relative}
-.product-card img{width:100%;height:180px;object-fit:cover;border-radius:var(--radius);margin-bottom:15px}
-.product-card h2{font-size:20px;margin-bottom:10px;color:var(--green)}
-.product-card p{font-size:14px;color:var(--muted)}
-.product-card:hover{border-color:var(--blue);box-shadow:0 0 20px var(--green);transform:translateY(-5px)}
-.product-card::after{content:"";position:absolute;bottom:0;left:0;width:0;height:3px;background:linear-gradient(90deg,var(--blue),var(--green));border-radius:999px;transition:width .3s ease}
-.product-card:hover::after{width:100%}
+/* Horizontal scroll products list */
+.products-list {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding-bottom: 10px;
+  -webkit-overflow-scrolling: touch;
+}
 
-/* Controls */
-.carousel-controls{display:flex;justify-content:center;gap:20px;margin-top:22px}
-.carousel-button{background:linear-gradient(90deg,var(--blue),var(--green));border:none;color:#fff;padding:10px 18px;border-radius:999px;cursor:pointer;transition:.3s;position:relative;overflow:hidden}
-.carousel-button:hover{box-shadow:0 0 15px var(--yellow);transform:scale(1.05)}
-.carousel-button::after{content:"";position:absolute;inset:0;background:linear-gradient(120deg,transparent 0%,rgba(255,255,255,.35) 45%,transparent 80%);transform:translateX(-200%)}
-.carousel-button:hover::after{animation:sheen .9s ease}
+/* Remove transform transition */
+.product-card {
+  flex: 0 0 calc(33.33% - 20px);
+  background: rgba(255,255,255,.03);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: var(--radius);
+  margin: 0;
+  padding: 20px;
+  text-align: center;
+  transition: border-color .3s, box-shadow .3s, transform .3s;
+  position: relative;
+}
+.product-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: var(--radius);
+  margin-bottom: 15px;
+}
+.product-card h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: var(--green);
+}
+.product-card p {
+  font-size: 14px;
+  color: var(--muted);
+  white-space: pre-line;
+}
+.product-card:hover {
+  border-color: var(--blue);
+  box-shadow: 0 0 20px var(--green);
+  transform: translateY(-5px);
+}
+.product-card::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--blue), var(--green));
+  border-radius: 999px;
+  transition: width .3s ease;
+}
+.product-card:hover::after {
+  width: 100%;
+}
+
+/* Know More Button */
+.know-more-button {
+  margin-top: 15px;
+  padding: 8px 18px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--blue), var(--green));
+  border: none;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: box-shadow 0.3s, transform 0.3s;
+  position: relative;
+  overflow: hidden;
+  font-size: 14px;
+}
+
+.know-more-button:hover {
+  box-shadow: 0 0 15px var(--yellow);
+  transform: translateY(-2px);
+}
+
+.know-more-button::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.35) 45%, transparent 80%);
+  transform: translateX(-200%);
+  transition: transform 0.9s ease;
+}
+
+.know-more-button:hover::after {
+  animation: sheen 0.9s ease forwards;
+}
+
+@keyframes sheen {
+  to {
+    transform: translateX(200%);
+  }
+}
 
 /* Reveal-on-scroll */
-.reveal{opacity:0;transform:translateY(16px);filter:blur(2px)}
-.reveal.in{opacity:1;transform:none;filter:blur(0);transition:opacity .8s ease,transform .8s ease,filter .8s ease}
-.delay-1{transition-delay:.1s}.delay-2{transition-delay:.2s}.delay-3{transition-delay:.3s}.delay-4{transition-delay:.4s}
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  filter: blur(2px);
+}
+.reveal.in {
+  opacity: 1;
+  transform: none;
+  filter: blur(0);
+  transition: opacity .8s ease, transform .8s ease, filter .8s ease;
+}
+.delay-1 {transition-delay:.1s}
+.delay-2 {transition-delay:.2s}
+.delay-3 {transition-delay:.3s}
+.delay-4 {transition-delay:.4s}
 
 /* Responsive */
-@media(max-width:992px){.product-card{flex:0 0 calc(50% - 20px);}}
-@media(max-width:600px){.product-card{flex:0 0 calc(100% - 20px);}}
+@media(max-width:992px) {
+  .product-card {
+    flex: 0 0 calc(50% - 20px);
+  }
+}
+@media(max-width:600px) {
+  .product-card {
+    flex: 0 0 calc(100% - 20px);
+  }
+}
 
-footer{padding:32px 0 60px;color:var(--muted);text-align:center;border-top:1px solid rgba(255,255,255,.08);margin-top:60px}
-.social-links{display:flex;justify-content:center;gap:14px;margin-top:12px}
-.social-links img{height:28px;width:28px}
+/* Footer */
+footer {
+  padding: 32px 0 60px;
+  color: var(--muted);
+  text-align: center;
+  border-top: 1px solid rgba(255,255,255,.08);
+  margin-top: 60px;
+}
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 12px;
+}
+.social-links img {
+  height: 28px;
+  width: 28px;
+}
 </style>
 </head>
 <body>
@@ -90,69 +204,59 @@ footer{padding:32px 0 60px;color:var(--muted);text-align:center;border-top:1px s
   <div class="carousel-container">
     <div class="products-list" id="products-list">
       <div class="product-card reveal delay-1">
-        <img src="assets/product1.jpg" alt="Product 1">
+        <img src="assets/product1.jpg" alt="Product 1" />
         <h2>Embedded Kit</h2>
         <p>Microcontroller-based learning kit<br>Easy prototyping<br>Hands-on exercises</p>
+        <button class="know-more-button" onclick="alert('More details coming soon!')">Know More</button>
       </div>
       <div class="product-card reveal delay-2">
-        <img src="assets/product2.jpg" alt="Product 2">
+        <img src="assets/product2.jpg" alt="Product 2" />
         <h2>AI Vision Kit</h2>
         <p>Camera modules<br>Edge AI ready<br>Computer vision projects</p>
+        <button class="know-more-button" onclick="alert('More details coming soon!')">Know More</button>
       </div>
       <div class="product-card reveal delay-3">
-        <img src="assets/product3.jpg" alt="Product 3">
+        <img src="assets/product3.jpg" alt="Product 3" />
         <h2>Robotics Kit</h2>
         <p>Actuators & sensors<br>Programming exercises<br>Educational robotics</p>
+        <button class="know-more-button" onclick="alert('More details coming soon!')">Know More</button>
       </div>
       <div class="product-card reveal delay-1">
-        <img src="assets/product4.jpg" alt="Product 4">
+        <img src="assets/product4.jpg" alt="Product 4" />
         <h2>Mechanical CAD Kit</h2>
         <p>CAD designs<br>Simulation software<br>Hands-on mechanical learning</p>
+        <button class="know-more-button" onclick="alert('More details coming soon!')">Know More</button>
       </div>
       <div class="product-card reveal delay-2">
-        <img src="assets/product5.jpg" alt="Product 5">
+        <img src="assets/product5.jpg" alt="Product 5" />
         <h2>IoT Starter Kit</h2>
         <p>ESP32/Arduino based<br>Sensor interfacing<br>Real-world IoT projects</p>
+        <button class="know-more-button" onclick="alert('More details coming soon!')">Know More</button>
       </div>
     </div>
-  </div>
-
-  <div class="carousel-controls reveal delay-4">
-    <button class="carousel-button" id="prev">❮ Prev</button>
-    <button class="carousel-button" id="next">Next ❯</button>
   </div>
 </div>
 
 <footer class="reveal delay-1">
   <p>© 2025 MechStem. Built with 💡 by future engineers.</p>
   <div class="social-links">
-    <a href="https://www.linkedin.com/company/mechstem/" target="_blank"><img src="assets/linkedin-icon.png" alt="LinkedIn"></a>
-    <a href="https://www.youtube.com/@mechstem" target="_blank"><img src="assets/youtube-icon.png" alt="YouTube"></a>
-    <a href="https://twitter.com/YOUR_TWITTER_HANDLE" target="_blank"><img src="assets/twitter-icon.png" alt="Twitter"></a>
+    <a href="https://www.linkedin.com/company/mechstem/" target="_blank" rel="noopener"><img src="assets/linkedin-icon.png" alt="LinkedIn" /></a>
+    <a href="https://www.youtube.com/@mechstem" target="_blank" rel="noopener"><img src="assets/youtube-icon.png" alt="YouTube" /></a>
+    <a href="https://twitter.com/YOUR_TWITTER_HANDLE" target="_blank" rel="noopener"><img src="assets/twitter-icon.png" alt="Twitter" /></a>
   </div>
 </footer>
 
 <script>
-const list = document.getElementById('products-list');
-const prev = document.getElementById('prev');
-const next = document.getElementById('next');
-const cards = document.querySelectorAll('.product-card');
-let total = cards.length;
-let perView = 3;
-let i = 0;
-
-function move(){ list.style.transform = `translateX(-${i*(100/perView)}%)`; }
-
-next.addEventListener('click', ()=>{ i = (i < total - perView) ? i+1 : 0; move(); });
-prev.addEventListener('click', ()=>{ i = (i > 0) ? i-1 : total - perView; move(); });
-
-setInterval(()=>{ i = (i < total - perView) ? i+1 : 0; move(); }, 6000);
-
 /* Reveal-on-scroll */
 const io = new IntersectionObserver((entries)=>{
-  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
-},{threshold:.2});
-document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+  entries.forEach(e => {
+    if(e.isIntersecting){
+      e.target.classList.add('in');
+      io.unobserve(e.target);
+    }
+  });
+},{threshold: 0.2});
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 </script>
 
 </body>
