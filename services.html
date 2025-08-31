@@ -19,30 +19,73 @@
   <a href="#contact" class="contact-button">Contact</a>
 </div>
 
-<!-- Services Section -->
-<main class="reveal delay-1" style="padding:40px; max-width:var(--maxw); margin:0 auto;">
+<!-- Services Hero Slider -->
+<section>
+  <div class="slider" id="slider-services">
+    <button class="prev">&#10094;</button>
+    <div class="slides" id="slides-services">
+      <div class="slide" style="background:url('assets/service-automation.jpg') center/cover no-repeat;">
+        <div class="left reveal delay-1">
+          <h1>Industrial Automation</h1>
+          <a href="#details" class="contact-button cta-button">Explore</a>
+        </div>
+        <div class="right reveal delay-2">
+          <p>Boosting efficiency in machinery through robotics and automation solutions.</p>
+        </div>
+      </div>
+      <div class="slide" style="background:url('assets/service-iot.jpg') center/cover no-repeat;">
+        <div class="left reveal delay-1">
+          <h1>IoT & Smart Infrastructure</h1>
+          <a href="#details" class="contact-button cta-button">Discover</a>
+        </div>
+        <div class="right reveal delay-2">
+          <p>Integrating IoT and AI to create sustainable, connected buildings.</p>
+        </div>
+      </div>
+      <div class="slide" style="background:url('assets/service-aerospace.jpg') center/cover no-repeat;">
+        <div class="left reveal delay-1">
+          <h1>Aerospace Systems</h1>
+          <a href="#details" class="contact-button cta-button">Learn More</a>
+        </div>
+        <div class="right reveal delay-2">
+          <p>Advanced avionics and flight technologies for modern aerospace solutions.</p>
+        </div>
+      </div>
+    </div>
+    <button class="next">&#10095;</button>
+    <div class="dots" id="dots-services">
+      <span class="dot active" data-index="0"></span>
+      <span class="dot" data-index="1"></span>
+      <span class="dot" data-index="2"></span>
+    </div>
+  </div>
+</section>
+
+<!-- Services Details Section -->
+<main id="details" class="reveal delay-1" style="padding:40px; max-width:var(--maxw); margin:0 auto;">
   <h1 style="text-align:center; margin-bottom:32px;">Our Services</h1>
   <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:24px;">
-    <!-- Service Card Example -->
     <div style="background:#1a1b1f; border-radius:var(--radius); box-shadow:var(--shadow); overflow:hidden;">
-      <img src="assets/service-1.jpg" alt="Service 1" style="width:100%; height:200px; object-fit:cover;">
+      <img src="assets/service-robotics.jpg" alt="Robotics Service" style="width:100%; height:200px; object-fit:cover;">
       <div style="padding:16px;">
-        <h2>Service 1</h2>
-        <p style="color:var(--muted); font-size:14px;">Brief description of Service 1.</p>
-        <a href="#" class="contact-button" style="margin-top:10px; display:inline-block;">Learn More</a>
+        <h2>Robotics Solutions</h2>
+        <p style="color:var(--muted); font-size:14px;">Custom automation and robotic integration for industrial setups.</p>
       </div>
     </div>
-
     <div style="background:#1a1b1f; border-radius:var(--radius); box-shadow:var(--shadow); overflow:hidden;">
-      <img src="assets/service-2.jpg" alt="Service 2" style="width:100%; height:200px; object-fit:cover;">
+      <img src="assets/service-ai.jpg" alt="AI & ML Service" style="width:100%; height:200px; object-fit:cover;">
       <div style="padding:16px;">
-        <h2>Service 2</h2>
-        <p style="color:var(--muted); font-size:14px;">Brief description of Service 2.</p>
-        <a href="#" class="contact-button" style="margin-top:10px; display:inline-block;">Learn More</a>
+        <h2>AI & Machine Learning</h2>
+        <p style="color:var(--muted); font-size:14px;">Predictive maintenance, analytics, and AI-driven decision making.</p>
       </div>
     </div>
-
-    <!-- Add more services as needed -->
+    <div style="background:#1a1b1f; border-radius:var(--radius); box-shadow:var(--shadow); overflow:hidden;">
+      <img src="assets/service-iot-devices.jpg" alt="IoT Devices" style="width:100%; height:200px; object-fit:cover;">
+      <div style="padding:16px;">
+        <h2>IoT Device Integration</h2>
+        <p style="color:var(--muted); font-size:14px;">Connecting devices for real-time monitoring and control.</p>
+      </div>
+    </div>
   </div>
 </main>
 
@@ -57,5 +100,44 @@
 </footer>
 
 <script src="script.js"></script>
+<script>
+const slidesContainerS = document.getElementById('slides-services');
+const slidesS = document.querySelectorAll('#slides-services .slide');
+const dotsS = document.querySelectorAll('#dots-services .dot');
+let currentIndexS = 0;
+let slideIntervalS = setInterval(nextSlideS, 10000);
+
+function goToSlideS(index){
+  slidesContainerS.style.transform = `translateX(-${index*100}%)`;
+  dotsS.forEach(d=>d.classList.remove('active'));
+  dotsS[index].classList.add('active');
+  currentIndexS = index;
+}
+
+function nextSlideS(){goToSlideS((currentIndexS+1)%slidesS.length);}
+function prevSlideS(){goToSlideS((currentIndexS-1+slidesS.length)%slidesS.length);}
+
+dotsS.forEach(dot=>{
+  dot.addEventListener('click',()=>{
+    clearInterval(slideIntervalS);
+    goToSlideS(parseInt(dot.dataset.index));
+    slideIntervalS = setInterval(nextSlideS,10000);
+  });
+});
+
+document.querySelector('#slider-services .prev').addEventListener('click',()=>{
+  clearInterval(slideIntervalS);
+  prevSlideS();
+  slideIntervalS = setInterval(nextSlideS,10000);
+});
+document.querySelector('#slider-services .next').addEventListener('click',()=>{
+  clearInterval(slideIntervalS);
+  nextSlideS();
+  slideIntervalS = setInterval(nextSlideS,10000);
+});
+
+goToSlideS(0);
+</script>
+
 </body>
 </html>
