@@ -1,72 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Services - My Website</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>MechStem – Services</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- Navbar -->
-  <nav class="navbar">
-    <div class="nav-left">
-      <img src="logo.png" alt="Logo" class="logo">
-      <div class="nav-item"><a href="index.html">Home</a></div>
-      <div class="nav-item"><a href="Products.html">Products</a></div>
-      <div class="nav-item nav-active">Services</div>
-    </div>
-    <a href="contact.html" class="contact-button">Contact</a>
-    <div class="hamburger" onclick="toggleMenu()">
-      <span></span><span></span><span></span>
-    </div>
-  </nav>
-
-  <!-- Services Layout -->
-  <div class="services-layout">
-    <aside class="sidebar" id="sidebar">
-      <h2>Our Services</h2>
-      <ul>
-        <li class="active" onclick="showService(0)">Service One</li>
-        <li onclick="showService(1)">Service Two</li>
-        <li onclick="showService(2)">Service Three</li>
-      </ul>
-    </aside>
-
-    <main class="content">
-      <div class="service-section active">
-        <h1>Service One</h1>
-        <p>Comprehensive solution tailored for your business needs.</p>
-        <a href="#" class="register-link">Register</a>
-      </div>
-      <div class="service-section">
-        <h1>Service Two</h1>
-        <p>High-quality service ensuring maximum productivity.</p>
-        <a href="#" class="register-link">Register</a>
-      </div>
-      <div class="service-section">
-        <h1>Service Three</h1>
-        <p>Expert guidance and support for complex projects.</p>
-        <a href="#" class="register-link">Register</a>
-      </div>
-    </main>
+<!-- Header -->
+<div class="navbar reveal delay-1">
+  <div class="nav-left">
+    <img src="assets/logo.png" alt="MechStem Logo" class="logo" />
+    <div class="nav-item" onclick="location.href='index.html'">Home</div>
+    <div class="nav-item" onclick="location.href='Products.html'">Products</div>
+    <div class="nav-item" onclick="location.href='services.html'">Services</div>
   </div>
+  <a href="#contact" class="contact-button">Contact</a>
+</div>
 
-  <footer>
-    &copy; 2025 My Company. All rights reserved.
-  </footer>
+<!-- Services Section -->
+<main class="reveal delay-1" style="padding:40px; max-width:var(--maxw); margin:0 auto;">
+  <h1 style="text-align:center; margin-bottom:32px;">Our Services</h1>
+  <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:24px;">
+    <!-- Service Card Example -->
+    <div style="background:#1a1b1f; border-radius:var(--radius); box-shadow:var(--shadow); overflow:hidden;">
+      <img src="assets/service-1.jpg" alt="Service 1" style="width:100%; height:200px; object-fit:cover;">
+      <div style="padding:16px;">
+        <h2>Service 1</h2>
+        <p style="color:var(--muted); font-size:14px;">Brief description of Service 1.</p>
+        <a href="#" class="contact-button" style="margin-top:10px; display:inline-block;">Learn More</a>
+      </div>
+    </div>
 
-  <script>
-    // Sidebar service toggle
-    const sections = document.querySelectorAll('.service-section');
-    const items = document.querySelectorAll('.sidebar li');
+    <div style="background:#1a1b1f; border-radius:var(--radius); box-shadow:var(--shadow); overflow:hidden;">
+      <img src="assets/service-2.jpg" alt="Service 2" style="width:100%; height:200px; object-fit:cover;">
+      <div style="padding:16px;">
+        <h2>Service 2</h2>
+        <p style="color:var(--muted); font-size:14px;">Brief description of Service 2.</p>
+        <a href="#" class="contact-button" style="margin-top:10px; display:inline-block;">Learn More</a>
+      </div>
+    </div>
 
-    function showService(index) {
-      sections.forEach(s => s.classList.remove('active'));
-      sections[index].classList.add('active');
-      items.forEach(i => i.classList.remove('active'));
-      items[index].classList.add('active');
-    }
-  </script>
+    <!-- Add more services as needed -->
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="reveal delay-1">
+  <p>© 2025 MechStem. Built with 💡 by future engineers.</p>
+  <div class="social-links">
+    <a href="https://www.linkedin.com/company/mechstem/" target="_blank"><img src="assets/linkedin-icon.png" alt="LinkedIn" /></a>
+    <a href="https://www.youtube.com/@mechstem" target="_blank"><img src="assets/youtube-icon.png" alt="YouTube" /></a>
+    <a href="https://twitter.com/YOUR_TWITTER_HANDLE" target="_blank"><img src="assets/twitter-icon.png" alt="Twitter" /></a>
+  </div>
+</footer>
+
+<script src="script.js"></script>
 </body>
 </html>
