@@ -1,61 +1,159 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>MechStem – Products</title>
-<link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MechStem – Our Products</title>
+
+<style>
+:root{
+  --bg:#0f1014; --text:#e6e9ef; --muted:#9aa3b2;
+  --blue:#1E88E5; --green:#43A047; --yellow:#FBC02D;
+  --radius:18px; --maxw:1200px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:system-ui,sans-serif;background:var(--bg);color:var(--text);}
+
+/* Navbar */
+.navbar{
+  position:sticky;top:0;z-index:50;backdrop-filter:blur(10px);
+  background:rgba(15,16,20,.85);border-bottom:1px solid rgba(255,255,255,.08);
+  display:flex;justify-content:space-between;align-items:center;padding:12px 20px;max-width:var(--maxw);margin:0 auto
+}
+.nav-left{display:flex;align-items:center;gap:18px}
+.logo{height:40px;animation:floaty 6s ease-in-out infinite}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+.nav-item{cursor:pointer;transition:color .3s}
+.nav-item:hover,.nav-active{color:var(--blue)}
+.contact-button{padding:8px 16px;border-radius:999px;background:linear-gradient(90deg,var(--blue),var(--green));color:#fff;font-weight:600;transition:.3s;position:relative;overflow:hidden}
+.contact-button:hover{box-shadow:0 0 15px var(--yellow);transform:translateY(-2px)}
+.contact-button::after{content:"";position:absolute;inset:0;background:linear-gradient(120deg,transparent 0%,rgba(255,255,255,.35) 45%,transparent 80%);transform:translateX(-200%)}
+.contact-button:hover::after{animation:sheen .9s ease}
+@keyframes sheen{to{transform:translateX(200%)}}
+
+/* Products Section */
+.products-background{position:relative;padding:60px 20px;text-align:center;max-width:var(--maxw);margin:0 auto}
+.products-background h1{font-size:clamp(28px,4vw,40px);margin-bottom:10px;color:var(--blue)}
+.products-background p{color:var(--muted);margin-bottom:40px}
+
+/* Carousel */
+.carousel-container{position:relative;overflow:hidden}
+.products-list{display:flex;transition:transform 0.8s cubic-bezier(0.77,0,0.175,1);}
+.product-card{flex:0 0 calc(33.33% - 20px);background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);
+  border-radius:var(--radius);margin:0 10px;padding:20px;text-align:center;transition:.3s;position:relative}
+.product-card img{width:100%;height:180px;object-fit:cover;border-radius:var(--radius);margin-bottom:15px}
+.product-card h2{font-size:20px;margin-bottom:10px;color:var(--green)}
+.product-card p{font-size:14px;color:var(--muted)}
+.product-card:hover{border-color:var(--blue);box-shadow:0 0 20px var(--green);transform:translateY(-5px)}
+.product-card::after{content:"";position:absolute;bottom:0;left:0;width:0;height:3px;background:linear-gradient(90deg,var(--blue),var(--green));border-radius:999px;transition:width .3s ease}
+.product-card:hover::after{width:100%}
+
+/* Controls */
+.carousel-controls{display:flex;justify-content:center;gap:20px;margin-top:22px}
+.carousel-button{background:linear-gradient(90deg,var(--blue),var(--green));border:none;color:#fff;padding:10px 18px;border-radius:999px;cursor:pointer;transition:.3s;position:relative;overflow:hidden}
+.carousel-button:hover{box-shadow:0 0 15px var(--yellow);transform:scale(1.05)}
+.carousel-button::after{content:"";position:absolute;inset:0;background:linear-gradient(120deg,transparent 0%,rgba(255,255,255,.35) 45%,transparent 80%);transform:translateX(-200%)}
+.carousel-button:hover::after{animation:sheen .9s ease}
+
+/* Reveal-on-scroll */
+.reveal{opacity:0;transform:translateY(16px);filter:blur(2px)}
+.reveal.in{opacity:1;transform:none;filter:blur(0);transition:opacity .8s ease,transform .8s ease,filter .8s ease}
+.delay-1{transition-delay:.1s}.delay-2{transition-delay:.2s}.delay-3{transition-delay:.3s}.delay-4{transition-delay:.4s}
+
+/* Responsive */
+@media(max-width:992px){.product-card{flex:0 0 calc(50% - 20px);}}
+@media(max-width:600px){.product-card{flex:0 0 calc(100% - 20px);}}
+
+footer{padding:32px 0 60px;color:var(--muted);text-align:center;border-top:1px solid rgba(255,255,255,.08);margin-top:60px}
+.social-links{display:flex;justify-content:center;gap:14px;margin-top:12px}
+.social-links img{height:28px;width:28px}
+</style>
 </head>
 <body>
 
-<!-- Header -->
+<!-- Navbar -->
 <div class="navbar reveal delay-1">
   <div class="nav-left">
     <img src="assets/logo.png" alt="MechStem Logo" class="logo" />
     <div class="nav-item" onclick="location.href='index.html'">Home</div>
-    <div class="nav-item" onclick="location.href='Products.html'">Products</div>
+    <div class="nav-item nav-active" onclick="location.href='Products.html'">Products</div>
     <div class="nav-item" onclick="location.href='services.html'">Services</div>
   </div>
   <a href="#contact" class="contact-button">Contact</a>
 </div>
 
-<!-- Products Section -->
-<main class="reveal delay-1" style="padding:40px; max-width:var(--maxw); margin:0 auto;">
-  <h1 style="text-align:center; margin-bottom:32px;">Our Products</h1>
-  <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:24px;">
-    <!-- Product Card Example -->
-    <div style="background:#1a1b1f; border-radius:var(--radius); box-shadow:var(--shadow); overflow:hidden;">
-      <img src="assets/product-1.jpg" alt="Product 1" style="width:100%; height:200px; object-fit:cover;">
-      <div style="padding:16px;">
-        <h2>Product 1</h2>
-        <p style="color:var(--muted); font-size:14px;">Brief description of Product 1.</p>
-        <a href="#" class="contact-button" style="margin-top:10px; display:inline-block;">Learn More</a>
+<!-- Products -->
+<div class="products-background">
+  <h1 class="reveal delay-1">Our Products</h1>
+  <p class="reveal delay-2">Discover our innovative offerings</p>
+
+  <div class="carousel-container">
+    <div class="products-list" id="products-list">
+      <div class="product-card reveal delay-1">
+        <img src="assets/product1.jpg" alt="Product 1">
+        <h2>Embedded Kit</h2>
+        <p>Microcontroller-based learning kit<br>Easy prototyping<br>Hands-on exercises</p>
+      </div>
+      <div class="product-card reveal delay-2">
+        <img src="assets/product2.jpg" alt="Product 2">
+        <h2>AI Vision Kit</h2>
+        <p>Camera modules<br>Edge AI ready<br>Computer vision projects</p>
+      </div>
+      <div class="product-card reveal delay-3">
+        <img src="assets/product3.jpg" alt="Product 3">
+        <h2>Robotics Kit</h2>
+        <p>Actuators & sensors<br>Programming exercises<br>Educational robotics</p>
+      </div>
+      <div class="product-card reveal delay-1">
+        <img src="assets/product4.jpg" alt="Product 4">
+        <h2>Mechanical CAD Kit</h2>
+        <p>CAD designs<br>Simulation software<br>Hands-on mechanical learning</p>
+      </div>
+      <div class="product-card reveal delay-2">
+        <img src="assets/product5.jpg" alt="Product 5">
+        <h2>IoT Starter Kit</h2>
+        <p>ESP32/Arduino based<br>Sensor interfacing<br>Real-world IoT projects</p>
       </div>
     </div>
-
-    <div style="background:#1a1b1f; border-radius:var(--radius); box-shadow:var(--shadow); overflow:hidden;">
-      <img src="assets/product-2.jpg" alt="Product 2" style="width:100%; height:200px; object-fit:cover;">
-      <div style="padding:16px;">
-        <h2>Product 2</h2>
-        <p style="color:var(--muted); font-size:14px;">Brief description of Product 2.</p>
-        <a href="#" class="contact-button" style="margin-top:10px; display:inline-block;">Learn More</a>
-      </div>
-    </div>
-
-    <!-- Add more products as needed -->
   </div>
-</main>
 
-<!-- Footer -->
+  <div class="carousel-controls reveal delay-4">
+    <button class="carousel-button" id="prev">❮ Prev</button>
+    <button class="carousel-button" id="next">Next ❯</button>
+  </div>
+</div>
+
 <footer class="reveal delay-1">
   <p>© 2025 MechStem. Built with 💡 by future engineers.</p>
   <div class="social-links">
-    <a href="https://www.linkedin.com/company/mechstem/" target="_blank"><img src="assets/linkedin-icon.png" alt="LinkedIn" /></a>
-    <a href="https://www.youtube.com/@mechstem" target="_blank"><img src="assets/youtube-icon.png" alt="YouTube" /></a>
-    <a href="https://twitter.com/YOUR_TWITTER_HANDLE" target="_blank"><img src="assets/twitter-icon.png" alt="Twitter" /></a>
+    <a href="https://www.linkedin.com/company/mechstem/" target="_blank"><img src="assets/linkedin-icon.png" alt="LinkedIn"></a>
+    <a href="https://www.youtube.com/@mechstem" target="_blank"><img src="assets/youtube-icon.png" alt="YouTube"></a>
+    <a href="https://twitter.com/YOUR_TWITTER_HANDLE" target="_blank"><img src="assets/twitter-icon.png" alt="Twitter"></a>
   </div>
 </footer>
 
-<script src="script.js"></script>
+<script>
+const list = document.getElementById('products-list');
+const prev = document.getElementById('prev');
+const next = document.getElementById('next');
+const cards = document.querySelectorAll('.product-card');
+let total = cards.length;
+let perView = 3;
+let i = 0;
+
+function move(){ list.style.transform = `translateX(-${i*(100/perView)}%)`; }
+
+next.addEventListener('click', ()=>{ i = (i < total - perView) ? i+1 : 0; move(); });
+prev.addEventListener('click', ()=>{ i = (i > 0) ? i-1 : total - perView; move(); });
+
+setInterval(()=>{ i = (i < total - perView) ? i+1 : 0; move(); }, 6000);
+
+/* Reveal-on-scroll */
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+},{threshold:.2});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+
 </body>
 </html>
