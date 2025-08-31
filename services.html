@@ -65,55 +65,20 @@
 
   h2 { color: var(--blue); margin-bottom: 16px; }
 
-  /* Calendar */
-  #calendar-container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
+  /* Fade-in animation */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
-  #calendar-container div {
-    user-select: none;
-  }
-
-  /* Grid calendar */
-  #calendar-container > div {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 8px;
-    text-align: center;
-  }
-  #calendar-container > div > div {
-    padding: 10px;
-    border-radius: 8px;
-    background: #1a1b1f;
-    color: var(--text);
-    cursor: pointer;
-    transition: background 0.3s;
-  }
-  #calendar-container > div > div:hover {
-    background: var(--green);
-  }
-  #calendar-container > div > div.event-day {
-    background: var(--blue);
-  }
-
-  #calendar-container > div > div.event-day:hover {
-    background: var(--green);
-  }
-
-  /* Event details box */
-  #event-details {
-    max-width: 600px;
-    margin: 20px auto 40px auto;
-    background: #121418;
-    padding: 20px;
-    border-radius: var(--radius);
-    box-shadow: 0 0 10px rgba(0,0,0,0.4);
-    color: var(--muted);
-  }
-  #event-details h3 {
-    color: var(--green);
-    margin-bottom: 10px;
+  .card.fade-in {
+    animation: fadeInUp 0.6s ease forwards;
+    opacity: 0;
   }
 
   /* Cards */
@@ -191,11 +156,10 @@
 <!-- Content -->
 <main class="content">
 
-  <!-- Workshops Calendar -->
+  <!-- Upcoming Events Notification -->
   <section id="workshops" style="margin-top: 50px;">
-    <h2>🔔 Upcoming Workshops</h2>
-    <div id="calendar-container"></div>
-    <div id="event-details"><p style="color: var(--muted); text-align:center;">Click a date to see workshop details.</p></div>
+    <h2>🔔 Upcoming Events</h2>
+    <div id="events-container" class="cards"></div>
   </section>
 
   <!-- Internships & Trainings Integrated -->
@@ -256,75 +220,67 @@
 
 <!-- Scripts -->
 <script>
-  const workshops = [
+  const events = [
     {
       date: '2025-09-12',
       title: 'Embedded Systems Workshop',
-      description: 'Hands-on microcontroller & firmware session. Online via Zoom. Duration: 2 hrs',
+      description: 'Hands-on microcontroller & firmware session. Online via Zoom. Duration: 2 hrs.',
+      link: 'https://forms.gle/your-google-form-link'
     },
     {
       date: '2025-09-18',
       title: 'Mechanical CAD Workshop',
-      description: '3D CAD design using Fusion 360 and simulation tools. Offline (Bangalore)',
+      description: '3D CAD design using Fusion 360 and simulation tools. Offline (Bangalore).',
+      link: 'https://forms.gle/your-google-form-link'
     },
     {
       date: '2025-09-25',
       title: 'AI Vision & Edge AI',
       description: 'Image recognition & model deployment on edge devices. Online + Kit access.',
+      link: 'https://forms.gle/your-google-form-link'
+    },
+    {
+      date: '2025-10-02',
+      title: 'Industrial IoT & Automation',
+      description: 'Explore PLCs, sensors & industrial control systems. Offline (Chennai).',
+      link: 'https://forms.gle/your-google-form-link'
     }
   ];
 
-  function generateCalendar() {
-    const container = document.getElementById("calendar-container");
+  function renderUpcomingEvents() {
+    const container = document.getElementById("events-container");
+    container.innerHTML = "";
+
     const today = new Date();
-    const month = today.getMonth();
-    const year = today.getFullYear();
-    const firstDay = new Date(year, month, 1).getDay();
-    const daysInMonth = new Date(year, month + 1, 0).getDate();
+    today.setHours(0, 0, 0, 0);
 
-    let calendarHTML = `<div>`;
+    const upcoming = events
+      .filter(event => {
+        const eventDate = new Date(event.date);
+        eventDate.setHours(0, 0, 0, 0);
+        return eventDate >= today;
+      })
+      .slice(0, 3);
 
-    const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-    weekdays.forEach(day => {
-      calendarHTML += `<div style="color:var(--muted);font-weight:bold;">${day}</div>`;
-    });
-
-    for (let i = 0; i < firstDay; i++) {
-      calendarHTML += `<div></div>`;
+    if (upcoming.length === 0) {
+      container.innerHTML = `<div class="card">🎉 No upcoming events at the moment. Stay tuned!</div>`;
+      return;
     }
 
-    for (let d = 1; d <= daysInMonth; d++) {
-      const fullDate = `${year}-${String(month + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
-      const event = workshops.find(e => e.date === fullDate);
-      calendarHTML += `
-        <div 
-          class="${event ? 'event-day' : ''}"
-          onclick="showEvent('${fullDate}')"
-          style="color:${event ? '#fff' : 'var(--text)'};"
-          title="${event ? event.title : ''}"
-        >
-          ${d}
-        </div>`;
-    }
-
-    calendarHTML += `</div>`;
-    container.innerHTML = calendarHTML;
-  }
-
-  function showEvent(date) {
-    const event = workshops.find(e => e.date === date);
-    const details = document.getElementById('event-details');
-    if (event) {
-      details.innerHTML = `
-        <h3>${event.title}</h3>
-        <p>${event.description}</p>
+    upcoming.forEach((event, index) => {
+      const card = document.createElement("div");
+      card.className = "card fade-in";
+      card.style.animationDelay = `${index * 0.2}s`;
+      card.innerHTML = `
+        <strong>📅 ${new Date(event.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' })}:</strong> ${event.title}<br />
+        ${event.description}
+        <br /><a href="${event.link}" target="_blank" class="button">Register</a>
       `;
-    } else {
-      details.innerHTML = `<p style="color:var(--muted); text-align:center;">No event on this date.</p>`;
-    }
+      container.appendChild(card);
+    });
   }
 
-  generateCalendar();
+  renderUpcomingEvents();
 </script>
 
 </body>
