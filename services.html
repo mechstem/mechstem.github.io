@@ -4,7 +4,6 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>MechStem – Services & Industries</title>
-<link rel="stylesheet" href="style.css" />
 <style>
   :root {
     --bg: #0f1014;
@@ -65,7 +64,64 @@
   }
 
   h2 { color: var(--blue); margin-bottom: 16px; }
-  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+
+  /* Calendar */
+  #calendar-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  #calendar-container div {
+    user-select: none;
+  }
+
+  /* Grid calendar */
+  #calendar-container > div {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+    text-align: center;
+  }
+  #calendar-container > div > div {
+    padding: 10px;
+    border-radius: 8px;
+    background: #1a1b1f;
+    color: var(--text);
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  #calendar-container > div > div:hover {
+    background: var(--green);
+  }
+  #calendar-container > div > div.event-day {
+    background: var(--blue);
+  }
+
+  #calendar-container > div > div.event-day:hover {
+    background: var(--green);
+  }
+
+  /* Event details box */
+  #event-details {
+    max-width: 600px;
+    margin: 20px auto 40px auto;
+    background: #121418;
+    padding: 20px;
+    border-radius: var(--radius);
+    box-shadow: 0 0 10px rgba(0,0,0,0.4);
+    color: var(--muted);
+  }
+  #event-details h3 {
+    color: var(--green);
+    margin-bottom: 10px;
+  }
+
+  /* Cards */
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+  }
   .card {
     background: #121418;
     border-radius: var(--radius);
@@ -73,19 +129,25 @@
     box-shadow: 0 4px 12px rgba(0,0,0,0.5);
     transition: transform 0.3s, box-shadow 0.3s;
   }
-  .card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.7); }
-  .register-link {
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.7);
+  }
+  .button {
     display: inline-block;
-    margin-top: 10px;
-    padding: 8px 14px;
+    margin-top: 12px;
+    padding: 8px 16px;
     background: var(--blue);
     color: white;
     border-radius: 8px;
     text-decoration: none;
     font-weight: bold;
     transition: 0.3s;
+    cursor: pointer;
   }
-  .register-link:hover { background: var(--green); }
+  .button:hover {
+    background: var(--green);
+  }
 
   footer {
     margin-top: 40px;
@@ -96,10 +158,21 @@
     font-size: 14px;
   }
 
-  .social-links { margin-top: 12px; display: flex; justify-content: center; gap: 14px; }
-  .social-icon img { width: 22px; height: 22px; filter: brightness(0) invert(1); transition: 0.3s; }
-  .social-icon img:hover { filter: brightness(1) invert(0); }
-
+  .social-links {
+    margin-top: 12px;
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+  }
+  .social-icon img {
+    width: 22px;
+    height: 22px;
+    filter: brightness(0) invert(1);
+    transition: 0.3s;
+  }
+  .social-icon img:hover {
+    filter: brightness(1) invert(0);
+  }
 </style>
 </head>
 <body>
@@ -117,65 +190,43 @@
 
 <!-- Content -->
 <main class="content">
-  <!-- Workshops -->
-  <section id="workshops">
-    <h2>🔔 Workshops</h2>
+
+  <!-- Workshops Calendar -->
+  <section id="workshops" style="margin-top: 50px;">
+    <h2>🔔 Upcoming Workshops</h2>
+    <div id="calendar-container"></div>
+    <div id="event-details"><p style="color: var(--muted); text-align:center;">Click a date to see workshop details.</p></div>
+  </section>
+
+  <!-- Internships & Trainings Integrated -->
+  <section id="internship-training" style="margin-top: 50px;">
+    <h2>🎓 Internships & Trainings</h2>
     <div class="cards">
+
+      <!-- Internship Card -->
       <div class="card">
-        <strong>Embedded Systems</strong><br>
-        Date: --- | Location: Online<br>
-        Hands-on microcontrollers & firmware projects.<br>
-        <a href="#" class="register-link">Register</a>
+        Pursuing <strong>B.E, B.Tech, M.Tech, BCA, MCA</strong>?<br>
+        Gain real-world technical skills with <strong>industrial internships</strong>.<br>
+        📌 Online & Offline | 📌 Live Projects | 📌 Fast Track (20 days) or 1 Month<br>
+        <strong>Fee:</strong> ₹3000<br>
+        <a href="https://forms.gle/your-google-form-link" target="_blank" class="button">Check Seats</a>
       </div>
+
+      <!-- Trainings Card -->
       <div class="card">
-        <strong>Prototyping</strong><br>
-        Date: --- | Location: ---<br>
-        Sensors, actuators & rapid prototyping.<br>
-        <a href="#" class="register-link">Register</a>
+        <strong>Trainings We Offer</strong>
+        <ul style="margin-top:10px; text-align:left; color: var(--muted);">
+          <li>Embedded Systems: Microcontrollers, firmware, interfacing</li>
+          <li>AI & Machine Learning: Model building, deployment, edge AI</li>
+          <li>Mechanical Design & ArchiCAD: CAD, simulation, prototyping</li>
+          <li>Corporate Workshops: Tailored sessions for companies</li>
+        </ul>
+        <a href="assets/MechStem_Training_Syllabus.pdf" download class="button">Download Syllabus</a>
       </div>
-      <div class="card">
-        <strong>Mechanical CAD</strong><br>
-        Date: --- | Location: ---<br>
-        CAD design & simulation workshops.<br>
-        <a href="#" class="register-link">Register</a>
-      </div>
+
     </div>
   </section>
 
-<!-- Internships & Trainings -->
-<section id="internships-trainings" style="margin-top:50px;">
-  <h2>🎓 Internships & Trainings</h2>
-  <div class="cards">
-    <!-- Left Card: Internship Overview -->
-    <div class="card">
-      <p>
-        Pursuing <strong>B.E, B.Tech, M.Tech, BCA, MCA</strong>?<br>
-        Get industry exposure with our <strong>Internship & Training Program</strong> designed for aspiring engineers.<br><br>
-        📌 <strong>Mode:</strong> Online & Offline<br>
-        📌 <strong>Projects:</strong> Live & Hands-on<br>
-        📌 <strong>Duration:</strong> Fast Track (20 Days) or Full (1 Month)<br>
-        📌 <strong>Fee:</strong> ₹3000
-      </p>
-      <a href="https://forms.gle/your-form-id" target="_blank" class="register-link" style="background: var(--green);">✅ Check Seats</a>
-    </div>
-
-    <!-- Right Card: Trainings List -->
-    <div class="card">
-      <strong>Trainings we offer </strong><br><br>
-      • Embedded Systems – Microcontrollers, firmware, interfacing<br>
-      • AI & Machine Learning – Model building, deployment, edge AI<br>
-      • Mechanical Design & ArchiCAD – CAD, simulation, prototyping<br>
-      • Corporate Workshops – Tailored sessions for companies
-    </div>
-  </div>
-
-  <!-- Unified Syllabus Download Button -->
-  <div style="text-align:center; margin-top: 24px;">
-    <a href="assets/MechStem-Training-Syllabus.pdf" download class="register-link">📥 Download Full Syllabus</a>
-  </div>
-</section>
-
-  
   <!-- Industries -->
   <section id="industries" style="margin-top:50px;">
     <h2>🔧 Industries We Serve</h2>
@@ -202,6 +253,79 @@
     </a>
   </div>
 </footer>
+
+<!-- Scripts -->
+<script>
+  const workshops = [
+    {
+      date: '2025-09-12',
+      title: 'Embedded Systems Workshop',
+      description: 'Hands-on microcontroller & firmware session. Online via Zoom. Duration: 2 hrs',
+    },
+    {
+      date: '2025-09-18',
+      title: 'Mechanical CAD Workshop',
+      description: '3D CAD design using Fusion 360 and simulation tools. Offline (Bangalore)',
+    },
+    {
+      date: '2025-09-25',
+      title: 'AI Vision & Edge AI',
+      description: 'Image recognition & model deployment on edge devices. Online + Kit access.',
+    }
+  ];
+
+  function generateCalendar() {
+    const container = document.getElementById("calendar-container");
+    const today = new Date();
+    const month = today.getMonth();
+    const year = today.getFullYear();
+    const firstDay = new Date(year, month, 1).getDay();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+    let calendarHTML = `<div>`;
+
+    const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    weekdays.forEach(day => {
+      calendarHTML += `<div style="color:var(--muted);font-weight:bold;">${day}</div>`;
+    });
+
+    for (let i = 0; i < firstDay; i++) {
+      calendarHTML += `<div></div>`;
+    }
+
+    for (let d = 1; d <= daysInMonth; d++) {
+      const fullDate = `${year}-${String(month + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+      const event = workshops.find(e => e.date === fullDate);
+      calendarHTML += `
+        <div 
+          class="${event ? 'event-day' : ''}"
+          onclick="showEvent('${fullDate}')"
+          style="color:${event ? '#fff' : 'var(--text)'};"
+          title="${event ? event.title : ''}"
+        >
+          ${d}
+        </div>`;
+    }
+
+    calendarHTML += `</div>`;
+    container.innerHTML = calendarHTML;
+  }
+
+  function showEvent(date) {
+    const event = workshops.find(e => e.date === date);
+    const details = document.getElementById('event-details');
+    if (event) {
+      details.innerHTML = `
+        <h3>${event.title}</h3>
+        <p>${event.description}</p>
+      `;
+    } else {
+      details.innerHTML = `<p style="color:var(--muted); text-align:center;">No event on this date.</p>`;
+    }
+  }
+
+  generateCalendar();
+</script>
 
 </body>
 </html>
