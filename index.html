@@ -252,6 +252,62 @@ body {
   transition-delay: .4s;
 }
 
+/* About & Career Section */
+.about-career-section {
+  max-width: var(--maxw);
+  margin: 40px auto 80px;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+.about-career-block {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  flex-wrap: wrap;
+  background: rgba(255 255 255 / 0.05);
+  padding: 28px 32px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+.about-career-block img {
+  flex: 1 1 280px;
+  max-width: 300px;
+  border-radius: var(--radius);
+  object-fit: cover;
+  height: 200px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+}
+.about-career-content {
+  flex: 2 1 400px;
+  color: var(--text);
+}
+.about-career-content h2 {
+  font-size: clamp(26px, 2.5vw, 36px);
+  margin-bottom: 14px;
+  color: var(--blue);
+}
+.about-career-content p {
+  font-size: 1.1rem;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+/* Responsive for about & career */
+@media (max-width: 768px) {
+  .about-career-block {
+    flex-direction: column;
+    text-align: center;
+  }
+  .about-career-content h2 {
+    color: var(--blue);
+  }
+  .about-career-content p {
+    font-size: 1rem;
+  }
+}
+
 /* Footer */
 footer {
   padding: 32px 0 60px;
@@ -269,41 +325,6 @@ footer {
 .social-links img {
   height: 28px;
   width: 28px;
-}
-
-/* About & Career Section */
-.about-career-section {
-  max-width: var(--maxw);
-  margin: 40px auto;
-  padding: 0 20px;
-}
-.about-career-block {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-  margin-bottom: 48px;
-  flex-wrap: wrap;
-}
-.about-career-block:last-child {
-  margin-bottom: 0;
-}
-.about-career-block img {
-  flex: 1 1 280px;
-  max-width: 300px;
-  border-radius: var(--radius);
-}
-.about-career-content {
-  flex: 2 1 400px;
-  color: var(--text);
-}
-.about-career-content h2 {
-  font-size: clamp(24px, 3vw, 32px);
-  margin-bottom: 12px;
-}
-.about-career-content p {
-  font-size: clamp(16px, 1.2vw, 18px);
-  color: var(--muted);
-  line-height: 1.5;
 }
 </style>
 </head>
@@ -354,7 +375,6 @@ footer {
         </div>
       </div>
     </div>
-    <button class="prev" aria-label="Previous Slide">&#10094;</button>
     <button class="next" aria-label="Next Slide">&#10095;</button>
     <div class="dots" id="dots">
       <span class="dot active" data-index="0"></span>
@@ -368,13 +388,7 @@ footer {
 <!-- About & Career Section -->
 <section class="about-career-section">
   <div class="about-career-block reveal delay-2">
-    <!-- About Us Vector SVG -->
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" class="about-career-block-img" style="flex: 1 1 280px; max-width: 300px; border-radius: var(--radius);">
-      <circle cx="32" cy="20" r="12" stroke="var(--blue)" stroke-width="3" />
-      <path stroke="var(--blue)" stroke-width="3" stroke-linecap="round" d="M16 52c0-8 32-8 32 0" />
-      <path stroke="var(--blue)" stroke-width="3" stroke-linecap="round" d="M22 34h20" />
-      <path stroke="var(--blue)" stroke-width="3" stroke-linecap="round" d="M32 34v18" />
-    </svg>
+    <img src="assets/about-us.jpg" alt="About Us Image" />
     <div class="about-career-content">
       <h2>About Us</h2>
       <p>
@@ -385,13 +399,7 @@ footer {
   </div>
 
   <div class="about-career-block reveal delay-3">
-    <!-- Career with Us Vector SVG -->
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" class="about-career-block-img" style="flex: 1 1 280px; max-width: 300px; border-radius: var(--radius);">
-      <rect x="14" y="18" width="36" height="28" stroke="var(--green)" stroke-width="3" rx="6" ry="6" />
-      <path stroke="var(--green)" stroke-width="3" stroke-linecap="round" d="M22 18v-6h20v6" />
-      <path stroke="var(--green)" stroke-width="3" stroke-linejoin="round" d="M32 32v10" />
-      <circle cx="32" cy="46" r="4" stroke="var(--green)" stroke-width="3" />
-    </svg>
+    <img src="assets/career-us.jpg" alt="Career with Us Image" />
     <div class="about-career-content">
       <h2>Career with Us</h2>
       <p>
@@ -403,77 +411,75 @@ footer {
 </section>
 
 <!-- Footer -->
-<footer class="reveal delay-4">
-  &copy; 2025 MechStem. All rights reserved.
+<footer class="reveal delay-1">
+  <p>© 2025 MechStem. Built with 💡 by future engineers.</p>
   <div class="social-links">
-    <a href="#" aria-label="Facebook"><img src="assets/facebook.svg" alt="Facebook" /></a>
-    <a href="#" aria-label="Twitter"><img src="assets/twitter.svg" alt="Twitter" /></a>
-    <a href="#" aria-label="LinkedIn"><img src="assets/linkedin.svg" alt="LinkedIn" /></a>
+    <a href="https://www.linkedin.com/company/mechstem/" target="_blank" rel="noopener"><img src="assets/linkedin-icon.png" alt="LinkedIn" /></a>
+    <a href="https://www.youtube.com/@mechstem" target="_blank" rel="noopener"><img src="assets/youtube-icon.png" alt="YouTube" /></a>
+    <a href="https://twitter.com/YOUR_TWITTER_HANDLE" target="_blank" rel="noopener"><img src="assets/twitter-icon.png" alt="Twitter" /></a>
   </div>
 </footer>
 
 <script>
-// Slider JavaScript
-const slides = document.getElementById('slides');
-const slideCount = slides.children.length;
-const dots = document.getElementById('dots').children;
-const prevBtn = document.querySelector('.prev');
-const nextBtn = document.querySelector('.next');
+const slidesContainer = document.getElementById('slides');
+const slides = document.querySelectorAll('.slide');
+const dots = document.querySelectorAll('.dot');
 let currentIndex = 0;
-let slideInterval;
+let slideInterval = setInterval(nextSlide, 8000);
 
 function goToSlide(index) {
-  if(index < 0) index = slideCount - 1;
-  if(index >= slideCount) index = 0;
-  slides.style.transform = `translateX(-${index * 100}%)`;
-  for(let dot of dots) dot.classList.remove('active');
+  if(index < 0) index = slides.length - 1;
+  if(index >= slides.length) index = 0;
+
+  slidesContainer.style.transform = `translateX(-${index * 100}%)`;
+  dots.forEach(dot => dot.classList.remove('active'));
   dots[index].classList.add('active');
   currentIndex = index;
 }
+
 function nextSlide() {
   goToSlide(currentIndex + 1);
 }
-function prevSlideFunc() {
+
+function prevSlide() {
   goToSlide(currentIndex - 1);
 }
-function startSlideShow() {
-  slideInterval = setInterval(nextSlide, 7000);
-}
-function stopSlideShow() {
+
+document.querySelector('.next').addEventListener('click', () => {
+  nextSlide();
+  resetInterval();
+});
+
+document.querySelector('.prev').addEventListener('click', () => {
+  prevSlide();
+  resetInterval();
+});
+
+dots.forEach(dot => {
+  dot.addEventListener('click', (e) => {
+    goToSlide(Number(e.target.dataset.index));
+    resetInterval();
+  });
+});
+
+function resetInterval() {
   clearInterval(slideInterval);
+  slideInterval = setInterval(nextSlide, 8000);
 }
 
-for(let dot of dots) {
-  dot.addEventListener('click', e => {
-    stopSlideShow();
-    goToSlide(parseInt(e.target.dataset.index));
-    startSlideShow();
+/* Reveal on scroll */
+const revealElements = document.querySelectorAll('.reveal');
+
+function revealOnScroll() {
+  const windowHeight = window.innerHeight;
+  revealElements.forEach(el => {
+    const elementTop = el.getBoundingClientRect().top;
+    if(elementTop < windowHeight - 100) {
+      el.classList.add('in');
+    }
   });
 }
-nextBtn.addEventListener('click', () => {
-  stopSlideShow();
-  nextSlide();
-  startSlideShow();
-});
-prevBtn.addEventListener('click', () => {
-  stopSlideShow();
-  prevSlideFunc();
-  startSlideShow();
-});
-goToSlide(0);
-startSlideShow();
 
-// Reveal on scroll
-function revealOnScroll() {
-  const reveals = document.querySelectorAll('.reveal');
-  const windowHeight = window.innerHeight;
-  for (const reveal of reveals) {
-    const revealTop = reveal.getBoundingClientRect().top;
-    if (revealTop < windowHeight - 80) {
-      reveal.classList.add('in');
-    }
-  }
-}
 window.addEventListener('scroll', revealOnScroll);
 window.addEventListener('load', revealOnScroll);
 </script>
