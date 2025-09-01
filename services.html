@@ -31,11 +31,7 @@
     top: 0;
     z-index: 1000;
   }
-  .nav-left {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
+  .nav-left { display: flex; align-items: center; gap: 12px; }
   .nav-item {
     cursor: pointer;
     padding: 8px 12px;
@@ -58,37 +54,12 @@
     position: relative;
     overflow: hidden;
   }
-  .contact-button:hover {
-    box-shadow: 0 0 10px var(--yellow);
-    transform: translateY(-2px);
-  }
-
-  main.content {
-    max-width: 1100px;
-    margin: 40px auto;
-    padding: 0 20px;
-  }
-
+  .contact-button:hover { box-shadow: 0 0 10px var(--yellow); transform: translateY(-2px); }
+  main.content { max-width: 1100px; margin: 40px auto; padding: 0 20px; }
   h2 { color: var(--blue); margin-bottom: 16px; }
 
-  /* Fade-in animation */
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
   /* Cards */
-  .cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 20px;
-  }
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
   .card {
     background: #121418;
     border-radius: var(--radius);
@@ -96,39 +67,17 @@
     box-shadow: 0 4px 12px rgba(0,0,0,0.5);
     transition: transform 0.3s, box-shadow 0.3s;
   }
-  .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.7);
-  }
+  .card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.7); }
   .button {
-    display: inline-block;
-    margin-top: 12px;
-    padding: 8px 16px;
-    background: var(--blue);
-    color: white;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: bold;
+    display: inline-block; margin-top: 12px; padding: 8px 16px;
+    background: var(--blue); color: white; border-radius: 8px;
+    text-decoration: none; font-weight: bold; cursor: pointer;
     transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
   }
-  .button:hover {
-    background: var(--green);
-    box-shadow: 0 0 10px var(--green);
-    transform: translateY(-2px);
-  }
+  .button:hover { background: var(--green); box-shadow: 0 0 10px var(--green); transform: translateY(-2px); }
 
-  /* Industries Section */
-
-  /* Changed to vertical stacking full width */
-  .industry-cards {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-  }
-
+  /* Industry Cards */
+  .industry-cards { display: flex; flex-direction: column; gap: 30px; }
   .industry-card {
     background: #121418;
     border-radius: var(--radius);
@@ -136,118 +85,26 @@
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    opacity: 0; /* Start hidden for animation */
+    opacity: 0;
     transform: translateY(30px);
     transition: transform 0.3s, box-shadow 0.3s;
-    width: 100%;
   }
+  .industry-card.animate { animation: fadeSlideUp 0.7s ease forwards; }
+  @keyframes fadeSlideUp { from {opacity: 0; transform: translateY(30px);} to {opacity: 1; transform: translateY(0);} }
+  .industry-card:hover { transform: translateY(-6px) scale(1.03); box-shadow: 0 10px 30px rgba(67, 160, 71, 0.8); }
+  .industry-card img { width: 100%; height: 220px; object-fit: cover; border-radius: var(--radius) var(--radius) 0 0; transition: transform 0.4s ease; }
+  .industry-card:hover img { transform: scale(1.05); }
+  .industry-info { padding: 16px 20px; }
+  .industry-info h3 { margin: 0 0 10px 0; color: var(--green); }
 
-  /* Animation keyframes */
-  @keyframes fadeSlideUp {
-    0% {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  .industry-card.animate {
-    animation: fadeSlideUp 0.7s ease forwards;
-  }
-
-  .industry-card:hover {
-    transform: translateY(-6px) scale(1.03);
-    box-shadow: 0 10px 30px rgba(67, 160, 71, 0.8); /* green glow */
-  }
-
-  .industry-card img {
-    width: 100%;
-    height: 220px;
-    object-fit: cover;
-    border-radius: var(--radius) var(--radius) 0 0;
-    transition: transform 0.4s ease;
-  }
-
-  .industry-card:hover img {
-    transform: scale(1.05);
-  }
-
-  .industry-info {
-    padding: 16px 20px;
-  }
-
-  .industry-info h3 {
-    margin: 0 0 10px 0;
-    color: var(--green);
-  }
-
-  .industry-info p {
-    color: var(--muted);
-    font-size: 14px;
-    line-height: 1.5;
-  }
-
-  /* Responsive for smaller screens */
-  @media (max-width: 600px) {
-    .industry-card {
-      opacity: 1 !important; /* disable animation on mobile for simplicity */
-      transform: none !important;
-    }
-  }
-
-  /* Events slider container */
-  #workshops {
-    position: relative;
-  }
-
-  .events-slider {
+  /* Accordion */
+  .accordion-toggle { background: none; border: none; color: var(--blue); font-weight: bold; cursor: pointer; margin-top: 8px; }
+  .accordion-content {
+    max-height: 0;
     overflow: hidden;
-    position: relative;
-    margin-top: 10px;
+    transition: max-height 0.5s ease, padding 0.3s ease;
   }
-
-  .events-track {
-    display: flex;
-    transition: transform 0.5s ease;
-  }
-
-  .event-slide {
-    min-width: 100%;
-    box-sizing: border-box;
-    padding-right: 20px;
-  }
-
-  /* Arrows */
-  .slider-arrow {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: var(--blue);
-    color: white;
-    border-radius: 50%;
-    width: 36px;
-    height: 36px;
-    border: none;
-    cursor: pointer;
-    font-size: 24px;
-    line-height: 36px;
-    text-align: center;
-    user-select: none;
-    transition: background-color 0.3s;
-    z-index: 10;
-  }
-  .slider-arrow:hover {
-    background: var(--green);
-  }
-  .slider-arrow.left {
-    left: 5px;
-  }
-  .slider-arrow.right {
-    right: 5px;
-  }
+  .accordion-content.open { padding-top: 10px; }
 </style>
 </head>
 <body>
@@ -266,170 +123,101 @@
 <!-- Content -->
 <main class="content">
 
-  <!-- Upcoming Events Notification with slider -->
-  <section id="workshops" style="margin-top: 50px;">
-    <h2>🔔 Upcoming Events</h2>
-    <div class="events-slider">
-      <button class="slider-arrow left" aria-label="Previous event">&#9664;</button>
-      <div id="events-track" class="events-track"></div>
-      <button class="slider-arrow right" aria-label="Next event">&#9654;</button>
-    </div>
-  </section>
-
-  <!-- Internships & Trainings Integrated -->
-  <section id="internship-training" style="margin-top: 50px;">
-    <h2>🎓 Internships & Trainings</h2>
-    <div class="cards">
-
-      <!-- Internship Card -->
-      <div class="card">
-        Pursuing <strong>B.E, B.Tech, M.Tech, BCA, MCA</strong>?<br>
-        Gain real-world technical skills with <strong>industrial internships</strong>.<br>
-        📌 Online & Offline | 📌 Live Projects | 📌 Fast Track (30 days) or 1 to 3 Months<br>
-        <strong>Fee:</strong> --- <br>
-        <a href="https://forms.gle/your-google-form-link" target="_blank" class="button">Check Seats</a>
-      </div>
-
-      <!-- Trainings Card -->
-      <div class="card">
-        <strong>Trainings We Offer</strong>
-        <ul style="margin-top:10px; text-align:left; color: var(--muted);">
-          <li>Embedded Systems: Microcontrollers, firmware, interfacing</li>
-          <li>AI & Machine Learning: Model building, deployment, edge AI</li>
-          <li>Mechanical Design & ArchiCAD: CAD, simulation, prototyping</li>
-          <li>Corporate Workshops: Tailored sessions for companies</li>
-        </ul>
-        <a href="assets/MechStem_Training_Syllabus.pdf" download class="button">Download </a>
-      </div>
-
-    </div>
-  </section>
-
   <!-- Industries -->
   <section id="industries" style="margin-top:50px;">
     <h2>Sectors Where We Make an Impact</h2>
-<div class="industry-cards">
-  
-    <!-- Embedded Systems, Semiconductors & Software -->
-  <div class="industry-card">
-    <img src="assets/embedded-systems.png" alt="Embedded Systems & Software" />
-    <div class="industry-info">
-      <h3>Embedded Systems, Semiconductors & Software</h3>
-      <p>We build intelligent platforms that power next-generation devices and digital ecosystems. Our capabilities include embedded software development, RTOS, device drivers, board support packages (BSP), and IoT connectivity.</p>
-      <p>In semiconductors and software, we contribute to chip design ASIC, FPGA, SoC, system software Linux, QNX, Android, and AI/ML-driven applications—enabling secure, connected, and high-performance systems for industries worldwide.</p>
-    </div>
-  </div>
-  
-  <!-- Mechanical Systems & Transportation -->
-  <div class="industry-card">
-    <img src="assets/mechanical-systems.png" alt="Mechanical Systems & Transportation" />
-    <div class="industry-info">
-      <h3>Systems & Transportation</h3>
-      <p> Mechanical systems and industrial automation, precision engineering, and advanced simulation tools to enhance productivity and reliability in manufacturing and mechanical systems. Our expertise spans robotics, fluid systems, thermodynamics, and materials engineering.</p>
-      <p>In transportation, we deliver solutions across automotive, aerospace, and locomotives—covering automobile electrification, software-defined vehicles (SDVs), powertrain systems, and body controls. We also innovate in ADAS, avionics, and predictive maintenance, driving the future of smart mobility & systems engg.</p>
-    </div>
-  </div>
-  
-  <!-- Architecture & Built Environment -->
-  <div class="industry-card">
-    <img src="assets/architecture.png" alt="Architecture & Built Environment" />
-    <div class="industry-info">
-      <h3>Architecture & Built Environment</h3>
-      <p>We empower architects, civil engineers, and construction professionals to design smart, sustainable spaces. Our solutions integrate smart infrastructure, green building materials, and renewable energy technologies.</p>
-      <p>By leveraging IoT, automation, and eco-friendly practices, we enhance energy efficiency, safety, and aesthetics—helping shape resilient and future-ready built environments.</p>
-    </div>
-  </div>
+    <div class="industry-cards">
+      
+      <!-- Embedded Systems -->
+      <div class="industry-card">
+        <img src="assets/embedded-systems.png" alt="Embedded Systems & Software" />
+        <div class="industry-info">
+          <h3>Embedded Systems, Semiconductors & Software</h3>
+          <p>We build intelligent platforms powering next-gen devices.</p>
+          <button class="accordion-toggle">View Details ▼</button>
+          <div class="accordion-content">
+            <ul>
+              <li>Embedded Software Development (RTOS, BSP, Drivers, IoT)</li>
+              <li>Semiconductor Design: ASIC, FPGA, SoC</li>
+              <li>System Software: Linux, QNX, Android</li>
+              <li>AI/ML-driven Applications & Secure Connectivity</li>
+            </ul>
+          </div>
+        </div>
+      </div>
 
-</div>
+      <!-- Systems & Transportation -->
+      <div class="industry-card">
+        <img src="assets/mechanical-systems.png" alt="Systems & Transportation" />
+        <div class="industry-info">
+          <h3>Systems & Transportation</h3>
+          <p>Engineering reliable mechanical & mobility solutions.</p>
+          <button class="accordion-toggle">View Details ▼</button>
+          <div class="accordion-content">
+            <ul>
+              <li>Mechanical Systems: CAD/CAM, PLM, LCA, Fluid & Material Systems</li>
+              <li>Special Purpose Machine Design & Product Development</li>
+              <li>Automotive: Electrification, SDVs, Powertrain, ADAS</li>
+              <li>Aerospace: Flight Management, Control Systems, Avionics</li>
+              <li>Locomotives: Predictive Maintenance & Embedded Safety</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Architecture -->
+      <div class="industry-card">
+        <img src="assets/architecture.png" alt="Architecture & Built Environment" />
+        <div class="industry-info">
+          <h3>Architecture & Built Environment</h3>
+          <p>Shaping sustainable, smart, and future-ready spaces.</p>
+          <button class="accordion-toggle">View Details ▼</button>
+          <div class="accordion-content">
+            <ul>
+              <li>Smart Infrastructure & Digital Twins</li>
+              <li>Green Building Materials & Renewable Energy Integration</li>
+              <li>IoT & Automation for Energy Efficiency & Safety</li>
+              <li>Urban Planning & Resilient Built Environments</li>
+            </ul>
+          </div>
+        </div>
+      </div>
 
     </div>
   </section>
-
 </main>
 
 <script>
-  // Animate industry cards when they come into view
-  function isInViewport(element) {
-    const rect = element.getBoundingClientRect();
-    return (
-      rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.9
-    );
+  // Animate cards
+  function isInViewport(el) {
+    const rect = el.getBoundingClientRect();
+    return rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.9;
   }
+  function animateCards() {
+    document.querySelectorAll('.industry-card').forEach(c => {
+      if (isInViewport(c)) c.classList.add('animate');
+    });
+  }
+  window.addEventListener('scroll', animateCards);
+  window.addEventListener('load', animateCards);
 
-  function animateIndustryCards() {
-    const cards = document.querySelectorAll('.industry-card');
-    cards.forEach(card => {
-      if (isInViewport(card)) {
-        card.classList.add('animate');
+  // Accordion (only one open at a time)
+  const toggles = document.querySelectorAll('.accordion-toggle');
+  toggles.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const allContents = document.querySelectorAll('.accordion-content');
+      const allButtons = document.querySelectorAll('.accordion-toggle');
+
+      allContents.forEach(c => { c.style.maxHeight = null; c.classList.remove('open'); });
+      allButtons.forEach(b => b.textContent = 'View Details ▼');
+
+      const content = btn.nextElementSibling;
+      const isOpen = content.classList.contains('open');
+      if (!isOpen) {
+        content.classList.add('open');
+        content.style.maxHeight = content.scrollHeight + "px";
+        btn.textContent = 'Hide Details ▲';
       }
-    });
-  }
-  window.addEventListener('scroll', animateIndustryCards);
-  window.addEventListener('load', animateIndustryCards);
-
-  // Events array for upcoming events example (replace with your own)
-  const events = [
-    {
-      date: '2025-09-15',
-      title: 'Embedded Systems Workshop',
-      description: 'Learn Microcontroller Programming & Interfacing.',
-      seats: 12
-    },
-    {
-      date: '2025-09-28',
-      title: 'AI & Machine Learning Bootcamp',
-      description: 'Build and deploy ML models for real applications.',
-      seats: 8
-    },
-    {
-      date: '2025-10-05',
-      title: 'Mechanical CAD Training',
-      description: 'Master ArchiCAD and mechanical design basics.',
-      seats: 5
-    }
-  ];
-
-  // Render events as slides
-  function renderEvents() {
-    const track = document.getElementById('events-track');
-    if (!track) return;
-    track.innerHTML = '';
-    events.forEach(event => {
-      const slide = document.createElement('div');
-      slide.classList.add('event-slide', 'card');
-      slide.innerHTML = `
-        <strong>${new Date(event.date).toLocaleDateString()}</strong><br>
-        <strong>${event.title}</strong><br>
-        ${event.description}<br>
-        <strong>Seats Left:</strong> ${event.seats}<br>
-        <a href="https://forms.gle/your-google-form-link" target="_blank" class="button">Register</a>
-      `;
-      track.appendChild(slide);
-    });
-  }
-
-  // Slider logic for events
-  let currentIndex = 0;
-
-  function updateSlider() {
-    const track = document.getElementById('events-track');
-    const total = events.length;
-    if (!track) return;
-    track.style.transform = `translateX(-${currentIndex * 100}%)`;
-  }
-
-  window.addEventListener('load', () => {
-    renderEvents();
-    updateSlider();
-
-    document.querySelector('.slider-arrow.left').addEventListener('click', () => {
-      currentIndex = (currentIndex - 1 + events.length) % events.length;
-      updateSlider();
-    });
-
-    document.querySelector('.slider-arrow.right').addEventListener('click', () => {
-      currentIndex = (currentIndex + 1) % events.length;
-      updateSlider();
     });
   });
 </script>
