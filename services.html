@@ -1,132 +1,343 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MechStem</title>
-  <style>
-    body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
-    header, footer { background: #222; color: #fff; padding: 1rem; text-align: center; }
-    nav a { margin: 0 10px; color: white; text-decoration: none; }
-    section { padding: 2rem; }
-    .card { border: 1px solid #ddd; border-radius: 8px; margin: 1rem 0; padding: 1rem; cursor: pointer; transition: all 0.3s ease; }
-    .card:hover { background: #f9f9f9; }
-    .accordion-content { display: none; margin-top: 1rem; padding-left: 1rem; }
-    .accordion-content ul { margin: 0; padding-left: 20px; }
-    .card.active .accordion-content { display: block; }
-    .card h3 { margin: 0; }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>MechStem – Services & Industries</title>
+<style>
+  :root {
+    --bg: #0f1014;
+    --text: #e6e9ef;
+    --muted: #9aa3b2;
+    --blue: #1E88E5;
+    --green: #43A047;
+    --yellow: #FBC02D;
+    --radius: 14px;
+  }
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+  }
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 20px;
+    background: rgba(15,16,20,0.95);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+  .nav-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .nav-item {
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: var(--radius);
+    transition: 0.3s;
+    font-size: 15px;
+  }
+  .nav-item:hover, .nav-active { color: var(--blue); }
+  .logo { height: 36px; }
+  .contact-button {
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--blue), var(--green));
+    color: #fff;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 14px;
+    transition: box-shadow 0.3s, transform 0.3s;
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+  }
+  .contact-button:hover {
+    box-shadow: 0 0 10px var(--yellow);
+    transform: translateY(-2px);
+  }
+
+  main.content {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 0 20px;
+  }
+
+  h2 { color: var(--blue); margin-bottom: 16px; }
+
+  /* Cards */
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+  }
+  .card {
+    background: #121418;
+    border-radius: var(--radius);
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.7);
+  }
+  .button {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 8px 16px;
+    background: var(--blue);
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  .button:hover {
+    background: var(--green);
+    box-shadow: 0 0 10px var(--green);
+    transform: translateY(-2px);
+  }
+
+  /* Industries Section */
+  .industry-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .industry-card {
+    background: #121418;
+    border-radius: var(--radius);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+  }
+
+  .industry-card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: var(--radius) var(--radius) 0 0;
+    transition: transform 0.4s ease;
+  }
+
+  .industry-card:hover img {
+    transform: scale(1.05);
+  }
+
+  .industry-info {
+    padding: 16px 20px;
+  }
+
+  .industry-info h3 {
+    margin: 0;
+    color: var(--green);
+  }
+
+  .industry-info p {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.5;
+    display: none;
+    margin-top: 10px;
+  }
+
+  .industry-card.active p {
+    display: block;
+  }
+
+  /* Events slider */
+  #workshops {
+    position: relative;
+  }
+  .events-slider {
+    overflow: hidden;
+    position: relative;
+    margin-top: 10px;
+  }
+  .events-track {
+    display: flex;
+    transition: transform 0.5s ease;
+  }
+  .event-slide {
+    min-width: 100%;
+    box-sizing: border-box;
+    padding-right: 20px;
+  }
+  .slider-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--blue);
+    color: white;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+    line-height: 36px;
+    text-align: center;
+    user-select: none;
+    transition: background-color 0.3s;
+    z-index: 10;
+  }
+  .slider-arrow:hover {
+    background: var(--green);
+  }
+  .slider-arrow.left {
+    left: 5px;
+  }
+  .slider-arrow.right {
+    right: 5px;
+  }
+</style>
 </head>
 <body>
-  <header>
-    <h1>MechStem</h1>
-    <nav>
-      <a href="#events">Events</a>
-      <a href="#training">Internships & Trainings</a>
-      <a href="#notifications">Notifications</a>
-      <a href="#industries">Industries</a>
-    </nav>
-  </header>
 
-  <!-- Events Slider -->
-  <section id="events">
-    <h2>Events</h2>
-    <p>[Slider Placeholder – Upcoming Events Here]</p>
+<!-- Navbar -->
+<div class="navbar">
+  <div class="nav-left">
+    <img src="assets/logo.png" alt="MechStem Logo" class="logo" />
+    <div class="nav-item" onclick="window.location.href='index.html'">Home</div>
+    <div class="nav-item" onclick="window.location.href='Products.html'">Products</div>
+    <div class="nav-item nav-active">Services</div>
+  </div>
+  <a href="#contact" class="contact-button">Contact</a>
+</div>
+
+<!-- Content -->
+<main class="content">
+
+  <!-- Upcoming Events -->
+  <section id="workshops" style="margin-top: 50px;">
+    <h2>🔔 Upcoming Events</h2>
+    <div class="events-slider">
+      <button class="slider-arrow left" aria-label="Previous event">&#9664;</button>
+      <div id="events-track" class="events-track"></div>
+      <button class="slider-arrow right" aria-label="Next event">&#9654;</button>
+    </div>
   </section>
 
   <!-- Internships & Trainings -->
-  <section id="training">
-    <h2>Internships & Trainings</h2>
-    <div class="card">
-      <h3>Linux System Programming</h3>
-      <p>Deep dive into Linux internals, system calls, IPC, and kernel-level programming.</p>
-    </div>
-    <div class="card">
-      <h3>Embedded Linux & Device Drivers</h3>
-      <p>Hands-on with kernel modules, device drivers, Yocto, and board bring-up.</p>
-    </div>
-    <div class="card">
-      <h3>AI & Machine Learning</h3>
-      <p>Learn fundamentals to advanced topics including GenAI, ML Ops, and edge AI.</p>
+  <section id="internship-training" style="margin-top: 50px;">
+    <h2>🎓 Internships & Trainings</h2>
+    <div class="cards">
+      <div class="card">
+        Pursuing <strong>B.E, B.Tech, M.Tech, BCA, MCA</strong>?<br>
+        Gain real-world technical skills with <strong>industrial internships</strong>.<br>
+        📌 Online & Offline | 📌 Live Projects | 📌 Fast Track (30 days) or 1 to 3 Months<br>
+        <strong>Fee:</strong> --- <br>
+        <a href="https://forms.gle/your-google-form-link" target="_blank" class="button">Check Seats</a>
+      </div>
+      <div class="card">
+        <strong>Trainings We Offer</strong>
+        <ul style="margin-top:10px; text-align:left; color: var(--muted);">
+          <li>Embedded Systems: Microcontrollers, firmware, interfacing</li>
+          <li>AI & Machine Learning: Model building, deployment, edge AI</li>
+          <li>Mechanical Design & ArchiCAD: CAD, simulation, prototyping</li>
+          <li>Corporate Workshops: Tailored sessions for companies</li>
+        </ul>
+        <a href="assets/MechStem_Training_Syllabus.pdf" download class="button">Download</a>
+      </div>
     </div>
   </section>
 
-  <!-- Notifications -->
-  <section id="notifications">
-    <h2>Notifications</h2>
-    <div class="card">
-      <p>🚀 Upcoming Webinar: Embedded AI for Automotive Systems (Sept 15)</p>
-    </div>
-    <div class="card">
-      <p>📢 Internship applications for Fall Batch are now open!</p>
+  <!-- Industries -->
+  <section id="industries" style="margin-top:50px;">
+    <h2>Sectors Where We Make an Impact</h2>
+    <div class="industry-cards">
+      <div class="industry-card">
+        <img src="assets/embedded-systems.png" alt="Embedded Systems & Software" />
+        <div class="industry-info">
+          <h3>Embedded Systems, Semiconductors & Software</h3>
+          <p>We build intelligent platforms that power next-generation devices and digital ecosystems. Our capabilities include embedded software development, RTOS, device drivers, board support packages (BSP), and IoT connectivity.</p>
+          <p>In semiconductors and software, we contribute to chip design (VLSI, FPGA, SoC), system software (Linux, QNX, Android), and AI/ML-driven applications—enabling secure, connected, and high-performance systems for industries worldwide.</p>
+        </div>
+      </div>
+      <div class="industry-card">
+        <img src="assets/mechanical-systems.png" alt="Mechanical Systems & Transportation" />
+        <div class="industry-info">
+          <h3>Mechanical Systems & Transportation</h3>
+          <p>We specialize in industrial automation, precision engineering, and advanced simulation tools to enhance productivity and reliability in manufacturing and mechanical systems. Our expertise spans robotics, fluid systems, thermodynamics, and materials engineering.</p>
+          <p>In transportation, we deliver solutions across automotive, aerospace, and locomotives—covering automobile electrification, software-defined vehicles (SDVs), powertrain systems, and body controls. We also innovate in ADAS, avionics, and predictive maintenance, driving the future of smart and sustainable mobility.</p>
+        </div>
+      </div>
+      <div class="industry-card">
+        <img src="assets/architecture.png" alt="Architecture & Built Environment" />
+        <div class="industry-info">
+          <h3>Architecture & Built Environment</h3>
+          <p>We empower architects, civil engineers, and construction professionals to design smart, sustainable spaces. Our solutions integrate smart infrastructure, green building materials, and renewable energy technologies.</p>
+          <p>By leveraging IoT, automation, and eco-friendly practices, we enhance energy efficiency, safety, and aesthetics—helping shape resilient and future-ready built environments.</p>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- Industries Section -->
-  <section id="industries">
-    <h2>Industries</h2>
+</main>
 
-    <div class="card">
-      <h3>Embedded Systems</h3>
-      <div class="accordion-content">
-        <ul>
-          <li>Embedded hardware and BSP development</li>
-          <li>Linux & RTOS integration (QNX, Zephyr, Yocto)</li>
-          <li>Device drivers, middleware, and connectivity (CAN, SPI, Bluetooth, Ethernet)</li>
-          <li>Embedded vision, IoT, and real-time control</li>
-        </ul>
-      </div>
-    </div>
+<script>
+  // Events
+  const events = [
+    {date: '2025-09-15', title: 'Embedded Systems Workshop', description: 'Learn Microcontroller Programming & Interfacing.', seats: 12},
+    {date: '2025-09-28', title: 'AI & Machine Learning Bootcamp', description: 'Build and deploy ML models for real applications.', seats: 8},
+    {date: '2025-10-05', title: 'Mechanical CAD Training', description: 'Master ArchiCAD and mechanical design basics.', seats: 5}
+  ];
+  let currentIndex = 0;
 
-    <div class="card">
-      <h3>Systems & Transportation</h3>
-      <div class="accordion-content">
-        <h4>Mechanical Systems</h4>
-        <ul>
-          <li>Robotics, automation, and precision engineering</li>
-          <li>Thermodynamics, fluid dynamics, and materials science</li>
-          <li>Special-purpose machine design</li>
-          <li>Product development with PLM & LCA focus</li>
-        </ul>
-        <h4>Transportation</h4>
-        <ul>
-          <li>Automotive, aerospace, and rail systems</li>
-          <li>Vehicle electrification & software-defined vehicles (SDVs)</li>
-          <li>Systems engineering for safety-critical hardware/software</li>
-          <li>Smart mobility, avionics & predictive maintenance</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="card">
-      <h3>Architecture & Built Environment</h3>
-      <div class="accordion-content">
-        <ul>
-          <li>Smart infrastructure and sustainable design</li>
-          <li>Building information modeling (BIM) and digital twins</li>
-          <li>Energy-efficient and green construction technologies</li>
-          <li>Urban mobility and intelligent city planning</li>
-        </ul>
-      </div>
-    </div>
-
-  </section>
-
-  <footer>
-    <p>&copy; 2025 MechStem. All Rights Reserved.</p>
-  </footer>
-
-  <script>
-    // Accordion - only one card open at a time
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-      card.addEventListener('click', () => {
-        // Close all
-        cards.forEach(c => c.classList.remove('active'));
-        // Open clicked
-        card.classList.add('active');
-      });
+  function renderEvents() {
+    const track = document.getElementById('events-track');
+    track.innerHTML = '';
+    events.forEach(event => {
+      const slide = document.createElement('div');
+      slide.classList.add('event-slide', 'card');
+      slide.innerHTML = `
+        <strong>${new Date(event.date).toLocaleDateString()}</strong><br>
+        <strong>${event.title}</strong><br>
+        ${event.description}<br>
+        <strong>Seats Left:</strong> ${event.seats}<br>
+        <a href="https://forms.gle/your-google-form-link" target="_blank" class="button">Register</a>
+      `;
+      track.appendChild(slide);
     });
-  </script>
+  }
+  function updateSlider() {
+    const track = document.getElementById('events-track');
+    track.style.transform = `translateX(-${currentIndex * 100}%)`;
+  }
+  window.addEventListener('load', () => {
+    renderEvents();
+    updateSlider();
+    document.querySelector('.slider-arrow.left').addEventListener('click', () => {
+      currentIndex = (currentIndex - 1 + events.length) % events.length;
+      updateSlider();
+    });
+    document.querySelector('.slider-arrow.right').addEventListener('click', () => {
+      currentIndex = (currentIndex + 1) % events.length;
+      updateSlider();
+    });
+  });
+
+  // Industry cards accordion
+  const industryCards = document.querySelectorAll('.industry-card');
+  industryCards.forEach(card => {
+    card.addEventListener('click', () => {
+      industryCards.forEach(c => c.classList.remove('active'));
+      card.classList.add('active');
+    });
+  });
+</script>
+
 </body>
 </html>
