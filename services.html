@@ -1,354 +1,226 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>MechStem – Services & Industries</title>
+<title>MechStem – Products & Services</title>
 <style>
   :root {
     --bg: #0f1014;
     --text: #e6e9ef;
     --muted: #9aa3b2;
-    --blue: #1E88E5;
-    --green: #43A047;
-    --yellow: #FBC02D;
-    --radius: 14px;
+    --blue: #1e90ff;
+    --accent: #ff6b6b;
+    --radius: 12px;
   }
+
   body {
     margin: 0;
-    font-family: Arial, sans-serif;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     background: var(--bg);
     color: var(--text);
   }
-  .navbar {
+
+  /* Navbar */
+  nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 12px 20px;
-    background: rgba(15,16,20,0.95);
-    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding: 1rem 2rem;
+    background: rgba(15, 16, 20, 0.9);
     position: sticky;
     top: 0;
     z-index: 1000;
+    backdrop-filter: blur(10px);
   }
-  .nav-left {
+  nav .logo {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: var(--blue);
+  }
+  nav ul {
+    list-style: none;
     display: flex;
-    align-items: center;
-    gap: 12px;
+    gap: 1.5rem;
+    margin: 0;
+    padding: 0;
   }
-  .nav-item {
-    cursor: pointer;
-    padding: 8px 12px;
-    border-radius: var(--radius);
-    transition: 0.3s;
-    font-size: 15px;
-  }
-  .nav-item:hover, .nav-active { color: var(--blue); }
-  .logo { height: 36px; }
-  .contact-button {
-    padding: 8px 14px;
-    border-radius: 999px;
-    background: linear-gradient(90deg, var(--blue), var(--green));
-    color: #fff;
-    font-weight: 600;
+  nav ul li a {
+    color: var(--text);
     text-decoration: none;
-    font-size: 14px;
-    transition: box-shadow 0.3s, transform 0.3s;
-    display: inline-block;
-    position: relative;
-    overflow: hidden;
+    transition: color 0.3s;
   }
-  .contact-button:hover {
-    box-shadow: 0 0 10px var(--yellow);
-    transform: translateY(-2px);
+  nav ul li a:hover {
+    color: var(--blue);
   }
 
-  main.content {
-    max-width: 1100px;
-    margin: 40px auto;
-    padding: 0 20px;
+  /* Sections */
+  section {
+    padding: 4rem 2rem;
+    max-width: 1200px;
+    margin: auto;
+  }
+  h1, h2 {
+    text-align: center;
+    margin-bottom: 2rem;
   }
 
-  h2 { color: var(--blue); margin-bottom: 16px; }
-
-  /* Cards */
-  .cards {
+  /* Product Cards */
+  .product-list {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 20px;
+    gap: 2rem;
   }
-  .card {
-    background: #121418;
+  .product-card {
+    background: #1a1c22;
+    padding: 1.5rem;
     border-radius: var(--radius);
-    padding: 20px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    text-align: center;
     transition: transform 0.3s, box-shadow 0.3s;
   }
-  .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.7);
+  .product-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
   }
-  .button {
-    display: inline-block;
-    margin-top: 12px;
-    padding: 8px 16px;
+  .product-card img {
+    max-width: 100%;
+    border-radius: var(--radius);
+    margin-bottom: 1rem;
+  }
+  .product-card button {
     background: var(--blue);
-    color: white;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-  }
-  .button:hover {
-    background: var(--green);
-    box-shadow: 0 0 10px var(--green);
-    transform: translateY(-2px);
-  }
-
-  /* Industries Section */
-  .industry-cards {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-  }
-
-  .industry-card {
-    background: #121418;
+    border: none;
+    padding: 0.6rem 1.2rem;
     border-radius: var(--radius);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-    overflow: hidden;
-    transition: transform 0.3s, box-shadow 0.3s;
+    color: white;
     cursor: pointer;
+    transition: background 0.3s;
+  }
+  .product-card button:hover {
+    background: var(--accent);
   }
 
-  .industry-card img {
-    width: 100%;
-    height: 220px;
-    object-fit: cover;
-    border-radius: var(--radius) var(--radius) 0 0;
-    transition: transform 0.4s ease;
+  /* Services Cards */
+  .service-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
   }
-
-  .industry-card:hover img {
-    transform: scale(1.05);
+  .service-card {
+    background: #1a1c22;
+    padding: 1.5rem;
+    border-radius: var(--radius);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    cursor: pointer;
+    transition: transform 0.3s;
   }
-
-  .industry-info {
-    padding: 16px 20px;
+  .service-card:hover {
+    transform: translateY(-6px);
   }
-
-  .industry-info h3 {
-    margin: 0;
-    color: var(--green);
+  .service-card h3 {
+    color: var(--blue);
   }
-
-  .industry-info p {
+  .service-card p {
     color: var(--muted);
-    font-size: 14px;
-    line-height: 1.5;
     display: none;
-    margin-top: 10px;
+    margin-top: 1rem;
   }
-
-  .industry-card.active p {
+  .service-card.active p {
     display: block;
   }
 
-  /* Events slider */
-  #workshops {
-    position: relative;
-  }
-  .events-slider {
-    overflow: hidden;
-    position: relative;
-    margin-top: 10px;
-  }
-  .events-track {
-    display: flex;
-    transition: transform 0.5s ease;
-  }
-  .event-slide {
-    min-width: 100%;
-    box-sizing: border-box;
-    padding-right: 20px;
-  }
-  .slider-arrow {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: var(--blue);
-    color: white;
-    border-radius: 50%;
-    width: 36px;
-    height: 36px;
-    border: none;
-    cursor: pointer;
-    font-size: 24px;
-    line-height: 36px;
+  /* Footer */
+  footer {
     text-align: center;
-    user-select: none;
-    transition: background-color 0.3s;
-    z-index: 10;
+    padding: 2rem;
+    background: #181a1f;
+    color: var(--muted);
   }
-  .slider-arrow:hover {
-    background: var(--green);
-  }
-  .slider-arrow.left {
-    left: 5px;
-  }
-  .slider-arrow.right {
-    right: 5px;
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    nav {
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .product-list, .service-list {
+      grid-template-columns: 1fr;
+    }
   }
 </style>
 </head>
 <body>
+  <!-- Navbar -->
+  <nav>
+    <div class="logo">MechStem</div>
+    <ul>
+      <li><a href="#products">Products</a></li>
+      <li><a href="#services">Services</a></li>
+    </ul>
+  </nav>
 
-<!-- Navbar -->
-<div class="navbar">
-  <div class="nav-left">
-    <img src="assets/logo.png" alt="MechStem Logo" class="logo" />
-    <div class="nav-item" onclick="window.location.href='index.html'">Home</div>
-    <div class="nav-item" onclick="window.location.href='Products.html'">Products</div>
-    <div class="nav-item nav-active">Services</div>
-  </div>
-  <a href="#contact" class="contact-button">Contact</a>
-</div>
-
-<!-- Content -->
-<main class="content">
-
-  <!-- Upcoming Events -->
-  <section id="workshops" style="margin-top: 50px;">
-    <h2>🔔 Upcoming Events</h2>
-    <div class="events-slider">
-      <button class="slider-arrow left" aria-label="Previous event">&#9664;</button>
-      <div id="events-track" class="events-track"></div>
-      <button class="slider-arrow right" aria-label="Next event">&#9654;</button>
-    </div>
-  </section>
-
-  <!-- Internships & Trainings -->
-  <section id="internship-training" style="margin-top: 50px;">
-    <h2>🎓 Internships & Trainings</h2>
-    <div class="cards">
-      <div class="card">
-        Pursuing <strong>B.E, B.Tech, M.Tech, BCA, MCA</strong>?<br>
-        Gain real-world technical skills with <strong>industrial internships</strong>.<br>
-        📌 Online & Offline | 📌 Live Projects | 📌 Fast Track (30 days) or 1 to 3 Months<br>
-        <strong>Fee:</strong> --- <br>
-        <a href="https://forms.gle/your-google-form-link" target="_blank" class="button">Check Seats</a>
+  <!-- Products Section -->
+  <section id="products">
+    <h1>Our Products</h1>
+    <div class="product-list">
+      <div class="product-card">
+        <img src="https://via.placeholder.com/400x250" alt="Embedded System Board">
+        <h2>Embedded Controller Board</h2>
+        <p>High-performance ARM-based boards for IoT, automation, and robotics.</p>
+        <button onclick="alert('More details coming soon!')">Know More</button>
       </div>
-      <div class="card">
-        <strong>Trainings We Offer</strong>
-        <ul style="margin-top:10px; text-align:left; color: var(--muted);">
-          <li>Embedded Systems: Microcontrollers, firmware, interfacing</li>
-          <li>AI & Machine Learning: Model building, deployment, edge AI</li>
-          <li>Mechanical Design & ArchiCAD: CAD, simulation, prototyping</li>
-          <li>Corporate Workshops: Tailored sessions for companies</li>
-        </ul>
-        <a href="assets/MechStem_Training_Syllabus.pdf" download class="button">Download</a>
+      <div class="product-card">
+        <img src="https://via.placeholder.com/400x250" alt="AI Edge Device">
+        <h2>AI Edge Device</h2>
+        <p>Compact AI hardware for vision, predictive analytics, and smart control.</p>
+        <button onclick="alert('More details coming soon!')">Know More</button>
+      </div>
+      <div class="product-card">
+        <img src="https://via.placeholder.com/400x250" alt="Drone Navigation Module">
+        <h2>Drone Navigation Module</h2>
+        <p>Embedded module for autonomous drones with GPS + AI navigation.</p>
+        <button onclick="alert('More details coming soon!')">Know More</button>
       </div>
     </div>
   </section>
 
- <!-- Industries -->
-<section id="industries" style="margin-top:50px;">
-  <h2>Sectors Where We Make an Impact</h2>
-  <div class="industry-cards">
-    
-    <!-- Embedded Systems & Edge AI -->
-    <div class="industry-card">
-      <img src="assets/embedded-systems.png" alt="Embedded Systems, Edge AI & Software" />
-      <div class="industry-info">
-        <h3>Embedded Systems, Edge AI & Software Solutions</h3>
-        <p><strong>Technologies:</strong> RTOS, Device Drivers, BSP, IoT Connectivity, VLSI/FPGA/SoC, AI/ML at the Edge, Computer Vision, Predictive Analytics, Cloud–Edge Integration, OS (Linux/QNX/Android)</p>
-        <p><strong>Industries Impacted:</strong><br>
-          Automotive (ECUs, SDVs, ADAS, Autonomous Driving, Diagnostics)<br>
-          Aerospace (Avionics, Flight Controls, Predictive Maintenance, Intelligent Systems)<br>
-          Consumer Electronics<br>
-          Industrial Automation (Controllers, Smart Factories, Robotics)<br>
-          Healthcare (MedTech AI Diagnostics)<br>
-          Energy (Smart Grid, Predictive Maintenance)
-        </p>
+  <!-- Services Section -->
+  <section id="services">
+    <h1>Industries We Serve</h1>
+    <div class="service-list">
+      <div class="service-card" onclick="this.classList.toggle('active')">
+        <h3>Construction</h3>
+        <p>Smart infrastructure, sustainable design, and digital build technologies.</p>
+      </div>
+      <div class="service-card" onclick="this.classList.toggle('active')">
+        <h3>Mechanical Systems</h3>
+        <p>Industrial automation, CAD/CAE solutions, and innovative mechanical design.</p>
+      </div>
+      <div class="service-card" onclick="this.classList.toggle('active')">
+        <h3>Aerospace</h3>
+        <p>Avionics software, embedded systems, and mission-critical technologies.</p>
+      </div>
+      <div class="service-card" onclick="this.classList.toggle('active')">
+        <h3>Camera Drones</h3>
+        <p>Navigation, control systems, and embedded vision applications.</p>
+      </div>
+      <div class="service-card" onclick="this.classList.toggle('active')">
+        <h3>Locomotives</h3>
+        <p>Predictive maintenance, safety-critical embedded systems, and IoT solutions.</p>
+      </div>
+      <div class="service-card" onclick="this.classList.toggle('active')">
+        <h3>Automotive</h3>
+        <p>ADAS, AUTOSAR-based ECUs, and AI-integrated automotive platforms.</p>
       </div>
     </div>
+  </section>
 
-    <!-- Mechanical Systems & Machine Design -->
-    <div class="industry-card">
-      <img src="assets/mechanical-systems.png" alt="Mechanical Systems & Machine Design" />
-      <div class="industry-info">
-        <h3>Mechanical Systems & Machine Design</h3>
-        <p><strong>Technologies:</strong> CAD/CAE, Simulation, Special Purpose Machinery (SPM), Robotics, Thermal/Fluid/Structural Engineering, Automation Systems</p>
-        <p><strong>Industries Impacted:</strong><br>
-          Manufacturing (Automation Lines, Robotics, SPM)<br>
-          Automotive (Vehicle Design, Powertrain Systems)<br>
-          Aerospace (Structures, Aerodynamics)<br>
-          Energy (Turbines, Pumps, Thermal Systems)<br>
-          Healthcare (Medical Devices & Equipment)
-        </p>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-
-</main>
-
-<script>
-  // Events
-  const events = [
-    {date: '2025-09-15', title: 'Embedded Systems Workshop', description: 'Learn Microcontroller Programming & Interfacing.', seats: 12},
-    {date: '2025-09-28', title: 'AI & Machine Learning Bootcamp', description: 'Build and deploy ML models for real applications.', seats: 8},
-    {date: '2025-10-05', title: 'Mechanical CAD Training', description: 'Master ArchiCAD and mechanical design basics.', seats: 5}
-  ];
-  let currentIndex = 0;
-
-  function renderEvents() {
-    const track = document.getElementById('events-track');
-    track.innerHTML = '';
-    events.forEach(event => {
-      const slide = document.createElement('div');
-      slide.classList.add('event-slide', 'card');
-      slide.innerHTML = `
-        <strong>${new Date(event.date).toLocaleDateString()}</strong><br>
-        <strong>${event.title}</strong><br>
-        ${event.description}<br>
-        <strong>Seats Left:</strong> ${event.seats}<br>
-        <a href="https://forms.gle/your-google-form-link" target="_blank" class="button">Register</a>
-      `;
-      track.appendChild(slide);
-    });
-  }
-  function updateSlider() {
-    const track = document.getElementById('events-track');
-    track.style.transform = `translateX(-${currentIndex * 100}%)`;
-  }
-  window.addEventListener('load', () => {
-    renderEvents();
-    updateSlider();
-    document.querySelector('.slider-arrow.left').addEventListener('click', () => {
-      currentIndex = (currentIndex - 1 + events.length) % events.length;
-      updateSlider();
-    });
-    document.querySelector('.slider-arrow.right').addEventListener('click', () => {
-      currentIndex = (currentIndex + 1) % events.length;
-      updateSlider();
-    });
-  });
-
-  // Industry cards accordion
-  const industryCards = document.querySelectorAll('.industry-card');
-  industryCards.forEach(card => {
-    card.addEventListener('click', () => {
-      industryCards.forEach(c => c.classList.remove('active'));
-      card.classList.add('active');
-    });
-  });
-</script>
-
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 MechStem. All rights reserved.</p>
+  </footer>
 </body>
 </html>
+```
