@@ -148,6 +148,48 @@ footer { padding:32px 0 60px; color:var(--muted); text-align:center; border-top:
   opacity: 1;
   transform: translateY(0);
 }
+
+/* ===================== Page Load Animations ===================== */
+@keyframes fadeSlideIn {
+  0% { opacity: 0; transform: translateY(40px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+  opacity: 0;
+  animation: fadeSlideIn 1s forwards;
+}
+
+/* Staggered animation for about-career blocks */
+.about-career-block {
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+.about-career-block.fade-visible:nth-child(1) {
+  animation: fadeSlideIn 0.8s 0.2s forwards;
+}
+.about-career-block.fade-visible:nth-child(2) {
+  animation: fadeSlideIn 0.8s 0.5s forwards;
+}
+
+/* Navbar fade-in */
+.navbar {
+  opacity: 0;
+  transform: translateY(-20px);
+}
+.navbar.fade-in {
+  animation: fadeSlideIn 0.8s forwards;
+}
+
+/* Slider content fade-in */
+.slide-content {
+  opacity: 0;
+  transform: translateY(20px);
+}
+.slide-content.fade-in {
+  animation: fadeSlideIn 1s forwards;
+}
 </style>
 </head>
 <body>
@@ -279,6 +321,23 @@ function revealAboutCareer() {
 
 window.addEventListener('scroll', revealAboutCareer);
 window.addEventListener('load', revealAboutCareer);
+
+/* ===================== Page Load Animations ===================== */
+window.addEventListener('load', () => {
+  // Navbar animation
+  document.querySelector('.navbar').classList.add('fade-in');
+
+  // Slider content animation
+  document.querySelectorAll('.slide-content').forEach((el, i) => {
+    el.classList.add('fade-in');
+    el.style.animationDelay = `${0.3 + i*0.2}s`; // stagger effect
+  });
+
+  // About & Career blocks animation
+  document.querySelectorAll('.about-career-block').forEach(block => {
+    block.classList.add('fade-visible');
+  });
+});
 </script>
 
 </body>
