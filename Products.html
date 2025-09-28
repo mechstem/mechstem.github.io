@@ -4,6 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>MechStem – Trainings & Events</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 <style>
   :root {
     --bg: #0f1014;
@@ -14,17 +15,27 @@
     --yellow: #FBC02D;
     --radius: 14px;
   }
-  body { margin: 0; font-family: Arial, sans-serif; background: var(--bg); color: var(--text); }
+  body { 
+    margin: 0; 
+    font-family: Arial, sans-serif; 
+    background: var(--bg); 
+    color: var(--text); 
+    opacity: 0; 
+    transition: opacity 1s ease-in-out; 
+  }
+  body.loaded { opacity: 1; }
+
   .navbar { display: flex; justify-content: space-between; align-items: center; padding: 12px 20px; background: rgba(15,16,20,0.95); border-bottom: 1px solid rgba(255,255,255,0.1); position: sticky; top: 0; z-index: 1000; }
   .nav-left { display: flex; align-items: center; gap: 12px; }
-  .nav-item { cursor: pointer; padding: 8px 12px; border-radius: var(--radius); transition: 0.3s; font-size: 15px; }
+  .nav-item { cursor: pointer; padding: 8px 12px; border-radius: var(--radius); transition: 0.3s; font-size: 15px; display: flex; align-items: center; gap: 6px;}
   .nav-item:hover, .nav-active { color: var(--blue); }
   .logo { height: 36px; }
   .contact-button { padding: 8px 14px; border-radius: 999px; background: linear-gradient(90deg, var(--blue), var(--green)); color: #fff; font-weight: 600; text-decoration: none; font-size: 14px; transition: box-shadow 0.3s, transform 0.3s; display: inline-block; position: relative; overflow: hidden; }
+  .contact-button i { margin-right: 6px; }
   .contact-button:hover { box-shadow: 0 0 10px var(--yellow); transform: translateY(-2px); }
 
   main.content { max-width: 1100px; margin: 40px auto; padding: 0 20px; }
-  h2 { color: var(--blue); margin-bottom: 16px; }
+  h2 { color: var(--blue); margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
 
   .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
   .card {
@@ -49,6 +60,7 @@
   .events-slider { overflow: hidden; position: relative; margin-top: 10px; }
   .events-track { display: flex; transition: transform 0.5s ease; }
   .event-slide { min-width: 100%; box-sizing: border-box; padding-right: 20px; }
+
   .slider-arrow { position: absolute; top: 50%; transform: translateY(-50%); background: var(--blue); color: white; border-radius: 50%; width: 36px; height: 36px; border: none; cursor: pointer; font-size: 24px; line-height: 36px; text-align: center; user-select: none; transition: background-color 0.3s; z-index: 10; }
   .slider-arrow:hover { background: var(--green); }
   .slider-arrow.left { left: 5px; }
@@ -57,7 +69,8 @@
   /* Footer */
   footer { padding: 32px 0 60px; color: var(--muted); text-align: center; border-top: 1px solid rgba(255,255,255,.08); margin-top: 40px; }
   .social-links { display: flex; justify-content: center; gap: 14px; margin-top: 12px; }
-  .social-links img { height: 28px; width: 28px; }
+  .social-links img { height: 28px; width: 28px; transition: transform 0.3s; }
+  .social-links img:hover { transform: scale(1.2); }
 </style>
 </head>
 <body>
@@ -66,17 +79,17 @@
 <div class="navbar">
   <div class="nav-left">
     <img src="assets/logo.png" alt="MechStem Logo" class="logo" />
-    <div class="nav-item" onclick="window.location.href='index.html'">Home</div>
-    <div class="nav-item nav-active">Trainings</div>
+    <div class="nav-item" onclick="window.location.href='index.html'"><i class="fa fa-home"></i>Home</div>
+    <div class="nav-item nav-active"><i class="fa fa-graduation-cap"></i>Trainings</div>
   </div>
-  <a href="#contact" class="contact-button">Contact</a>
+  <a href="#contact" class="contact-button"><i class="fa fa-envelope"></i>Contact</a>
 </div>
 
 <main class="content">
 
   <!-- Upcoming Events -->
   <section id="workshops" style="margin-top: 50px;">
-    <h2>🔔 Upcoming Events</h2>
+    <h2><i class="fa fa-bell"></i> Upcoming Events</h2>
     <div class="events-slider">
       <button class="slider-arrow left" aria-label="Previous event">&#9664;</button>
       <div id="events-track" class="events-track"></div>
@@ -86,7 +99,7 @@
 
   <!-- Internships -->
   <section id="internship-training" style="margin-top: 50px;">
-    <h2>🎓 Internships</h2>
+    <h2><i class="fa fa-briefcase"></i> Internships</h2>
     <div class="cards">
       <div class="card">
         Pursuing <strong>B.E, B.Tech, M.Tech, BCA, MCA</strong>?<br>
@@ -99,8 +112,9 @@
   </section>
 
   <!-- Trainings -->
+  <!-- START: Linux Systems Engineering Training -->
   <section id="trainings" style="margin-top: 50px;">
-    <h2>🎓 Trainings</h2>
+    <h2><i class="fa fa-cogs"></i> Trainings</h2>
     <div class="cards">
       <div class="card">
         <img src="assets/linux.jpg" alt="Linux Systems Engineering"/>
@@ -161,6 +175,7 @@
       </div>
     </div>
   </section>
+  <!-- END: Linux Systems Engineering Training -->
 
 </main>
 
@@ -175,34 +190,37 @@
 </footer>
 
 <script>
-  // Events slider
-  const events = [
-    {date: '2025-09-15', title: 'Embedded Systems Workshop', description: 'Learn Microcontroller Programming & Interfacing.', seats: 12},
-    {date: '2025-09-28', title: 'AI & Machine Learning Bootcamp', description: 'Build and deploy ML models for real applications.', seats: 8},
-    {date: '2025-10-05', title: 'Mechanical CAD Training', description: 'Master ArchiCAD and mechanical design basics.', seats: 5}
-  ];
-  let currentIndex = 0;
-  function renderEvents() {
-    const track = document.getElementById('events-track');
-    track.innerHTML = '';
-    events.forEach(event => {
-      const slide = document.createElement('div');
-      slide.classList.add('event-slide', 'card');
-      slide.innerHTML = `
-        <strong>${new Date(event.date).toLocaleDateString()}</strong><br>
-        <strong>${event.title}</strong><br>
-        ${event.description}<br>
-        <strong>Seats Left:</strong> ${event.seats}<br>
-        <a href="https://forms.gle/your-google-form-link" target="_blank" class="button">Register</a>
-      `;
-      track.appendChild(slide);
-    });
-  }
-  function updateSlider() {
-    const track = document.getElementById('events-track');
-    track.style.transform = `translateX(-${currentIndex * 100}%)`;
-  }
+  // Fade-in page on load
   window.addEventListener('load', () => {
+    document.body.classList.add('loaded');
+
+    // Events slider
+    const events = [
+      {date: '2025-09-15', title: 'Embedded Systems Workshop', description: 'Learn Microcontroller Programming & Interfacing.', seats: 12},
+      {date: '2025-09-28', title: 'AI & Machine Learning Bootcamp', description: 'Build and deploy ML models for real applications.', seats: 8},
+      {date: '2025-10-05', title: 'Mechanical CAD Training', description: 'Master ArchiCAD and mechanical design basics.', seats: 5}
+    ];
+    let currentIndex = 0;
+    function renderEvents() {
+      const track = document.getElementById('events-track');
+      track.innerHTML = '';
+      events.forEach(event => {
+        const slide = document.createElement('div');
+        slide.classList.add('event-slide', 'card');
+        slide.innerHTML = `
+          <strong>${new Date(event.date).toLocaleDateString()}</strong><br>
+          <strong>${event.title}</strong><br>
+          ${event.description}<br>
+          <strong>Seats Left:</strong> ${event.seats}<br>
+          <a href="https://forms.gle/your-google-form-link" target="_blank" class="button">Register</a>
+        `;
+        track.appendChild(slide);
+      });
+    }
+    function updateSlider() {
+      const track = document.getElementById('events-track');
+      track.style.transform = `translateX(-${currentIndex * 100}%)`;
+    }
     renderEvents();
     updateSlider();
     document.querySelector('.slider-arrow.left').addEventListener('click', () => {
