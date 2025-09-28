@@ -31,18 +31,8 @@
     top: 0;
     z-index: 1000;
   }
-  .nav-left {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-  .nav-item {
-    cursor: pointer;
-    padding: 8px 12px;
-    border-radius: var(--radius);
-    transition: 0.3s;
-    font-size: 15px;
-  }
+  .nav-left { display: flex; align-items: center; gap: 12px; }
+  .nav-item { cursor: pointer; padding: 8px 12px; border-radius: var(--radius); transition: 0.3s; font-size: 15px; }
   .nav-item:hover, .nav-active { color: var(--blue); }
   .logo { height: 36px; }
   .contact-button {
@@ -58,36 +48,26 @@
     position: relative;
     overflow: hidden;
   }
-  .contact-button:hover {
-    box-shadow: 0 0 10px var(--yellow);
-    transform: translateY(-2px);
-  }
+  .contact-button:hover { box-shadow: 0 0 10px var(--yellow); transform: translateY(-2px); }
 
-  main.content {
-    max-width: 1100px;
-    margin: 40px auto;
-    padding: 0 20px;
-  }
-
+  main.content { max-width: 1100px; margin: 40px auto; padding: 0 20px; }
   h2 { color: var(--blue); margin-bottom: 16px; }
 
-  /* Cards */
-  .cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 20px;
-  }
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
   .card {
     background: #121418;
     border-radius: var(--radius);
     padding: 20px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.5);
     transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
   }
-  .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.7);
-  }
+  .card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.7); }
+  .card img { width: 100%; border-radius: var(--radius); margin-bottom: 12px; }
+
+  .card-content { display: none; margin-top: 10px; color: var(--muted); }
+  .card.open .card-content { display: block; }
+
   .button {
     display: inline-block;
     margin-top: 12px;
@@ -99,85 +79,23 @@
     font-weight: bold;
     transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;
     cursor: pointer;
-    position: relative;
-    overflow: hidden;
   }
-  .button:hover {
-    background: var(--green);
-    box-shadow: 0 0 10px var(--green);
-    transform: translateY(-2px);
-  }
+  .button:hover { background: var(--green); box-shadow: 0 0 10px var(--green); transform: translateY(-2px); }
 
   /* Events slider */
-  #workshops {
-    position: relative;
-  }
-  .events-slider {
-    overflow: hidden;
-    position: relative;
-    margin-top: 10px;
-  }
-  .events-track {
-    display: flex;
-    transition: transform 0.5s ease;
-  }
-  .event-slide {
-    min-width: 100%;
-    box-sizing: border-box;
-    padding-right: 20px;
-  }
+  #workshops { position: relative; }
+  .events-slider { overflow: hidden; position: relative; margin-top: 10px; }
+  .events-track { display: flex; transition: transform 0.5s ease; }
+  .event-slide { min-width: 100%; box-sizing: border-box; padding-right: 20px; }
   .slider-arrow {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: var(--blue);
-    color: white;
-    border-radius: 50%;
-    width: 36px;
-    height: 36px;
-    border: none;
-    cursor: pointer;
-    font-size: 24px;
-    line-height: 36px;
-    text-align: center;
-    user-select: none;
-    transition: background-color 0.3s;
-    z-index: 10;
+    position: absolute; top: 50%; transform: translateY(-50%);
+    background: var(--blue); color: white; border-radius: 50%;
+    width: 36px; height: 36px; border: none; cursor: pointer; font-size: 24px;
+    line-height: 36px; text-align: center; user-select: none; transition: background-color 0.3s; z-index: 10;
   }
-  .slider-arrow:hover {
-    background: var(--green);
-  }
-  .slider-arrow.left {
-    left: 5px;
-  }
-  .slider-arrow.right {
-    right: 5px;
-  }
-
-  /* Collapsible training cards */
-  details summary {
-    cursor: pointer;
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 12px;
-  }
-  details[open] summary::after {
-    content: "▲";
-    float: right;
-  }
-  details summary::after {
-    content: "▼";
-    float: right;
-  }
-  details div { margin-top: 12px; }
-  details img {
-    width: 100%;
-    border-radius: var(--radius);
-    margin-bottom: 12px;
-  }
-  details details {
-    margin-top: 8px;
-  }
+  .slider-arrow:hover { background: var(--green); }
+  .slider-arrow.left { left: 5px; }
+  .slider-arrow.right { right: 5px; }
 </style>
 </head>
 <body>
@@ -192,7 +110,6 @@
   <a href="#contact" class="contact-button">Contact</a>
 </div>
 
-<!-- Content -->
 <main class="content">
 
   <!-- Upcoming Events -->
@@ -205,11 +122,10 @@
     </div>
   </section>
 
-  <!-- Internships & Trainings -->
+  <!-- Internships -->
   <section id="internship-training" style="margin-top: 50px;">
-    <h2>🎓 Internships & Trainings</h2>
+    <h2>🎓 Internships</h2>
     <div class="cards">
-      <!-- Internship Card (unchanged) -->
       <div class="card">
         Pursuing <strong>B.E, B.Tech, M.Tech, BCA, MCA</strong>?<br>
         Gain real-world technical skills with <strong>industrial internships</strong>.<br>
@@ -217,115 +133,57 @@
         <strong>Fee:</strong> --- <br>
         <a href="https://forms.gle/your-google-form-link" target="_blank" class="button">Check Seats</a>
       </div>
+    </div>
+  </section>
 
-      <!-- Collapsible Training Cards -->
-      <div class="card">
-        <details style="color: var(--text);">
-          <summary>Linux Systems Engineering – Master Linux system-level skills</summary>
-          <div>
-            <img src="assets/linux_training.png" alt="Linux Training Animation">
-            <a href="#" class="button">Enroll Now</a>
-            <h4>Curriculum</h4>
-            <a href="assets/Linux_Systems_Engineering_Curriculum.pdf" download class="button">Download Curriculum</a>
-            <h4>Prerequisites & Who Should Enroll</h4>
-            <ul style="margin-top:10px; text-align:left; color: var(--muted);">
-              <li>GNU Toolchain</li>
-              <li>Linux Command-line Skills</li>
-              <li>Embedded Systems Basics</li>
-              <li>Basic Linux Kernel Architecture</li>
-              <li>Embedded Software Engineers & Firmware Developers</li>
-              <li>Hardware/Board Engineers integrating drivers & BSPs</li>
-              <li>IoT & Product Engineers building Linux distributions</li>
-              <li>Yocto Adopters: R&D Engineers & Tech Leads</li>
-            </ul>
-            <h4>Key Takeaways</h4>
-            <ul style="margin-top:10px; text-align:left; color: var(--muted);">
-              <li>Embedded Linux architecture – bootloader, kernel, device tree, root filesystem</li>
-              <li>Complete board bring-up: cross-compilation, kernel config, deployment</li>
-              <li>Device tree customization & hardware driver integration</li>
-              <li>Peripheral interfaces: I²C, SPI, UART, etc.</li>
-              <li>Master Yocto Project – layers, recipes, images, package management</li>
-              <li>Build & customize BSPs</li>
-              <li>Optimize Linux systems for footprint, performance, security</li>
-              <li>Debug, extend, and maintain embedded Linux systems</li>
-            </ul>
-            <h4>Program Details</h4>
-            <table style="width:100%; color: var(--muted); margin-bottom:10px;">
-              <tr><td>Start Date</td><td>15th October 2025</td></tr>
-              <tr><td>Delivery Mode</td><td>Online / Instructor-Led</td></tr>
-              <tr><td>Timing</td><td>7 PM – 9 PM (IST)</td></tr>
-              <tr><td>Duration</td><td>6 Weeks</td></tr>
-              <tr><td>Fee</td><td>₹35,000</td></tr>
-            </table>
-            <h4>FAQs</h4>
-            <details><summary>Can I target roles in embedded product development companies?</summary>
-              <p>Yes. The program equips you with practical knowledge to contribute effectively to embedded Linux-based product development.</p>
-            </details>
-            <details><summary>Difference between learning Embedded Linux and Yocto separately vs. in this course?</summary>
-              <p>Embedded Linux provides the foundation (boot process, kernel, device tree, rootfs), while Yocto teaches you to build and customize Linux distributions. This course blends both.</p>
-            </details>
-            <details><summary>Bare-metal background – do I need Linux programming?</summary>
-              <p>No prior Linux programming experience is required, though familiarity with embedded systems concepts helps.</p>
-            </details>
-            <details><summary>Hardware requirement?</summary>
-              <p>A standard development board with Linux support (Raspberry Pi, BeagleBone, etc.) is recommended.</p>
-            </details>
-          </div>
-        </details>
+  <!-- Trainings -->
+  <section id="trainings" style="margin-top: 50px;">
+    <h2>🎓 Trainings</h2>
+    <div class="cards">
+      <div class="card" onclick="this.classList.toggle('open')">
+        <img src="assets/linux.jpg" alt="Linux Systems Engineering"/>
+        <strong>Linux Systems Engineering</strong>
+        <div class="card-content">
+          <p><strong>Short Description:</strong> Master Linux system-level skills to thrive in the age of AI automation. Gain a whole new perspective.</p>
+          <ul>
+            <li><strong>Start Date:</strong> 15th October 2025</li>
+            <li><strong>Delivery Mode:</strong> Online / Instructor-Led</li>
+            <li><strong>Timing:</strong> 7 PM – 9 PM (IST)</li>
+            <li><strong>Duration:</strong> 6 Weeks</li>
+            <li><strong>Fee:</strong> ₹35,000</li>
+          </ul>
+          <a href="https://forms.gle/your-google-form-link" target="_blank" class="button">Enroll Now</a>
+          <p><strong>Prerequisites & Who Should Enroll:</strong></p>
+          <ul>
+            <li>GNU Toolchain</li>
+            <li>Linux Command-line Skills</li>
+            <li>Embedded Systems Basics</li>
+            <li>Basic Linux Kernel Architecture</li>
+          </ul>
+          <p>Ideal for Embedded Software Engineers, Hardware Engineers, IoT & Product Engineers, and Yocto adopters.</p>
+          <p><strong>Key Takeaways:</strong></p>
+          <ul>
+            <li>Understand Embedded Linux architecture – bootloader, kernel, device tree, root filesystem</li>
+            <li>Perform a complete board bring-up: cross-compilation, kernel config, deployment to custom hardware</li>
+            <li>Customize device trees and integrate hardware-specific drivers</li>
+            <li>Work with peripheral interfaces (I²C, SPI, UART, etc.) on embedded platforms</li>
+            <li>Master the Yocto Project build system</li>
+            <li>Build and customize Board Support Packages (BSPs)</li>
+            <li>Optimize Linux systems for footprint, performance, and security</li>
+            <li>Develop practical skills to debug, extend, and maintain embedded Linux systems</li>
+          </ul>
+          <p><strong>FAQs (Click card to expand/collapse)</strong></p>
+          <ul>
+            <li><strong>Q:</strong> Can I target roles in embedded product development companies? <br>
+                <strong>A:</strong> Yes. This program equips you with practical knowledge.</li>
+            <li><strong>Q:</strong> Difference between Embedded Linux and Yocto separately vs this course? <br>
+                <strong>A:</strong> This course blends both for real product development experience.</li>
+            <li><strong>Q:</strong> Hardware requirement? <br>
+                <strong>A:</strong> Standard board with Linux support (Raspberry Pi, BeagleBone, etc.)</li>
+          </ul>
+        </div>
       </div>
-
-      <div class="card">
-        <details style="color: var(--text);">
-          <summary>Embedded Linux, Yocto on Edge AI Platforms – Hands-on Yocto & Embedded Linux</summary>
-          <div>
-            <img src="assets/embedded_linux_yocto.png" alt="Embedded Linux Yocto Animation">
-            <a href="#" class="button">Enroll Now</a>
-            <h4>Curriculum</h4>
-            <a href="assets/Embedded_Linux_Yocto_Curriculum.pdf" download class="button">Download Curriculum</a>
-            <h4>Prerequisites & Who Should Enroll</h4>
-            <ul style="margin-top:10px; text-align:left; color: var(--muted);">
-              <li>GNU Toolchain</li>
-              <li>Linux Command-line Skills</li>
-              <li>Embedded Systems Basics</li>
-              <li>Basic Linux Kernel Architecture</li>
-              <li>Embedded Software Engineers & Firmware Developers</li>
-              <li>Hardware/Board Engineers integrating drivers & BSPs</li>
-              <li>IoT & Product Engineers building Linux distributions</li>
-              <li>Yocto Adopters: R&D Engineers & Tech Leads</li>
-            </ul>
-            <h4>Key Takeaways</h4>
-            <ul style="margin-top:10px; text-align:left; color: var(--muted);">
-              <li>Master Yocto Project – layers, recipes, images, package management</li>
-              <li>Customize Board Support Packages (BSPs)</li>
-              <li>Complete board bring-up with embedded Linux</li>
-              <li>Optimize Linux for footprint, performance, security</li>
-              <li>Debug and maintain embedded Linux systems</li>
-            </ul>
-            <h4>Program Details</h4>
-            <table style="width:100%; color: var(--muted); margin-bottom:10px;">
-              <tr><td>Start Date</td><td>15th October 2025</td></tr>
-              <tr><td>Delivery Mode</td><td>Online / Instructor-Led</td></tr>
-              <tr><td>Timing</td><td>7 PM – 9 PM (IST)</td></tr>
-              <tr><td>Duration</td><td>6 Weeks</td></tr>
-              <tr><td>Fee</td><td>₹35,000</td></tr>
-            </table>
-            <h4>FAQs</h4>
-            <details><summary>Can I target roles in embedded product development companies?</summary>
-              <p>Yes. The program equips you with practical knowledge to contribute effectively to embedded Linux-based product development.</p>
-            </details>
-            <details><summary>Difference between learning Embedded Linux and Yocto separately vs. in this course?</summary>
-              <p>Embedded Linux provides the foundation (boot process, kernel, device tree, rootfs), while Yocto teaches you to build and customize Linux distributions. This course blends both.</p>
-            </details>
-            <details><summary>Bare-metal background – do I need Linux programming?</summary>
-              <p>No prior Linux programming experience is required, though familiarity with embedded systems concepts helps.</p>
-            </details>
-            <details><summary>Hardware requirement?</summary>
-              <p>A standard development board with Linux support (Raspberry Pi, BeagleBone, etc.) is recommended.</p>
-            </details>
-          </div>
-        </details>
-      </div>
-
+      <!-- Duplicate similar cards for other trainings -->
     </div>
   </section>
 
@@ -339,7 +197,6 @@
     {date: '2025-10-05', title: 'Mechanical CAD Training', description: 'Master ArchiCAD and mechanical design basics.', seats: 5}
   ];
   let currentIndex = 0;
-
   function renderEvents() {
     const track = document.getElementById('events-track');
     track.innerHTML = '';
