@@ -4,45 +4,58 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>MechStem – Products & Services</title>
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 <style>
 :root{
   --bg:#0f1014; --text:#e6e9ef; --muted:#9aa3b2;
   --blue:#1E88E5; --green:#43A047; --yellow:#FBC02D;
-  --radius:18px; --maxw:1200px;
+  --radius:14px; --maxw:1200px;
 }
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:system-ui,sans-serif;background:var(--bg);color:var(--text);}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:system-ui,sans-serif;background:var(--bg);color:var(--text);opacity:0;transition:opacity 1s ease-in-out;}
+body.loaded{opacity:1;}
 
 /* Navbar */
 .navbar{
-  position:sticky;top:0;z-index:50;backdrop-filter:blur(10px);
-  background:rgba(15,16,20,.85);border-bottom:1px solid rgba(255,255,255,.08);
-  display:flex;justify-content:space-between;align-items:center;padding:12px 20px;max-width:var(--maxw);margin:0 auto
+  position:sticky;
+  top:0;
+  z-index:1000;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:12px 30px;
+  width:100%;
+  background: rgba(15,16,20,0.7);
+  backdrop-filter: blur(10px);
+  transition: background 0.3s ease;
 }
-.nav-left{display:flex;align-items:center;gap:18px}
-.logo{height:40px;animation:floaty 6s ease-in-out infinite}
-@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
-.nav-item{cursor:pointer;transition:color .3s}
-.nav-item:hover,.nav-active{color:var(--blue)}
-.contact-button{padding:8px 16px;border-radius:999px;background:linear-gradient(90deg,var(--blue),var(--green));color:#fff;font-weight:600;transition:.3s;position:relative;overflow:hidden}
-.contact-button:hover{box-shadow:0 0 15px var(--yellow);transform:translateY(-2px)}
-.contact-button::after{content:"";position:absolute;inset:0;background:linear-gradient(120deg,transparent 0%,rgba(255,255,255,.35) 45%,transparent 80%);transform:translateX(-200%)}
-.contact-button:hover::after{animation:sheen .9s ease}
+.navbar.scrolled{
+  background: rgba(15,16,20,0.95);
+}
+.nav-left{display:flex;align-items:center;gap:18px;}
+.logo{height:40px;animation:floaty 6s ease-in-out infinite;}
+@keyframes floaty{0%,100%{transform:translateY(0);}50%{transform:translateY(-4px);}}
+.nav-item{cursor:pointer;transition:color .3s;font-size:15px;display:flex;align-items:center;gap:6px;}
+.nav-item:hover,.nav-active{color:var(--blue);}
+.contact-button{
+  padding:8px 16px;border-radius:999px;background:linear-gradient(90deg,var(--blue),var(--green));
+  color:#fff;font-weight:600;transition:.3s;position:relative;overflow:hidden;text-decoration:none;
+}
+.contact-button:hover{box-shadow:0 0 15px var(--yellow);transform:translateY(-2px);}
+.contact-button::after{
+  content:"";position:absolute;inset:0;background:linear-gradient(120deg,transparent 0%,rgba(255,255,255,.35) 45%,transparent 80%);transform:translateX(-200%);
+}
+.contact-button:hover::after{animation:sheen .9s ease;}
 
 /* Section Titles */
-.section-title {
-  text-align:center;margin:50px 0 20px;
-  font-size:clamp(26px,4vw,36px);color:var(--blue);
-}
+.section-title{ text-align:center; margin:50px 0 20px; font-size:clamp(26px,4vw,36px); color:var(--blue); }
 
 /* Products Section */
-.products-background{position:relative;padding:20px;text-align:center;max-width:var(--maxw);margin:0 auto}
-.products-list {
-  display:flex;gap:20px;overflow-x:auto;scroll-behavior:smooth;
-  padding-bottom:10px;-webkit-overflow-scrolling:touch;
+.products-background{position:relative;padding:20px;text-align:center;max-width:var(--maxw);margin:0 auto;}
+.products-list{
+  display:flex;gap:20px;overflow-x:auto;scroll-behavior:smooth;padding-bottom:10px;-webkit-overflow-scrolling:touch;
 }
-.product-card {
+.product-card{
   flex:0 0 calc(33.33% - 20px);
   background:rgba(255,255,255,.03);
   border:1px solid rgba(255,255,255,.08);
@@ -51,90 +64,53 @@ body{font-family:system-ui,sans-serif;background:var(--bg);color:var(--text);}
   transition:border-color .3s,box-shadow .3s,transform .3s;
   position:relative;
 }
-.product-card img {
-  width:100%;height:180px;object-fit:cover;border-radius:var(--radius);
-  margin-bottom:15px;
+.product-card img{width:100%;height:180px;object-fit:cover;border-radius:var(--radius);margin-bottom:15px;}
+.product-card h2{font-size:20px;margin-bottom:10px;color:var(--green);}
+.product-card p{font-size:14px;color:var(--muted);white-space:pre-line;}
+.product-card:hover{border-color:var(--blue);box-shadow:0 0 20px var(--green);transform:translateY(-5px);}
+.product-card::after{
+  content:"";position:absolute;bottom:0;left:0;width:0;height:3px;background:linear-gradient(90deg,var(--blue),var(--green));border-radius:999px;transition:width .3s ease;
 }
-.product-card h2 {font-size:20px;margin-bottom:10px;color:var(--green);}
-.product-card p {font-size:14px;color:var(--muted);white-space:pre-line;}
-.product-card:hover {
-  border-color:var(--blue);box-shadow:0 0 20px var(--green);
-  transform:translateY(-5px);
+.product-card:hover::after{width:100%;}
+.know-more-button{
+  margin-top:15px;padding:8px 18px;border-radius:999px;background:linear-gradient(90deg,var(--blue),var(--green));
+  border:none;color:#fff;font-weight:600;cursor:pointer;transition:box-shadow .3s,transform .3s;position:relative;overflow:hidden;font-size:14px;
 }
-.product-card::after {
-  content:"";position:absolute;bottom:0;left:0;width:0;height:3px;
-  background:linear-gradient(90deg,var(--blue),var(--green));
-  border-radius:999px;transition:width .3s ease;
-}
-.product-card:hover::after {width:100%;}
-.know-more-button {
-  margin-top:15px;padding:8px 18px;border-radius:999px;
-  background:linear-gradient(90deg,var(--blue),var(--green));
-  border:none;color:#fff;font-weight:600;cursor:pointer;
-  transition:box-shadow .3s,transform .3s;position:relative;overflow:hidden;font-size:14px;
-}
-.know-more-button:hover {box-shadow:0 0 15px var(--yellow);transform:translateY(-2px);}
+.know-more-button:hover{box-shadow:0 0 15px var(--yellow);transform:translateY(-2px);}
 
 /* Industries Section */
-.industry-cards {display:flex;flex-direction:column;gap:30px;max-width:var(--maxw);margin:0 auto;padding:0 20px;}
-.industry-card {
-  background:#121418;border-radius:var(--radius);
-  box-shadow:0 4px 12px rgba(0,0,0,0.5);
-  overflow:hidden;transition:transform .3s,box-shadow .3s;
-  cursor:pointer;
-}
-.industry-card img {width:100%;height:220px;object-fit:cover;border-radius:var(--radius) var(--radius) 0 0;transition:transform .4s ease;}
-.industry-card:hover img {transform:scale(1.05);}
-.industry-info {padding:16px 20px;}
-.industry-info h3 {margin:0;color:var(--green);}
-.industry-info p {color:var(--muted);font-size:14px;line-height:1.5;display:none;margin-top:10px;}
-.industry-card.active p {display:block;}
+.industry-cards{display:flex;flex-direction:column;gap:30px;max-width:var(--maxw);margin:0 auto;padding:0 20px;}
+.industry-card{background:#121418;border-radius:var(--radius);box-shadow:0 4px 12px rgba(0,0,0,0.5);overflow:hidden;transition:transform .3s,box-shadow .3s;cursor:pointer;}
+.industry-card img{width:100%;height:220px;object-fit:cover;border-radius:var(--radius) var(--radius) 0 0;transition:transform .4s ease;}
+.industry-card:hover img{transform:scale(1.05);}
+.industry-info{padding:16px 20px;}
+.industry-info h3{margin:0;color:var(--green);}
+.industry-info p{color:var(--muted);font-size:14px;line-height:1.5;display:none;margin-top:10px;}
+.industry-card.active p{display:block;}
 
 /* Responsive */
-@media(max-width:992px) {.product-card {flex:0 0 calc(50% - 20px);}}
-@media(max-width:600px) {.product-card {flex:0 0 calc(100% - 20px);}}
+@media(max-width:992px){.product-card{flex:0 0 calc(50% - 20px);}}
+@media(max-width:600px){.product-card{flex:0 0 calc(100% - 20px);}}
 
 /* Footer */
-footer {
-  padding:32px 0 60px;color:var(--muted);text-align:center;
-  border-top:1px solid rgba(255,255,255,.08);margin-top:60px;
-}
-.social-links {display:flex;justify-content:center;gap:14px;margin-top:12px;}
-.social-links img {height:28px;width:28px;}
-
-@keyframes sheen {to {transform:translateX(200%);}}
+footer{padding:32px 0 60px;color:var(--muted);text-align:center;border-top:1px solid rgba(255,255,255,.08);margin-top:60px;}
+.social-links{display:flex;justify-content:center;gap:14px;margin-top:12px;}
+.social-links img{height:28px;width:28px;}
+@keyframes sheen{to{transform:translateX(200%);}}
 </style>
 </head>
 <body>
 
-<!-- Load Font Awesome -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-
 <!-- Navbar -->
-<div class="navbar reveal delay-1">
+<div class="navbar">
   <div class="nav-left">
     <img src="assets/logo.png" alt="MechStem Logo" class="logo" />
-
-    <!-- Home Icon -->
-    <div class="nav-item nav-active" onclick="location.href='index.html'" title="Home">
-      <i class="fas fa-home" style="font-size: 20px;"></i> Home
-    </div>
-
-    <!-- Trainings Icon -->
-    <div class="nav-item" onclick="location.href='Products.html'" title="Trainings">
-      <i class="fas fa-graduation-cap" style="font-size: 20px;"></i> Trainings
-    </div>
-
-    <!-- Services Icon -->
-    <div class="nav-item" onclick="location.href='services.html'" title="Services">
-      <i class="fas fa-cogs" style="font-size: 20px;"></i> Services
-    </div>
+    <div class="nav-item nav-active" onclick="location.href='index.html'"><i class="fas fa-home"></i> Home</div>
+    <div class="nav-item" onclick="location.href='Products.html'"><i class="fas fa-graduation-cap"></i> Trainings</div>
+    <div class="nav-item" onclick="location.href='services.html'"><i class="fas fa-cogs"></i> Services</div>
   </div>
-
-  <!-- Contact Button -->
   <a href="#contact" class="contact-button"><i class="fas fa-envelope"></i> Contact</a>
 </div>
-
 
 <!-- Products Section -->
 <div class="products-background">
@@ -158,18 +134,6 @@ footer {
       <p>Automotive protocol analysis<br>Supports CAN, CAN-FD, LIN<br>Real-time logging</p>
       <button class="know-more-button">Know More</button>
     </div>
-    <div class="product-card">
-      <img src="assets/product4.jpg" alt="Drone Control Module" />
-      <h2>Drone Control Module</h2>
-      <p>Embedded vision & navigation<br>Flight controller integration<br>AI-powered safety</p>
-      <button class="know-more-button">Know More</button>
-    </div>
-    <div class="product-card">
-      <img src="assets/product5.jpg" alt="Industrial IoT Gateway" />
-      <h2>IoT Gateway</h2>
-      <p>Industrial protocols support<br>Secure cloud connectivity<br>Predictive maintenance ready</p>
-      <button class="know-more-button">Know More</button>
-    </div>
   </div>
 </div>
 
@@ -182,14 +146,7 @@ footer {
       <div class="industry-info">
         <h3>Embedded Systems, Edge AI & Software Solutions</h3>
         <p><strong>Technologies:</strong> RTOS, Drivers, BSP, IoT, FPGA/SoC, AI/ML, Computer Vision, Cloud Integration</p>
-        <p><strong>Industries Impacted:</strong><br>
-          Automotive (ECUs, ADAS, SDVs)<br>
-          Aerospace (Avionics, Flight Controls)<br>
-          Consumer Electronics<br>
-          Industrial Automation<br>
-          Healthcare (MedTech)<br>
-          Energy (Smart Grid)
-        </p>
+        <p><strong>Industries Impacted:</strong><br>Automotive, Aerospace, Consumer Electronics, Industrial Automation, Healthcare, Energy</p>
       </div>
     </div>
     <div class="industry-card">
@@ -197,13 +154,7 @@ footer {
       <div class="industry-info">
         <h3>Mechanical Systems & Machine Design</h3>
         <p><strong>Technologies:</strong> CAD/CAE, Simulation, SPM, Robotics, Thermal/Fluid/Structural Engineering</p>
-        <p><strong>Industries Impacted:</strong><br>
-          Manufacturing (Automation, Robotics)<br>
-          Automotive (Vehicle & Powertrain)<br>
-          Aerospace (Structures, Aerodynamics)<br>
-          Energy (Turbines, Thermal Systems)<br>
-          Healthcare (Medical Devices)
-        </p>
+        <p><strong>Industries Impacted:</strong><br>Manufacturing, Automotive, Aerospace, Energy, Healthcare</p>
       </div>
     </div>
   </div>
@@ -219,6 +170,16 @@ footer {
 </footer>
 
 <script>
+// Page fade-in
+window.addEventListener('load',()=>{document.body.classList.add('loaded');});
+
+// Navbar scroll effect
+window.addEventListener('scroll',()=>{
+  const navbar=document.querySelector('.navbar');
+  if(window.scrollY>50){navbar.classList.add('scrolled');}
+  else{navbar.classList.remove('scrolled');}
+});
+
 // Industry accordion
 const industryCards=document.querySelectorAll('.industry-card');
 industryCards.forEach(card=>{
