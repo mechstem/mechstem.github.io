@@ -34,20 +34,22 @@
   .contact-button i { margin-right: 6px; }
   .contact-button:hover { box-shadow: 0 0 10px var(--yellow); transform: translateY(-2px); }
 
-  /* Training card header (image left, title right) */
-  .training-header {
-    display: flex;
-    align-items: center;
-    gap: 10px; /* space between image and title */
-    margin-bottom: 12px;
-  }
+ /* Training cards header: title left, profile-pic right */
+.training-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* push title left, image right */
+  gap: 12px;
+  margin-bottom: 12px;
+}
 
-  .training-header img {
-    width: 10px;
-    height: 5px;
-    object-fit: cover;
-    border-radius: 50%;
-  }
+.training-header img {
+  width: 50px;        /* profile-pic size */
+  height: 50px;
+  object-fit: cover;  /* keep proportions */
+  border-radius: 50%; /* round image */
+}
+
   
   main.content { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
   h2 { color: var(--blue); margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
@@ -153,8 +155,8 @@
     <div class="cards">
       <div class="card">
         <div class="training-header">
-             <img src="assets/Linux.gif" alt="Linux Systems Engineering"/>
-             <strong>Linux Systems Engineering</strong>
+            <strong>Linux Systems Engineering</strong>
+            <img src="assets/Linux.gif" alt="Linux Systems Engineering"/>
          </div>
         <div class="card-content">
           <p><strong>Short Description:</strong> Master Linux system-level skills to thrive in the age of AI automation.</p>
@@ -220,8 +222,8 @@
     <div class="cards">
       <div class="card">
          <div class="training-header">
-           <img src="assets/Linux.gif" alt="Linux Systems Engineering"/>
            <strong>Linux Systems Engineering</strong>
+           <img src="assets/Linux.gif" alt="Linux Systems Engineering"/>
          </div>
         <div class="card-content">
           <p><strong>Short Description:</strong> Master Linux system-level skills to thrive in the age of AI automation.</p>
