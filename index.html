@@ -1,506 +1,193 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>MechStem – Tech-Driven Innovation in Engineering</title>
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 <style>
 :root{
-  --bg:#0f1014; --text:#e6e9ef; --muted:#9aa3b2;
-  --blue:#1E88E5; --green:#43A047; --red:#E53935; --yellow:#FBC02D;
-  --radius:18px; --shadow:0 10px 30px rgba(0,0,0,.25); --maxw:1200px;
-}
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-body {
-  font-family: system-ui, sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  line-height: 1.6;
+  --bg:#0f1014; 
+  --text:#e6e9ef; 
+  --muted:#9aa3b2;
+  --blue:#1E88E5; 
+  --green:#43A047; 
+  --red:#E53935; 
+  --yellow:#FBC02D;
+  --radius:18px;
+  --shadow:0 10px 30px rgba(0,0,0,.25);
 }
 
-/* Navbar */
+* {box-sizing:border-box; margin:0; padding:0;}
+body {font-family: system-ui, sans-serif; background: var(--bg); color: var(--text); line-height:1.6;}
+
 .navbar {
   position: sticky;
   top: 0;
-  z-index: 50;
-  backdrop-filter: blur(10px);
-  background: rgba(15,16,20,.85);
-  border-bottom: 1px solid rgba(255,255,255,.08);
+  z-index: 1000;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 20px;
-  max-width: var(--maxw);
-  margin: 0 auto;
-}
-.nav-left {
-  display: flex;
-  align-items: center;
-  gap: 18px;
-}
-.logo {
-  height: 40px;
-  animation: floaty 6s ease-in-out infinite;
-}
-@keyframes floaty {
-  0%, 100% {transform: translateY(0);}
-  50% {transform: translateY(-4px);}
-}
-.nav-item {
-  cursor: pointer;
-  opacity: .95;
-  transition: color .3s;
-}
-.nav-item:hover,
-.nav-active {
-  color: var(--blue);
-}
-.contact-button {
-  padding: 8px 16px;
-  border-radius: 999px;
-  background: linear-gradient(90deg, var(--blue), var(--green));
-  color: #fff;
-  font-weight: 600;
-  transition: .3s;
-  position: relative;
-  overflow: hidden;
-  text-decoration: none;
-  display: inline-block;
-}
-.contact-button:hover {
-  box-shadow: 0 0 15px var(--yellow);
-  transform: translateY(-2px);
-}
-.contact-button::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,.35) 45%, transparent 80%);
-  transform: translateX(-200%);
-} 
-.contact-button:hover::after {
-  animation: sheen .9s ease forwards;
-}
-@keyframes sheen {
-  to {transform: translateX(200%);}
-}
-
-/* Slider */
-.slider {
-  position: relative;
+  padding: 12px 30px;
   width: 100%;
-  height: 100vh;  /* full viewport height */
-  margin: 0;      /* remove extra top/bottom space */
-  overflow: hidden;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
+  background: rgba(15,16,20,0.7);
+  backdrop-filter: blur(10px);
+  transition: background 0.3s ease;
 }
+.navbar.scrolled { background: rgba(15,16,20,0.95); }
 
-.slides {
-  display: flex;
-  transition: transform 2.5s ease; /* Slower transition */
-  width: 400%; /* 4 slides */
-  height: 100%;
+.nav-left { display: flex; align-items: center; gap: 20px; }
+.logo { height:40px; animation: floaty 6s ease-in-out infinite; }
+@keyframes floaty {0%,100%{transform:translateY(0);}50%{transform:translateY(-4px);}}
+.nav-item { cursor:pointer; opacity:.95; transition:color .3s; display:flex; align-items:center; gap:6px; }
+.nav-item:hover, .nav-active { color: var(--blue); }
+.contact-button {
+  padding: 8px 16px; border-radius:999px; background: linear-gradient(90deg, var(--blue), var(--green));
+  color:#fff; font-weight:600; text-decoration:none; position:relative; overflow:hidden;
 }
+.contact-button:hover { box-shadow:0 0 15px var(--yellow); transform:translateY(-2px); }
+.contact-button::after {
+  content:""; position:absolute; inset:0; background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,.35) 45%, transparent 80%);
+  transform:translateX(-200%);
+}
+.contact-button:hover::after { animation: sheen .9s ease forwards; }
+@keyframes sheen { to {transform:translateX(200%);} }
+
+/* Full-screen slider */
+.slider { position: relative; width:100%; height:100vh; overflow:hidden; }
+.slides { display:flex; transition: transform 1.5s ease; width:400%; height:100%; }
 .slide {
-  min-width: 100%;
-  height: 100%;
-  position: relative;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  color: var(--text);
+  min-width:100%; height:100%; position:relative; background-size:cover; background-position:center;
+  display:flex; align-items:center; justify-content:flex-start; color:var(--text);
 }
 .slide-content {
-  position: absolute;
-  left: 30px;
-  top: 50%;                /* vertical center */
-  transform: translateY(-50%);
-  max-width: 40%;
-  background: rgba(0,0,0,0.5);
-  padding: 20px 30px;
-  border-radius: 14px;
-  box-shadow: 0 0 12px rgba(0,0,0,0.6);
+  position:absolute; left:50px; top:50%; transform:translateY(-50%);
+  max-width:40%; background:rgba(0,0,0,0.5); padding:20px 30px; border-radius:14px; box-shadow:0 0 12px rgba(0,0,0,0.6);
+}
+.slide-content h1 { font-size:clamp(28px,3vw,42px); margin-bottom:12px; line-height:1.2; }
+.slide-content p { font-size:clamp(14px,1.2vw,18px); color: var(--muted); margin-bottom:18px; }
+.slide-content .cta-button { margin-top:0; padding:10px 18px; font-size:1rem; }
+
+/* Mobile */
+@media(max-width:768px){
+  .slide-content { position:static; transform:none; max-width:90%; margin:0 auto; text-align:center; background:rgba(0,0,0,0.65); padding:16px 20px; border-radius:12px; }
+  .slide { justify-content:center; }
 }
 
-.slide-content h1 {
-  font-size: clamp(28px, 3vw, 42px);
-  margin-bottom: 12px;
-  line-height: 1.2;
-}
-.slide-content p {
-  font-size: clamp(14px, 1.2vw, 18px);
-  color: var(--muted);
-  margin-bottom: 18px;
-}
-.slide-content .cta-button {
-  margin-top: 0;
-  padding: 10px 18px;
-  font-size: 1rem;
-}
-
-/* Mobile responsive */
-@media (max-width:768px){
-  .slide-content {
-    position: static;
-    max-width: 100%;
-    margin: 0 auto;
-    background: rgba(0,0,0,0.65);
-    padding: 16px 20px;
-    border-radius: 12px;
-    text-align: center;
-  }
-  .slide {
-    justify-content: center;
-  }
-}
-
-/* Prev/Next Arrows */
+/* Arrows */
 .prev, .next {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(0,0,0,0.4);
-  color: #fff;
-  border: none;
-  font-size: 24px;
-  padding: 12px;
-  border-radius: 50%;
-  cursor: pointer;
-  z-index: 10;
-  transition: background .3s;
-  user-select: none;
+  position:absolute; top:50%; transform:translateY(-50%);
+  background:rgba(0,0,0,0.4); color:#fff; border:none; font-size:24px; padding:12px; border-radius:50%; cursor:pointer; z-index:10; transition:background .3s; user-select:none;
 }
-.prev:hover, .next:hover {
-  background: rgba(0,0,0,0.6);
-}
-.prev {
-  left: 15px;
-}
-.next {
-  right: 15px;
-}
+.prev:hover, .next:hover { background:rgba(0,0,0,0.6); }
+.prev { left:15px; }
+.next { right:15px; }
 
 /* Dots */
-.dots {
-  text-align: center;
-  margin-top: 16px;
-}
-.dot {
-  height: 12px;
-  width: 12px;
-  margin: 0 6px;
-  background-color: rgba(255,255,255,.35);
-  border-radius: 50%;
-  display: inline-block;
-  cursor: pointer;
-  transition: background-color .3s;
-}
-.dot.active:nth-child(1) {
-  background: var(--blue);
-  animation: pulse 2.6s ease-in-out infinite;
-}
-.dot.active:nth-child(2) {
-  background: var(--green);
-  animation: pulse 2.6s ease-in-out infinite;
-}
-.dot.active:nth-child(3) {
-  background: var(--yellow);
-  animation: pulse 2.6s ease-in-out infinite;
-}
-.dot.active:nth-child(4) {
-  background: var(--red);
-  animation: pulse 2.6s ease-in-out infinite;
-}
-@keyframes pulse {
-  0%, 100% {
-    box-shadow: 0 0 0 rgba(0,0,0,0);
-  }
-  50% {
-    box-shadow: 0 0 16px rgba(251,192,45,.35);
-  }
-}
-
-/* Reveal-on-scroll */
-.reveal {
-  opacity: 0;
-  transform: translateY(16px);
-  filter: blur(2px);
-}
-.reveal.in {
-  opacity: 1;
-  transform: none;
-  filter: blur(0);
-  transition: opacity .8s ease, transform .8s ease, filter .8s ease;
-}
-.delay-1 {
-  transition-delay: .1s;
-}
-.delay-2 {
-  transition-delay: .2s;
-}
-.delay-3 {
-  transition-delay: .3s;
-}
-.delay-4 {
-  transition-delay: .4s;
-}
-
-/* About & Career Section */
-.about-career-section {
-  max-width: var(--maxw);
-  margin: 40px auto 80px;
-  padding: 0 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 48px;
-}
-.about-career-block {
-  display: flex;
-  align-items: center;
-  gap: 28px;
-  flex-wrap: wrap;
-  background: rgba(255 255 255 / 0.05);
-  padding: 28px 32px;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-}
-.about-career-block img {
-  flex: 1 1 280px;
-  max-width: 300px;
-  border-radius: var(--radius);
-  object-fit: cover;
-  height: 200px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.5);
-}
-.about-career-content {
-  flex: 2 1 400px;
-  color: var(--text);
-}
-.about-career-content h2 {
-  font-size: clamp(26px, 2.5vw, 36px);
-  margin-bottom: 14px;
-  color: var(--blue);
-}
-.about-career-content p {
-  font-size: 1.1rem;
-  color: var(--muted);
-  line-height: 1.5;
-}
-
-/* Responsive for about & career */
-@media (max-width: 768px) {
-  .about-career-block {
-    flex-direction: column;
-    text-align: center;
-  }
-  .about-career-content h2 {
-    color: var(--blue);
-  }
-  .about-career-content p {
-    font-size: 1rem;
-  }
-}
+.dots { position:absolute; bottom:30px; width:100%; text-align:center; }
+.dot { height:12px; width:12px; margin:0 6px; background:rgba(255,255,255,.35); border-radius:50%; display:inline-block; cursor:pointer; transition:background .3s; }
+.dot.active:nth-child(1){ background:var(--blue); animation:pulse 2.6s ease-in-out infinite; }
+.dot.active:nth-child(2){ background:var(--green); animation:pulse 2.6s ease-in-out infinite; }
+.dot.active:nth-child(3){ background:var(--yellow); animation:pulse 2.6s ease-in-out infinite; }
+.dot.active:nth-child(4){ background:var(--red); animation:pulse 2.6s ease-in-out infinite; }
+@keyframes pulse { 0%,100%{box-shadow:0 0 0 rgba(0,0,0,0);} 50%{box-shadow:0 0 16px rgba(251,192,45,.35);} }
 
 /* Footer */
-footer {
-  padding: 32px 0 60px;
-  color: var(--muted);
-  text-align: center;
-  border-top: 1px solid rgba(255,255,255,.08);
-  margin-top: 40px;
-}
-.social-links {
-  display: flex;
-  justify-content: center;
-  gap: 14px;
-  margin-top: 12px;
-}
-.social-links img {
-  height: 28px;
-  width: 28px;
-}
+footer { padding:32px 0 60px; color:var(--muted); text-align:center; border-top:1px solid rgba(255,255,255,.08); margin-top:40px; }
+.social-links { display:flex; justify-content:center; gap:14px; margin-top:12px; }
+.social-links img { height:28px; width:28px; transition: transform .3s; }
+.social-links img:hover { transform:scale(1.2); }
+
 </style>
 </head>
 <body>
 
-<!-- Load Font Awesome -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-
 <!-- Navbar -->
-<div class="navbar reveal delay-1">
+<div class="navbar">
   <div class="nav-left">
-    <img src="assets/logo.png" alt="MechStem Logo" class="logo" />
-
-    <!-- Home Icon -->
-    <div class="nav-item nav-active" onclick="location.href='index.html'" title="Home">
-      <i class="fas fa-home" style="font-size: 20px;"></i> Home
-    </div>
-
-    <!-- Trainings Icon -->
-    <div class="nav-item" onclick="location.href='Products.html'" title="Trainings">
-      <i class="fas fa-graduation-cap" style="font-size: 20px;"></i> Trainings
-    </div>
-
-    <!-- Services Icon -->
-    <div class="nav-item" onclick="location.href='services.html'" title="Services">
-      <i class="fas fa-cogs" style="font-size: 20px;"></i> Services
-    </div>
+    <img src="assets/logo.png" alt="MechStem Logo" class="logo">
+    <div class="nav-item nav-active" onclick="location.href='index.html'"><i class="fas fa-home"></i> Home</div>
+    <div class="nav-item" onclick="location.href='Products.html'"><i class="fas fa-graduation-cap"></i> Trainings</div>
+    <div class="nav-item" onclick="location.href='services.html'"><i class="fas fa-cogs"></i> Services</div>
   </div>
-
-  <!-- Contact Button -->
   <a href="#contact" class="contact-button"><i class="fas fa-envelope"></i> Contact</a>
 </div>
 
-
 <!-- Slider -->
-<section>
-  <div class="slider" id="slider">
-    <button class="prev" aria-label="Previous Slide">&#10094;</button>
-    <div class="slides" id="slides">
-      <div class="slide" style="background: url('assets/Project-1.jpg') center/cover no-repeat;">
-        <div class="slide-content reveal delay-1">
-          <h1>Engineering Innovation for the Future</h1>
-          <p>Empowering industries with AI, embedded systems, and mechanical solutions.</p>
-          <a href="#news" class="contact-button cta-button">Read Latest News</a>
-        </div>
-      </div>
-      <div class="slide" style="background: url('assets/Project-2.jpg') center/cover no-repeat;">
-        <div class="slide-content reveal delay-1">
-          <h1>Innovating Smart Infrastructure</h1>
-          <p>Sustainable buildings with IoT and advanced analytics.</p>
-          <a href="#news" class="contact-button cta-button">Explore More</a>
-        </div>
-      </div>
-      <div class="slide" style="background: url('assets/Project-3.jpg') center/cover no-repeat;">
-        <div class="slide-content reveal delay-1">
-          <h1>Advanced Automation in Machinery</h1>
-          <p>Boosting efficiency with robotics and automation.</p>
-          <a href="#news" class="contact-button cta-button">See How</a>
-        </div>
-      </div>
-      <div class="slide" style="background: url('assets/Project-4.jpg') center/cover no-repeat;">
-        <div class="slide-content reveal delay-1">
-          <h1>Leading Aerospace Systems</h1>
-          <p>State-of-the-art avionics and flight technology.</p>
-          <a href="#news" class="contact-button cta-button">Discover More</a>
-        </div>
+<section class="slider">
+  <button class="prev">&#10094;</button>
+  <div class="slides">
+    <div class="slide" style="background:url('assets/Project-1.jpg') center/cover no-repeat;">
+      <div class="slide-content">
+        <h1>Engineering Innovation for the Future</h1>
+        <p>Empowering industries with AI, embedded systems, and mechanical solutions.</p>
+        <a href="#news" class="contact-button cta-button">Read Latest News</a>
       </div>
     </div>
-    <button class="next" aria-label="Next Slide">&#10095;</button>
-    <div class="dots" id="dots">
-      <span class="dot active" data-index="0"></span>
-      <span class="dot" data-index="1"></span>
-      <span class="dot" data-index="2"></span>
-      <span class="dot" data-index="3"></span>
+    <div class="slide" style="background:url('assets/Project-2.jpg') center/cover no-repeat;">
+      <div class="slide-content">
+        <h1>Innovating Smart Infrastructure</h1>
+        <p>Sustainable buildings with IoT and advanced analytics.</p>
+        <a href="#news" class="contact-button cta-button">Explore More</a>
+      </div>
+    </div>
+    <div class="slide" style="background:url('assets/Project-3.jpg') center/cover no-repeat;">
+      <div class="slide-content">
+        <h1>Advanced Automation in Machinery</h1>
+        <p>Boosting efficiency with robotics and automation.</p>
+        <a href="#news" class="contact-button cta-button">See How</a>
+      </div>
+    </div>
+    <div class="slide" style="background:url('assets/Project-4.jpg') center/cover no-repeat;">
+      <div class="slide-content">
+        <h1>Leading Aerospace Systems</h1>
+        <p>State-of-the-art avionics and flight technology.</p>
+        <a href="#news" class="contact-button cta-button">Discover More</a>
+      </div>
     </div>
   </div>
-</section>
-
-<!-- About & Career Section -->
-<section class="about-career-section">
-  <div class="about-career-block reveal delay-2">
-    <img src="assets/mech-logo.png" alt="About Us Image" />
-    <div class="about-career-content">
-      <h2>About Us</h2>
-      <p>
-        MechStem is a pioneering engineering company that thrives on tech-driven innovation. 
-        We combine AI, embedded systems, and mechanical expertise to craft sustainable, efficient solutions that shape the future of industries worldwide.
-      </p>
-    </div>
-  </div>
-
-  <div class="about-career-block reveal delay-3">
-    <div class="about-career-content">
-      <h2>Career with Us</h2>
-      <p>
-        Join MechStem and become part of a dynamic team shaping tomorrow’s technology. 
-        We foster innovation, growth, and collaboration to empower engineers and visionaries to thrive.
-      </p>
-    </div>
+  <button class="next">&#10095;</button>
+  <div class="dots">
+    <span class="dot active" data-index="0"></span>
+    <span class="dot" data-index="1"></span>
+    <span class="dot" data-index="2"></span>
+    <span class="dot" data-index="3"></span>
   </div>
 </section>
 
 <!-- Footer -->
-<footer class="reveal delay-1">
+<footer>
   <p>© 2025 MechStem. Built with 💡 by future engineers.</p>
   <div class="social-links">
-    <a href="https://www.linkedin.com/company/mechstem/" target="_blank" rel="noopener"><img src="assets/linkedin-icon.png" alt="LinkedIn" /></a>
-    <a href="https://www.youtube.com/@mechstem" target="_blank" rel="noopener"><img src="assets/youtube-icon.png" alt="YouTube" /></a>
-    <a href="https://twitter.com/YOUR_TWITTER_HANDLE" target="_blank" rel="noopener"><img src="assets/twitter-icon.png" alt="Twitter" /></a>
+    <a href="https://www.linkedin.com/company/mechstem/" target="_blank"><img src="assets/linkedin-icon.png" alt="LinkedIn"></a>
+    <a href="https://www.youtube.com/@mechstem" target="_blank"><img src="assets/youtube-icon.png" alt="YouTube"></a>
+    <a href="https://twitter.com/YOUR_TWITTER_HANDLE" target="_blank"><img src="assets/twitter-icon.png" alt="Twitter"></a>
   </div>
 </footer>
 
 <script>
-const slidesContainer = document.getElementById('slides');
+const slidesContainer = document.querySelector('.slides');
 const slides = document.querySelectorAll('.slide');
 const dots = document.querySelectorAll('.dot');
 let currentIndex = 0;
-let slideInterval = setInterval(nextSlide, 8000);
-
-function goToSlide(index) {
-  if(index < 0) index = slides.length - 1;
-  if(index >= slides.length) index = 0;
-
-  slidesContainer.style.transform = `translateX(-${index * 100}%)`;
-  dots.forEach(dot => dot.classList.remove('active'));
+function goToSlide(index){
+  if(index<0) index=slides.length-1;
+  if(index>=slides.length) index=0;
+  slidesContainer.style.transform = `translateX(-${index*100}%)`;
+  dots.forEach(d=>d.classList.remove('active'));
   dots[index].classList.add('active');
-  currentIndex = index;
+  currentIndex=index;
 }
+document.querySelector('.next').addEventListener('click', ()=>goToSlide(currentIndex+1));
+document.querySelector('.prev').addEventListener('click', ()=>goToSlide(currentIndex-1));
+dots.forEach(dot=>dot.addEventListener('click',(e)=>goToSlide(Number(e.target.dataset.index))));
 
-function nextSlide() {
-  goToSlide(currentIndex + 1);
-}
-
-function prevSlide() {
-  goToSlide(currentIndex - 1);
-}
-
-document.querySelector('.next').addEventListener('click', () => {
-  nextSlide();
-  resetInterval();
+/* Navbar scroll effect */
+window.addEventListener('scroll', ()=>{
+  const navbar=document.querySelector('.navbar');
+  if(window.scrollY>50) navbar.classList.add('scrolled');
+  else navbar.classList.remove('scrolled');
 });
-
-document.querySelector('.prev').addEventListener('click', () => {
-  prevSlide();
-  resetInterval();
-});
-
-dots.forEach(dot => {
-  dot.addEventListener('click', (e) => {
-    goToSlide(Number(e.target.dataset.index));
-    resetInterval();
-  });
-});
-
-function resetInterval() {
-  clearInterval(slideInterval);
-  slideInterval = setInterval(nextSlide, 8000);
-}
-
-/* Reveal on scroll */
-const revealElements = document.querySelectorAll('.reveal');
-
-function revealOnScroll() {
-  const windowHeight = window.innerHeight;
-  revealElements.forEach(el => {
-    const elementTop = el.getBoundingClientRect().top;
-    if(elementTop < windowHeight - 100) {
-      el.classList.add('in');
-    }
-  });
-}
-
-window.addEventListener('scroll', revealOnScroll);
-window.addEventListener('load', revealOnScroll);
 </script>
 
 </body>
