@@ -15,7 +15,6 @@
     --yellow: #FBC02D;
     --radius: 14px;
   }
-
   body { 
     margin: 0; 
     font-family: Arial, sans-serif; 
@@ -26,22 +25,7 @@
   }
   body.loaded { opacity: 1; }
 
-  /* Navbar */
-  .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 20px;
-    background: rgba(15,16,20,0.95);
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    opacity: 0;
-    transform: translateY(-20px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-  }
-  .navbar.fade-in { opacity:1; transform:translateY(0); }
+  .navbar { display: flex; justify-content: space-between; align-items: center; padding: 12px 20px; background: rgba(15,16,20,0.95); border-bottom: 1px solid rgba(255,255,255,0.1); position: sticky; top: 0; z-index: 1000; }
   .nav-left { display: flex; align-items: center; gap: 12px; }
   .nav-item { cursor: pointer; padding: 8px 12px; border-radius: var(--radius); transition: 0.3s; font-size: 15px; display: flex; align-items: center; gap: 6px;}
   .nav-item:hover, .nav-active { color: var(--blue); }
@@ -59,11 +43,10 @@
     border-radius: var(--radius);
     padding: 20px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-    transition: transform 0.3s, box-shadow 0.3s, opacity 0.8s ease, transform 0.8s ease;
+    transition: transform 0.3s, box-shadow 0.3s;
     cursor: pointer;
-    opacity:0;
-    transform: translateY(40px);
   }
+  .card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.7); }
   .card img { width: 100%; border-radius: var(--radius); margin-bottom: 12px; }
   .card-content { margin-top: 10px; color: var(--muted); }
   .section-toggle { cursor: pointer; margin-top: 8px; padding: 6px 10px; background: #1E88E550; border-radius: 8px; display: inline-block; font-weight: bold; }
@@ -88,23 +71,38 @@
   .social-links { display: flex; justify-content: center; gap: 14px; margin-top: 12px; }
   .social-links img { height: 28px; width: 28px; transition: transform 0.3s; }
   .social-links img:hover { transform: scale(1.2); }
-
-  /* Fade-in animation keyframes */
-  @keyframes fadeSlideIn { 0%{opacity:0;transform:translateY(40px);} 100%{opacity:1;transform:translateY(0);} }
 </style>
 </head>
 <body>
 
+<!-- Load Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
 <!-- Navbar -->
-<div class="navbar">
+<div class="navbar reveal delay-1">
   <div class="nav-left">
     <img src="assets/logo.png" alt="MechStem Logo" class="logo" />
-    <div class="nav-item nav-active" onclick="location.href='index.html'" title="Home"><i class="fas fa-home"></i> Home</div>
-    <div class="nav-item" onclick="location.href='Products.html'" title="Trainings"><i class="fas fa-graduation-cap"></i> Trainings</div>
-    <div class="nav-item" onclick="location.href='services.html'" title="Services"><i class="fas fa-cogs"></i> Services</div>
+
+    <!-- Home Icon -->
+    <div class="nav-item nav-active" onclick="location.href='index.html'" title="Home">
+      <i class="fas fa-home" style="font-size: 20px;"></i> Home
+    </div>
+
+    <!-- Trainings Icon -->
+    <div class="nav-item" onclick="location.href='Products.html'" title="Trainings">
+      <i class="fas fa-graduation-cap" style="font-size: 20px;"></i> Trainings
+    </div>
+
+    <!-- Services Icon -->
+    <div class="nav-item" onclick="location.href='services.html'" title="Services">
+      <i class="fas fa-cogs" style="font-size: 20px;"></i> Services
+    </div>
   </div>
+
+  <!-- Contact Button -->
   <a href="#contact" class="contact-button"><i class="fas fa-envelope"></i> Contact</a>
 </div>
+
 
 <main class="content">
 
@@ -133,6 +131,7 @@
   </section>
 
   <!-- Trainings -->
+  <!-- START: Linux Systems Engineering Training -->
   <section id="trainings" style="margin-top: 50px;">
     <h2><i class="fa fa-cogs"></i> Trainings</h2>
     <div class="cards">
@@ -195,6 +194,72 @@
       </div>
     </div>
   </section>
+  <!-- END: Linux Systems Engineering Training -->
+
+  <!-- START: @2-->
+  <section id="trainings" style="margin-top: 50px;">
+    <h2><i class="fa fa-cogs"></i> Trainings</h2>
+    <div class="cards">
+      <div class="card">
+        <img src="assets/linux.jpg" alt="Linux Systems Engineering"/>
+        <strong>Linux Systems Engineering</strong>
+        <div class="card-content">
+          <p><strong>Short Description:</strong> Master Linux system-level skills to thrive in the age of AI automation.</p>
+
+          <div class="section-toggle">Program Details ▼</div>
+          <div class="section-content">
+            <ul>
+              <li><strong>Start Date:</strong> 15th October 2025</li>
+              <li><strong>Delivery Mode:</strong> Online / Instructor-Led</li>
+              <li><strong>Timing:</strong> 7 PM – 9 PM (IST)</li>
+              <li><strong>Duration:</strong> 6 Weeks</li>
+              <li><strong>Fee:</strong> ₹35,000</li>
+            </ul>
+            <a href="https://forms.gle/your-google-form-link" target="_blank" class="button">Enroll Now</a>
+          </div>
+
+          <div class="section-toggle">Prerequisites & Who Should Enroll ▼</div>
+          <div class="section-content">
+            <ul>
+              <li>GNU Toolchain</li>
+              <li>Linux Command-line Skills</li>
+              <li>Embedded Systems Basics</li>
+              <li>Basic Linux Kernel Architecture</li>
+            </ul>
+            <p>Ideal for Embedded Software Engineers, Hardware Engineers, IoT & Product Engineers, and Yocto adopters.</p>
+          </div>
+
+          <div class="section-toggle">Key Takeaways ▼</div>
+          <div class="section-content">
+            <ul>
+              <li>Understand Embedded Linux architecture – bootloader, kernel, device tree, root filesystem</li>
+              <li>Perform a complete board bring-up: cross-compilation, kernel config, deployment to custom hardware</li>
+              <li>Customize device trees and integrate hardware-specific drivers</li>
+              <li>Work with peripheral interfaces (I²C, SPI, UART, etc.) on embedded platforms</li>
+              <li>Master the Yocto Project build system</li>
+              <li>Build and customize Board Support Packages (BSPs)</li>
+              <li>Optimize Linux systems for footprint, performance, and security</li>
+              <li>Develop practical skills to debug, extend, and maintain embedded Linux systems</li>
+            </ul>
+          </div>
+
+          <div class="section-toggle">FAQs ▼</div>
+          <div class="section-content">
+            <ul>
+              <li><strong>Q:</strong> Can I target roles in embedded product development companies? <br>
+                  <strong>A:</strong> Yes. This program equips you with practical knowledge.</li>
+              <li><strong>Q:</strong> Difference between Embedded Linux and Yocto separately vs this course? <br>
+                  <strong>A:</strong> This course blends both for real product development experience.</li>
+              <li><strong>Q:</strong> Hardware requirement? <br>
+                  <strong>A:</strong> Standard board with Linux support (Raspberry Pi, BeagleBone, etc.)</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- END: @2-->
   
 </main>
 
@@ -209,18 +274,9 @@
 </footer>
 
 <script>
+  // Fade-in page on load
   window.addEventListener('load', () => {
     document.body.classList.add('loaded');
-    document.querySelector('.navbar').classList.add('fade-in');
-
-    // Fade-in cards staggered
-    const allCards = document.querySelectorAll('.card');
-    allCards.forEach((card, i) => {
-      setTimeout(() => {
-        card.style.opacity = 1;
-        card.style.transform = 'translateY(0)';
-      }, i * 150);
-    });
 
     // Events slider
     const events = [
@@ -234,7 +290,7 @@
       track.innerHTML = '';
       events.forEach(event => {
         const slide = document.createElement('div');
-        slide.classList.add('event-slide','card');
+        slide.classList.add('event-slide', 'card');
         slide.innerHTML = `
           <strong>${new Date(event.date).toLocaleDateString()}</strong><br>
           <strong>${event.title}</strong><br>
@@ -260,7 +316,7 @@
       updateSlider();
     });
 
-    // Collapsible sections
+    // Collapsible sections inside training card
     document.querySelectorAll('.section-toggle').forEach(toggle => {
       toggle.addEventListener('click', () => {
         const content = toggle.nextElementSibling;
