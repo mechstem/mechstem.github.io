@@ -27,11 +27,12 @@ body.loaded{opacity:1;}
   width:100%;
   background: rgba(15,16,20,0.7);
   backdrop-filter: blur(10px);
-  transition: background 0.3s ease;
+  transition:background 0.3s ease,opacity 0.8s ease,transform 0.8s ease;
+  opacity:0;
+  transform:translateY(-20px);
 }
-.navbar.scrolled{
-  background: rgba(15,16,20,0.95);
-}
+.navbar.scrolled{background: rgba(15,16,20,0.95);}
+.navbar.fade-in{opacity:1;transform:translateY(0);}
 .nav-left{display:flex;align-items:center;gap:18px;}
 .logo{height:40px;animation:floaty 6s ease-in-out infinite;}
 @keyframes floaty{0%,100%{transform:translateY(0);}50%{transform:translateY(-4px);}}
@@ -61,8 +62,10 @@ body.loaded{opacity:1;}
   border:1px solid rgba(255,255,255,.08);
   border-radius:var(--radius);
   padding:20px;text-align:center;
-  transition:border-color .3s,box-shadow .3s,transform .3s;
+  transition:border-color .3s,box-shadow .3s,transform .3s,opacity .8s ease,transform .8s ease;
   position:relative;
+  opacity:0;
+  transform:translateY(40px);
 }
 .product-card img{width:100%;height:180px;object-fit:cover;border-radius:var(--radius);margin-bottom:15px;}
 .product-card h2{font-size:20px;margin-bottom:10px;color:var(--green);}
@@ -80,7 +83,13 @@ body.loaded{opacity:1;}
 
 /* Industries Section */
 .industry-cards{display:flex;flex-direction:column;gap:30px;max-width:var(--maxw);margin:0 auto;padding:0 20px;}
-.industry-card{background:#121418;border-radius:var(--radius);box-shadow:0 4px 12px rgba(0,0,0,0.5);overflow:hidden;transition:transform .3s,box-shadow .3s;cursor:pointer;}
+.industry-card{
+  background:#121418;border-radius:var(--radius);box-shadow:0 4px 12px rgba(0,0,0,0.5);overflow:hidden;
+  transition:transform .3s,box-shadow .3s,opacity .8s ease,transform .8s ease;
+  cursor:pointer;
+  opacity:0;
+  transform:translateY(40px);
+}
 .industry-card img{width:100%;height:220px;object-fit:cover;border-radius:var(--radius) var(--radius) 0 0;transition:transform .4s ease;}
 .industry-card:hover img{transform:scale(1.05);}
 .industry-info{padding:16px 20px;}
@@ -97,6 +106,8 @@ footer{padding:32px 0 60px;color:var(--muted);text-align:center;border-top:1px s
 .social-links{display:flex;justify-content:center;gap:14px;margin-top:12px;}
 .social-links img{height:28px;width:28px;}
 @keyframes sheen{to{transform:translateX(200%);}}
+@keyframes fadeSlideIn{0%{opacity:0;transform:translateY(40px);}100%{opacity:1;transform:translateY(0);}}
+.fade-in{opacity:0;animation:fadeSlideIn 1s forwards;}
 </style>
 </head>
 <body>
@@ -171,7 +182,19 @@ footer{padding:32px 0 60px;color:var(--muted);text-align:center;border-top:1px s
 
 <script>
 // Page fade-in
-window.addEventListener('load',()=>{document.body.classList.add('loaded');});
+window.addEventListener('load',()=>{
+  document.body.classList.add('loaded');
+  // Navbar animation
+  document.querySelector('.navbar').classList.add('fade-in');
+  // Products cards staggered
+  document.querySelectorAll('.product-card').forEach((card,i)=>{
+    card.style.animation=`fadeSlideIn 0.8s forwards ${0.2 + i*0.2}s`;
+  });
+  // Industry cards staggered
+  document.querySelectorAll('.industry-card').forEach((card,i)=>{
+    card.style.animation=`fadeSlideIn 0.8s forwards ${0.3 + i*0.3}s`;
+  });
+});
 
 // Navbar scroll effect
 window.addEventListener('scroll',()=>{
