@@ -34,6 +34,20 @@
   .contact-button i { margin-right: 6px; }
   .contact-button:hover { box-shadow: 0 0 10px var(--yellow); transform: translateY(-2px); }
 
+  /* Training card header (image left, title right) */
+  .training-header {
+    display: flex;
+    align-items: center;
+    gap: 12px; /* space between image and title */
+    margin-bottom: 12px;
+  }
+
+  .training-header img {
+    width: 80px;
+    height: auto;
+    border-radius: var(--radius);
+  }
+  
   main.content { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
   h2 { color: var(--blue); margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
 
@@ -49,6 +63,7 @@
   .card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.7); }
   .card img { width: 100%; border-radius: var(--radius); margin-bottom: 12px; }
   .card-content { margin-top: 10px; color: var(--muted); }
+  
   .section-toggle { cursor: pointer; margin-top: 8px; padding: 6px 10px; background: #1E88E550; border-radius: 8px; display: inline-block; font-weight: bold; }
   .section-content { display: none; margin-top: 8px; color: var(--muted); }
   .section-content ul { margin-left: 20px; }
@@ -136,8 +151,10 @@
     <h2><i class="fa fa-cogs"></i> Trainings</h2>
     <div class="cards">
       <div class="card">
-        <img src="assets/Linux.gif" alt="Linux Systems Engineering"/>
-        <strong>Linux Systems Engineering</strong>
+        <div class="training-header">
+             <img src="assets/Linux.gif" alt="Linux Systems Engineering"/>
+             <strong>Linux Systems Engineering</strong>
+         </div>
         <div class="card-content">
           <p><strong>Short Description:</strong> Master Linux system-level skills to thrive in the age of AI automation.</p>
 
@@ -201,8 +218,10 @@
     <h2><i class="fa fa-cogs"></i> Trainings</h2>
     <div class="cards">
       <div class="card">
-        <img src="assets/linux.jpg" alt="Linux Systems Engineering"/>
-        <strong>Linux Systems Engineering</strong>
+         <div class="training-header">
+           <img src="assets/Linux.gif" alt="Linux Systems Engineering"/>
+           <strong>Linux Systems Engineering</strong>
+         </div>
         <div class="card-content">
           <p><strong>Short Description:</strong> Master Linux system-level skills to thrive in the age of AI automation.</p>
 
