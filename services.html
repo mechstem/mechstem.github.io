@@ -107,15 +107,34 @@ footer {
 </head>
 <body>
 
+<!-- Load Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
 <!-- Navbar -->
-<div class="navbar">
+<div class="navbar reveal delay-1">
   <div class="nav-left">
     <img src="assets/logo.png" alt="MechStem Logo" class="logo" />
-    <div class="nav-item" onclick="location.href='index.html'">Home</div>
-    <div class="nav-item nav-active">Services</div>
+
+    <!-- Home Icon -->
+    <div class="nav-item nav-active" onclick="location.href='index.html'" title="Home">
+      <i class="fas fa-home" style="font-size: 20px;"></i> Home
+    </div>
+
+    <!-- Trainings Icon -->
+    <div class="nav-item" onclick="location.href='Products.html'" title="Trainings">
+      <i class="fas fa-graduation-cap" style="font-size: 20px;"></i> Trainings
+    </div>
+
+    <!-- Services Icon -->
+    <div class="nav-item" onclick="location.href='services.html'" title="Services">
+      <i class="fas fa-cogs" style="font-size: 20px;"></i> Services
+    </div>
   </div>
-  <a href="#contact" class="contact-button">Contact</a>
+
+  <!-- Contact Button -->
+  <a href="#contact" class="contact-button"><i class="fas fa-envelope"></i> Contact</a>
 </div>
+
 
 <!-- Products Section -->
 <div class="products-background">
