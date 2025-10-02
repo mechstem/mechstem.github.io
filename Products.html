@@ -7,597 +7,519 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 <style>
   :root {
-    --bg: #0f0f14;
-    --text: #e0e2e6;
-    --muted: #a0a5ab;
-    --blue: #1e57f2;
-    --green: #4caf50;
-    --yellow: #ffc107;
-    --shadow-light: rgba(30, 87, 243, 0.4);
-    --shadow-strong: rgba(30, 136, 40, 0.4);
+    --bg: #0f1014;
+    --text: #e6e9ef;
+    --muted: #9aa3b2;
+    --blue: #1E88E5;
+    --green: #43A047;
+    --yellow: #FBC02D;
     --radius: 14px;
   }
-  body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: var(--bg);
-    color: var(--text);
+  body { 
+    margin: 0; 
+    font-family: Arial, sans-serif; 
+    background: var(--bg); 
+    color: var(--text); 
+    opacity: 0; 
+    transition: opacity 1s ease-in-out; 
+  }
+  body.loaded { opacity: 1; }
+
+  .navbar { display: flex; justify-content: space-between; align-items: center; padding: 12px 20px; background: rgba(15,16,20,0.95); border-bottom: 1px solid rgba(255,255,255,0.1); position: sticky; top: 0; z-index: 1000; }
+  .nav-left { display: flex; align-items: center; gap: 12px; }
+  .nav-item { cursor: pointer; padding: 8px 12px; border-radius: var(--radius); transition: 0.3s; font-size: 15px; display: flex; align-items: center; gap: 6px;color: var(--text); text-decoration: none; }
+  .nav-item:hover, .nav-active { color: var(--blue); }
+  .logo { height: 36px; }
+  .contact-button { padding: 8px 14px; border-radius: 999px; background: linear-gradient(90deg, var(--blue), var(--green)); color: #fff; font-weight: 600; text-decoration: none; font-size: 14px; transition: box-shadow 0.3s, transform 0.3s; display: inline-block; position: relative; overflow: hidden; }
+  .contact-button i { margin-right: 6px; }
+  .contact-button:hover { box-shadow: 0 0 10px var(--yellow); transform: translateY(-2px); }
+
+  /* Animations for reveal on scroll */
+  .reveal {
     opacity: 0;
-    transition: opacity 1s ease-in-out;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
   }
-  body.loaded {
+  .reveal.active {
     opacity: 1;
+    transform: translateY(0);
   }
-  .navbar {
-    position: sticky;
-    top: 0;
+  .delay-1 { transition-delay: 0.2s; }
+  .delay-2 { transition-delay: 0.4s; }
+  .delay-3 { transition-delay: 0.6s; }
+  .delay-4 { transition-delay: 0.8s; }
+  .delay-5 { transition-delay: 1s; }
+  .delay-6 { transition-delay: 1.2s; }
+  .delay-7 { transition-delay: 1.4s; }
+
+  main.content { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
+  h2 { color: var(--blue); margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+  .card {
+    background: #121418;
+    border-radius: var(--radius);
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+    text-align: left;
+  }
+  .card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.7); }
+  .card img { width: 100%; border-radius: var(--radius); margin-bottom: 12px; }
+  .card-content { margin-top: 10px; color: var(--muted); }
+  
+  .training-header {
     display: flex;
+    align-items: center;
     justify-content: space-between;
-    align-items: center;
-    padding: 14px 22px;
-    background: rgba(15,16,20,0.95);
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-    z-index: 1000;
-  }
-  .navbar .logo {
-    height: 38px;
-  }
-  .navbar .nav-left {
-    display: flex;
-    align-items: center;
-    gap: 18px;
-  }
-  .navbar .nav-left .nav-item {
-    color: var(--text);
-    cursor: pointer;
-    flex-shrink: 0;
-    display: flex;
-    gap: 8px;
-    font-size: 15px;
-    padding: 10px 16px;
-    border-radius: var(--radius);
-    user-select: none;
-    transition: color 0.3s ease;
-  }
-  .navbar .nav-left .nav-item:hover,
-  .navbar .nav-left .nav-item.active {
-    color: var(--blue);
-  }
-  .navbar .contact-button {
-    background: linear-gradient(90deg, var(--blue), var(--green));
-    color: white;
-    text-decoration: none;
-    font-weight: 600;
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    padding: 8px 22px;
-    border-radius: 28px;
-    transition: box-shadow 0.3s ease, transform 0.3s ease;
-    user-select: none;
-  }
-  .navbar .contact-button:hover {
-    box-shadow: 0 0 12px var(--yellow);
-    transform: translateY(-2px);
-  }
-  main {
-    max-width: 1200px;
-    margin: 50px auto 80px auto;
-    padding: 0 24px;
-  }
-  h2 {
-    font-size: 2.2rem;
-    color: var(--blue);
-    display: flex;
-    gap: 16px;
-    align-items: center;
-    margin-bottom: 32px;
-  }
-  /* Layout */
-  .side-by-side {
-    display: flex;
-    gap: 40px;
-    margin-bottom: 64px;
-  }
-  #internship-section, #events-section {
-    flex: 1;
-  }
-  @media (max-width: 880px) {
-    .side-by-side {
-      flex-direction: column;
-    }
-  }
-  /* Internship Card */
-  #internship-section .card {
-    border-radius: var(--radius);
-    background: #12121f;
-    box-shadow: 0 6px 15px rgba(0,0,0,0.6);
-    padding: 26px 22px;
-    color: var(--text);
-    font-size: 1.07rem;
-    line-height: 1.4;
-  }
-  /* Event Slider */
-  #events-section {
-    position: relative;
-  }
-  .events-slider {
-    position: relative;
-    overflow: hidden;
-  }
-  .event-track {
-    display: flex;
-    transition: transform 0.5s ease;
-  }
-  .event-card {
-    min-width: 320px;
-    max-width: 320px;
-    margin-right: 18px;
-    border-radius: var(--radius);
-    overflow: hidden;
-    background: var(--bg);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.7);
-    cursor: pointer;
-    user-select: none;
-  }
-  .event-card img {
-    width: 100%;
-    height: 170px;
-    object-fit: cover;
-  }
-  .event-card .event-overlay {
-    padding: 12px 16px;
-  }
-  .event-date {
-    color: var(--green);
-    font-weight: bold;
-    font-size: 0.9rem;
-    margin-bottom: 6px;
-  }
-  .event-title {
-    font-size: 1.35rem;
-    font-weight: 800;
-    color: var(--blue);
-    margin-bottom: 8px;
-  }
-  .event-desc {
-    font-size: 1rem;
-    color: var(--muted);
+    gap: 12px;
     margin-bottom: 12px;
-  }
-  .event-seats {
+    color: var(--blue);
     font-weight: 600;
-    color: var(--yellow);
-    margin-bottom: 16px;
+    font-size: 1.2rem;
   }
-  .eventregister-btn {
-    display: inline-block;
-    background: var(--blue);
-    padding: 10px 22px;
-    border-radius: 28px;
-    color: white;
-    font-weight: 600;
-    text-decoration: none;
-    transition: background-color 0.3s ease;
-  }
-  .eventregister-btn:hover {
-    background: var(--green);
-  }
-  .slider-button {
-    position: absolute;
-    top: 50%;
-    border-radius: 50%;
-    background: var(--blue);
-    border: none;
-    color: white;
+  .training-header img {
     width: 40px;
     height: 40px;
-    font-size: 22px;
-    cursor: pointer;
-    user-select: none;
-    transform: translateY(-50%);
-    opacity: 0.8;
-    transition: background 0.3s ease, opacity 0.3s ease;
-    z-index: 10;
-  }
-  .slider-button:hover {
-    background: var(--green);
-    opacity: 1;
-  }
-  .slider-button.left {
-    left: 10px;
-  }
-  .slider-button.right {
-    right: 10px;
-  }
-  /* Training Cards */
-  .training-cards {
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-    max-width: 900px;
-    margin: 0 auto 60px auto;
-  }
-  .training-card {
-    display: flex;
-    gap: 30px;
-    padding: 24px 28px;
-    background: linear-gradient(135deg,#1c1d26 0%,#212332 100%);
-    border-radius: var(--radius);
-    box-shadow: 0 10px 24px var(--shadow-light);
-    cursor: default;
-    user-select: none;
-    transition: box-shadow 0.3s ease;
-  }
-  .training-card:hover {
-    box-shadow: 0 15px 40px var(--shadow-strong);
-  }
-  .training-card .icon-wrapper {
-    flex-shrink: 0;
-    width: 95px;
-    height: 95px;
+    object-fit: cover;
     border-radius: 50%;
-    border: 2px solid var(--blue);
-    background: #191c28;
-    display: flex;
-    align-items: center;
-    justify-content: center;
   }
-  .training-card .icon-wrapper img {
-    max-width: 70px;
-    max-height: 70px;
-    object-fit: contain;
-  }
-  .training-content {
-    flex-grow: 1;
-  }
-  .training-title {
-    font-size: 1.9rem;
-    font-weight: 700;
-    color: var(--blue);
-    margin-bottom: 10px;
-  }
-  .training-desc {
-    font-size: 1.1rem;
-    color: var(--muted);
-    margin-bottom: 15px;
-    line-height: 1.5;
-  }
-  .toggle-button {
-    cursor: pointer;
-    font-weight: 700;
-    color: var(--blue);
-    background: transparent;
-    border: none;
-    font-size: 1rem;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 12px;
-  }
-  .toggle-button svg {
-    transition: transform 0.3s ease;
-  }
-  .toggle-button.active svg {
-    transform: rotate(180deg);
-  }
-  .toggle-content {
-    max-height: 0;
-    overflow: hidden;
-    margin-left: 20px;
-    color: var(--muted);
-    transition: max-height 0.4s ease;
-  }
-  .toggle-content.open {
-    max-height: 600px; /* sufficiently large */
-  }
-  .toggle-content ul {
-    margin-left: 16px;
-    margin-top: 8px;
-    list-style: disc;
-    line-height: 1.6;
-  }
-  .btn-enroll {
-    margin-top: 20px;
-    padding: 12px 24px;
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: white;
-    background-color: var(--blue);
-    border-radius: 28px;
-    border: none;
-    cursor: pointer;
-    box-shadow: 0 0 18px var(--blue);
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-  }
-  .btn-enroll:hover {
-    background-color: var(--green);
-    box-shadow: 0 0 25px var(--green);
-  }
-  /* Testimonials */
-  #testimonials {
-    max-width: 800px;
-    margin: 80px auto 50px auto;
-    position: relative;
-    overflow: hidden;
-    padding: 20px 10px;
-  }
-  #testimonials .testimonial-card {
-    opacity: 0;
-    position: absolute;
-    width: 100%;
-    left: 0;
-    top: 0;
-    color: var(--text);
-    font-style: italic;
-    font-size: 1.15rem;
-    background: #12121f;
-    border-radius: var(--radius);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.7);
+  
+  .section-toggle { cursor: pointer; margin-top: 8px; padding: 6px 10px; background: #1E88E550; border-radius: 8px; display: inline-block; font-weight: bold; color: var(--blue); }
+  .section-content { display: none; margin-top: 8px; color: var(--muted); }
+  .section-content ul { margin-left: 20px; }
+  .button { display: inline-block; margin-top: 12px; padding: 8px 16px; background: var(--blue); color: white; border-radius: 8px; text-decoration: none; font-weight: bold; transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s; cursor: pointer; }
+  .button:hover { background: var(--green); box-shadow: 0 0 10px var(--green); transform: translateY(-2px); }
+
+  /* Events slider */
+  #workshops { position: relative; }
+  .events-slider { overflow: hidden; position: relative; margin-top: 10px; }
+  .events-track { display: flex; transition: transform 0.5s ease; }
+  .event-slide { min-width: 100%; box-sizing: border-box; padding: 0 10px; background: #121418; border-radius: var(--radius); box-shadow: 0 8px 16px rgba(0,0,0,0.7); color: var(--text); }
+
+  .slider-arrow { position: absolute; top: 50%; transform: translateY(-50%); background: var(--blue); color: white; border-radius: 50%; width: 36px; height: 36px; border: none; cursor: pointer; font-size: 24px; line-height: 36px; text-align: center; user-select: none; transition: background-color 0.3s; z-index: 10; }
+  .slider-arrow:hover { background: var(--green); }
+  .slider-arrow.left { left: 5px; }
+  .slider-arrow.right { right: 5px; }
+
+  /* Footer */
+  footer { padding: 32px 0 60px; color: var(--muted); text-align: center; border-top: 1px solid rgba(255,255,255,.08); margin-top: 40px; }
+  .social-links { display: flex; justify-content: center; gap: 14px; margin-top: 12px; }
+  .social-links img { height: 28px; width: 28px; transition: transform 0.3s; }
+  .social-links img:hover { transform: scale(1.2); }
+  
+  /* Testimonials slider */
+  #testimonials { margin: 60px auto; max-width: 800px; }
+  .slider-container { position: relative; overflow: hidden; }
+  .slider-track { display: flex; transition: transform 0.5s ease; }
+  .testimonial-card {
+    flex: 0 0 100%;
+    box-sizing: border-box;
     padding: 20px;
-    pointer-events: none;
-    transition: opacity 1s ease;
+    background: #121418;
+    border-radius: var(--radius);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.7);
+    color: #e6e9ef;
+    font-style: italic;
+    font-size: 1.1rem;
   }
-  #testimonials .testimonial-card.active {
-    position: relative;
-    opacity: 1;
-    pointer-events: auto;
-    z-index: 2;
-  }
-  #testimonials .testimonial-card .author {
-    margin-top: 15px;
-    font-weight: 700;
+  .testimonial-card strong {
+    display: block;
+    margin-top: 12px;
     font-style: normal;
     color: var(--muted);
+    font-size: 1rem;
   }
+  .slider-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--blue);
+    color: #fff;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    user-select: none;
+    z-index: 10;
+    transition: background-color 0.3s;
+  }
+  .slider-arrow:hover { background: var(--green); }
+  .slider-arrow.left { left: 10px; }
+  .slider-arrow.right { right: 10px; }
+
   /* Responsive */
-  @media (max-width: 700px){
-    .training-card {
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-    }
-    .training-card .icon-wrapper {
-      margin-bottom: 18px;
-    }
+  @media (max-width: 600px) {
+    .cards { grid-template-columns: 1fr; }
+    .slider-arrow { width: 30px; height: 30px; font-size: 20px; }
   }
 </style>
 </head>
 <body>
-  <nav class="navbar" role="navigation" aria-label="Primary">
-    <div class="nav-left" role="menu">
-      <img src="assets/logo.png" alt="MechStem Logo" class="logo"/>
-      <div class="nav-item" tabindex="0" role="menuitem" onclick="location.href='index.html'"> <i class="fas fa-home"></i> Home</div>
-      <div class="nav-item active" tabindex="0" role="menuitem" onclick="location.href='Products.html'"> <i class="fas fa-graduation-cap"></i> Trainings</div>
-      <div class="nav-item" tabindex="0" role="menuitem" onclick="location.href='services.html'"> <i class="fas fa-cogs"></i> Services</div>
+<!-- Navbar -->
+<div class="navbar reveal delay-1">
+  <div class="nav-left">
+    <img src="assets/logo.png" alt="MechStem Logo" class="logo" />
+    <div class="nav-item nav-active" onclick="location.href='index.html'" title="Home"><i class="fas fa-home" style="font-size: 20px;"></i> Home</div>
+    <div class="nav-item" onclick="location.href='Products.html'" title="Trainings"><i class="fas fa-graduation-cap" style="font-size: 20px;"></i> Trainings</div>
+    <div class="nav-item" onclick="location.href='services.html'" title="Services"><i class="fas fa-cogs" style="font-size: 20px;"></i> Services</div>
+  </div>
+  <a href="#contact" class="contact-button"><i class="fas fa-envelope"></i> Contact</a>
+</div>
+
+<main class="content">
+  <!-- Upcoming Events -->
+  <section id="workshops" class="reveal delay-2" style="margin-top: 50px;">
+    <h2><i class="fa fa-bell"></i> Upcoming Events</h2>
+    <div class="events-slider">
+      <button class="slider-arrow left" aria-label="Previous event">◀</button>
+      <div id="events-track" class="events-track"></div>
+      <button class="slider-arrow right" aria-label="Next event">▶</button>
     </div>
-    <a href="#contact" class="contact-button" role="button" tabindex="0">
-      <i class="fas fa-envelope"></i> Contact
-    </a>
-  </nav>
+  </section>
 
-  <main>
-    <div class="side-by-side">
-      <section id="internship-section" aria-label="Internships">
-        <h2><i class="fas fa-briefcase"></i> Internships</h2>
-        <div class="cards" role="list">
-          <article class="card" role="listitem" tabindex="0">
-            Pursuing <strong>B.E, B.Tech, M.Tech, MCA, BCA</strong>? Gain practical industry exposure with our internships.<br/>
-            Online & Offline available with live project opportunities.<br/>
-            <strong>Duration:</strong> 30 days to 3 months<br/>
-            <strong>Fee:</strong> --<br/>
-            <a href="https://forms.gle/your-google-link" target="_blank" rel="noopener" class="button">Check Seats</a>
-          </article>
-        </div>
-      </section>
-
-      <section id="events-section" aria-label="Upcoming Events">
-        <h2><i class="fas fa-bell"></i> Upcoming Events</h2>
-        <div class="events-slider" aria-live="polite" aria-atomic="true" role="region">
-          <button class="slider-button left" aria-label="Previous Event">❮</button>
-          <div class="event-track"></div>
-          <button class="slider-button right" aria-label="Next Event">❯</button>
-        </div>
-      </section>
+  <!-- Internships -->
+  <section id="internship-training" class="reveal delay-3" style="margin-top: 50px;">
+    <h2><i class="fa fa-briefcase"></i> Internships</h2>
+    <div class="cards">
+      <div class="card">
+        Pursuing <strong>B.E, B.Tech, M.Tech, BCA, MCA</strong>?<br>
+        Gain real-world technical skills with <strong>industrial internships</strong>.<br>
+        📌 Online & Offline | 📌 Live Projects | 📌 Fast Track (30 days) or 1 to 3 Months<br>
+        <strong>Fee:</strong> --- <br>
+        <a href="https://forms.gle/your-google-form-link" target="_blank" class="button">Check Seats</a>
+      </div>
     </div>
+  </section>
 
-    <section id="training-section" aria-label="Trainings">
-      <h2><i class="fas fa-graduation-cap"></i> Trainings</h2>
-      <div class="training-cards" role="list">
-        <!-- Example Training Card -->
-        <article class="training-card" role="listitem" tabindex="0" aria-expanded="false">
-          <div class="icon-wrapper"><img src="assets/autocad_icon.png" alt="AutoCAD Logo"/></div>
-          <div class="training-content">
-            <h3 class="training-title">AutoCAD Mechanical Training & Certification</h3>
-            <p class="training-desc">Industry-leading course to master mechanical drafting & design with AutoCAD.</p>
-            <button class="toggle-button" aria-expanded="false" aria-controls="acad-details">
-              Details
-              <svg aria-hidden="true" fill="currentColor" height="16" width="16" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5"/></svg>
-            </button>
-            <div id="acad-details" class="toggle-content" aria-hidden="true">
-              <strong>Program:</strong>
-              <ul>
-                <li>AutoCAD interface & tools</li>
-                <li>2D & 3D drafting</li>
-                <li>Industry standard documentation</li>
-                <li>Flexible schedule</li>
-              </ul>
-              <strong>Prerequisites:</strong>
-              <ul><li>None, suitable for beginners</li></ul>
-              <a href="https://forms.gle/your-google-link" target="_blank" rel="noopener" class="btn-enroll">Enroll Now</a>
-            </div>
+  <!-- Trainings -->
+  <section id="trainings" class="reveal delay-4" style="margin-top: 50px;">
+    <h2><i class="fa fa-cogs"></i> Trainings</h2>
+    <div class="cards">
+
+      <!-- AutoCAD Mechanical -->
+      <div class="card">
+        <div class="training-header">
+          <strong>AutoCAD Mechanical Training &amp; Certification Course</strong>
+          <img src="assets/autocad_icon.png" alt="AutoCAD Mechanical" />
+        </div>
+        <div class="card-content">
+          <p><strong>Short Description:</strong> Learn industry-standard AutoCAD Mechanical for designing and drafting mechanical components with accuracy and speed.</p>
+
+          <div class="section-toggle">Program Details ▼</div>
+          <div class="section-content">
+            <ul>
+              <li>AutoCAD interface and productivity tools</li>
+              <li>Draw and edit mechanical drawings including 3D modeling</li>
+              <li>Industry-specific libraries and parts</li>
+              <li>Documentation, dimensioning, and layout management</li>
+              <li>Duration: flexible short-term course</li>
+            </ul>
+            <a href="https://forms.gle/your-google-form-link" target="_blank" class="button">Enroll Now</a>
           </div>
-        </article>
-        <!-- Add more trainings here -->
-      </div>
-    </section>
 
-    <section id="testimonials" aria-label="Student Testimonials" class="reveal delay-6">
-      <h2><i class="fas fa-comment"></i> Testimonials</h2>
-      <div class="slider-container">
-        <div class="testimonial-card active" role="listitem">
-          <p>“The Embedded Systems course helped me leapfrog my career.”</p>
-          <div class="author">- Priya S.</div>
-        </div>
-        <div class="testimonial-card" role="listitem">
-          <p>“Amazing trainers and well-structured curriculum.”</p>
-          <div class="author">- Rajesh K.</div>
-        </div>
-        <div class="testimonial-card" role="listitem">
-          <p>“Hands-on Embedded Linux and Yocto training with great support.”</p>
-          <div class="author">- Anjali M.</div>
-        </div>
-        <div class="testimonial-card" role="listitem">
-          <p>“Excellent AI & ML course with career assistance.”</p>
-          <div class="author">- Vikram P.</div>
-        </div>
-        <button class="slider-button left" aria-label="Previous testimonial">❮</button>
-        <button class="slider-button right" aria-label="Next testimonial">❯</button>
-      </div>
-    </section>
-  </main>
+          <div class="section-toggle">Prerequisites & Who Should Enroll ▼</div>
+          <div class="section-content">
+            <ul>
+              <li>Students and professionals in mechanical, automotive, aeronautical engineering</li>
+              <li>Diploma or ITI holders in related fields</li>
+              <li>Beginners interested in CAD drafting</li>
+            </ul>
+          </div>
 
-  <footer>
-    <p>© 2025 MechStem. Powered by Love and Innovation.</p>
-    <div class="footer-socials">
-      <a href="https://linkedin.com/company/mechstem" aria-label="LinkedIn" target="_blank" rel="noopener">
-        <img src="assets/linkedin-icon.png" alt="LinkedIn"/>
-      </a>
-      <a href="https://youtube.com/MechStemOfficial" aria-label="YouTube" target="_blank" rel="noopener">
-        <img src="assets/youtube-icon.png" alt="YouTube"/>
-      </a>
-      <a href="https://twitter.com/MechStem" aria-label="Twitter" target="_blank" rel="noopener">
-        <img src="assets/twitter-icon.png" alt="Twitter"/>
-      </a>
+          <div class="section-toggle">Key Takeaways ▼</div>
+          <div class="section-content">
+            <ul>
+              <li>Proficiency in AutoCAD Mechanical software</li>
+              <li>Ability to create detailed, industry-standard mechanical drawings</li>
+              <li>Improved employability in drafting and design roles</li>
+            </ul>
+          </div>
+
+          <div class="section-toggle">FAQs ▼</div>
+          <div class="section-content">
+            <ul>
+              <li><strong>Q:</strong> Do I need prior CAD experience?<br><strong>A:</strong> No, the course is suitable for beginners.</li>
+              <li><strong>Q:</strong> Is placement available?<br><strong>A:</strong> Yes, assistance provided for drafting roles.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Embedded Systems -->
+      <div class="card">
+        <div class="training-header">
+          <strong>Online Embedded Systems Course With Placements</strong>
+          <img src="assets/embedded_icon.png" alt="Embedded Systems" />
+        </div>
+        <div class="card-content">
+          <p><strong>Short Description:</strong> Intensive 6-month course to make fresh graduates industry-ready embedded systems engineers with live classes and projects.</p>
+
+          <div class="section-toggle">Program Details ▼</div>
+          <div class="section-content">
+            <ul>
+              <li>Linux Systems, C/C++ programming</li>
+              <li>Microcontroller programming and communication protocols</li>
+              <li>Industry-oriented projects with placement support</li>
+              <li>Duration: 6 months</li>
+            </ul>
+            <a href="https://forms.gle/your-google-form-link" target="_blank" class="button">Enroll Now</a>
+          </div>
+
+          <div class="section-toggle">Prerequisites & Who Should Enroll ▼</div>
+          <div class="section-content">
+            <ul>
+              <li>Engineering graduates or diploma holders in related fields</li>
+              <li>Basic programming skills preferred</li>
+            </ul>
+          </div>
+
+          <div class="section-toggle">Key Takeaways ▼</div>
+          <div class="section-content">
+            <ul>
+              <li>Strong embedded software development skills</li>
+              <li>Experience with Linux and hardware interfaces</li>
+              <li>2 years unlimited placement support</li>
+            </ul>
+          </div>
+
+          <div class="section-toggle">FAQs ▼</div>
+          <div class="section-content">
+            <ul>
+              <li><strong>Q:</strong> Is this course fully online?<br><strong>A:</strong> Yes, with live classes and recorded videos.</li>
+              <li><strong>Q:</strong> What is the placement rate?<br><strong>A:</strong> Over 90% placement within 6 months.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Embedded Linux -->
+      <div class="card">
+        <div class="training-header">
+          <strong>Embedded Linux and Yocto Project Training</strong>
+          <img src="assets/linux_icon.png" alt="Embedded Linux" />
+        </div>
+        <div class="card-content">
+          <p><strong>Short Description:</strong> Learn embedded Linux design and customization with Yocto Project and real hardware labs.</p>
+
+          <div class="section-toggle">Program Details ▼</div>
+          <div class="section-content">
+            <ul>
+              <li>Embedded Linux architecture, boot process</li>
+              <li>Yocto Project tools and build systems</li>
+              <li>BSP creation, kernel customization</li>
+              <li>Weekend live classes, 6 weeks</li>
+            </ul>
+            <a href="https://forms.gle/your-google-form-link" target="_blank" class="button">Enroll Now</a>
+          </div>
+
+          <div class="section-toggle">Prerequisites & Who Should Enroll ▼</div>
+          <div class="section-content">
+            <ul>
+              <li>Basic Linux and embedded concepts</li>
+              <li>Developers and engineers seeking Linux specialization</li>
+            </ul>
+          </div>
+
+          <div class="section-toggle">Key Takeaways ▼</div>
+          <div class="section-content">
+            <ul>
+              <li>Master embedded Linux and Yocto build system</li>
+              <li>Develop custom Linux distros for embedded devices</li>
+              <li>Build BSPs and customize kernels</li>
+            </ul>
+          </div>
+
+          <div class="section-toggle">FAQs ▼</div>
+          <div class="section-content">
+            <ul>
+              <li><strong>Q:</strong> Is hardware required?<br><strong>A:</strong> Recommendations provided; simulators available.</li>
+              <li><strong>Q:</strong> Suitable for working professionals?<br><strong>A:</strong> Weekend classes designed for convenience.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- AI/ML Course -->
+      <div class="card">
+        <div class="training-header">
+          <strong>Executive Diploma in Machine Learning & AI (IIIT Bangalore)</strong>
+          <img src="assets/ai_ml_icon.png" alt="AI / ML" />
+        </div>
+        <div class="card-content">
+          <p><strong>Short Description:</strong> Advanced AI and ML training with IIIT Bangalore faculty and industry experts, featuring 30+ projects and personalized career support.</p>
+
+          <div class="section-toggle">Program Details ▼</div>
+          <div class="section-content">
+            <ul>
+              <li>Advanced mathematics and programming</li>
+              <li>Data analysis, ML foundations, cloud technologies</li>
+              <li>Capstone project and portfolio building</li>
+              <li>Duration: 11-13 months, flexible</li>
+            </ul>
+            <a href="https://forms.gle/your-google-form-link" target="_blank" class="button">Enroll Now</a>
+          </div>
+
+          <div class="section-toggle">Prerequisites & Who Should Enroll ▼</div>
+          <div class="section-content">
+            <ul>
+              <li>Basic programming and math skills</li>
+              <li>Working professionals seeking AI/ML expertise</li>
+            </ul>
+          </div>
+
+          <div class="section-toggle">Key Takeaways ▼</div>
+          <div class="section-content">
+            <ul>
+              <li>Expertise in AI/ML algorithms and real-world applications</li>
+              <li>Master industry tools and cloud platforms</li>
+              <li>Strong placement and career coaching support</li>
+            </ul>
+          </div>
+
+          <div class="section-toggle">FAQs ▼</div>
+          <div class="section-content">
+            <ul>
+              <li><strong>Q:</strong> Is it self-paced?<br><strong>A:</strong> Includes live sessions and self-learning.</li>
+              <li><strong>Q:</strong> What projects are included?<br><strong>A:</strong> Real business problems, plus personal capstone.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
-  </footer>
+  </section>
+  
+  <!-- Testimonials -->
+  <section id="testimonials" class="reveal delay-6">
+    <h2><i class="fa fa-comment-dots"></i> What Our Students Say</h2>
+    <div class="slider-container">
+      <div class="slider-track">
+        <div class="testimonial-card">
+          <p>"The Embedded Systems course with MechStem gave me the confidence and skills to land my dream job. The projects were very industry relevant."</p>
+          <strong>- Priya S.</strong>
+        </div>
+        <div class="testimonial-card">
+          <p>"The AutoCAD Mechanical Certification program is practical and well-structured. The trainers are highly knowledgeable."</p>
+          <strong>- Rajesh K.</strong>
+        </div>
+        <div class="testimonial-card">
+          <p>"Excellent learning experience for Embedded Linux and Yocto. The weekend classes fit my schedule perfectly."</p>
+          <strong>- Anjali M.</strong>
+        </div>
+        <div class="testimonial-card">
+          <p>"The AI/ML Executive Diploma was challenging but rewarding. The capstone project really showcased my skills to recruiters."</p>
+          <strong>- Vikram P.</strong>
+        </div>
+      </div>
+      <button class="slider-arrow left" aria-label="Previous testimonial">&#10094;</button>
+      <button class="slider-arrow right" aria-label="Next testimonial">&#10095;</button>
+    </div>
+  </section>
+</main>
 
-  <script>
-    const toggles = document.querySelectorAll('.toggle-button');
+<footer>
+  <p>© 2025 MechStem. Built with 💡 by future engineers.</p>
+  <div class="social-links">
+    <a href="https://www.linkedin.com/company/mechstem/" target="_blank" rel="noopener"><img src="assets/linkedin-icon.png" alt="LinkedIn" /></a>
+    <a href="https://www.youtube.com/@mechstem" target="_blank" rel="noopener"><img src="assets/youtube-icon.png" alt="YouTube" /></a>
+    <a href="https://twitter.com/YOUR_TWITTER_HANDLE" target="_blank" rel="noopener"><img src="assets/twitter-icon.png" alt="Twitter" /></a>
+  </div>
+</footer>
+
+<script>
+  // Fade-in on load
+  window.addEventListener('load', () => {
+    document.body.classList.add('loaded');
+    revealOnScroll();
+  });
+
+  // Scroll reveal animation
+  function revealOnScroll() {
+    const elements = document.querySelectorAll('.reveal');
+    elements.forEach(el => {
+      var windowHeight = window.innerHeight;
+      var elementTop = el.getBoundingClientRect().top;
+      var revealPoint = 150;
+      if (elementTop < windowHeight - revealPoint) {
+        el.classList.add('active');
+      } else {
+        el.classList.remove('active');
+      }
+    });
+  }
+  window.addEventListener('scroll', revealOnScroll);
+
+  // Collapsible content toggling
+  document.addEventListener('DOMContentLoaded', () => {
+    const toggles = document.querySelectorAll('.section-toggle');
     toggles.forEach(toggle => {
       toggle.addEventListener('click', () => {
-        const container = toggle.closest('.training-card');
-        const contents = container.querySelectorAll('.toggle-content');
-        const buttons = container.querySelectorAll('.toggle-button');
-        buttons.forEach(btn => {
-          if (btn !== toggle) {
-            btn.classList.remove('active');
-            btn.setAttribute('aria-expanded', 'false');
-          }
-        });
-        contents.forEach(content => {
-          if (content !== toggle.nextElementSibling) {
-            content.classList.remove('open');
-            content.setAttribute('aria-hidden', 'true');
-          }
-        });
         const content = toggle.nextElementSibling;
-        if (content.classList.contains('open')) {
-          toggle.classList.remove('active');
-          content.classList.remove('open');
-          toggle.setAttribute('aria-expanded', 'false');
-          content.setAttribute('aria-hidden', 'true');
-          toggle.textContent = toggle.textContent.replace('▲', '▼');
+        if (content.style.display === 'block') {
+          content.style.display = 'none';
         } else {
-          toggle.classList.add('active');
-          content.classList.add('open');
-          toggle.setAttribute('aria-expanded', 'true');
-          content.setAttribute('aria-hidden', 'false');
-          toggle.textContent = toggle.textContent.replace('▼', '▲');
+          content.style.display = 'block';
         }
       });
     });
+  });
 
-    // Testimonial slider with fade transition
-    let testimonialIndex = 0;
-    const testimonialCards = document.querySelectorAll('#testimonials .testimonial-card');
-
-    function showTestimonial(index) {
-      testimonialCards.forEach((card, i) => {
-        card.classList.toggle('active', i === index);
-      });
-    }
-
-    function nextTestimonial() {
-      testimonialIndex = (testimonialIndex + 1) % testimonialCards.length;
-      showTestimonial(testimonialIndex);
-    }
-
-    // Auto-slide every 2 seconds
-    setInterval(nextTestimonial, 2000);
-
-    document.addEventListener('DOMContentLoaded', () => {
-      showTestimonial(testimonialIndex);
+  // Events slider logic
+  const events = [
+    {date: '2025-09-15', title: 'Embedded Systems Workshop', description: 'Learn Microcontroller Programming & Interfacing.', seats: 12},
+    {date: '2025-09-28', title: 'AI & Machine Learning Bootcamp', description: 'Build and deploy ML models for real applications.', seats: 8},
+    {date: '2025-10-05', title: 'Mechanical CAD Training', description: 'Master ArchiCAD and mechanical design basics.', seats: 5}
+  ];
+  let currentEventIndex = 0;
+  function renderEvents() {
+    const track = document.getElementById('events-track');
+    track.innerHTML = '';
+    events.forEach(e => {
+      const slide = document.createElement('div');
+      slide.classList.add('event-slide', 'card');
+      slide.innerHTML = `<strong>${new Date(e.date).toLocaleDateString()}</strong><br><strong>${e.title}</strong><br>${e.description}<br><strong>Seats Left:</strong> ${e.seats}<br><a href="https://forms.gle/your-google-form-link" target="_blank" class="button">Register</a>`;
+      track.appendChild(slide);
     });
-
-    // Events Slider logic (same as old)
-    const events = [
-      {title: "Embedded Systems Workshop", date: "2023-09-15", seats: "12 Seats Left", img: "assets/event1.jpg"},
-      {title: "AI & ML Bootcamp", date: "2023-09-28", seats: "8 Seats Left", img: "assets/event2.jpg"},
-      {title: "Mechanical CAD Training", date: "2023-10-05", seats: "5 Seats Left", img: "assets/event3.jpg"},
-    ];
-
-    let currentEvent = 0;
-    const eventTrack = document.querySelector('#events-section .event-track');
-    const eventPrev = document.querySelector('#events-section .slider-button.left');
-    const eventNext = document.querySelector('#events-section .slider-button.right');
-
-    function renderEvents() {
-      eventTrack.innerHTML = '';
-      events.forEach(evt => {
-        const card = document.createElement('div');
-        card.className = 'event-card';
-        card.innerHTML = `
-          <img src="${evt.img}" alt="${evt.title}">
-          <div class="event-overlay">
-            <div class="event-date">${new Date(evt.date).toLocaleDateString()}</div>
-            <div class="event-title">${evt.title}</div>
-            <div class="event-seats">${evt.seats}</div>
-            <a href="https://forms.gle/your-google-link" target="_blank" class="eventregister-btn">Register</a>
-          </div>
-        `;
-        eventTrack.appendChild(card);
-      });
-    }
-
-    function updateEvents() {
-      eventTrack.style.transform = `translateX(-${currentEvent * 340}px)`;
-    }
-
-    eventPrev.addEventListener('click', () => {
-      currentEvent = (currentEvent - 1 + events.length) % events.length;
-      updateEvents();
+  }
+  function updateEventSlider() {
+    const track = document.getElementById('events-track');
+    track.style.transform = `translateX(-${currentEventIndex * 100}%)`;
+  }
+  document.addEventListener('DOMContentLoaded', () => {
+    renderEvents();
+    updateEventSlider();
+    document.querySelector('.slider-arrow.left').addEventListener('click', () => {
+      currentEventIndex = (currentEventIndex - 1 + events.length) % events.length;
+      updateEventSlider();
     });
-
-    eventNext.addEventListener('click', () => {
-      currentEvent = (currentEvent + 1) % events.length;
-      updateEvents();
+    document.querySelector('.slider-arrow.right').addEventListener('click', () => {
+      currentEventIndex = (currentEventIndex + 1) % events.length;
+      updateEventSlider();
     });
+  });
 
-    document.addEventListener('DOMContentLoaded', () => {
-      renderEvents();
-      updateEvents();
+  // Testimonial slider logic
+  let currentTestimonial = 0;
+  function updateTestimonialSlider() {
+    const track = document.querySelector('#testimonials .slider-track');
+    track.style.transform = `translateX(-${currentTestimonial * 100}%)`;
+  }
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelector('#testimonials .slider-arrow.left').addEventListener('click', () => {
+      currentTestimonial = (currentTestimonial - 1 + 4) % 4;
+      updateTestimonialSlider();
     });
+    document.querySelector('#testimonials .slider-arrow.right').addEventListener('click', () => {
+      currentTestimonial = (currentTestimonial + 1) % 4;
+      updateTestimonialSlider();
+    });
+    updateTestimonialSlider();
+  });
 
-    // Reveal animation
-    function revealOnScroll() {
-      const reveals = document.querySelectorAll('.reveal');
-      for (const reveal of reveals) {
-        const viewportHeight = window.innerHeight;
-        const top = reveal.getBoundingClientRect().top;
-        if (top < viewportHeight - 150) {
-          reveal.classList.add('active');
-        } else {
-          reveal.classList.remove('active');
-        }
-      }
-    }
-    window.addEventListener('scroll', revealOnScroll);
-    window.addEventListener('load', () => {
-      document.body.classList.add('loaded');
-      revealOnScroll();
-    });
-  </script>
+</script>
 </body>
 </html>
+
