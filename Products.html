@@ -96,12 +96,54 @@
   #workshops { position: relative; }
   .events-slider { overflow: hidden; position: relative; margin-top: 10px; }
   .events-track { display: flex; transition: transform 0.5s ease; }
-  .event-slide { min-width: 100%; box-sizing: border-box; padding: 0 10px; background: #121418; border-radius: var(--radius); box-shadow: 0 8px 16px rgba(0,0,0,0.7); color: var(--text); }
+  .event-slide { min-width: 100%; box-sizing: border-box; padding: 0 10px; background: #121418; border-radius: var(--radius); box-shadow: 0 8px 16px rgba(0,0,0,0.7); color: var(--text); position: relative; overflow: hidden; }
+  .event-img { width: 100%; height: 200px; border-radius: var(--radius); object-fit: cover; display: block; }
+  .text-link {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  text-decoration: none;
+  padding: 20px;
+  cursor: pointer;
+  border-radius: var(--radius);
+  box-sizing: border-box;
+  z-index: 2;
+}
+.text-link:hover { background: rgba(0,0,0,0.7); }
+.button {
+  margin-top: 12px;
+  background: var(--blue);
+  border-radius: 8px;
+  padding: 6px 16px;
+  font-weight: bold;
+  pointer-events: none;
+}
+.slider-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--blue);
+  color: #fff;
+  border-radius: 50%;
+  border: none;
+  width: 36px;
+  height: 36px;
+  font-size: 24px;
+  cursor: pointer;
+  user-select: none;
+  z-index: 10;
+  transition: background-color 0.3s;
+}
+.slider-arrow:hover { background: #43A047; }
+.slider-arrow.left { left: 5px; }
+.slider-arrow.right { right: 5px; }
 
-  .slider-arrow { position: absolute; top: 50%; transform: translateY(-50%); background: var(--blue); color: white; border-radius: 50%; width: 36px; height: 36px; border: none; cursor: pointer; font-size: 24px; line-height: 36px; text-align: center; user-select: none; transition: background-color 0.3s; z-index: 10; }
-  .slider-arrow:hover { background: var(--green); }
-  .slider-arrow.left { left: 5px; }
-  .slider-arrow.right { right: 5px; }
 
   /* Footer */
   footer { padding: 32px 0 60px; color: var(--muted); text-align: center; border-top: 1px solid rgba(255,255,255,.08); margin-top: 40px; }
@@ -469,38 +511,54 @@
   });
 
   // Events slider logic
-  const events = [
-    {date: '2025-09-15', title: 'Embedded Systems Workshop', description: 'Learn Microcontroller Programming & Interfacing.', seats: 12},
-    {date: '2025-09-28', title: 'AI & Machine Learning Bootcamp', description: 'Build and deploy ML models for real applications.', seats: 8},
-    {date: '2025-10-05', title: 'Mechanical CAD Training', description: 'Master ArchiCAD and mechanical design basics.', seats: 5}
-  ];
-  let currentEventIndex = 0;
-  function renderEvents() {
-    const track = document.getElementById('events-track');
-    track.innerHTML = '';
-    events.forEach(e => {
-      const slide = document.createElement('div');
-      slide.classList.add('event-slide', 'card');
-      slide.innerHTML = `<strong>${new Date(e.date).toLocaleDateString()}</strong><br><strong>${e.title}</strong><br>${e.description}<br><strong>Seats Left:</strong> ${e.seats}<br><a href="https://forms.gle/your-google-form-link" target="_blank" class="button">Register</a>`;
-      track.appendChild(slide);
-    });
-  }
-  function updateEventSlider() {
-    const track = document.getElementById('events-track');
-    track.style.transform = `translateX(-${currentEventIndex * 100}%)`;
-  }
-  document.addEventListener('DOMContentLoaded', () => {
-    renderEvents();
-    updateEventSlider();
-    document.querySelector('.slider-arrow.left').addEventListener('click', () => {
-      currentEventIndex = (currentEventIndex - 1 + events.length) % events.length;
-      updateEventSlider();
-    });
-    document.querySelector('.slider-arrow.right').addEventListener('click', () => {
-      currentEventIndex = (currentEventIndex + 1) % events.length;
-      updateEventSlider();
-    });
+const events = [
+  {date: '2025-09-15', title: 'Embedded Systems Workshop', description: 'Learn Microcontroller Programming & Interfacing.', seats: 12, img: 'assets/event1.jpg'},
+  {date: '2025-09-28', title: 'AI & Machine Learning Bootcamp', description: 'Build and deploy ML models for real applications.', seats: 8, img: 'assets/event2.jpg'},
+  {date: '2025-10-05', title: 'Mechanical CAD Training', description: 'Master ArchiCAD and mechanical design basics.', seats: 5, img: 'assets/event3.jpg'}
+];
+
+let currentEventIndex = 0;
+
+function renderEvents() {
+  const track = document.getElementById('events-track');
+  track.innerHTML = '';
+  events.forEach(e => {
+    const slide = document.createElement('div');
+    slide.classList.add('event-slide');
+    slide.innerHTML = `
+      <img src="${e.img}" alt="${e.title}" class="event-img" />
+      <a href="https://forms.gle/your-google-form-link" target="_blank" class="text-link">
+        <div><strong>${new Date(e.date).toLocaleDateString()}</strong></div>
+        <div><strong>${e.title}</strong></div>
+        <div>${e.description}</div>
+        <div><strong>Seats Left:</strong> ${e.seats}</div>
+        <span class="button">Register</span>
+      </a>
+    `;
+    track.appendChild(slide);
   });
+}
+
+function updateEventSlider() {
+  const track = document.getElementById('events-track');
+  track.style.transform = `translateX(-${currentEventIndex * 100}%)`;
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  renderEvents();
+  updateEventSlider();
+
+  document.querySelector('.slider-arrow.left').addEventListener('click', () => {
+    currentEventIndex = (currentEventIndex - 1 + events.length) % events.length;
+    updateEventSlider();
+  });
+
+  document.querySelector('.slider-arrow.right').addEventListener('click', () => {
+    currentEventIndex = (currentEventIndex + 1) % events.length;
+    updateEventSlider();
+  });
+});
+
 
   // Testimonial slider logic
   let currentTestimonial = 0;
