@@ -27,30 +27,31 @@
 
   .navbar { display: flex; justify-content: space-between; align-items: center; padding: 12px 20px; background: rgba(15,16,20,0.95); border-bottom: 1px solid rgba(255,255,255,0.1); position: sticky; top: 0; z-index: 1000; }
   .nav-left { display: flex; align-items: center; gap: 12px; }
-  .nav-item { cursor: pointer; padding: 8px 12px; border-radius: var(--radius); transition: 0.3s; font-size: 15px; display: flex; align-items: center; gap: 6px;}
+  .nav-item { cursor: pointer; padding: 8px 12px; border-radius: var(--radius); transition: 0.3s; font-size: 15px; display: flex; align-items: center; gap: 6px;color: var(--text); text-decoration: none; }
   .nav-item:hover, .nav-active { color: var(--blue); }
   .logo { height: 36px; }
   .contact-button { padding: 8px 14px; border-radius: 999px; background: linear-gradient(90deg, var(--blue), var(--green)); color: #fff; font-weight: 600; text-decoration: none; font-size: 14px; transition: box-shadow 0.3s, transform 0.3s; display: inline-block; position: relative; overflow: hidden; }
   .contact-button i { margin-right: 6px; }
   .contact-button:hover { box-shadow: 0 0 10px var(--yellow); transform: translateY(-2px); }
 
- /* Training cards header: title left, profile-pic right */
-.training-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between; /* push title left, image right */
-  gap: 12px;
-  margin-bottom: 12px;
-}
+  /* Animations for reveal on scroll */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .delay-1 { transition-delay: 0.2s; }
+  .delay-2 { transition-delay: 0.4s; }
+  .delay-3 { transition-delay: 0.6s; }
+  .delay-4 { transition-delay: 0.8s; }
+  .delay-5 { transition-delay: 1s; }
+  .delay-6 { transition-delay: 1.2s; }
+  .delay-7 { transition-delay: 1.4s; }
 
-.training-header img {
-  width: 10px;        /* profile-pic size */
-  height: 40px;
-  object-fit: cover;  /* keep proportions */
-  border-radius: 50%; /* round image */
-}
-
-  
   main.content { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
   h2 { color: var(--blue); margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
 
@@ -62,12 +63,30 @@
     box-shadow: 0 4px 12px rgba(0,0,0,0.5);
     transition: transform 0.3s, box-shadow 0.3s;
     cursor: pointer;
+    text-align: left;
   }
   .card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.7); }
   .card img { width: 100%; border-radius: var(--radius); margin-bottom: 12px; }
   .card-content { margin-top: 10px; color: var(--muted); }
   
-  .section-toggle { cursor: pointer; margin-top: 8px; padding: 6px 10px; background: #1E88E550; border-radius: 8px; display: inline-block; font-weight: bold; }
+  .training-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 12px;
+    color: var(--blue);
+    font-weight: 600;
+    font-size: 1.2rem;
+  }
+  .training-header img {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+  
+  .section-toggle { cursor: pointer; margin-top: 8px; padding: 6px 10px; background: #1E88E550; border-radius: 8px; display: inline-block; font-weight: bold; color: var(--blue); }
   .section-content { display: none; margin-top: 8px; color: var(--muted); }
   .section-content ul { margin-left: 20px; }
   .button { display: inline-block; margin-top: 12px; padding: 8px 16px; background: var(--blue); color: white; border-radius: 8px; text-decoration: none; font-weight: bold; transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s; cursor: pointer; }
@@ -77,7 +96,7 @@
   #workshops { position: relative; }
   .events-slider { overflow: hidden; position: relative; margin-top: 10px; }
   .events-track { display: flex; transition: transform 0.5s ease; }
-  .event-slide { min-width: 100%; box-sizing: border-box; padding: 0 10px; }
+  .event-slide { min-width: 100%; box-sizing: border-box; padding: 0 10px; background: #121418; border-radius: var(--radius); box-shadow: 0 8px 16px rgba(0,0,0,0.7); color: var(--text); }
 
   .slider-arrow { position: absolute; top: 50%; transform: translateY(-50%); background: var(--blue); color: white; border-radius: 50%; width: 36px; height: 36px; border: none; cursor: pointer; font-size: 24px; line-height: 36px; text-align: center; user-select: none; transition: background-color 0.3s; z-index: 10; }
   .slider-arrow:hover { background: var(--green); }
@@ -89,53 +108,81 @@
   .social-links { display: flex; justify-content: center; gap: 14px; margin-top: 12px; }
   .social-links img { height: 28px; width: 28px; transition: transform 0.3s; }
   .social-links img:hover { transform: scale(1.2); }
+  
+  /* Testimonials slider */
+  #testimonials { margin: 60px auto; max-width: 800px; }
+  .slider-container { position: relative; overflow: hidden; }
+  .slider-track { display: flex; transition: transform 0.5s ease; }
+  .testimonial-card {
+    flex: 0 0 100%;
+    box-sizing: border-box;
+    padding: 20px;
+    background: #121418;
+    border-radius: var(--radius);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.7);
+    color: #e6e9ef;
+    font-style: italic;
+    font-size: 1.1rem;
+  }
+  .testimonial-card strong {
+    display: block;
+    margin-top: 12px;
+    font-style: normal;
+    color: var(--muted);
+    font-size: 1rem;
+  }
+  .slider-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--blue);
+    color: #fff;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    user-select: none;
+    z-index: 10;
+    transition: background-color 0.3s;
+  }
+  .slider-arrow:hover { background: var(--green); }
+  .slider-arrow.left { left: 10px; }
+  .slider-arrow.right { right: 10px; }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    .cards { grid-template-columns: 1fr; }
+    .slider-arrow { width: 30px; height: 30px; font-size: 20px; }
+  }
 </style>
 </head>
 <body>
-
-<!-- Load Font Awesome -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-
 <!-- Navbar -->
 <div class="navbar reveal delay-1">
   <div class="nav-left">
     <img src="assets/logo.png" alt="MechStem Logo" class="logo" />
-
-    <!-- Home Icon -->
-    <div class="nav-item nav-active" onclick="location.href='index.html'" title="Home">
-      <i class="fas fa-home" style="font-size: 20px;"></i> Home
-    </div>
-
-    <!-- Trainings Icon -->
-    <div class="nav-item" onclick="location.href='Products.html'" title="Trainings">
-      <i class="fas fa-graduation-cap" style="font-size: 20px;"></i> Trainings
-    </div>
-
-    <!-- Services Icon -->
-    <div class="nav-item" onclick="location.href='services.html'" title="Services">
-      <i class="fas fa-cogs" style="font-size: 20px;"></i> Services
-    </div>
+    <div class="nav-item nav-active" onclick="location.href='index.html'" title="Home"><i class="fas fa-home" style="font-size: 20px;"></i> Home</div>
+    <div class="nav-item" onclick="location.href='Products.html'" title="Trainings"><i class="fas fa-graduation-cap" style="font-size: 20px;"></i> Trainings</div>
+    <div class="nav-item" onclick="location.href='services.html'" title="Services"><i class="fas fa-cogs" style="font-size: 20px;"></i> Services</div>
   </div>
-
-  <!-- Contact Button -->
   <a href="#contact" class="contact-button"><i class="fas fa-envelope"></i> Contact</a>
 </div>
 
-
 <main class="content">
-
   <!-- Upcoming Events -->
-  <section id="workshops" style="margin-top: 50px;">
+  <section id="workshops" class="reveal delay-2" style="margin-top: 50px;">
     <h2><i class="fa fa-bell"></i> Upcoming Events</h2>
     <div class="events-slider">
-      <button class="slider-arrow left" aria-label="Previous event">&#9664;</button>
+      <button class="slider-arrow left" aria-label="Previous event">◀</button>
       <div id="events-track" class="events-track"></div>
-      <button class="slider-arrow right" aria-label="Next event">&#9654;</button>
+      <button class="slider-arrow right" aria-label="Next event">▶</button>
     </div>
   </section>
 
   <!-- Internships -->
-  <section id="internship-training" style="margin-top: 50px;">
+  <section id="internship-training" class="reveal delay-3" style="margin-top: 50px;">
     <h2><i class="fa fa-briefcase"></i> Internships</h2>
     <div class="cards">
       <div class="card">
@@ -149,26 +196,27 @@
   </section>
 
   <!-- Trainings -->
-  <!-- START: Linux Systems Engineering Training -->
-  <section id="trainings" style="margin-top: 50px;">
+  <section id="trainings" class="reveal delay-4" style="margin-top: 50px;">
     <h2><i class="fa fa-cogs"></i> Trainings</h2>
     <div class="cards">
+
+      <!-- AutoCAD Mechanical -->
       <div class="card">
         <div class="training-header">
-            <strong>Linux Systems Engineering</strong>
-            <img src="assets/Linux.gif" alt="Linux Systems Engineering"/>
-         </div>
+          <strong>AutoCAD Mechanical Training &amp; Certification Course</strong>
+          <img src="assets/autocad_icon.png" alt="AutoCAD Mechanical" />
+        </div>
         <div class="card-content">
-          <p><strong>Short Description:</strong> Master Linux system-level skills to thrive in the age of AI automation.</p>
+          <p><strong>Short Description:</strong> Learn industry-standard AutoCAD Mechanical for designing and drafting mechanical components with accuracy and speed.</p>
 
           <div class="section-toggle">Program Details ▼</div>
           <div class="section-content">
             <ul>
-              <li><strong>Start Date:</strong> 15th October 2025</li>
-              <li><strong>Delivery Mode:</strong> Online / Instructor-Led</li>
-              <li><strong>Timing:</strong> 7 PM – 9 PM (IST)</li>
-              <li><strong>Duration:</strong> 6 Weeks</li>
-              <li><strong>Fee:</strong> ₹35,000</li>
+              <li>AutoCAD interface and productivity tools</li>
+              <li>Draw and edit mechanical drawings including 3D modeling</li>
+              <li>Industry-specific libraries and parts</li>
+              <li>Documentation, dimensioning, and layout management</li>
+              <li>Duration: flexible short-term course</li>
             </ul>
             <a href="https://forms.gle/your-google-form-link" target="_blank" class="button">Enroll Now</a>
           </div>
@@ -176,66 +224,47 @@
           <div class="section-toggle">Prerequisites & Who Should Enroll ▼</div>
           <div class="section-content">
             <ul>
-              <li>GNU Toolchain</li>
-              <li>Linux Command-line Skills</li>
-              <li>Embedded Systems Basics</li>
-              <li>Basic Linux Kernel Architecture</li>
+              <li>Students and professionals in mechanical, automotive, aeronautical engineering</li>
+              <li>Diploma or ITI holders in related fields</li>
+              <li>Beginners interested in CAD drafting</li>
             </ul>
-            <p>Ideal for Embedded Software Engineers, Hardware Engineers, IoT & Product Engineers, and Yocto adopters.</p>
           </div>
 
           <div class="section-toggle">Key Takeaways ▼</div>
           <div class="section-content">
             <ul>
-              <li>Understand Embedded Linux architecture – bootloader, kernel, device tree, root filesystem</li>
-              <li>Perform a complete board bring-up: cross-compilation, kernel config, deployment to custom hardware</li>
-              <li>Customize device trees and integrate hardware-specific drivers</li>
-              <li>Work with peripheral interfaces (I²C, SPI, UART, etc.) on embedded platforms</li>
-              <li>Master the Yocto Project build system</li>
-              <li>Build and customize Board Support Packages (BSPs)</li>
-              <li>Optimize Linux systems for footprint, performance, and security</li>
-              <li>Develop practical skills to debug, extend, and maintain embedded Linux systems</li>
+              <li>Proficiency in AutoCAD Mechanical software</li>
+              <li>Ability to create detailed, industry-standard mechanical drawings</li>
+              <li>Improved employability in drafting and design roles</li>
             </ul>
           </div>
 
           <div class="section-toggle">FAQs ▼</div>
           <div class="section-content">
             <ul>
-              <li><strong>Q:</strong> Can I target roles in embedded product development companies? <br>
-                  <strong>A:</strong> Yes. This program equips you with practical knowledge.</li>
-              <li><strong>Q:</strong> Difference between Embedded Linux and Yocto separately vs this course? <br>
-                  <strong>A:</strong> This course blends both for real product development experience.</li>
-              <li><strong>Q:</strong> Hardware requirement? <br>
-                  <strong>A:</strong> Standard board with Linux support (Raspberry Pi, BeagleBone, etc.)</li>
+              <li><strong>Q:</strong> Do I need prior CAD experience?<br><strong>A:</strong> No, the course is suitable for beginners.</li>
+              <li><strong>Q:</strong> Is placement available?<br><strong>A:</strong> Yes, assistance provided for drafting roles.</li>
             </ul>
           </div>
-
         </div>
       </div>
-    </div>
-  </section>
-  <!-- END: Linux Systems Engineering Training -->
 
-  <!-- START: @2-->
-  <section id="trainings" style="margin-top: 50px;">
-    <h2><i class="fa fa-cogs"></i> Trainings</h2>
-    <div class="cards">
+      <!-- Embedded Systems -->
       <div class="card">
-         <div class="training-header">
-           <strong>Linux Systems Engineering</strong>
-           <img src="assets/IPC_1.gif" alt="Linux Systems Engineering"/>
-         </div>
+        <div class="training-header">
+          <strong>Online Embedded Systems Course With Placements</strong>
+          <img src="assets/embedded_icon.png" alt="Embedded Systems" />
+        </div>
         <div class="card-content">
-          <p><strong>Short Description:</strong> Master Linux system-level skills to thrive in the age of AI automation.</p>
+          <p><strong>Short Description:</strong> Intensive 6-month course to make fresh graduates industry-ready embedded systems engineers with live classes and projects.</p>
 
           <div class="section-toggle">Program Details ▼</div>
           <div class="section-content">
             <ul>
-              <li><strong>Start Date:</strong> 15th October 2025</li>
-              <li><strong>Delivery Mode:</strong> Online / Instructor-Led</li>
-              <li><strong>Timing:</strong> 7 PM – 9 PM (IST)</li>
-              <li><strong>Duration:</strong> 6 Weeks</li>
-              <li><strong>Fee:</strong> ₹35,000</li>
+              <li>Linux Systems, C/C++ programming</li>
+              <li>Microcontroller programming and communication protocols</li>
+              <li>Industry-oriented projects with placement support</li>
+              <li>Duration: 6 months</li>
             </ul>
             <a href="https://forms.gle/your-google-form-link" target="_blank" class="button">Enroll Now</a>
           </div>
@@ -243,49 +272,154 @@
           <div class="section-toggle">Prerequisites & Who Should Enroll ▼</div>
           <div class="section-content">
             <ul>
-              <li>GNU Toolchain</li>
-              <li>Linux Command-line Skills</li>
-              <li>Embedded Systems Basics</li>
-              <li>Basic Linux Kernel Architecture</li>
+              <li>Engineering graduates or diploma holders in related fields</li>
+              <li>Basic programming skills preferred</li>
             </ul>
-            <p>Ideal for Embedded Software Engineers, Hardware Engineers, IoT & Product Engineers, and Yocto adopters.</p>
           </div>
 
           <div class="section-toggle">Key Takeaways ▼</div>
           <div class="section-content">
             <ul>
-              <li>Understand Embedded Linux architecture – bootloader, kernel, device tree, root filesystem</li>
-              <li>Perform a complete board bring-up: cross-compilation, kernel config, deployment to custom hardware</li>
-              <li>Customize device trees and integrate hardware-specific drivers</li>
-              <li>Work with peripheral interfaces (I²C, SPI, UART, etc.) on embedded platforms</li>
-              <li>Master the Yocto Project build system</li>
-              <li>Build and customize Board Support Packages (BSPs)</li>
-              <li>Optimize Linux systems for footprint, performance, and security</li>
-              <li>Develop practical skills to debug, extend, and maintain embedded Linux systems</li>
+              <li>Strong embedded software development skills</li>
+              <li>Experience with Linux and hardware interfaces</li>
+              <li>2 years unlimited placement support</li>
             </ul>
           </div>
 
           <div class="section-toggle">FAQs ▼</div>
           <div class="section-content">
             <ul>
-              <li><strong>Q:</strong> Can I target roles in embedded product development companies? <br>
-                  <strong>A:</strong> Yes. This program equips you with practical knowledge.</li>
-              <li><strong>Q:</strong> Difference between Embedded Linux and Yocto separately vs this course? <br>
-                  <strong>A:</strong> This course blends both for real product development experience.</li>
-              <li><strong>Q:</strong> Hardware requirement? <br>
-                  <strong>A:</strong> Standard board with Linux support (Raspberry Pi, BeagleBone, etc.)</li>
+              <li><strong>Q:</strong> Is this course fully online?<br><strong>A:</strong> Yes, with live classes and recorded videos.</li>
+              <li><strong>Q:</strong> What is the placement rate?<br><strong>A:</strong> Over 90% placement within 6 months.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Embedded Linux -->
+      <div class="card">
+        <div class="training-header">
+          <strong>Embedded Linux and Yocto Project Training</strong>
+          <img src="assets/linux_icon.png" alt="Embedded Linux" />
+        </div>
+        <div class="card-content">
+          <p><strong>Short Description:</strong> Learn embedded Linux design and customization with Yocto Project and real hardware labs.</p>
+
+          <div class="section-toggle">Program Details ▼</div>
+          <div class="section-content">
+            <ul>
+              <li>Embedded Linux architecture, boot process</li>
+              <li>Yocto Project tools and build systems</li>
+              <li>BSP creation, kernel customization</li>
+              <li>Weekend live classes, 6 weeks</li>
+            </ul>
+            <a href="https://forms.gle/your-google-form-link" target="_blank" class="button">Enroll Now</a>
+          </div>
+
+          <div class="section-toggle">Prerequisites & Who Should Enroll ▼</div>
+          <div class="section-content">
+            <ul>
+              <li>Basic Linux and embedded concepts</li>
+              <li>Developers and engineers seeking Linux specialization</li>
             </ul>
           </div>
 
+          <div class="section-toggle">Key Takeaways ▼</div>
+          <div class="section-content">
+            <ul>
+              <li>Master embedded Linux and Yocto build system</li>
+              <li>Develop custom Linux distros for embedded devices</li>
+              <li>Build BSPs and customize kernels</li>
+            </ul>
+          </div>
+
+          <div class="section-toggle">FAQs ▼</div>
+          <div class="section-content">
+            <ul>
+              <li><strong>Q:</strong> Is hardware required?<br><strong>A:</strong> Recommendations provided; simulators available.</li>
+              <li><strong>Q:</strong> Suitable for working professionals?<br><strong>A:</strong> Weekend classes designed for convenience.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- AI/ML Course -->
+      <div class="card">
+        <div class="training-header">
+          <strong>Executive Diploma in Machine Learning & AI (IIIT Bangalore)</strong>
+          <img src="assets/ai_ml_icon.png" alt="AI / ML" />
+        </div>
+        <div class="card-content">
+          <p><strong>Short Description:</strong> Advanced AI and ML training with IIIT Bangalore faculty and industry experts, featuring 30+ projects and personalized career support.</p>
+
+          <div class="section-toggle">Program Details ▼</div>
+          <div class="section-content">
+            <ul>
+              <li>Advanced mathematics and programming</li>
+              <li>Data analysis, ML foundations, cloud technologies</li>
+              <li>Capstone project and portfolio building</li>
+              <li>Duration: 11-13 months, flexible</li>
+            </ul>
+            <a href="https://forms.gle/your-google-form-link" target="_blank" class="button">Enroll Now</a>
+          </div>
+
+          <div class="section-toggle">Prerequisites & Who Should Enroll ▼</div>
+          <div class="section-content">
+            <ul>
+              <li>Basic programming and math skills</li>
+              <li>Working professionals seeking AI/ML expertise</li>
+            </ul>
+          </div>
+
+          <div class="section-toggle">Key Takeaways ▼</div>
+          <div class="section-content">
+            <ul>
+              <li>Expertise in AI/ML algorithms and real-world applications</li>
+              <li>Master industry tools and cloud platforms</li>
+              <li>Strong placement and career coaching support</li>
+            </ul>
+          </div>
+
+          <div class="section-toggle">FAQs ▼</div>
+          <div class="section-content">
+            <ul>
+              <li><strong>Q:</strong> Is it self-paced?<br><strong>A:</strong> Includes live sessions and self-learning.</li>
+              <li><strong>Q:</strong> What projects are included?<br><strong>A:</strong> Real business problems, plus personal capstone.</li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
   </section>
-  <!-- END: @2-->
   
+  <!-- Testimonials -->
+  <section id="testimonials" class="reveal delay-6">
+    <h2><i class="fa fa-comment-dots"></i> What Our Students Say</h2>
+    <div class="slider-container">
+      <div class="slider-track">
+        <div class="testimonial-card">
+          <p>"The Embedded Systems course with MechStem gave me the confidence and skills to land my dream job. The projects were very industry relevant."</p>
+          <strong>- Priya S.</strong>
+        </div>
+        <div class="testimonial-card">
+          <p>"The AutoCAD Mechanical Certification program is practical and well-structured. The trainers are highly knowledgeable."</p>
+          <strong>- Rajesh K.</strong>
+        </div>
+        <div class="testimonial-card">
+          <p>"Excellent learning experience for Embedded Linux and Yocto. The weekend classes fit my schedule perfectly."</p>
+          <strong>- Anjali M.</strong>
+        </div>
+        <div class="testimonial-card">
+          <p>"The AI/ML Executive Diploma was challenging but rewarding. The capstone project really showcased my skills to recruiters."</p>
+          <strong>- Vikram P.</strong>
+        </div>
+      </div>
+      <button class="slider-arrow left" aria-label="Previous testimonial">&#10094;</button>
+      <button class="slider-arrow right" aria-label="Next testimonial">&#10095;</button>
+    </div>
+  </section>
 </main>
 
-<!-- Footer -->
 <footer>
   <p>© 2025 MechStem. Built with 💡 by future engineers.</p>
   <div class="social-links">
@@ -296,57 +430,95 @@
 </footer>
 
 <script>
-  // Fade-in page on load
+  // Fade-in on load
   window.addEventListener('load', () => {
     document.body.classList.add('loaded');
+    revealOnScroll();
+  });
 
-    // Events slider
-    const events = [
-      {date: '2025-09-15', title: 'Embedded Systems Workshop', description: 'Learn Microcontroller Programming & Interfacing.', seats: 12},
-      {date: '2025-09-28', title: 'AI & Machine Learning Bootcamp', description: 'Build and deploy ML models for real applications.', seats: 8},
-      {date: '2025-10-05', title: 'Mechanical CAD Training', description: 'Master ArchiCAD and mechanical design basics.', seats: 5}
-    ];
-    let currentIndex = 0;
-    function renderEvents() {
-      const track = document.getElementById('events-track');
-      track.innerHTML = '';
-      events.forEach(event => {
-        const slide = document.createElement('div');
-        slide.classList.add('event-slide', 'card');
-        slide.innerHTML = `
-          <strong>${new Date(event.date).toLocaleDateString()}</strong><br>
-          <strong>${event.title}</strong><br>
-          ${event.description}<br>
-          <strong>Seats Left:</strong> ${event.seats}<br>
-          <a href="https://forms.gle/your-google-form-link" target="_blank" class="button">Register</a>
-        `;
-        track.appendChild(slide);
-      });
-    }
-    function updateSlider() {
-      const track = document.getElementById('events-track');
-      track.style.transform = `translateX(-${currentIndex * 100}%)`;
-    }
-    renderEvents();
-    updateSlider();
-    document.querySelector('.slider-arrow.left').addEventListener('click', () => {
-      currentIndex = (currentIndex - 1 + events.length) % events.length;
-      updateSlider();
+  // Scroll reveal animation
+  function revealOnScroll() {
+    const elements = document.querySelectorAll('.reveal');
+    elements.forEach(el => {
+      var windowHeight = window.innerHeight;
+      var elementTop = el.getBoundingClientRect().top;
+      var revealPoint = 150;
+      if (elementTop < windowHeight - revealPoint) {
+        el.classList.add('active');
+      } else {
+        el.classList.remove('active');
+      }
     });
-    document.querySelector('.slider-arrow.right').addEventListener('click', () => {
-      currentIndex = (currentIndex + 1) % events.length;
-      updateSlider();
-    });
+  }
+  window.addEventListener('scroll', revealOnScroll);
 
-    // Collapsible sections inside training card
-    document.querySelectorAll('.section-toggle').forEach(toggle => {
+  // Collapsible content toggling
+  document.addEventListener('DOMContentLoaded', () => {
+    const toggles = document.querySelectorAll('.section-toggle');
+    toggles.forEach(toggle => {
       toggle.addEventListener('click', () => {
         const content = toggle.nextElementSibling;
-        content.style.display = (content.style.display === 'block') ? 'none' : 'block';
+        if (content.style.display === 'block') {
+          content.style.display = 'none';
+        } else {
+          content.style.display = 'block';
+        }
       });
     });
   });
-</script>
 
+  // Events slider logic
+  const events = [
+    {date: '2025-09-15', title: 'Embedded Systems Workshop', description: 'Learn Microcontroller Programming & Interfacing.', seats: 12},
+    {date: '2025-09-28', title: 'AI & Machine Learning Bootcamp', description: 'Build and deploy ML models for real applications.', seats: 8},
+    {date: '2025-10-05', title: 'Mechanical CAD Training', description: 'Master ArchiCAD and mechanical design basics.', seats: 5}
+  ];
+  let currentEventIndex = 0;
+  function renderEvents() {
+    const track = document.getElementById('events-track');
+    track.innerHTML = '';
+    events.forEach(e => {
+      const slide = document.createElement('div');
+      slide.classList.add('event-slide', 'card');
+      slide.innerHTML = `<strong>${new Date(e.date).toLocaleDateString()}</strong><br><strong>${e.title}</strong><br>${e.description}<br><strong>Seats Left:</strong> ${e.seats}<br><a href="https://forms.gle/your-google-form-link" target="_blank" class="button">Register</a>`;
+      track.appendChild(slide);
+    });
+  }
+  function updateEventSlider() {
+    const track = document.getElementById('events-track');
+    track.style.transform = `translateX(-${currentEventIndex * 100}%)`;
+  }
+  document.addEventListener('DOMContentLoaded', () => {
+    renderEvents();
+    updateEventSlider();
+    document.querySelector('.slider-arrow.left').addEventListener('click', () => {
+      currentEventIndex = (currentEventIndex - 1 + events.length) % events.length;
+      updateEventSlider();
+    });
+    document.querySelector('.slider-arrow.right').addEventListener('click', () => {
+      currentEventIndex = (currentEventIndex + 1) % events.length;
+      updateEventSlider();
+    });
+  });
+
+  // Testimonial slider logic
+  let currentTestimonial = 0;
+  function updateTestimonialSlider() {
+    const track = document.querySelector('#testimonials .slider-track');
+    track.style.transform = `translateX(-${currentTestimonial * 100}%)`;
+  }
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelector('#testimonials .slider-arrow.left').addEventListener('click', () => {
+      currentTestimonial = (currentTestimonial - 1 + 4) % 4;
+      updateTestimonialSlider();
+    });
+    document.querySelector('#testimonials .slider-arrow.right').addEventListener('click', () => {
+      currentTestimonial = (currentTestimonial + 1) % 4;
+      updateTestimonialSlider();
+    });
+    updateTestimonialSlider();
+  });
+
+</script>
 </body>
 </html>
