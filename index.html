@@ -3,175 +3,170 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MechStem Research Lab | Embedded Systems, AI & Mechanical Innovation</title>
+<meta name="description" content="MechStem is a research lab founded in 2017, working on Embedded Systems, Edge AI, Mechanical Systems and applied engineering innovation.">
 
-<title>MechStem Research Lab | Engineering, Embedded Systems & AI</title>
-
-<meta name="description"
-content="MechStem Research Lab (est. 2017) is an independent engineering research and innovation lab working at the intersection of embedded systems, AI, automation, and mechanical engineering.">
-
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 
 <style>
-:root{
-  --bg:#0f1014;
-  --card:#1a1c22;
-  --text:#e6e9ef;
-  --muted:#9aa3b2;
-  --primary:#1E88E5;
-  --accent:#43A047;
-  --radius:16px;
-  --shadow:0 10px 30px rgba(0,0,0,.35);
+:root {
+  --bg: #0b0d12;
+  --card: #141722;
+  --text: #e6e9ef;
+  --muted: #9aa3b2;
+  --primary: #4cc9f0;
+  --accent: #80ffdb;
+  --radius: 16px;
+  --shadow: 0 20px 50px rgba(0,0,0,.4);
 }
 
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-
-body{
-  font-family:system-ui,-apple-system,BlinkMacSystemFont,sans-serif;
-  background:var(--bg);
-  color:var(--text);
-  line-height:1.65;
+* {margin:0;padding:0;box-sizing:border-box;}
+html {scroll-behavior: smooth;}
+body {
+  font-family: system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
 }
 
-/* ================= NAV ================= */
-.navbar{
-  position:sticky;
+/* === Grid Background === */
+.bg-grid {
+  position: fixed;
+  inset:0;
+  z-index:-1;
+  background:
+    linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
+  background-size: 70px 70px;
+  animation: gridMove 50s linear infinite;
+  mask-image: radial-gradient(circle at center, black 55%, transparent 100%);
+}
+@keyframes gridMove {
+  from {background-position:0 0;}
+  to {background-position:140px 140px;}
+}
+
+/* === Navbar === */
+.nav {
+  position: sticky;
   top:0;
+  display: flex;
+  justify-content: space-between;
+  align-items:center;
+  padding:16px 40px;
+  background: rgba(11,13,18,.85);
+  backdrop-filter: blur(10px);
   z-index:1000;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:14px 40px;
-  background:rgba(15,16,20,.88);
-  backdrop-filter:blur(12px);
 }
-.nav-left{
-  display:flex;
-  align-items:center;
-  gap:26px;
+.nav-left {
+  display:flex; align-items:center; gap:28px;
 }
-.logo{height:36px}
-.nav-item{
-  text-decoration:none;
-  color:var(--muted);
-  font-size:.95rem;
-}
-.nav-item:hover{color:var(--primary)}
-.contact-btn{
-  background:linear-gradient(90deg,var(--primary),var(--accent));
+.logo {height:36px;}
+.nav a {color:var(--muted); text-decoration:none; font-size:.95rem;}
+.nav a:hover {color:var(--primary);}
+.nav-btn {
   padding:10px 18px;
   border-radius:999px;
-  color:#fff;
-  text-decoration:none;
+  background: linear-gradient(90deg,var(--primary),var(--accent));
+  color:#000;
   font-weight:600;
-  font-size:.9rem;
+  text-decoration:none;
 }
 
-/* ================= HERO ================= */
-.hero{
-  min-height:92vh;
+/* === Hero === */
+.hero {
+  min-height:90vh;
   display:flex;
   align-items:center;
   justify-content:center;
   text-align:center;
   padding:80px 20px;
 }
-.hero-content{max-width:960px}
-.hero h1{
-  font-size:clamp(38px,5vw,60px);
-  margin-bottom:22px;
+.hero h1 {
+  font-size: clamp(38px,5vw,60px);
+  margin-bottom:18px;
 }
-.hero p{
-  font-size:1.15rem;
+.hero p {
+  max-width:900px;
+  margin:auto;
+  font-size:1.2rem;
   color:var(--muted);
-  margin-bottom:36px;
 }
-.hero .tagline{
-  font-size:.95rem;
-  letter-spacing:.12em;
-  text-transform:uppercase;
-  color:var(--accent);
-  margin-bottom:16px;
+.hero .cta {
+  margin-top:34px;
+  display:inline-block;
+  padding:14px 32px;
+  border-radius:999px;
+  background: linear-gradient(90deg,var(--primary),var(--accent));
+  color:#000;
+  font-weight:700;
+  text-decoration:none;
 }
 
-/* ================= SECTIONS ================= */
-.section{
-  padding:90px 30px;
+/* === Section === */
+.section {
   max-width:1200px;
   margin:auto;
+  padding:100px 30px;
 }
-.section h2{
+.section h2 {
   text-align:center;
-  font-size:2.5rem;
+  font-size:2.6rem;
   margin-bottom:18px;
   color:var(--primary);
 }
-.section-desc{
+.section-desc {
   text-align:center;
-  max-width:820px;
+  max-width:800px;
   margin:0 auto 60px;
   color:var(--muted);
-  font-size:1.05rem;
 }
 
-/* ================= CARDS ================= */
-.cards{
+/* === Grid Cards === */
+.grid {
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:28px;
+  gap:32px;
 }
-.card{
+.card {
   background:var(--card);
   padding:34px;
   border-radius:var(--radius);
   box-shadow:var(--shadow);
-  transition:.3s ease;
+  transition:.4s;
 }
-.card:hover{transform:translateY(-6px)}
-.card i{
+.card:hover {
+  transform:translateY(-8px);
+  box-shadow:0 0 0 1px rgba(76,201,240,.35),0 30px 80px rgba(76,201,240,.15);
+}
+.card i {
   font-size:30px;
   color:var(--primary);
   margin-bottom:16px;
 }
-.card h3{margin-bottom:10px}
 
-/* ================= ABOUT ================= */
-.about{
+/* === About === */
+.about {
   display:grid;
-  grid-template-columns:1.1fr .9fr;
+  grid-template-columns:1fr 1fr;
   gap:60px;
 }
-.about img{
-  width:100%;
-  border-radius:var(--radius);
-  box-shadow:var(--shadow);
-}
+.about img {width:100%; border-radius:var(--radius);}
 
-/* ================= OPPORTUNITIES ================= */
-.opportunities{
-  padding:110px 30px;
-  text-align:center;
-  background:radial-gradient(circle at top,#15171c,#0f1014);
-}
-.op-desc{color:var(--muted);margin-bottom:70px}
-
-.op-grid{
+/* === Opportunities === */
+.op-grid {
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(340px,1fr));
-  gap:44px;
-  max-width:1100px;
-  margin:auto;
+  grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+  gap:40px;
 }
-.op-card{
-  background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.015));
-  padding:44px;
-  border-radius:var(--radius);
-  text-align:left;
+.op-card {
   position:relative;
+  background:rgba(255,255,255,.04);
+  padding:40px;
+  border-radius:var(--radius);
   box-shadow:var(--shadow);
 }
-.op-card::before{
+.op-card::before {
   content:"";
   position:absolute;
   inset:0;
@@ -180,276 +175,184 @@ body{
   background:linear-gradient(90deg,var(--primary),var(--accent));
   -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
   -webkit-mask-composite:xor;
-  mask-composite:exclude;
 }
-.op-box{
-  background:rgba(0,0,0,.35);
-  padding:24px;
-  border-radius:12px;
-  margin:22px 0;
-}
-.op-list{list-style:none;margin:26px 0}
-.op-list li{margin-bottom:14px}
-.op-list i{color:var(--accent)}
-
-.op-btn{
+.op-btn {
   display:inline-block;
-  padding:12px 28px;
+  margin-top:20px;
+  padding:12px 26px;
   border-radius:999px;
   background:linear-gradient(90deg,var(--primary),var(--accent));
-  color:#fff;
+  color:#000;
+  font-weight:700;
   text-decoration:none;
-  font-weight:600;
-}
-.op-btn.outline{
-  background:transparent;
-  border:1px solid var(--primary);
 }
 
-/* ================= FOOTER ================= */
-.footer{
-  background:radial-gradient(circle at top,#15171c,#0b0c10);
-  padding:90px 30px 30px;
-  color:var(--muted);
-}
-.footer-container{
+/* === Contact === */
+.contact {
   max-width:1200px;
   margin:auto;
+  padding:100px 30px;
   display:grid;
-  grid-template-columns:1.6fr 1fr 1fr 1fr;
-  gap:50px;
+  grid-template-columns:1fr 1fr;
+  gap:60px;
 }
-.footer-logo{height:42px;margin-bottom:16px}
-.footer-tagline{max-width:340px;font-size:.95rem}
-
-.footer-col h4{
+.contact h2 {font-size:2.6rem; color:var(--primary);}
+.contact p {color:var(--muted);}
+.contact-info {margin-top:30px;}
+.contact-info div {margin-bottom:14px;}
+.contact-socials a {
+  color:var(--muted);
+  font-size:20px;
+  margin-right:18px;
+}
+.contact-socials a:hover {color:var(--primary);}
+.form {
+  background:rgba(255,255,255,.03);
+  padding:40px;
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+}
+.form input,.form textarea {
+  width:100%;
+  margin-bottom:18px;
+  padding:14px;
+  border-radius:10px;
+  border:none;
+  background:#0f1220;
   color:var(--text);
-  margin-bottom:20px;
 }
-.footer-col ul{list-style:none}
-.footer-col li{margin-bottom:14px}
+.form button {
+  width:100%;
+  padding:14px;
+  border-radius:999px;
+  border:none;
+  font-weight:700;
+  background:linear-gradient(90deg,var(--primary),var(--accent));
+  cursor:pointer;
+}
 
-.footer-bottom{
-  max-width:1200px;
-  margin:60px auto 0;
-  padding-top:22px;
+/* === Footer === */
+footer {
+  text-align:center;
+  padding:40px 20px;
+  color:var(--muted);
   border-top:1px solid rgba(255,255,255,.08);
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  flex-wrap:wrap;
 }
 
-/* ================= REVEAL ================= */
-.reveal{
+/* === Reveal Animation === */
+.reveal {
   opacity:0;
-  transform:translateY(28px);
-  transition:.9s ease;
+  transform:translateY(30px);
+  transition:.8s;
 }
-.reveal.active{
-  opacity:1;
-  transform:none;
-}
+.reveal.active {opacity:1;transform:none;}
 
-/* ================= RESPONSIVE ================= */
-@media(max-width:900px){
-  .about{grid-template-columns:1fr}
-  .footer-container{grid-template-columns:1fr 1fr}
-}
-@media(max-width:600px){
-  .footer-container{grid-template-columns:1fr}
-  .footer-bottom{flex-direction:column;text-align:center;gap:16px}
+@media(max-width:900px) {
+  .about,.contact {grid-template-columns:1fr;}
 }
 </style>
 </head>
 
 <body>
+<div class="bg-grid"></div>
 
-<!-- NAV -->
-<div class="navbar">
+<!-- Navbar -->
+<nav class="nav">
   <div class="nav-left">
     <img src="./assets/logo.png" class="logo">
-    <a class="nav-item" href="#home">Home</a>
-    <a class="nav-item" href="#research">Research</a>
-    <a class="nav-item" href="#about">About</a>
+    <a href="#research">Research</a>
+    <a href="#products">Products</a>
+    <a href="#opportunities">Opportunities</a>
   </div>
-  <a href="#contact" class="contact-btn">Collaborate</a>
-</div>
+  <a href="#contact" class="nav-btn">Contact Us</a>
+</nav>
 
-<!-- HERO -->
-<section class="hero" id="home">
-  <div class="hero-content">
-    <div class="tagline">Independent Research Lab · Est. 2017</div>
-    <h1>Engineering Research for Intelligent Systems</h1>
-    <p>
-      MechStem is an independent engineering research lab working at the
-      intersection of embedded systems, artificial intelligence,
-      automation, and mechanical engineering.
-    </p>
-    <a href="#research" class="contact-btn">Explore Research</a>
+<!-- Hero -->
+<section class="hero">
+  <div>
+    <h1>MechStem Research Lab</h1>
+    <p>Applied engineering research in Embedded Systems, Edge AI, and Mechanical Systems — from silicon to systems.</p>
+    <a href="#research" class="cta">Explore Research</a>
   </div>
 </section>
 
-<!-- RESEARCH DOMAINS -->
+<!-- Research Section -->
 <section class="section" id="research">
   <h2>Research Domains</h2>
-  <p class="section-desc">
-    Our work spans foundational research, applied engineering,
-    and industry-aligned system development.
-  </p>
-
-  <div class="cards">
-    <div class="card reveal">
-      <i class="fas fa-brain"></i>
-      <h3>Artificial Intelligence & Automation</h3>
-      <p>
-        Applied AI research in perception, decision systems,
-        industrial automation, and intelligent workflows.
-      </p>
-    </div>
-
-    <div class="card reveal">
-      <i class="fas fa-microchip"></i>
-      <h3>Embedded Systems & Edge Computing</h3>
-      <p>
-        Low-level systems research including Linux, RTOS,
-        device drivers, BSPs, and edge AI deployment.
-      </p>
-    </div>
-
-    <div class="card reveal">
-      <i class="fas fa-cogs"></i>
-      <h3>Mechanical Systems & Mechatronics</h3>
-      <p>
-        Design, simulation, and optimization of mechanical
-        and electromechanical systems.
-      </p>
-    </div>
+  <p class="section-desc">Bridging applied research and industry deployment.</p>
+  <div class="grid">
+    <div class="card reveal"><i class="fas fa-microchip"></i><h3>Embedded Systems</h3><p>Linux, RTOS, BSP, drivers, sensor pipelines.</p></div>
+    <div class="card reveal"><i class="fas fa-brain"></i><h3>Edge AI</h3><p>On-device inference, vision, sensor fusion, edge orchestration.</p></div>
+    <div class="card reveal"><i class="fas fa-cogs"></i><h3>Mechanical Systems</h3><p>Robotics, machine design, simulation & cyber-physical systems.</p></div>
   </div>
 </section>
 
-<!-- ABOUT -->
-<section class="section" id="about">
-  <h2>About MechStem</h2>
-  <p class="section-desc">
-    Research-led engineering with real-world impact.
-  </p>
-
-  <div class="about">
-    <div>
-      <p>
-        Founded in 2017, MechStem began as a technical initiative
-        focused on deep engineering fundamentals across software,
-        electronics, and mechanical systems.
-      </p>
-      <p style="margin-top:16px;">
-        Today, MechStem operates as an independent research lab,
-        conducting applied research, building experimental platforms,
-        and collaborating with industry, academia, and engineers
-        worldwide.
-      </p>
-      <p style="margin-top:16px;">
-        Our philosophy emphasizes rigor, system-level thinking,
-        and long-term engineering value over short-term trends.
-      </p>
-    </div>
-    <img src="./assets/research-lab.jpg" alt="MechStem Research Lab">
+<!-- Products Section -->
+<section class="section" id="products">
+  <h2>Products & Platforms</h2>
+  <p class="section-desc">Research-driven systems under development.</p>
+  <div class="grid">
+    <div class="card reveal"><h3>OmniParse</h3><p>Structured & unstructured intelligence engine.</p></div>
+    <div class="card reveal"><h3>Nayana</h3><p>Edge AI vision platform (WIP).</p></div>
+    <div class="card reveal"><h3>Internal Tools</h3><p>Embedded & AI debugging systems.</p></div>
   </div>
 </section>
 
-<!-- OPPORTUNITIES -->
-<section class="opportunities">
-  <h2>Opportunities & Collaboration</h2>
-  <p class="op-desc">
-    Work with us through research, engineering, or institutional collaboration.
-  </p>
-
+<!-- Opportunities Section -->
+<section class="section" id="opportunities">
+  <h2>Opportunities</h2>
   <div class="op-grid">
     <div class="op-card reveal">
-      <h3>Research & Engineering Roles</h3>
-      <div class="op-box">
-        <p>
-          Internships, research fellowships, and engineering
-          roles for motivated builders and researchers.
-        </p>
-      </div>
-      <a href="#" class="op-btn">Apply</a>
+      <h3>Join the Lab</h3>
+      <p>Internships, research engineers, and AI/Embedded positions.</p>
+      <a class="op-btn" href="#">Apply</a>
     </div>
-
     <div class="op-card reveal">
-      <h3>Industry & Academic Collaboration</h3>
-      <ul class="op-list">
-        <li><i class="fas fa-check-circle"></i> Joint research programs</li>
-        <li><i class="fas fa-check-circle"></i> Prototyping & validation</li>
-        <li><i class="fas fa-check-circle"></i> Open research initiatives</li>
-      </ul>
-      <a href="#" class="op-btn outline">Schedule Discussion</a>
+      <h3>Collaborate</h3>
+      <p>Industry research partnerships & open-source sponsorships.</p>
+      <a class="op-btn" href="#">Contact Research Team</a>
     </div>
   </div>
 </section>
 
-<!-- CONTACT -->
-<section class="section" id="contact" style="text-align:center">
-  <h2>Contact</h2>
-  <p class="section-desc">
-    <a href="mailto:contact@mechstem.com">contact@mechstem.com</a>
-  </p>
+<!-- Contact Section -->
+<section class="contact" id="contact">
+  <div>
+    <h2>Get In Touch</h2>
+    <p>Discuss research, collaboration, or partnership opportunities.</p>
+    <div class="contact-info">
+      <div>📧 contact@mechstem.com</div>
+      <div>📍 Bangalore, India</div>
+    </div>
+    <div class="contact-socials">
+      <a href="https://github.com/mechstem" target="_blank"><i class="fab fa-github"></i></a>
+      <a href="https://www.linkedin.com/company/mechstem/" target="_blank"><i class="fab fa-linkedin"></i></a>
+      <a href="https://www.youtube.com/@mechstem" target="_blank"><i class="fab fa-youtube"></i></a>
+    </div>
+  </div>
+
+  <form class="form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+    <input name="name" placeholder="Full name" required>
+    <input name="email" type="email" placeholder="Email" required>
+    <textarea name="message" rows="6" placeholder="Your message"></textarea>
+    <button>Send Message</button>
+  </form>
 </section>
 
-<!-- FOOTER -->
-<footer class="footer">
-  <div class="footer-container">
-    <div>
-      <img src="./assets/logo.png" class="footer-logo">
-      <p class="footer-tagline">
-        Independent research and engineering innovation since 2017.
-      </p>
-    </div>
-
-    <div class="footer-col">
-      <h4>Focus Areas</h4>
-      <ul>
-        <li>Embedded Systems</li>
-        <li>AI & Automation</li>
-        <li>Mechanical Engineering</li>
-      </ul>
-    </div>
-
-    <div class="footer-col">
-      <h4>Research</h4>
-      <ul>
-        <li>Publications</li>
-        <li>Projects</li>
-        <li>Open Source</li>
-      </ul>
-    </div>
-
-    <div class="footer-col">
-      <h4>Organization</h4>
-      <ul>
-        <li>About</li>
-        <li>Contact</li>
-        <li>Legal</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="footer-bottom">
-    <p>© 2017–2025 MechStem Research Lab</p>
-  </div>
+<footer>
+  © 2025 MechStem Research Lab · Founded 2017
 </footer>
 
 <script>
-const els=document.querySelectorAll('.reveal');
-const obs=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting){
-      e.target.classList.add('active');
-      obs.unobserve(e.target);
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting) {
+      entry.target.classList.add('active');
+      observer.unobserve(entry.target);
     }
   });
-},{threshold:.15});
-els.forEach(el=>obs.observe(el));
+},{threshold:0.15});
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 </script>
 
 </body>
