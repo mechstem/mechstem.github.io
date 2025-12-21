@@ -2,343 +2,294 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>MechStem – Tech-Driven Innovation in Engineering</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MechStem | Tech-Driven Engineering Innovation</title>
+
+<meta name="description" content="MechStem is a tech-driven engineering company specializing in AI, automation, embedded systems, and sustainable innovation.">
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
 <style>
 :root{
-  --bg:#0f1014; 
-  --text:#e6e9ef; 
+  --bg:#0f1014;
+  --card:#1a1c22;
+  --text:#e6e9ef;
   --muted:#9aa3b2;
-  --blue:#1E88E5; 
-  --green:#43A047; 
-  --red:#E53935; 
-  --yellow:#FBC02D;
-  --radius:18px;
-  --shadow:0 10px 30px rgba(0,0,0,.25);
+  --primary:#1E88E5;
+  --accent:#43A047;
+  --radius:16px;
+  --shadow:0 10px 30px rgba(0,0,0,.35);
 }
 
-* {box-sizing:border-box; margin:0; padding:0;}
-body {font-family: system-ui, sans-serif; background: var(--bg); color: var(--text); line-height:1.6;}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family: system-ui, sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+}
 
-.navbar {
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px 30px;
-  width: 100%;
-  background: rgba(15,16,20,0.7);
-  backdrop-filter: blur(10px);
-  transition: background 0.3s ease;
+/* ================= NAVBAR ================= */
+.navbar{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:14px 40px;
+  background:rgba(15,16,20,.85);
+  backdrop-filter:blur(10px);
 }
-.navbar.scrolled { background: rgba(15,16,20,0.95); }
+.nav-left{
+  display:flex;
+  align-items:center;
+  gap:26px;
+}
+.logo{
+  height:38px;
+}
+.nav-item{
+  cursor:pointer;
+  color:var(--muted);
+  transition:.3s;
+}
+.nav-item:hover{color:var(--primary)}
+.contact-btn{
+  background:linear-gradient(90deg,var(--primary),var(--accent));
+  padding:10px 18px;
+  border-radius:999px;
+  color:#fff;
+  text-decoration:none;
+  font-weight:600;
+}
 
-.nav-left { display: flex; align-items: center; gap: 20px; }
-.logo { height:40px; animation: floaty 6s ease-in-out infinite; }
-@keyframes floaty {0%,100%{transform:translateY(0);}50%{transform:translateY(-4px);}}
-.nav-item { cursor:pointer; opacity:.95; transition:color .3s; display:flex; align-items:center; gap:6px; }
-.nav-item:hover, .nav-active { color: var(--blue); }
-.contact-button {
-  padding: 8px 16px; border-radius:999px; background: linear-gradient(90deg, var(--blue), var(--green));
-  color:#fff; font-weight:600; text-decoration:none; position:relative; overflow:hidden;
+/* ================= HERO ================= */
+.hero{
+  min-height:90vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:60px 20px;
 }
-.contact-button:hover { box-shadow:0 0 15px var(--yellow); transform:translateY(-2px); }
-.contact-button::after {
-  content:""; position:absolute; inset:0; background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,.35) 45%, transparent 80%);
-  transform:translateX(-200%);
+.hero-content{
+  max-width:900px;
 }
-.contact-button:hover::after { animation: sheen .9s ease forwards; }
-@keyframes sheen { to {transform:translateX(200%);} }
+.hero h1{
+  font-size:clamp(36px,5vw,56px);
+  margin-bottom:20px;
+}
+.hero p{
+  font-size:1.2rem;
+  color:var(--muted);
+  margin-bottom:32px;
+}
+.hero .cta{
+  font-size:1rem;
+  padding:12px 22px;
+}
 
-/* Full-screen slider */
-.slider { position: relative; width:100%; height:100vh; overflow:hidden; }
-.slides { display:flex; transition: transform 1.5s ease; width:400%; height:100%; }
-.slide {
-  min-width:100%; height:100%; position:relative; background-size:cover; background-position:center;
-  display:flex; align-items:center; justify-content:flex-start; color:var(--text);
+/* ================= SECTIONS ================= */
+.section{
+  padding:80px 30px;
+  max-width:1200px;
+  margin:auto;
 }
-.slide-content {
-  position:absolute; left:50px; top:50%; transform:translateY(-50%);
-  max-width:40%; background:rgba(0,0,0,0.5); padding:20px 30px; border-radius:14px; box-shadow:0 0 12px rgba(0,0,0,0.6);
+.section h2{
+  text-align:center;
+  font-size:2.4rem;
+  margin-bottom:18px;
+  color:var(--primary);
 }
-.slide-content h1 { font-size:clamp(28px,3vw,42px); margin-bottom:12px; line-height:1.2; }
-.slide-content p { font-size:clamp(14px,1.2vw,18px); color: var(--muted); margin-bottom:18px; }
-.slide-content .cta-button { margin-top:0; padding:10px 18px; font-size:1rem; }
+.section p.section-desc{
+  text-align:center;
+  max-width:800px;
+  margin:0 auto 50px;
+  color:var(--muted);
+}
 
-/* Mobile */
+/* ================= CARDS ================= */
+.cards{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:26px;
+}
+.card{
+  background:var(--card);
+  padding:28px;
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  transition:.3s;
+}
+.card:hover{
+  transform:translateY(-6px);
+}
+.card i{
+  font-size:28px;
+  color:var(--primary);
+  margin-bottom:14px;
+}
+.card h3{
+  margin-bottom:10px;
+}
+.card p{
+  color:var(--muted);
+}
+
+/* ================= ABOUT ================= */
+.about{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:50px;
+  align-items:center;
+}
+.about img{
+  width:100%;
+  border-radius:var(--radius);
+}
+
+/* ================= CONTACT ================= */
+.contact{
+  text-align:center;
+  background:#15171c;
+  padding:80px 20px;
+}
+.contact h2{
+  color:var(--primary);
+  margin-bottom:14px;
+}
+.contact p{
+  color:var(--muted);
+  margin-bottom:20px;
+}
+.contact a{
+  color:#fff;
+  text-decoration:none;
+  font-weight:600;
+  font-size:1.1rem;
+}
+
+/* ================= FOOTER ================= */
+footer{
+  padding:40px 20px;
+  text-align:center;
+  color:var(--muted);
+  border-top:1px solid rgba(255,255,255,.08);
+}
+.socials{
+  margin-top:14px;
+  display:flex;
+  justify-content:center;
+  gap:18px;
+}
+.socials a{
+  color:var(--muted);
+  font-size:20px;
+}
+.socials a:hover{color:var(--primary)}
+
+/* ================= MOBILE ================= */
 @media(max-width:768px){
-  .slide-content { position:static; transform:none; max-width:90%; margin:0 auto; text-align:center; background:rgba(0,0,0,0.65); padding:16px 20px; border-radius:12px; }
-  .slide { justify-content:center; }
-}
-
-/* Arrows */
-.prev, .next {
-  position:absolute; top:50%; transform:translateY(-50%);
-  background:rgba(0,0,0,0.4); color:#fff; border:none; font-size:24px; padding:12px; border-radius:50%; cursor:pointer; z-index:10; transition:background .3s; user-select:none;
-}
-.prev:hover, .next:hover { background:rgba(0,0,0,0.6); }
-.prev { left:15px; }
-.next { right:15px; }
-
-/* Dots */
-.dots { position:absolute; bottom:30px; width:100%; text-align:center; }
-.dot { height:12px; width:12px; margin:0 6px; background:rgba(255,255,255,.35); border-radius:50%; display:inline-block; cursor:pointer; transition:background .3s; }
-.dot.active:nth-child(1){ background:var(--blue); animation:pulse 2.6s ease-in-out infinite; }
-.dot.active:nth-child(2){ background:var(--green); animation:pulse 2.6s ease-in-out infinite; }
-.dot.active:nth-child(3){ background:var(--yellow); animation:pulse 2.6s ease-in-out infinite; }
-.dot.active:nth-child(4){ background:var(--red); animation:pulse 2.6s ease-in-out infinite; }
-@keyframes pulse { 0%,100%{box-shadow:0 0 0 rgba(0,0,0,0);} 50%{box-shadow:0 0 16px rgba(251,192,45,.35);} }
-
-/* Footer */
-footer { padding:32px 0 60px; color:var(--muted); text-align:center; border-top:1px solid rgba(255,255,255,.08); margin-top:40px; }
-.social-links { display:flex; justify-content:center; gap:14px; margin-top:12px; }
-.social-links img { height:28px; width:28px; transition: transform .3s; }
-.social-links img:hover { transform:scale(1.2); }
-
-/* About & Career Section */
-.about-career-section {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 40px;
-  padding: 60px 30px;
-  justify-content: center;
-  background: rgba(20, 20, 24, 0.85);
-}
-
-.about-career-block {
-  flex: 1 1 400px;
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  padding: 20px;
-  border-radius: var(--radius);
-  background: rgba(30,30,36,0.6);
-  box-shadow: var(--shadow);
-  opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
-}
-
-.about-career-block img {
-  max-width: 150px;
-  border-radius: var(--radius);
-}
-
-.about-career-content h2 {
-  margin-bottom: 12px;
-  color: var(--blue);
-}
-
-.about-career-content p {
-  color: var(--text);
-  line-height: 1.5;
-}
-
-/* Visible state with stagger */
-.about-career-block.visible:nth-child(1) {
-  transition-delay: 0.2s;
-  opacity: 1;
-  transform: translateY(0);
-}
-.about-career-block.visible:nth-child(2) {
-  transition-delay: 0.5s;
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* ===================== Page Load Animations ===================== */
-@keyframes fadeSlideIn {
-  0% { opacity: 0; transform: translateY(40px); }
-  100% { opacity: 1; transform: translateY(0); }
-}
-
-.fade-in {
-  opacity: 0;
-  animation: fadeSlideIn 1s forwards;
-}
-
-/* Staggered animation for about-career blocks */
-.about-career-block {
-  opacity: 0;
-  transform: translateY(40px);
-}
-
-.about-career-block.fade-visible:nth-child(1) {
-  animation: fadeSlideIn 0.8s 0.2s forwards;
-}
-.about-career-block.fade-visible:nth-child(2) {
-  animation: fadeSlideIn 0.8s 0.5s forwards;
-}
-
-/* Navbar fade-in */
-.navbar {
-  opacity: 0;
-  transform: translateY(-20px);
-}
-.navbar.fade-in {
-  animation: fadeSlideIn 0.8s forwards;
-}
-
-/* Slider content fade-in */
-.slide-content {
-  opacity: 0;
-  transform: translateY(20px);
-}
-.slide-content.fade-in {
-  animation: fadeSlideIn 1s forwards;
+  .about{
+    grid-template-columns:1fr;
+  }
 }
 </style>
 </head>
+
 <body>
 
-<!-- Navbar -->
+<!-- NAVBAR -->
 <div class="navbar">
   <div class="nav-left">
-    <img src="assets/logo.png" alt="MechStem Logo" class="logo">
-    <div class="nav-item nav-active" onclick="location.href='index.html'"><i class="fas fa-home"></i> Home</div>
-    <div class="nav-item" onclick="location.href='Products.html'"><i class="fas fa-graduation-cap"></i> Trainings</div>
-    <div class="nav-item" onclick="location.href='services.html'"><i class="fas fa-cogs"></i> Services</div>
+    <img src="./assets/logo.png" class="logo" alt="MechStem Logo">
+    <div class="nav-item" onclick="location.href='#home'">Home</div>
+    <div class="nav-item" onclick="location.href='#services'">Services</div>
+    <div class="nav-item" onclick="location.href='#about'">About</div>
   </div>
-  <a href="#contact" class="contact-button"><i class="fas fa-envelope"></i> Contact</a>
+  <a href="#contact" class="contact-btn">Contact</a>
 </div>
 
-<!-- Slider -->
-<section class="slider">
-  <button class="prev">&#10094;</button>
-  <div class="slides">
-    <div class="slide" style="background:url('assets/Project-1.jpg') center/cover no-repeat;">
-      <div class="slide-content">
-        <h1>Engineering Innovation for the Future</h1>
-        <p>Empowering industries with AI, embedded systems, and mechanical solutions.</p>
-        <a href="#news" class="contact-button cta-button">Read Latest News</a>
-      </div>
-    </div>
-    <div class="slide" style="background:url('assets/Project-2.jpg') center/cover no-repeat;">
-      <div class="slide-content">
-        <h1>Innovating Smart Infrastructure</h1>
-        <p>Sustainable buildings with IoT and advanced analytics.</p>
-        <a href="#news" class="contact-button cta-button">Explore More</a>
-      </div>
-    </div>
-    <div class="slide" style="background:url('assets/Project-3.jpg') center/cover no-repeat;">
-      <div class="slide-content">
-        <h1>Advanced Automation in Machinery</h1>
-        <p>Boosting efficiency with robotics and automation.</p>
-        <a href="#news" class="contact-button cta-button">See How</a>
-      </div>
-    </div>
-    <div class="slide" style="background:url('assets/Project-4.jpg') center/cover no-repeat;">
-      <div class="slide-content">
-        <h1>Leading Aerospace Systems</h1>
-        <p>State-of-the-art avionics and flight technology.</p>
-        <a href="#news" class="contact-button cta-button">Discover More</a>
-      </div>
-    </div>
-  </div>
-  <button class="next">&#10095;</button>
-  <div class="dots">
-    <span class="dot active" data-index="0"></span>
-    <span class="dot" data-index="1"></span>
-    <span class="dot" data-index="2"></span>
-    <span class="dot" data-index="3"></span>
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-content">
+    <h1>Tech-Driven Innovation in Engineering</h1>
+    <p>
+      MechStem blends AI, automation, and mechanical engineering
+      to create sustainable, future-ready solutions.
+    </p>
+    <a href="#services" class="contact-btn cta">Explore Our Work</a>
   </div>
 </section>
 
-<!-- About & Career Section -->
-<section class="about-career-section">
-  <div class="about-career-block">
-    <img src="assets/mech-logo.png" alt="About Us Image" />
-    <div class="about-career-content">
-      <h2>About Us</h2>
-      <p>
-        MechStem is a pioneering engineering company that thrives on tech-driven innovation. 
-        We combine AI, embedded systems, and mechanical expertise to craft sustainable, efficient solutions that shape the future of industries worldwide.
-      </p>
-    </div>
-  </div>
+<!-- SERVICES -->
+<section class="section" id="services">
+  <h2>Our Capabilities</h2>
+  <p class="section-desc">
+    We focus on intelligent, scalable engineering solutions
+    that drive real-world impact.
+  </p>
 
-  <div class="about-career-block">
-    <div class="about-career-content">
-      <h2>Career with Us</h2>
-      <p>
-        Join MechStem and become part of a dynamic team shaping tomorrow’s technology. 
-        We foster innovation, growth, and collaboration to empower engineers and visionaries to thrive.
-      </p>
+  <div class="cards">
+    <div class="card">
+      <i class="fas fa-robot"></i>
+      <h3>AI & Automation</h3>
+      <p>Smart robotics and automation systems that enhance efficiency.</p>
+    </div>
+    <div class="card">
+      <i class="fas fa-microchip"></i>
+      <h3>Embedded Systems</h3>
+      <p>Reliable embedded platforms for industrial and smart applications.</p>
+    </div>
+    <div class="card">
+      <i class="fas fa-industry"></i>
+      <h3>Mechanical Design</h3>
+      <p>Innovative mechanical solutions built for performance and durability.</p>
     </div>
   </div>
 </section>
 
-<!-- Footer -->
+<!-- ABOUT -->
+<section class="section" id="about">
+  <h2>About MechStem</h2>
+  <p class="section-desc">
+    We are engineers, innovators, and problem-solvers shaping the future.
+  </p>
+
+  <div class="about">
+    <div>
+      <p>
+        MechStem is a forward-thinking engineering company dedicated to
+        solving complex challenges using advanced technology.
+        Our interdisciplinary approach combines AI, electronics,
+        and mechanical expertise.
+      </p>
+      <p style="margin-top:14px;">
+        We believe in sustainable innovation, continuous learning,
+        and building solutions that matter.
+      </p>
+    </div>
+    <img src="./assets/Project-1.jpg" alt="Engineering Innovation">
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <h2>Get In Touch</h2>
+  <p>Interested in collaboration, training, or projects?</p>
+  <a href="mailto:contact@mechstem.com">contact@mechstem.com</a>
+</section>
+
+<!-- FOOTER -->
 <footer>
-  <p>© 2025 MechStem. Built with 💡 by future engineers.</p>
-  <div class="social-links">
-    <a href="https://www.linkedin.com/company/mechstem/" target="_blank"><img src="assets/linkedin-icon.png" alt="LinkedIn"></a>
-    <a href="https://www.youtube.com/@mechstem" target="_blank"><img src="assets/youtube-icon.png" alt="YouTube"></a>
-    <a href="https://twitter.com/YOUR_TWITTER_HANDLE" target="_blank"><img src="assets/twitter-icon.png" alt="Twitter"></a>
+  <p>© 2025 MechStem. Built by future engineers.</p>
+  <div class="socials">
+    <a href="https://www.linkedin.com/company/mechstem/" target="_blank"><i class="fab fa-linkedin"></i></a>
+    <a href="https://www.youtube.com/@mechstem" target="_blank"><i class="fab fa-youtube"></i></a>
+    <a href="#"><i class="fab fa-twitter"></i></a>
   </div>
 </footer>
-
-<script>
-const slidesContainer = document.querySelector('.slides');
-const slides = document.querySelectorAll('.slide');
-const dots = document.querySelectorAll('.dot');
-let currentIndex = 0;
-
-function goToSlide(index){
-  if(index<0) index=slides.length-1;
-  if(index>=slides.length) index=0;
-  slidesContainer.style.transform = `translateX(-${index*100}%)`;
-  dots.forEach(d=>d.classList.remove('active'));
-  dots[index].classList.add('active');
-  currentIndex=index;
-}
-
-document.querySelector('.next').addEventListener('click', ()=>goToSlide(currentIndex+1));
-document.querySelector('.prev').addEventListener('click', ()=>goToSlide(currentIndex-1));
-dots.forEach(dot=>dot.addEventListener('click',(e)=>goToSlide(Number(e.target.dataset.index))));
-
-/* Navbar scroll effect */
-window.addEventListener('scroll', ()=>{
-  const navbar=document.querySelector('.navbar');
-  if(window.scrollY>50) navbar.classList.add('scrolled');
-  else navbar.classList.remove('scrolled');
-});
-
-/* About & Career reveal on scroll with cinematic stagger */
-function revealAboutCareer() {
-  const section = document.querySelector('.about-career-section');
-  const blocks = document.querySelectorAll('.about-career-block');
-  const rect = section.getBoundingClientRect();
-  const windowHeight = window.innerHeight;
-
-  if(rect.top < windowHeight * 0.85) {
-    blocks.forEach(block => block.classList.add('visible'));
-  }
-}
-
-window.addEventListener('scroll', revealAboutCareer);
-window.addEventListener('load', revealAboutCareer);
-
-/* ===================== Page Load Animations ===================== */
-window.addEventListener('load', () => {
-  // Navbar animation
-  document.querySelector('.navbar').classList.add('fade-in');
-
-  // Slider content animation
-  document.querySelectorAll('.slide-content').forEach((el, i) => {
-    el.classList.add('fade-in');
-    el.style.animationDelay = `${0.3 + i*0.2}s`; // stagger effect
-  });
-
-  // About & Career blocks animation
-  document.querySelectorAll('.about-career-block').forEach(block => {
-    block.classList.add('fade-visible');
-  });
-});
-</script>
 
 </body>
 </html>
