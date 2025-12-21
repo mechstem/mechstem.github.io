@@ -184,6 +184,24 @@ body {
   line-height: 1.5;
   color: var(--muted);
 }
+/* Removes default link styling */
+.card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block; /* Ensures the link covers the full area of the card */
+  transition: transform 0.2s ease;
+}
+
+/* Optional: Slight lift effect on the wrapper itself */
+.card-link:hover {
+  transform: translateY(-5px);
+}
+
+/* Ensure the card hover styles still trigger correctly */
+.card-link:hover .card {
+  border-color: var(--primary);
+  background: rgba(255, 255, 255, 0.06);
+}
 
 
 /* === About === */
@@ -320,32 +338,38 @@ footer {
 <!-- Research Section -->
 <section class="section" id="research">
   <h2>Domains</h2>
-  <p class="section-desc">Bridging applied research and industry deployment.</p>
-  
-  <!--div class="grid">
-    <div class="card reveal">
-      <div class="card-icon-container">
-        <img src="./assets/Archi.gif" alt="Embedded"> 
+  <div class="grid">
+    
+    <a href="embedded-systems.html" class="card-link">
+      <div class="card reveal">
+        <div class="card-icon-container">
+          <img src="./assets/Archi.gif" alt="Embedded"> 
+        </div>
+        <h3>Embedded Systems</h3>
+        <p>Linux, RTOS, BSP, drivers, and sensor pipelines.</p>
       </div>
-      <h3>Embedded Systems</h3>
-      <p>Linux, RTOS, BSP, drivers, and sensor pipelines.</p>
-</div-->
+    </a>
 
-    <div class="card reveal">
-      <div class="card-icon-container">
-        <img src="./assets/AI.gif" alt="AI">
+    <a href="https://github.com/mechstem/edge-ai" target="_blank" class="card-link">
+      <div class="card reveal">
+        <div class="card-icon-container">
+          <img src="./assets/AI.gif" alt="AI">
+        </div>
+        <h3>Edge AI</h3>
+        <p>On-device inference, vision, and edge orchestration.</p>
       </div>
-      <h3>Edge AI</h3>
-      <p>On-device inference, vision, and edge orchestration.</p>
-    </div>
+    </a>
 
-    <div class="card reveal">
-      <div class="card-icon-container">
-        <img src="./assets/gears.gif" alt="Mechanical">
+    <a href="https://github.com/mechstem/mechanical" target="_blank" class="card-link">
+      <div class="card reveal">
+        <div class="card-icon-container">
+          <img src="./assets/gears.gif" alt="Mechanical">
+        </div>
+        <h3>Mechanical Systems</h3>
+        <p>Robotics, machine design, and cyber-physical simulations.</p>
       </div>
-      <h3>Mechanical Systems</h3>
-      <p>Robotics, machine design, and cyber-physical simulations.</p>
-    </div>
+    </a>
+    
   </div>
 </section>
 
@@ -368,16 +392,18 @@ footer {
   <div class="op-grid">
     <div class="op-card reveal">
       <h3>Join the Lab</h3>
-      <p>Internships,Trainings, Engineers in various positions.</p>
-      <a class="op-btn" href="#">Apply</a>
+      <p>Internships, Trainings, Engineers in various positions!!!.</p>
+      <a class="op-btn" href="https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID_HERE/edit?usp=sharing" target="_blank">Apply</a>
     </div>
+    
     <div class="op-card reveal">
       <h3>Collaborate</h3>
       <p>Industry research partnerships & open-source sponsorships.</p>
-      <a class="op-btn" href="#">Contact Team</a>
+      <a class="op-btn" href="https://docs.google.com/spreadsheets/d/YOUR_SECOND_SHEET_ID/edit?usp=sharing" target="_blank">Contact Team</a>
     </div>
   </div>
 </section>
+
 
 <!-- Contact Section -->
 <section class="contact" id="contact">
