@@ -123,48 +123,68 @@ body {
 }
 
 /* === Grid Cards === */
-/* Keep the large card style */
-.card {
-  background: var(--card);
-  padding: 40px; /* Generous padding for a "big" feel */
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  transition: .4s;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start; /* Aligns everything to the left */
-  min-height: 250px; /* Ensures cards are consistently large */
+/* Narrower grid to make cards feel more compact */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+  max-width: 1000px; /* Constrains the overall width */
+  margin: 0 auto;
 }
 
-/* The small 35px GIF container */
+/* Compact, Translucent Glass Card */
+.card {
+  background: rgba(255, 255, 255, 0.03); /* Translucent base */
+  backdrop-filter: blur(10px); /* Frosty glass effect */
+  -webkit-backdrop-filter: blur(10px);
+  padding: 25px; /* Reduced padding for a "bit small" feel */
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.08); /* Soft border */
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  min-height: 200px; /* Reduced height */
+}
+
+/* Small GIF Container */
 .card-icon-container {
-  width: 50px;
-  height: 50px;
+  width: 45px;
+  height: 45px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 12px;
-  margin-bottom: 24px; /* Space between icon and title */
+  background: rgba(76, 201, 240, 0.1);
+  border-radius: 10px;
+  margin-bottom: 15px;
 }
 
 .card-icon-container img {
-  width: 35px; /* The specific size you requested */
+  width: 35px;
   height: 35px;
   object-fit: contain;
 }
 
-/* Hover state for the big card */
+/* Hover Effect */
 .card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 0 0 1px rgba(76, 201, 240, 0.35), 0 30px 80px rgba(76, 201, 240, 0.15);
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.06); /* Brightens slightly */
+  border-color: var(--primary);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
 }
 
-.card:hover .card-icon-container {
-  border-color: var(--primary);
-  background: rgba(76, 201, 240, 0.1);
+/* Text adjustments for smaller card */
+.card h3 {
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+  color: var(--primary);
 }
+
+.card p {
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
 
 /* === About === */
 .about {
@@ -314,29 +334,30 @@ footer {
   <div class="grid">
     <div class="card reveal">
       <div class="card-icon-container">
-        <img src="./assets/Archi.gif" alt="Embedded Systems"> 
+        <img src="./assets/Archi.gif" alt="Embedded"> 
       </div>
       <h3>Embedded Systems</h3>
-      <p>Linux, RTOS, BSP, drivers, and high-performance sensor pipelines designed for reliability.</p>
+      <p>Linux, RTOS, BSP, drivers, and sensor pipelines.</p>
     </div>
 
     <div class="card reveal">
       <div class="card-icon-container">
-        <img src="./assets/AI.gif" alt="Edge AI">
+        <img src="./assets/AI.gif" alt="AI">
       </div>
       <h3>Edge AI</h3>
-      <p>On-device inference, computer vision, and sensor fusion for real-time intelligence at the edge.</p>
+      <p>On-device inference, vision, and edge orchestration.</p>
     </div>
 
     <div class="card reveal">
       <div class="card-icon-container">
-        <img src="./assets/gears.gif" alt="Mechanical Systems">
+        <img src="./assets/gears.gif" alt="Mechanical">
       </div>
       <h3>Mechanical Systems</h3>
-      <p>Robotics, machine design, and cyber-physical simulations bridging the gap between digital and physical.</p>
+      <p>Robotics, machine design, and cyber-physical simulations.</p>
     </div>
   </div>
 </section>
+
 
 
 <!-- Products Section -->
