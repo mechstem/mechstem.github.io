@@ -7,6 +7,7 @@
 <meta name="description" content="MechStem is a research lab founded in 2017, working on Embedded Systems, Edge AI, Mechanical Systems and applied engineering innovation.">
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
 <style>
 :root {
@@ -58,9 +59,7 @@ body {
   backdrop-filter: blur(10px);
   z-index:1000;
 }
-.nav-left {
-  display:flex; align-items:center; gap:28px;
-}
+.nav-left { display:flex; align-items:center; gap:28px; }
 .logo {height:36px;}
 .nav a {color:var(--muted); text-decoration:none; font-size:.95rem;}
 .nav a:hover {color:var(--primary);}
@@ -75,23 +74,15 @@ body {
 
 /* === Hero === */
 .hero {
-  min-height:90vh;
+  min-height:80vh;
   display:flex;
   align-items:center;
   justify-content:center;
   text-align:center;
   padding:80px 20px;
 }
-.hero h1 {
-  font-size: clamp(38px,5vw,60px);
-  margin-bottom:18px;
-}
-.hero p {
-  max-width:900px;
-  margin:auto;
-  font-size:1.2rem;
-  color:var(--muted);
-}
+.hero h1 { font-size: clamp(38px,5vw,60px); margin-bottom:18px; }
+.hero p { max-width:900px; margin:auto; font-size:1.2rem; color:var(--muted); }
 .hero .cta {
   margin-top:34px;
   display:inline-block;
@@ -103,230 +94,118 @@ body {
   text-decoration:none;
 }
 
-/* === Section === */
-.section {
-  max-width:1200px;
-  margin:auto;
-  padding:100px 30px;
-}
-.section h2 {
-  text-align:center;
-  font-size:2.6rem;
-  margin-bottom:18px;
-  color:var(--primary);
-}
-.section-desc {
-  text-align:center;
-  max-width:800px;
-  margin:0 auto 60px;
-  color:var(--muted);
-}
+/* === Section Base === */
+.section { max-width:1200px; margin:auto; padding:80px 30px; }
+.section h2 { text-align:center; font-size:2.6rem; margin-bottom:18px; color:var(--primary); }
+.section-desc { text-align:center; max-width:800px; margin:0 auto 40px; color:var(--muted); }
 
-/* === Grid Cards === */
-/* Narrower grid to make cards feel more compact */
+/* === SLIDER STYLES === */
+.slider-container { max-width: 850px; margin: 0 auto; }
+.news-slider { padding: 10px 10px 60px 10px !important; }
+.news-card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+}
+.media-container { width: 100%; aspect-ratio: 16 / 9; background: #000; }
+.media-container img, .media-container iframe { width: 100%; height: 100%; object-fit: cover; border:none; }
+.news-content { padding: 20px; text-align: left; }
+.news-content h3 { font-size: 1.1rem; margin: 10px 0 5px; color: var(--primary); }
+.news-content p { font-size: 0.88rem; color: var(--muted); line-height: 1.5; }
+.badge {
+  font-size: 0.65rem;
+  background: rgba(76, 201, 240, 0.15);
+  color: var(--primary);
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-weight: 700;
+}
+.swiper-pagination-bullet { background: var(--muted) !important; }
+.swiper-pagination-bullet-active { background: var(--primary) !important; }
+
+/* === Grid Cards (Domains/Products) === */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 20px;
-  max-width: 1000px; /* Constrains the overall width */
+  max-width: 1000px;
   margin: 0 auto;
 }
-
-/* Compact, Translucent Glass Card */
 .card {
-  background: rgba(255, 255, 255, 0.03); /* Translucent base */
-  backdrop-filter: blur(10px); /* Frosty glass effect */
-  -webkit-backdrop-filter: blur(10px);
-  padding: 25px; /* Reduced padding for a "bit small" feel */
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  padding: 25px;
   border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.08); /* Soft border */
+  border: 1px solid rgba(255, 255, 255, 0.08);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
   flex-direction: column;
-  min-height: 200px; /* Reduced height */
+  min-height: 200px;
 }
-
-/* Small GIF Container */
 .card-icon-container {
-  width: 45px;
-  height: 45px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(76, 201, 240, 0.1);
-  border-radius: 10px;
-  margin-bottom: 15px;
+  width: 45px; height: 45px; display: flex; align-items: center; justify-content: center;
+  background: rgba(76, 201, 240, 0.1); border-radius: 10px; margin-bottom: 15px;
 }
-
-.card-icon-container img {
-  width: 35px;
-  height: 35px;
-  object-fit: contain;
-}
-
-/* Hover Effect */
-.card:hover {
-  transform: translateY(-5px);
-  background: rgba(255, 255, 255, 0.06); /* Brightens slightly */
-  border-color: var(--primary);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-}
-
-/* Text adjustments for smaller card */
-.card h3 {
-  font-size: 1.1rem;
-  margin-bottom: 8px;
-  color: var(--primary);
-}
-
-.card p {
-  font-size: 0.88rem;
-  line-height: 1.5;
-  color: var(--muted);
-}
-/* Removes default link styling */
-.card-link {
-  text-decoration: none;
-  color: inherit;
-  display: block; /* Ensures the link covers the full area of the card */
-  transition: transform 0.2s ease;
-}
-
-/* Optional: Slight lift effect on the wrapper itself */
-.card-link:hover {
-  transform: translateY(-5px);
-}
-
-/* Ensure the card hover styles still trigger correctly */
-.card-link:hover .card {
-  border-color: var(--primary);
-  background: rgba(255, 255, 255, 0.06);
-}
-
-
-/* === About === */
-.about {
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:60px;
-}
-.about img {width:100%; border-radius:var(--radius);}
+.card-icon-container img { width: 35px; height: 35px; object-fit: contain; }
+.card:hover { transform: translateY(-5px); border-color: var(--primary); background: rgba(255, 255, 255, 0.06); }
+.card h3 { font-size: 1.1rem; margin-bottom: 8px; color: var(--primary); }
+.card p { font-size: 0.88rem; color: var(--muted); }
+.card-link { text-decoration: none; color: inherit; display: block; }
 
 /* === Opportunities === */
-.op-grid {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-  gap:40px;
-}
+.op-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:40px; }
 .op-card {
-  position:relative;
-  background:rgba(255,255,255,.04);
-  padding:40px;
-  border-radius:var(--radius);
-  box-shadow:var(--shadow);
+  position:relative; background:rgba(255,255,255,.04); padding:40px; border-radius:var(--radius);
 }
 .op-card::before {
-  content:"";
-  position:absolute;
-  inset:0;
-  border-radius:inherit;
-  padding:1px;
+  content:""; position:absolute; inset:0; border-radius:inherit; padding:1px;
   background:linear-gradient(90deg,var(--primary),var(--accent));
-  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
-  -webkit-mask-composite:xor;
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0); -webkit-mask-composite:xor;
 }
 .op-btn {
-  display:inline-block;
-  margin-top:20px;
-  padding:12px 26px;
-  border-radius:999px;
-  background:linear-gradient(90deg,var(--primary),var(--accent));
-  color:#000;
-  font-weight:700;
-  text-decoration:none;
+  display:inline-block; margin-top:20px; padding:12px 26px; border-radius:999px;
+  background:linear-gradient(90deg,var(--primary),var(--accent)); color:#000; font-weight:700; text-decoration:none;
 }
 
-/* === Contact === */
-.contact {
-  max-width:1200px;
-  margin:auto;
-  padding:100px 30px;
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:60px;
-}
-.contact h2 {font-size:2.6rem; color:var(--primary);}
-.contact p {color:var(--muted);}
-.contact-info {margin-top:30px;}
-.contact-info div {margin-bottom:14px;}
-.contact-socials a {
-  color:var(--muted);
-  font-size:20px;
-  margin-right:18px;
-}
-.contact-socials a:hover {color:var(--primary);}
-.form {
-  background:rgba(255,255,255,.03);
-  padding:40px;
-  border-radius:var(--radius);
-  box-shadow:var(--shadow);
-}
-.form input,.form textarea {
-  width:100%;
-  margin-bottom:18px;
-  padding:14px;
-  border-radius:10px;
-  border:none;
-  background:#0f1220;
-  color:var(--text);
+/* === Contact & Form === */
+.contact { max-width:1200px; margin:auto; padding:100px 30px; display:grid; grid-template-columns:1fr 1fr; gap:60px; }
+.contact-socials a { color:var(--muted); font-size:20px; margin-right:18px; }
+.form { background:rgba(255,255,255,.03); padding:40px; border-radius:var(--radius); }
+.form input, .form textarea {
+  width:100%; margin-bottom:18px; padding:14px; border-radius:10px;
+  border:none; background:#0f1220; color:var(--text);
 }
 .form button {
-  width:100%;
-  padding:14px;
-  border-radius:999px;
-  border:none;
-  font-weight:700;
-  background:linear-gradient(90deg,var(--primary),var(--accent));
-  cursor:pointer;
+  width:100%; padding:14px; border-radius:999px; border:none;
+  font-weight:700; background:linear-gradient(90deg,var(--primary),var(--accent)); cursor:pointer;
 }
 
-/* === Footer === */
-footer {
-  text-align:center;
-  padding:40px 20px;
-  color:var(--muted);
-  border-top:1px solid rgba(255,255,255,.08);
-}
+footer { text-align:center; padding:40px 20px; color:var(--muted); border-top:1px solid rgba(255,255,255,.08); }
 
-/* === Reveal Animation === */
-.reveal {
-  opacity:0;
-  transform:translateY(30px);
-  transition:.8s;
-}
-.reveal.active {opacity:1;transform:none;}
+/* Reveal Animation */
+.reveal { opacity:0; transform:translateY(30px); transition:.8s; }
+.reveal.active { opacity:1; transform:none; }
 
-@media(max-width:900px) {
-  .about,.contact {grid-template-columns:1fr;}
-}
+@media(max-width:900px) { .contact { grid-template-columns:1fr; } }
 </style>
 </head>
 
 <body>
 <div class="bg-grid"></div>
 
-<!-- Navbar -->
 <nav class="nav">
   <div class="nav-left">
-    <img src="./assets/logo.png" class="logo">
-    <a href="#research">Blog</a>
+    <img src="./assets/logo.png" class="logo" alt="Logo">
+    <a href="#updates">News</a>
+    <a href="#research">Domains</a>
     <a href="#products">Products</a>
     <a href="#opportunities">Opportunities</a>
   </div>
   <a href="#contact" class="nav-btn">Contact Us</a>
 </nav>
 
-<!-- Hero -->
 <section class="hero">
   <div>
     <h1>MechStem</h1>
@@ -335,124 +214,139 @@ footer {
   </div>
 </section>
 
-<!-- Research Section -->
+<section class="section" id="updates">
+  <h2>Lab Updates</h2>
+  <p class="section-desc">Tech talks, research milestones, and recent news.</p>
+  <div class="slider-container reveal">
+    <div class="swiper news-slider">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide news-card">
+          <div class="media-container">
+            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Tech Talk" allowfullscreen></iframe>
+          </div>
+          <div class="news-content">
+            <span class="badge">Tech Talk</span>
+            <h3>Edge AI Inference</h3>
+            <p>Optimizing vision models for low-power ARM microcontrollers.</p>
+          </div>
+        </div>
+        <div class="swiper-slide news-card">
+          <div class="media-container">
+            <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=800" alt="Lab Rig">
+          </div>
+          <div class="news-content">
+            <span class="badge">News</span>
+            <h3>System Deployment</h3>
+            <p>New mechanical testing rig completed for the robotics division.</p>
+          </div>
+        </div>
+        <div class="swiper-slide news-card">
+          <div class="media-container">
+            <img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=800" alt="Conference">
+          </div>
+          <div class="news-content">
+            <span class="badge">Event</span>
+            <h3>Embedded World 2025</h3>
+            <p>Highlights from our presentation on RTOS safety standards.</p>
+          </div>
+        </div>
+      </div>
+      <div class="swiper-pagination"></div>
+    </div>
+  </div>
+</section>
+
 <section class="section" id="research">
   <h2>Domains</h2>
   <div class="grid">
-    
-    <!--a href="embedded-systems.html" class="card-link">
-      <div class="card reveal">
-        <div class="card-icon-container">
-          <img src="./assets/Archi.gif" alt="Embedded"> 
-        </div>
-        <h3>Embedded Systems</h3>
-        <p>Linux, RTOS, BSP, drivers, and sensor pipelines.</p>
-      </div>
-  </a-->
-
     <a href="https://github.com/mechstem/EdgeAi_traine.git" target="_blank" class="card-link">
       <div class="card reveal">
-        <div class="card-icon-container">
-          <img src="./assets/AI.gif" alt="AI">
-        </div>
+        <div class="card-icon-container"><img src="./assets/AI.gif" alt="AI"></div>
         <h3>Edge AI</h3>
         <p>On-device inference, vision, and edge orchestration.</p>
       </div>
     </a>
-
     <a href="https://mechstem.gitbook.io/mechstem-docs/" target="_blank" class="card-link">
       <div class="card reveal">
-        <div class="card-icon-container">
-          <img src="./assets/gears.gif" alt="Mechanical">
-        </div>
+        <div class="card-icon-container"><img src="./assets/gears.gif" alt="Mechanical"></div>
         <h3>Mechanical Systems</h3>
         <p>Robotics, machine design, and cyber-physical simulations.</p>
       </div>
     </a>
-    
   </div>
 </section>
 
-
-
-<!-- Products Section -->
 <section class="section" id="products">
   <h2>Products & Projects</h2>
   <p class="section-desc">Research-driven systems under development.</p>
   <div class="grid">
-    
     <a href="https://mechstem.gitbook.io/mechstem-docs/" target="_blank" class="card-link">
       <div class="card reveal">
-        <div class="card-icon-container">
-          <img src="./assets/Controller_1.gif" alt="Mechanical">
-        </div>
-        <h3>Edge remote</h3>
-        <p>On-device ML inference<br>Camera + Sensor Fusion<br>Cloud–Edge Integration</p>
+        <div class="card-icon-container"><img src="./assets/Controller_1.gif" alt="Edge Remote"></div>
+        <h3>Edge Remote</h3>
+        <p>On-device ML inference, Camera + Sensor Fusion, and Cloud–Edge Integration.</p>
       </div>
     </a>
-
-    
     <a href="https://mechstem.gitbook.io/mechstem-docs/" target="_blank" class="card-link">
       <div class="card reveal">
-        <div class="card-icon-container">
-          <img src="./assets/gears.gif" alt="Mechanical">
-        </div>
-        <h3>Robotic Arm development</h3>
-        <p>Systems Engineering, machine design.</p>
+        <div class="card-icon-container"><img src="./assets/gears.gif" alt="Robotic Arm"></div>
+        <h3>Robotic Arm Development</h3>
+        <p>Systems Engineering and precision machine design.</p>
       </div>
     </a>
-    
   </div>
 </section>
 
-<!-- Opportunities Section -->
 <section class="section" id="opportunities">
   <h2>Opportunities</h2>
   <div class="op-grid">
     <div class="op-card reveal">
       <h3>Join the Lab</h3>
-      <p>Internships, Trainings, Engineers in various positions!!!.</p>
-      <a class="op-btn" href="https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID_HERE/edit?usp=sharing" target="_blank">Apply</a>
+      <p>Internships, Trainings, and Engineering positions available.</p>
+      <a class="op-btn" href="#" target="_blank">Apply Now</a>
     </div>
-    
     <div class="op-card reveal">
       <h3>Collaborate</h3>
       <p>Industry research partnerships & open-source sponsorships.</p>
-      <a class="op-btn" href="https://docs.google.com/spreadsheets/d/YOUR_SECOND_SHEET_ID/edit?usp=sharing" target="_blank">Contact Team</a>
+      <a class="op-btn" href="#contact">Contact Team</a>
     </div>
   </div>
 </section>
 
-
-<!-- Contact Section -->
 <section class="contact" id="contact">
   <div>
     <h2>Get In Touch</h2>
     <p>Discuss research, collaboration, or partnership opportunities.</p>
-    <div class="contact-info">
-      <div>📧 contact@mechstem.com</div>
-      <div>📍 Bangalore, India</div>
-    </div>
     <div class="contact-socials">
       <a href="https://github.com/mechstem" target="_blank"><i class="fab fa-github"></i></a>
       <a href="https://www.linkedin.com/company/mechstem/" target="_blank"><i class="fab fa-linkedin"></i></a>
       <a href="https://www.youtube.com/@mechstem" target="_blank"><i class="fab fa-youtube"></i></a>
     </div>
   </div>
-
-  <form class="form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+  <form class="form" action="#" method="POST">
     <input name="name" placeholder="Full name" required>
     <input name="email" type="email" placeholder="Email" required>
-    <textarea name="message" rows="6" placeholder="Your message"></textarea>
+    <textarea name="message" rows="4" placeholder="Your message"></textarea>
     <button>Send Message</button>
   </form>
 </section>
 
-<footer>
-  © 2017-2025 MechStem · 
-</footer>
+<footer>© 2017-2025 MechStem</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
 <script>
+// Initialize Swiper
+const swiper = new Swiper('.news-slider', {
+  slidesPerView: 1,
+  spaceBetween: 25,
+  loop: true,
+  autoplay: { delay: 5000, disableOnInteraction: false },
+  pagination: { el: '.swiper-pagination', clickable: true },
+  breakpoints: { 700: { slidesPerView: 2 } }
+});
+
+// Reveal Animation
 const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if(entry.isIntersecting) {
