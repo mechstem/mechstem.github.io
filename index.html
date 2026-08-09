@@ -160,9 +160,15 @@ body {
   position:relative; background:rgba(255,255,255,.04); padding:40px; border-radius:var(--radius);
 }
 .op-card::before {
-  content:""; position:absolute; inset:0; border-radius:inherit; padding:1px;
-  background:linear-gradient(90deg,var(--primary),var(--accent));
-  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0); -webkit-mask-composite:xor;
+  content: ""; 
+  position: absolute; 
+  inset: 0; 
+  border-radius: inherit; 
+  padding: 1px;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  -webkit-mask: linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0); 
+  -webkit-mask-composite: xor;
+  pointer-events: none; /* <-- Add this line to allow clicking */
 }
 .op-btn {
   display:inline-block; margin-top:20px; padding:12px 26px; border-radius:999px;
@@ -268,7 +274,7 @@ footer { text-align:center; padding:40px 20px; color:var(--muted); border-top:1p
       </div>
     </a>
     
-    <a href="./trainings.html" target="_blank" class="card-link">
+    <a href="./Products.html" target="_blank" class="card-link">
       <div class="card reveal">
         <div class="card-icon-container"><img src="./assets/Manage_1.gif" alt="Mechanical"></div>
         <h3>Industrial Courses </h3>
@@ -326,7 +332,7 @@ footer { text-align:center; padding:40px 20px; color:var(--muted); border-top:1p
     <div class="op-card reveal">
       <h3>Collaborate</h3>
       <p>Industry research partnerships & open-source sponsorships.</p>
-      <a class="op-btn" href="#Contact">Contact Team</a>
+      <a class="op-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSd7KGoTd2T64U0oRQ2SvgPvpeio5s9lpm2AeeZp-7gNnXlXZQ/viewform?usp=dialog">Contact Team</a>
     </div>
   </div>
 </section>
