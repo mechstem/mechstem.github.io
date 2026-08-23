@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>mechstem — Pure-Play Mechatronics Engineering | Applied Ingenuity</title>
+  <meta name="description" content="mechstem is a pure-play mechatronics engineering organization founded in 2017 — delivering R&D, services, and training across machinery, automation, embedded systems, and PLM." />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Swiper.js & FontAwesome -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  
+  <!-- Google Fonts: Syne, Space Grotesk, IBM Plex Sans & IBM Plex Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700;800&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #07090d;
+      --card: #0c1017;
+      --primary: #4cc9f0;
+      --accent: #80ffdb;
+      --neon: #66e3ff;
+      --orange: #ff6a1a;
+      --blueprint: #0a2540;
+      --line-cyan: #bfe1ff;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: #f5f7fb;
+      font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      overflow-x: hidden;
+    }
+
+    .font-brand { font-family: 'Syne', sans-serif; }
+    .font-display { font-family: 'Space Grotesk', sans-serif; }
+    .font-mono-code { font-family: 'IBM Plex Mono', monospace; }
+
+    /* Subtle Grid Floor */
+    .bg-grid {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      background:
+        linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+      background-size: 50px 50px;
+      pointer-events: none;
+      mask-image: radial-gradient(circle at center, black 35%, transparent 90%);
+    }
+
+    /* 3D Perspective Containers */
+    .perspective-container { perspective: 1200px; }
+
+    .tilt-card {
+      transform-style: preserve-3d;
+      transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .tilt-card:hover {
+      box-shadow: 0 25px 50px -12px rgba(102, 227, 255, 0.15);
+      border-color: rgba(102, 227, 255, 0.4);
+    }
+
+    /* HUD Corner Framing */
+    .hud-frame { position: relative; }
+    .hud-frame::before, .hud-frame::after {
+      content: '';
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-color: var(--neon);
+      pointer-events: none;
+    }
+    .hud-frame::before { top: -1px; left: -1px; border-top: 2px solid; border-left: 2px solid; }
+    .hud-frame::after { bottom: -1px; right: -1px; border-bottom: 2px solid; border-right: 2px solid; }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: #05070b; }
+    ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 2px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--orange); }
+
+    /* Keyframe Animations for HUD Vector Views & Logo */
+    @keyframes explodePiston {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-22px); }
+    }
+    .anim-piston { animation: explodePiston 3.2s ease-in-out infinite; }
+
+    @keyframes explodeHead {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-42px); }
+    }
+    .anim-head { animation: explodeHead 3.2s ease-in-out infinite; }
+
+    @keyframes explodeCrank {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(28px); }
+    }
+    .anim-crank { animation: explodeCrank 3.2s ease-in-out infinite; }
+
+    @keyframes dataPulse {
+      0% { stroke-dashoffset: 40; }
+      100% { stroke-dashoffset: 0; }
+    }
+    .animate-trace {
+      stroke-dasharray: 4 8;
+      animation: dataPulse 1.2s linear infinite;
+    }
+
+    @keyframes pulseZoom {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.06); }
+    }
+    .anim-zoom { animation: pulseZoom 4s ease-in-out infinite; }
+
+    @keyframes cncGantry {
+      0%, 100% { transform: translate(0, 0); }
+      50% { transform: translate(14px, -18px); }
+    }
+    .anim-cnc { animation: cncGantry 3.5s ease-in-out infinite; }
+
+    @keyframes softFloat {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-4px); }
+    }
+    .anim-logo-float { animation: softFloat 4s ease-in-out infinite; }
+
+    .swiper-pagination-bullet { background: #4a5568 !important; }
+    .swiper-pagination-bullet-active { background: #4cc9f0 !important; width: 24px !important; border-radius: 4px !important; }
+  </style>
+</head>
+
+<body class="selection:bg-[#ff6a1a] selection:text-white relative">
+  <canvas id="particleCanvas" class="fixed inset-0 z-0 pointer-events-none opacity-40"></canvas>
+  <div class="bg-grid"></div>
+
+  <!-- 1. NAVIGATION BAR (Greyish Translucent Glass) -->
+  <header class="fixed top-0 left-0 right-0 z-50 bg-[#141722]/50 backdrop-blur-xl border-b border-white/10">
+    <div class="max-w-[1240px] mx-auto px-6 py-3.5 flex items-center justify-between">
+      
+      <!-- Brand Logo (Enlarged & Animated) -->
+      <a href="#top" class="flex items-center gap-4 group no-underline">
+        <div class="relative w-12 h-12 flex items-center justify-center anim-logo-float transition-all duration-500 group-hover:drop-shadow-[0_0_15px_rgba(76,201,240,0.6)]">
+          <img
+            src="assets/logo.png"
+            alt="mechstem Logo"
+            class="w-full h-full object-contain drop-shadow-[0_0_8px_rgba(255,255,255,0.1)]"
+            onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/mechstem/mechstem.github.io/main/assets/logo.png';"
+          />
+        </div>
+        <span class="font-brand font-bold text-2xl tracking-normal text-white lowercase group-hover:text-[#4cc9f0] transition-colors">
+          mechstem
+        </span>
+      </a>
+
+      <!-- Clean Header Links -->
+      <nav class="hidden lg:flex items-center space-x-8 font-mono-code text-xs">
+        <a href="#capabilities" class="text-gray-300 hover:text-white transition-colors">CAPABILITIES</a>
+        <a href="#products" class="text-gray-300 hover:text-white transition-colors">PRODUCTS</a>
+        <a href="#training" class="text-gray-300 hover:text-white transition-colors">TRAINING & CAPABILITY</a>
+        <a href="#about" class="text-gray-300 hover:text-white transition-colors">ABOUT</a>
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <a
+          href="https://docs.google.com/forms/d/e/1FAIpQLSd7KGoTd2T64U0oRQ2SvgPvpeio5s9lpm2AeeZp-7gNnXlXZQ/viewform?usp=dialog"
+          target="_blank"
+          rel="noreferrer"
+          class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full font-mono-code text-xs font-bold bg-gradient-to-r from-[#4cc9f0] to-[#80ffdb] text-[#05070b] hover:shadow-[0_0_20px_rgba(76,201,240,0.5)] transition-all"
+        >
+          <i class="fas fa-terminal text-[11px]"></i> INITIATE CONTACT
+        </a>
+        <button id="mobileMenuBtn" class="lg:hidden text-white border border-white/20 p-2 rounded-lg font-mono-code text-xs">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Drawer -->
+    <div id="mobileMenu" class="hidden lg:hidden bg-[#0c1017]/95 backdrop-blur-xl border-b border-white/10 px-6 py-5 flex flex-col space-y-3 font-mono-code text-xs">
+      <a href="#capabilities" class="text-gray-300 py-1">CAPABILITIES</a>
+      <a href="#products" class="text-gray-300 py-1">PRODUCTS</a>
+      <a href="#training" class="text-gray-300 py-1">TRAINING & CAPABILITY</a>
+      <a href="#about" class="text-gray-300 py-1">ABOUT</a>
+    </div>
+  </header>
+
+  <!-- 2. HERO SECTION -->
+  <section id="top" class="min-h-screen flex items-center justify-center pt-28 pb-16 px-6 relative z-10">
+    <div class="max-w-[1240px] w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      
+      <!-- Left Narrative Column -->
+      <div class="lg:col-span-7 flex flex-col items-start text-left">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-white/10 font-mono-code text-xs text-[#66e3ff] mb-6">
+          <span class="w-2 h-2 rounded-full bg-[#ff6a1a] animate-ping"></span>
+          <span>APPLIED ENGINEERING & INGENUITY</span>
+        </div>
+
+        <h1 class="font-display text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white leading-[1.08] max-w-2xl">
+          Where Engineering Meets Ingenuity — <em class="text-transparent bg-clip-text bg-gradient-to-r from-[#4cc9f0] via-[#bfe1ff] to-[#80ffdb] not-italic">Applied Intelligence across Physical & Digital Systems.</em>
+        </h1>
+
+        <p class="mt-6 text-base sm:text-lg text-[#9aa3b2] max-w-xl font-light leading-relaxed">
+          Delivering inventive engineering solutions, intelligent systems, and end-to-end applied innovation across modern industries.
+        </p>
+
+        <div class="mt-8 flex items-center gap-4 flex-wrap font-mono-code text-xs font-bold">
+          <a href="#capabilities" class="px-8 py-4 rounded-full bg-gradient-to-r from-[#4cc9f0] to-[#80ffdb] text-[#05070b] hover:shadow-[0_0_25px_rgba(76,201,240,0.6)] transition-all transform hover:-translate-y-0.5">
+            EXPLORE CAPABILITIES
+          </a>
+          <a href="#updates" class="px-8 py-4 rounded-full border border-white/20 hover:border-[#66e3ff] text-white hover:bg-white/5 transition-all flex items-center gap-2">
+            <span>LAB UPDATES & EVENTS</span>
+            <i class="fas fa-arrow-right text-[10px]"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Right: Multi-View Animated Vector Frame HUD -->
+      <div class="lg:col-span-5 perspective-container">
+        <div class="tilt-card bg-gradient-to-br from-[#0c1017]/95 to-[#080c14]/95 border border-white/10 p-6 rounded-3xl backdrop-blur-2xl shadow-2xl relative hud-frame overflow-hidden">
+          
+          <!-- Top Control Header & Mode Tabs -->
+          <div class="flex items-center justify-between pb-3 border-b border-white/10 mb-3 font-mono-code text-[11px]">
+            <span class="text-[#66e3ff] flex items-center gap-1.5 font-bold">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              <span id="hudViewTitle">ENGINE EXPLOSION</span>
+            </span>
+            <span class="text-white/40 text-[10px]" id="hudStatusTag">ISO // AXIS-Z</span>
+          </div>
+
+          <!-- View Selector Buttons -->
+          <div class="grid grid-cols-4 gap-1.5 mb-3 font-mono-code text-[9.5px]">
+            <button onclick="setHudView(0)" id="tab0" class="px-2 py-1 rounded bg-[#66e3ff]/20 text-[#66e3ff] border border-[#66e3ff]/40 font-bold transition-all">01. ENGINE</button>
+            <button onclick="setHudView(1)" id="tab1" class="px-2 py-1 rounded bg-white/5 text-white/60 border border-white/10 hover:text-white transition-all">02. CPU DIE</button>
+            <button onclick="setHudView(2)" id="tab2" class="px-2 py-1 rounded bg-white/5 text-white/60 border border-white/10 hover:text-white transition-all">03. CNC MILL</button>
+            <button onclick="setHudView(3)" id="tab3" class="px-2 py-1 rounded bg-white/5 text-white/60 border border-white/10 hover:text-white transition-all">04. ARCH-GRID</button>
+          </div>
+
+          <!-- Vector Frame Stage Area -->
+          <div class="h-64 relative flex items-center justify-center bg-[#05070b]/60 rounded-2xl border border-white/5 overflow-hidden p-2">
+            
+            <!-- VIEW 0: ANIMATED EXPLODING ENGINE -->
+            <svg id="viewEngine" viewBox="0 0 320 220" class="w-full h-full" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <line x1="160" y1="15" x2="160" y2="205" stroke="#4CC9F0" stroke-width="1" stroke-dasharray="3 3" opacity="0.4" />
+              
+              <!-- Cylinder Head (Exploding Upward) -->
+              <g class="anim-head" style="transform-origin: center;">
+                <rect x="95" y="32" width="130" height="24" rx="4" fill="#0A2540" stroke="#66E3FF" stroke-width="1.5" />
+                <circle cx="125" cy="44" r="5" stroke="#80FFDB" stroke-width="1.2" />
+                <circle cx="195" cy="44" r="5" stroke="#80FFDB" stroke-width="1.2" />
+                <text x="160" y="47" fill="#BFE1FF" font-family="IBM Plex Mono" font-size="7.5" text-anchor="middle">VALVE HEAD</text>
+              </g>
+
+              <!-- Floating Piston Assembly -->
+              <g class="anim-piston" style="transform-origin: center;">
+                <rect x="115" y="80" width="90" height="40" rx="3" fill="#121A28" stroke="#4CC9F0" stroke-width="1.5" />
+                <line x1="118" y1="88" x2="202" y2="88" stroke="#FF6A1A" stroke-width="1.2" />
+                <line x1="118" y1="94" x2="202" y2="94" stroke="#FF6A1A" stroke-width="1.2" />
+                <text x="160" y="104" fill="#80FFDB" font-family="IBM Plex Mono" font-size="7" text-anchor="middle">PISTON CROWN</text>
+                <line x1="160" y1="120" x2="160" y2="152" stroke="#66E3FF" stroke-width="3" stroke-linecap="round" />
+              </g>
+
+              <!-- Crankcase Assembly (Exploding Downward) -->
+              <g class="anim-crank" style="transform-origin: center;">
+                <rect x="100" y="160" width="120" height="34" rx="6" fill="#0A2540" stroke="#66E3FF" stroke-width="1.5" />
+                <circle cx="160" cy="177" r="11" stroke="#FF6A1A" stroke-width="1.5" />
+                <circle cx="160" cy="177" r="3" fill="#80FFDB" />
+              </g>
+            </svg>
+
+            <!-- VIEW 1: ZOOMED MICRO CPU DIE -->
+            <svg id="viewCpu" viewBox="0 0 320 220" class="w-full h-full hidden" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <g class="anim-zoom" style="transform-origin: center;">
+                <rect x="70" y="20" width="180" height="180" rx="8" fill="#0A1828" stroke="#66E3FF" stroke-width="1.5" />
+                <rect x="105" y="55" width="110" height="110" rx="4" fill="#070D18" stroke="#FF6A1A" stroke-width="1.5" />
+                <path d="M80 60 L105 60 M80 80 L105 80 M80 140 L105 140 M80 160 L105 160" stroke="#80FFDB" stroke-width="1.5" class="animate-trace" />
+                <path d="M240 60 L215 60 M240 80 L215 80 M240 140 L215 140 M240 160 L215 160" stroke="#80FFDB" stroke-width="1.5" class="animate-trace" />
+                <rect x="120" y="70" width="35" height="35" fill="#122538" stroke="#4CC9F0" stroke-width="1" />
+                <rect x="165" y="70" width="35" height="35" fill="#122538" stroke="#4CC9F0" stroke-width="1" />
+                <rect x="120" y="115" width="35" height="35" fill="#122538" stroke="#4CC9F0" stroke-width="1" />
+                <rect x="165" y="115" width="35" height="35" fill="#122538" stroke="#4CC9F0" stroke-width="1" />
+                <circle cx="160" cy="110" r="6" fill="#FF6A1A" />
+                <text x="160" y="193" fill="#80FFDB" font-family="IBM Plex Mono" font-size="7.5" text-anchor="middle">5nm DIE // RTOS CORE</text>
+              </g>
+            </svg>
+
+            <!-- VIEW 2: CNC GANTRY & TOOLHEAD -->
+            <svg id="viewCnc" viewBox="0 0 320 220" class="w-full h-full hidden" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="40" y="165" width="240" height="22" rx="4" fill="#0A2540" stroke="#4CC9F0" stroke-width="1.5" />
+              <line x1="50" y1="176" x2="270" y2="176" stroke="#80FFDB" stroke-width="1" stroke-dasharray="4 4" />
+              <rect x="65" y="35" width="22" height="130" fill="#08101A" stroke="#66E3FF" stroke-width="1.2" />
+              <rect x="233" y="35" width="22" height="130" fill="#08101A" stroke="#66E3FF" stroke-width="1.2" />
+              <g class="anim-cnc">
+                <rect x="60" y="55" width="200" height="26" rx="4" fill="#0F243A" stroke="#66E3FF" stroke-width="1.5" />
+                <rect x="142" y="75" width="36" height="42" rx="3" fill="#182C40" stroke="#FF6A1A" stroke-width="1.5" />
+                <polygon points="156,117 164,117 160,138" fill="#80FFDB" />
+                <line x1="160" y1="138" x2="160" y2="165" stroke="#FF6A1A" stroke-width="1" stroke-dasharray="2 2" />
+              </g>
+              <text x="160" y="202" fill="#BFE1FF" font-family="IBM Plex Mono" font-size="7.5" text-anchor="middle">5-AXIS CNC TOOLHEAD</text>
+            </svg>
+
+            <!-- VIEW 3: ARCHITECTURAL WIREFRAME STRUCTURE -->
+            <svg id="viewArch" viewBox="0 0 320 220" class="w-full h-full hidden" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <g transform="translate(160, 110)">
+                <polygon points="0,50 90,0 0,-50 -90,0" fill="#0A1828" stroke="#4CC9F0" stroke-width="1.5" />
+                <polygon points="0,20 90,-30 0,-80 -90,-30" fill="none" stroke="#66E3FF" stroke-width="1.2" stroke-dasharray="3 3" />
+                <polygon points="0,-10 90,-60 0,-110 -90,-60" fill="#0F2840" stroke="#80FFDB" stroke-width="1.5" />
+                <line x1="-90" y1="0" x2="-90" y2="-60" stroke="#FF6A1A" stroke-width="1.5" />
+                <line x1="0" y1="50" x2="0" y2="-10" stroke="#66E3FF" stroke-width="2" />
+                <line x1="90" y1="0" x2="90" y2="-60" stroke="#FF6A1A" stroke-width="1.5" />
+                <line x1="0" y1="-50" x2="0" y2="-110" stroke="#66E3FF" stroke-width="1.5" />
+                <line x1="-90" y1="0" x2="0" y2="-10" stroke="#80FFDB" stroke-width="0.8" opacity="0.6" />
+                <line x1="90" y1="0" x2="0" y2="-10" stroke="#80FFDB" stroke-width="0.8" opacity="0.6" />
+              </g>
+              <text x="160" y="202" fill="#80FFDB" font-family="IBM Plex Mono" font-size="7.5" text-anchor="middle">SPATIAL BIM // STRUCTURAL GRID</text>
+            </svg>
+
+          </div>
+
+          <!-- Bottom Telemetry State Readout -->
+          <div class="space-y-1.5 font-mono-code text-xs pt-3 border-t border-white/10">
+            <div class="flex justify-between text-[#9aa3b2]">
+              <span id="hudParam1Label">EXPLOSION AXIS</span>
+              <span id="hudParam1Val" class="text-white font-bold">VERTICAL (Z-SLOT)</span>
+            </div>
+            <div class="flex justify-between text-[#9aa3b2]">
+              <span id="hudParam2Label">KINEMATIC STATE</span>
+              <span id="hudParam2Val" class="text-[#80ffdb] font-bold">CALIBRATED</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 3. CAPABILITIES -->
+  <section id="capabilities" class="py-28 max-w-[1240px] mx-auto px-6 relative z-10 border-t border-white/[0.08]">
+    <div class="max-w-[660px] mb-14">
+      <span class="font-mono-code text-xs uppercase tracking-widest text-[#66e3ff] flex items-center gap-2 mb-3">
+        <span class="w-2 h-2 bg-[#66e3ff] inline-block"></span> 01 / WHAT WE DO
+      </span>
+      <h2 class="font-display text-3xl sm:text-5xl font-bold text-white tracking-tight">
+        Engineering the physical world — with intelligence built in
+      </h2>
+      <p class="mt-4 text-sm sm:text-base text-[#9aa3b2] font-light">
+        From the physics of machinery and CNC structures to the RTOS firmware and computer vision running inside it.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 perspective-container">
+      <div class="tilt-card bg-[#0c1017] p-7 rounded-2xl border border-white/10 flex flex-col justify-between hover:bg-[#101824]">
+        <div>
+          <div class="w-10 h-10 rounded-xl bg-[#66e3ff]/10 border border-[#66e3ff]/20 flex items-center justify-center text-[#66e3ff] mb-6">
+            <i class="fas fa-cogs text-lg"></i>
+          </div>
+          <h3 class="font-display text-base font-bold text-white mb-2">Machinery & Mechanical Systems</h3>
+        </div>
+        <p class="text-xs text-[#8798aa] leading-relaxed mt-4 font-light">
+          Design, analysis and prototyping of mechanical systems, machinery and structures — from concept sketch to validated hardware.
+        </p>
+      </div>
+
+      <div class="tilt-card bg-[#0c1017] p-7 rounded-2xl border border-white/10 flex flex-col justify-between hover:bg-[#101824]">
+        <div>
+          <div class="w-10 h-10 rounded-xl bg-[#66e3ff]/10 border border-[#66e3ff]/20 flex items-center justify-center text-[#66e3ff] mb-6">
+            <i class="fas fa-robot text-lg"></i>
+          </div>
+          <h3 class="font-display text-base font-bold text-white mb-2">Industrial Automation</h3>
+        </div>
+        <p class="text-xs text-[#8798aa] leading-relaxed mt-4 font-light">
+          Robotics integration, machine control and intelligent automation systems that keep production lines running.
+        </p>
+      </div>
+
+      <div class="tilt-card bg-[#0c1017] p-7 rounded-2xl border border-white/10 flex flex-col justify-between hover:bg-[#101824]">
+        <div>
+          <div class="w-10 h-10 rounded-xl bg-[#66e3ff]/10 border border-[#66e3ff]/20 flex items-center justify-center text-[#66e3ff] mb-6">
+            <i class="fas fa-microchip text-lg"></i>
+          </div>
+          <h3 class="font-display text-base font-bold text-white mb-2">Embedded Systems</h3>
+        </div>
+        <p class="text-xs text-[#8798aa] leading-relaxed mt-4 font-light">
+          Electronics and software together — hardware design, firmware, RTOS/BSP and sensor integration for products that sense and decide.
+        </p>
+      </div>
+
+      <div class="tilt-card bg-[#0c1017] p-7 rounded-2xl border border-white/10 flex flex-col justify-between hover:bg-[#101824]">
+        <div>
+          <div class="w-10 h-10 rounded-xl bg-[#66e3ff]/10 border border-[#66e3ff]/20 flex items-center justify-center text-[#66e3ff] mb-6">
+            <i class="fas fa-layer-group text-lg"></i>
+          </div>
+          <h3 class="font-display text-base font-bold text-white mb-2">Product Engineering & PLM</h3>
+        </div>
+        <p class="text-xs text-[#8798aa] leading-relaxed mt-4 font-light">
+          Product development, DFM/DFA and lifecycle management — configuration, documentation and traceability from concept to sustainment.
+        </p>
+      </div>
+
+      <div class="tilt-card bg-[#0c1017] p-7 rounded-2xl border border-white/10 flex flex-col justify-between hover:bg-[#101824]">
+        <div>
+          <div class="w-10 h-10 rounded-xl bg-[#66e3ff]/10 border border-[#66e3ff]/20 flex items-center justify-center text-[#66e3ff] mb-6">
+            <i class="fas fa-graduation-cap text-lg"></i>
+          </div>
+          <h3 class="font-display text-base font-bold text-white mb-2">Training & Capability Building</h3>
+        </div>
+        <p class="text-xs text-[#8798aa] leading-relaxed mt-4 font-light">
+          SME-led courses, workshops and on-the-job mentoring that build lasting engineering capability inside your team.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. PRODUCTS & LAB PROJECTS -->
+  <section id="products" class="py-28 max-w-[1240px] mx-auto px-6 relative z-10 border-t border-white/[0.08]">
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-4">
+      <div>
+        <span class="font-mono-code text-xs uppercase tracking-widest text-[#ff6a1a] flex items-center gap-2 mb-3">
+          <span class="w-2 h-2 bg-[#ff6a1a] inline-block"></span> 02 / RESEARCH & WORKING PROTOTYPES
+        </span>
+        <h2 class="font-display text-3xl sm:text-5xl font-bold text-white tracking-tight">Products in Development</h2>
+      </div>
+      <a href="https://mechstem.gitbook.io/mechstem-docs/" target="_blank" rel="noreferrer" class="font-mono-code text-xs text-[#80ffdb] hover:underline flex items-center gap-2">
+        <span>GITBOOK HARDWARE DOCS</span>
+        <i class="fas fa-arrow-right text-[10px]"></i>
+      </a>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 perspective-container">
+      <a href="https://mechstem.gitbook.io/mechstem-docs/" target="_blank" rel="noreferrer" class="tilt-card group bg-[#0c1017] p-6 rounded-2xl border border-white/10 flex flex-col justify-between hover:border-[#66e3ff]">
+        <div>
+          <div class="aspect-[16/10] bg-[#080c12] rounded-xl overflow-hidden mb-5 p-2 flex items-center justify-center border border-white/5">
+            <img src="assets/Controller_1.gif" alt="Edge Remote" class="w-full h-full object-cover rounded-lg" onerror="this.src='assets/AI.gif'" />
+          </div>
+          <span class="font-mono-code text-[10px] uppercase tracking-wider text-[#ff6a1a] font-semibold">Embedded · Edge AI</span>
+          <h3 class="font-display text-lg font-bold text-white mt-1 group-hover:text-[#66e3ff] transition-colors">Edge Remote</h3>
+          <p class="text-xs text-[#9aa3b2] mt-2 leading-relaxed font-light">On-device ML inference, camera and sensor fusion, and cloud–edge integration.</p>
+        </div>
+        <div class="mt-6 pt-4 border-t border-white/10 flex items-center justify-between font-mono-code text-xs text-[#4cc9f0]">
+          <span>View Specs</span><span>→</span>
+        </div>
+      </a>
+
+      <a href="https://mechstem.gitbook.io/mechstem-docs/" target="_blank" rel="noreferrer" class="tilt-card group bg-[#0c1017] p-6 rounded-2xl border border-white/10 flex flex-col justify-between hover:border-[#66e3ff]">
+        <div>
+          <div class="aspect-[16/10] bg-[#080c12] rounded-xl overflow-hidden mb-5 p-2 flex items-center justify-center border border-white/5">
+            <img src="assets/Automation.gif" alt="Robotic Arm" class="w-full h-full object-cover rounded-lg" />
+          </div>
+          <span class="font-mono-code text-[10px] uppercase tracking-wider text-[#ff6a1a] font-semibold">Automation</span>
+          <h3 class="font-display text-lg font-bold text-white mt-1 group-hover:text-[#66e3ff] transition-colors">Robotic Arm Development</h3>
+          <p class="text-xs text-[#9aa3b2] mt-2 leading-relaxed font-light">Industrial automation and special-purpose machinery for handling and assembly tasks.</p>
+        </div>
+        <div class="mt-6 pt-4 border-t border-white/10 flex items-center justify-between font-mono-code text-xs text-[#4cc9f0]">
+          <span>View Specs</span><span>→</span>
+        </div>
+      </a>
+
+      <a href="https://mechstem.gitbook.io/mechstem-docs/" target="_blank" rel="noreferrer" class="tilt-card group bg-[#0c1017] p-6 rounded-2xl border border-white/10 flex flex-col justify-between hover:border-[#66e3ff]">
+        <div>
+          <div class="aspect-[16/10] bg-[#080c12] rounded-xl overflow-hidden mb-5 p-2 flex items-center justify-center border border-white/5">
+            <img src="assets/EV.gif" alt="Smart Home System" class="w-full h-full object-cover rounded-lg" />
+          </div>
+          <span class="font-mono-code text-[10px] uppercase tracking-wider text-[#ff6a1a] font-semibold">Embedded · IoT</span>
+          <h3 class="font-display text-lg font-bold text-white mt-1 group-hover:text-[#66e3ff] transition-colors">Smart Home System</h3>
+          <p class="text-xs text-[#9aa3b2] mt-2 leading-relaxed font-light">Remote control of appliances and security devices for convenience, safety and energy efficiency.</p>
+        </div>
+        <div class="mt-6 pt-4 border-t border-white/10 flex items-center justify-between font-mono-code text-xs text-[#4cc9f0]">
+          <span>View Specs</span><span>→</span>
+        </div>
+      </a>
+
+      <a href="https://mechstem.gitbook.io/mechstem-docs/" target="_blank" rel="noreferrer" class="tilt-card group bg-[#0c1017] p-6 rounded-2xl border border-white/10 flex flex-col justify-between hover:border-[#66e3ff]">
+        <div>
+          <div class="aspect-[16/10] bg-[#080c12] rounded-xl overflow-hidden mb-5 p-2 flex items-center justify-center border border-white/5">
+            <img src="assets/jet_1.gif" alt="SkyBot-X" class="w-full h-full object-cover rounded-lg" />
+          </div>
+          <span class="font-mono-code text-[10px] uppercase tracking-wider text-[#ff6a1a] font-semibold">Robotics · Aerial</span>
+          <h3 class="font-display text-lg font-bold text-white mt-1 group-hover:text-[#66e3ff] transition-colors">SkyBot-X</h3>
+          <p class="text-xs text-[#9aa3b2] mt-2 leading-relaxed font-light">Smart drone with autonomous GPS flight, FPV streaming, computer-vision navigation and payload delivery.</p>
+        </div>
+        <div class="mt-6 pt-4 border-t border-white/10 flex items-center justify-between font-mono-code text-xs text-[#4cc9f0]">
+          <span>View Specs</span><span>→</span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- 5. TRAINING & CAPABILITY BUILDING -->
+  <section id="training" class="py-28 bg-[#05070b] border-t border-white/[0.08] relative z-10">
+    <div class="max-w-[1240px] mx-auto px-6">
+      
+      <!-- Section Header -->
+      <div class="max-w-[760px] mb-12">
+        <span class="font-mono-code text-xs uppercase tracking-widest text-[#4cc9f0] flex items-center gap-2 mb-3">
+          <span class="w-2 h-2 bg-[#ff6a1a] inline-block"></span> 03 / TRAINING & CAPABILITY BUILDING
+        </span>
+        <h2 class="font-display text-3xl sm:text-5xl font-bold text-white tracking-tight">
+          Learn the stack, not just a slice of it
+        </h2>
+        <p class="mt-3 text-sm sm:text-base text-[#9aa3b2] font-light leading-relaxed">
+          Certification courses, internships and hands-on workshops led by the engineers who run our client programs — not generic courseware.
+        </p>
+      </div>
+
+      <!-- Flagship Course Card -->
+      <div class="bg-gradient-to-br from-[#0b1824] to-[#11101d] border border-[#66e3ff]/20 p-8 md:p-10 rounded-3xl mb-8 shadow-2xl hud-frame">
+        <div class="flex flex-wrap justify-between items-start gap-4 mb-4">
+          <div>
+            <span class="text-xs font-mono-code text-[#4cc9f0] uppercase tracking-wider block mb-1">FLAGSHIP PROGRAMME</span>
+            <h3 class="font-display text-xl md:text-3xl font-bold text-white max-w-2xl">
+              Certification Course: Mechatronics, Robotics & Intelligent Systems
+            </h3>
+          </div>
+          <span class="bg-[#ff6a1a] text-[#0a2540] text-xs font-mono-code font-bold px-3.5 py-1.5 uppercase tracking-wider rounded-md">
+            Flagship programme
+          </span>
+        </div>
+
+        <p class="text-sm text-[#bfe1ff]/90 max-w-3xl leading-relaxed mb-6">
+          An integrated, project-based engineering course covering mechatronics, embedded systems, control, robotics, AI/ML, computer vision, IoT and Industry 4.0.
+        </p>
+
+        <!-- Course Meta Details -->
+        <div class="flex flex-wrap gap-8 font-mono-code text-xs text-[#bfe1ff] mb-8 pb-6 border-b border-white/10">
+          <div><b class="block text-white uppercase text-[10px] tracking-wider mb-1">DURATION</b> Approx. 6–9 months</div>
+          <div><b class="block text-white uppercase text-[10px] tracking-wider mb-1">LEVEL</b> Graduate / Professional</div>
+          <div><b class="block text-white uppercase text-[10px] tracking-wider mb-1">FORMAT</b> Theory + Labs + Projects + Capstone</div>
+        </div>
+
+        <!-- Toggleable Core Modules -->
+        <button id="syllabusToggleBtn" class="font-mono-code text-xs text-[#ff6a1a] border border-[#ff6a1a] px-4 py-2 rounded-lg mb-6 hover:bg-[#ff6a1a]/10 transition-colors">
+          View core modules ▾
+        </button>
+
+        <div id="moduleGrid" class="hidden grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 mb-8 font-mono-code text-xs text-[#bfe1ff]/85">
+          <div class="p-2.5 rounded bg-white/[0.02] border border-white/5">— Mechatronics Fundamentals</div>
+          <div class="p-2.5 rounded bg-white/[0.02] border border-white/5">— Sensors & Instrumentation</div>
+          <div class="p-2.5 rounded bg-white/[0.02] border border-white/5">— Actuators, Motors & Drives</div>
+          <div class="p-2.5 rounded bg-white/[0.02] border border-white/5">— Microprocessors, MCUs & RTOS</div>
+          <div class="p-2.5 rounded bg-white/[0.02] border border-white/5">— Control Systems & Dynamics</div>
+          <div class="p-2.5 rounded bg-white/[0.02] border border-white/5">— Robotics: Kinematics & Autonomy</div>
+          <div class="p-2.5 rounded bg-white/[0.02] border border-white/5">— AI, ML & Computer Vision</div>
+          <div class="p-2.5 rounded bg-white/[0.02] border border-white/5">— IoT, IIoT & Industry 4.0</div>
+        </div>
+
+        <div class="flex flex-wrap gap-4 font-mono-code text-xs font-bold">
+          <a
+            href="https://docs.google.com/forms/d/e/1FAIpQLSf-1oE6WQamga4FQnhxsdkVg_On1HwIzoXXKkjYg-Gr_p9Grw/viewform?usp=dialog"
+            target="_blank"
+            rel="noreferrer"
+            class="bg-[#ff6a1a] hover:bg-[#ff7f3a] text-[#0a2540] px-7 py-3.5 rounded-full transition-all shadow-[0_0_20px_rgba(255,106,26,0.3)]"
+          >
+            Register now
+          </a>
+          <a
+            href="MECHSTEM_Mechatronics_Robotics_Intelligent_Systems_Course_Outline.pdf"
+            download
+            class="bg-[#3ea35a] hover:bg-[#49bd69] text-white px-7 py-3.5 rounded-full transition-all flex items-center gap-2"
+          >
+            <i class="fas fa-file-pdf"></i> Download brochure
+          </a>
+        </div>
+      </div>
+
+      <!-- Training Tracks: Internships, Workshops, Managerial Acumen -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
+        
+        <!-- Internships -->
+        <div class="bg-[#0c1017] p-7 rounded-2xl border border-white/10 flex flex-col justify-between">
+          <div>
+            <h4 class="font-mono-code text-xs uppercase text-[#7fb8e8] tracking-wider mb-2">INTERNSHIPS</h4>
+            <p class="text-xs text-[#bfe1ff]/80 leading-relaxed font-light mb-6">
+              For B.E, B.Tech, M.Tech, BCA and MCA students — real-world technical skills through industrial internships. Online & offline, live projects, fast-track (30 days) or 1–3 months.
+            </p>
+          </div>
+          <a
+            href="https://docs.google.com/forms/d/e/1FAIpQLSf-1oE6WQamga4FQnhxsdkVg_On1HwIzoXXKkjYg-Gr_p9Grw/viewform?usp=dialog"
+            target="_blank"
+            rel="noreferrer"
+            class="font-mono-code text-xs text-[#bfe1ff] border border-[#bfe1ff]/30 px-4 py-2 rounded-lg text-center hover:bg-white/5 transition-colors"
+          >
+            Check seats
+          </a>
+        </div>
+
+        <!-- Upcoming Workshops -->
+        <div class="bg-[#0c1017] p-7 rounded-2xl border border-white/10 flex flex-col justify-between">
+          <div>
+            <h4 class="font-mono-code text-xs uppercase text-[#7fb8e8] tracking-wider mb-2">UPCOMING WORKSHOPS</h4>
+            <p class="text-xs text-[#bfe1ff]/80 leading-relaxed font-light mb-6">
+              Embedded Systems Workshop · AI & Machine Learning Bootcamp · Mechanical CAD Training — running through the coming quarter.
+            </p>
+          </div>
+          <a href="#contact" class="font-mono-code text-xs text-[#bfe1ff] border border-[#bfe1ff]/30 px-4 py-2 rounded-lg text-center hover:bg-white/5 transition-colors">
+            Ask about dates
+          </a>
+        </div>
+
+        <!-- Managerial Acumen Track -->
+        <div class="bg-[#0c1017] p-7 rounded-2xl border border-white/10 flex flex-col justify-between">
+          <div>
+            <h4 class="font-mono-code text-xs uppercase text-[#7fb8e8] tracking-wider mb-2">MANAGERIAL ACUMEN TRACK</h4>
+            <p class="text-xs text-[#bfe1ff]/80 leading-relaxed font-light mb-6">
+              Systems-engineering and program-management modules for engineers stepping into cross-discipline leadership roles.
+            </p>
+          </div>
+          <a href="#contact" class="font-mono-code text-xs text-[#bfe1ff] border border-[#bfe1ff]/30 px-4 py-2 rounded-lg text-center hover:bg-white/5 transition-colors">
+            Ask about dates
+          </a>
+        </div>
+
+      </div>
+
+      <!-- Testimonials Slider -->
+      <div class="bg-[#0c1017] border border-white/10 rounded-2xl p-8 relative">
+        <div id="testimonialText" class="text-base text-white italic max-w-3xl leading-relaxed">
+          "The Embedded Systems course with Mechstem gave me the confidence and skills to land my dream job. The projects were very industry relevant."
+        </div>
+        <strong id="testimonialAuthor" class="block mt-4 font-mono-code text-xs text-[#7fb8e8] not-italic">
+          — Priya S.
+        </strong>
+        <div id="testimonialDots" class="flex gap-2.5 mt-5"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 6. LAB UPDATES & TECH TALKS SECTION -->
+  <section id="updates" class="py-24 max-w-[1240px] mx-auto px-6 relative z-10 border-t border-white/[0.08]">
+    <div class="max-w-[760px] mb-12">
+      <span class="font-mono-code text-xs uppercase tracking-widest text-[#4cc9f0] flex items-center gap-2 mb-3">
+        <span class="w-2 h-2 bg-[#ff6a1a] inline-block"></span> 04 / LAB UPDATES & TECH TALKS
+      </span>
+      <h2 class="font-display text-3xl sm:text-5xl font-bold text-white tracking-tight">
+        Tech Talks & Research Milestones
+      </h2>
+      <p class="mt-3 text-sm sm:text-base text-[#9aa3b2] font-light leading-relaxed">
+        Research presentations, robotics testing deployments, and engineering updates.
+      </p>
+    </div>
+
+    <!-- Media & News Swiper with Explicit Links -->
+    <div class="swiper updatesSwiper max-w-5xl mx-auto pb-14">
+      <div class="swiper-wrapper">
+        
+        <!-- Slide 1: Tech Talk Video -->
+        <div class="swiper-slide bg-[#0c1017] border border-white/10 rounded-2xl overflow-hidden group">
+          <div class="aspect-video bg-black relative">
+            <iframe class="w-full h-full border-none" src="https://www.youtube.com/@mechstem" title="Tech Talk" allowfullscreen></iframe>
+          </div>
+          <div class="p-6">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] font-mono-code bg-[#4cc9f0]/15 text-[#4cc9f0] px-2.5 py-1 rounded font-bold uppercase">Tech Talk</span>
+              <a href="https://www.youtube.com/@mechstem" target="_blank" rel="noreferrer" class="text-xs font-mono-code text-[#4cc9f0] hover:underline flex items-center gap-1">
+                Watch on YouTube <i class="fas fa-external-link-alt text-[10px]"></i>
+              </a>
+            </div>
+            <h3 class="font-display text-lg font-semibold text-white mt-3">Edge AI Inference on ARM Cortex</h3>
+            <p class="text-xs text-[#9aa3b2] mt-1">Optimizing spatial vision neural networks for low-power microcontrollers.</p>
+          </div>
+        </div>
+
+        <!-- Slide 2: Lab Rig Deployment -->
+        <div class="swiper-slide bg-[#0c1017] border border-white/10 rounded-2xl overflow-hidden group">
+          <a href="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=1200" target="_blank" rel="noreferrer" class="block aspect-video bg-black overflow-hidden relative">
+            <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=800" alt="Testing Rig" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+            <div class="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs font-mono-code">
+              <i class="fas fa-search-plus mr-1.5"></i> View Image
+            </div>
+          </a>
+          <div class="p-6">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] font-mono-code bg-[#80ffdb]/15 text-[#80ffdb] px-2.5 py-1 rounded font-bold uppercase">Engineering News</span>
+              <a href="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=1200" target="_blank" rel="noreferrer" class="text-xs font-mono-code text-[#80ffdb] hover:underline flex items-center gap-1">
+                Open Photo <i class="fas fa-external-link-alt text-[10px]"></i>
+              </a>
+            </div>
+            <h3 class="font-display text-lg font-semibold text-white mt-3">Kinematic Test Rig Deployment</h3>
+            <p class="text-xs text-[#9aa3b2] mt-1">New mechanical testing rig completed for the robotics division.</p>
+          </div>
+        </div>
+
+        <!-- Slide 3: Embedded World Conference -->
+        <div class="swiper-slide bg-[#0c1017] border border-white/10 rounded-2xl overflow-hidden group">
+          <a href="assets/Project-2.jpg" target="_blank" rel="noreferrer" class="block aspect-video bg-black overflow-hidden relative">
+            <img src="assets/Project-2.jpg" alt="Embedded World" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=800&q=80'" />
+            <div class="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs font-mono-code">
+              <i class="fas fa-search-plus mr-1.5"></i> View Image
+            </div>
+          </a>
+          <div class="p-6">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] font-mono-code bg-[#ff6a1a]/15 text-[#ff6a1a] px-2.5 py-1 rounded font-bold uppercase">Conference</span>
+              <a href="assets/Project-2.jpg" target="_blank" rel="noreferrer" class="text-xs font-mono-code text-[#ff6a1a] hover:underline flex items-center gap-1">
+                Open Photo <i class="fas fa-external-link-alt text-[10px]"></i>
+              </a>
+            </div>
+            <h3 class="font-display text-lg font-semibold text-white mt-3">Embedded World 2025</h3>
+            <p class="text-xs text-[#9aa3b2] mt-1">Highlights from our presentation on RTOS safety standards.</p>
+          </div>
+        </div>
+
+      </div>
+      <div class="swiper-pagination"></div>
+    </div>
+  </section>
+
+  <!-- 7. HOW WE ENGAGE & LIFECYCLE SECTION -->
+  <section id="approach" class="py-24 bg-[#080b10] border-t border-white/[0.08] relative z-10">
+    <div class="max-w-[1240px] mx-auto px-6">
+      
+      <div class="max-w-[760px] mb-14">
+        <span class="font-mono-code text-xs uppercase tracking-widest text-[#ff6a1a] flex items-center gap-2 mb-3">
+          <span class="w-2 h-2 bg-[#ff6a1a] inline-block"></span> 05 / HOW WE ENGAGE
+        </span>
+        <h2 class="font-display text-3xl sm:text-5xl font-bold text-white tracking-tight">
+          From systems engineering to sustainment
+        </h2>
+        <p class="mt-4 text-sm sm:text-base text-[#9aa3b2] font-light leading-relaxed">
+          Whatever the domain, Mechstem engagements follow the same disciplined lifecycle — the sequence a real program needs, not a marketing flourish.
+        </p>
+      </div>
+
+      <!-- 5-Step Disciplined Lifecycle -->
+      <div class="grid grid-cols-1 md:grid-cols-5 border-t border-b border-white/10 divide-y md:divide-y-0 md:divide-x divide-white/10">
+        
+        <div class="p-6 flex flex-col justify-start">
+          <span class="font-mono-code text-xs text-[#ff6a1a] font-bold">01</span>
+          <h4 class="font-display text-base font-bold text-white mt-2 mb-2">Systems requirements</h4>
+          <p class="text-xs text-[#9aa3b2] leading-relaxed font-light">
+            Define the problem, constraints and success criteria across mechanical, electronic and software boundaries.
+          </p>
+        </div>
+
+        <div class="p-6 flex flex-col justify-start">
+          <span class="font-mono-code text-xs text-[#ff6a1a] font-bold">02</span>
+          <h4 class="font-display text-base font-bold text-white mt-2 mb-2">Concept & design</h4>
+          <p class="text-xs text-[#9aa3b2] leading-relaxed font-light">
+            Cross-discipline concept generation, trade studies and architecture — mechanical, automation and embedded together.
+          </p>
+        </div>
+
+        <div class="p-6 flex flex-col justify-start">
+          <span class="font-mono-code text-xs text-[#ff6a1a] font-bold">03</span>
+          <h4 class="font-display text-base font-bold text-white mt-2 mb-2">Prototype & validation</h4>
+          <p class="text-xs text-[#9aa3b2] leading-relaxed font-light">
+            Build, instrument and test — hardware-in-the-loop where the domain calls for it.
+          </p>
+        </div>
+
+        <div class="p-6 flex flex-col justify-start">
+          <span class="font-mono-code text-xs text-[#ff6a1a] font-bold">04</span>
+          <h4 class="font-display text-base font-bold text-white mt-2 mb-2">Production engineering</h4>
+          <p class="text-xs text-[#9aa3b2] leading-relaxed font-light">
+            DFM/DFA, industrialisation and automation handover for repeatable manufacture.
+          </p>
+        </div>
+
+        <div class="p-6 flex flex-col justify-start">
+          <span class="font-mono-code text-xs text-[#ff6a1a] font-bold">05</span>
+          <h4 class="font-display text-base font-bold text-white mt-2 mb-2">Field support & sustainment</h4>
+          <p class="text-xs text-[#9aa3b2] leading-relaxed font-light">
+            Lifecycle management, spares, upgrades and capability transfer to your own team.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 8. ABOUT MECHSTEM SECTION -->
+  <section id="about" class="py-24 max-w-[1240px] mx-auto px-6 border-t border-white/[0.08] relative z-10">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+      
+      <div>
+        <span class="font-mono-code text-xs uppercase tracking-widest text-[#66e3ff] flex items-center gap-2 mb-3">
+          <span class="w-2 h-2 bg-[#ff6a1a] inline-block"></span> 06 / ABOUT MECHSTEM
+        </span>
+        <h2 class="font-display text-3xl sm:text-4xl font-bold text-white mb-6">
+          Subject-matter depth. Managerial acumen.
+        </h2>
+        <div class="space-y-4 text-sm text-[#8798aa] leading-relaxed font-light">
+          <p>
+            Mechstem is a pure-play mechatronics engineering organisation, founded in 2017 — we don't dilute into unrelated fields, and we don't stop at one discipline. Our engineers work fluidly across machinery, mechanical systems, industrial automation, and embedded electronics and software, tied together by product lifecycle management.
+          </p>
+          <p>
+            Every engagement pairs deep subject-matter expertise with the managerial acumen to run it as a program: scoped, sequenced, and accountable — whether the deliverable is a working prototype, a production line, or a trained team.
+          </p>
+          <p>
+            That combination is why clients bring us problems that cross domains and disciplines at once — and why training is a first-class part of what we do, not an afterthought.
+          </p>
+        </div>
+      </div>
+
+      <!-- Specification Data Plate -->
+      <div class="border border-white/20 font-mono-code text-xs bg-[#0c1017] rounded-2xl p-2 text-[#eef4fb]">
+        <div class="flex justify-between p-4 border-b border-white/10">
+          <span class="text-[#78899a] uppercase">Founded</span>
+          <span class="font-bold text-white">2017</span>
+        </div>
+        <div class="flex justify-between p-4 border-b border-white/10">
+          <span class="text-[#78899a] uppercase">Type</span>
+          <span class="font-bold text-[#4cc9f0]">Pure-play mechatronics</span>
+        </div>
+        <div class="flex justify-between p-4 border-b border-white/10">
+          <span class="text-[#78899a] uppercase">Focus</span>
+          <span class="font-bold text-white">R&D · Services · Training</span>
+        </div>
+        <div class="flex justify-between p-4 border-b border-white/10">
+          <span class="text-[#78899a] uppercase">Disciplines</span>
+          <span class="font-bold text-white">5 Core Stack Units</span>
+        </div>
+        <div class="flex justify-between p-4 border-b border-white/10">
+          <span class="text-[#78899a] uppercase">Domains served</span>
+          <span class="font-bold text-white">7+ Industrial Sectors</span>
+        </div>
+        <div class="flex justify-between p-4">
+          <span class="text-[#78899a] uppercase">Lifecycle coverage</span>
+          <span class="font-bold text-[#80ffdb]">Concept → Sustainment</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 9. OPPORTUNITIES -->
+  <section id="opportunities" class="py-24 max-w-[1240px] mx-auto px-6 relative z-10 border-t border-white/[0.08]">
+    <div class="max-w-[660px] mb-12">
+      <span class="font-mono-code text-xs uppercase tracking-widest text-[#80ffdb] flex items-center gap-2 mb-3">
+        <span class="w-2 h-2 bg-[#80ffdb] inline-block"></span> 07 / OPPORTUNITIES & CAREERS
+      </span>
+      <h2 class="font-display text-3xl sm:text-5xl font-bold text-white tracking-tight">Join the Ecosystem</h2>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 perspective-container">
+      <div class="tilt-card bg-[#0c1017] p-8 rounded-3xl border border-white/10 flex flex-col justify-between">
+        <div>
+          <span class="font-mono-code text-xs text-[#4cc9f0] uppercase tracking-wider block mb-2">FOR GRADUATES & STUDENTS</span>
+          <h3 class="font-display text-2xl font-bold text-white">Join the Lab</h3>
+          <p class="text-sm text-[#9aa3b2] mt-3 leading-relaxed font-light">
+            Pursuing B.E, B.Tech, M.Tech, BCA, or MCA? Gain real-world industrial mechatronics skills through online & offline fast-track internships and apprenticeships.
+          </p>
+        </div>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSf-1oE6WQamga4FQnhxsdkVg_On1HwIzoXXKkjYg-Gr_p9Grw/viewform?usp=dialog" target="_blank" rel="noreferrer" class="mt-8 inline-block px-8 py-3.5 rounded-full font-mono-code text-xs font-bold bg-gradient-to-r from-[#4cc9f0] to-[#80ffdb] text-[#05070b] text-center">
+          Apply!
+        </a>
+      </div>
+
+      <div class="tilt-card bg-[#0c1017] p-8 rounded-3xl border border-white/10 flex flex-col justify-between">
+        <div>
+          <span class="font-mono-code text-xs text-[#80ffdb] uppercase tracking-wider block mb-2">FOR INDUSTRY & INSTITUTIONS</span>
+          <h3 class="font-display text-2xl font-bold text-white">Collaborate</h3>
+          <p class="text-sm text-[#9aa3b2] mt-3 leading-relaxed font-light">
+            Industry R&D partnerships, custom special-purpose machinery (SPM) consulting, and open-source robotics sponsorships.
+          </p>
+        </div>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSd7KGoTd2T64U0oRQ2SvgPvpeio5s9lpm2AeeZp-7gNnXlXZQ/viewform?usp=dialog" target="_blank" rel="noreferrer" class="mt-8 inline-block px-8 py-3.5 rounded-full font-mono-code text-xs font-bold bg-white/10 hover:bg-white/20 text-white text-center transition-colors">
+          CONTACT ENGINEERING TEAM →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. CONTACT SECTION -->
+  <section id="contact" class="py-24 bg-[#0a2540] text-white border-t border-[#bfe1ff]/15 relative z-10">
+    <div class="max-w-[1240px] mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+      <div>
+        <span class="font-mono-code text-xs uppercase tracking-widest text-[#7fb8e8] flex items-center gap-2 mb-3">
+          <span class="w-2 h-2 bg-[#ff6a1a] inline-block"></span> START A CONVERSATION
+        </span>
+        <h2 class="font-display text-3xl sm:text-5xl font-bold tracking-tight">
+          Bring us the problem that crosses your domains.
+        </h2>
+        <p class="text-sm text-[#bfe1ff]/80 mt-4 leading-relaxed font-light">
+          Whether it's an R&D program, an engineering services contract, or a capability development track — tell us where you're starting from.
+        </p>
+        
+        <div class="mt-10 space-y-4 font-mono-code text-xs text-[#bfe1ff]">
+          <div><b class="block text-white uppercase text-[10px]">Email Direct</b> hello@mechstem.com</div>
+          <div><b class="block text-white uppercase text-[10px]">Studio HQ</b> Chennai, Tamil Nadu, India</div>
+        </div>
+
+        <div class="flex gap-4 mt-8">
+          <a href="https://github.com/mechstem" target="_blank" rel="noreferrer" class="w-10 h-10 border border-[#bfe1ff]/30 rounded-xl flex items-center justify-center hover:bg-[#ff6a1a] hover:text-black transition-colors"><i class="fab fa-github"></i></a>
+          <a href="https://www.linkedin.com/company/mechstem/" target="_blank" rel="noreferrer" class="w-10 h-10 border border-[#bfe1ff]/30 rounded-xl flex items-center justify-center hover:bg-[#ff6a1a] hover:text-black transition-colors"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://www.youtube.com/@mechstem" target="_blank" rel="noreferrer" class="w-10 h-10 border border-[#bfe1ff]/30 rounded-xl flex items-center justify-center hover:bg-[#ff6a1a] hover:text-black transition-colors"><i class="fab fa-youtube"></i></a>
+          <a href="https://twitter.com/mechstem" target="_blank" rel="noreferrer" class="w-10 h-10 border border-[#bfe1ff]/30 rounded-xl flex items-center justify-center hover:bg-[#ff6a1a] hover:text-black transition-colors"><i class="fab fa-twitter"></i></a>
+        </div>
+      </div>
+
+      <form action="https://docs.google.com/forms/d/e/1FAIpQLSd7KGoTd2T64U0oRQ2SvgPvpeio5s9lpm2AeeZp-7gNnXlXZQ/viewform?usp=dialog" method="POST" target="_blank" class="space-y-4 font-mono-code text-xs bg-white/[0.03] p-8 rounded-3xl border border-white/10">
+        <div>
+          <label class="block text-[#7fb8e8] uppercase mb-1">Full Name</label>
+          <input name="name" required placeholder="Your Name" class="w-full bg-white/5 border border-[#bfe1ff]/30 rounded-xl px-4 py-3 text-white focus:outline-[#4cc9f0]" />
+        </div>
+        <div>
+          <label class="block text-[#7fb8e8] uppercase mb-1">Organization / Institution</label>
+          <input name="org" placeholder="Company or College" class="w-full bg-white/5 border border-[#bfe1ff]/30 rounded-xl px-4 py-3 text-white focus:outline-[#4cc9f0]" />
+        </div>
+        <div>
+          <label class="block text-[#7fb8e8] uppercase mb-1">Scope</label>
+          <textarea name="message" rows="3" placeholder="Brief scope of inquiry..." class="w-full bg-white/5 border border-[#bfe1ff]/30 rounded-xl px-4 py-3 text-white focus:outline-[#4cc9f0]"></textarea>
+        </div>
+        <button type="submit" class="w-full py-4 rounded-full font-bold bg-gradient-to-r from-[#4cc9f0] to-[#80ffdb] text-[#05070b] hover:shadow-[0_0_20px_rgba(76,201,240,0.5)] transition-all">
+          SEND INQUIRY →
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- 11. FOOTER -->
+  <footer class="bg-[#020408] border-t border-white/10 py-14 text-xs font-mono-code text-[#9aa3b2] relative z-10">
+    <div class="max-w-[1240px] mx-auto px-6">
+      
+      <div class="flex flex-col md:flex-row justify-between items-start gap-8 pb-10 border-b border-white/10">
+        <!-- Logo Image Reference -->
+        <div class="flex items-center gap-3.5">
+          <div class="w-9 h-9 flex items-center justify-center">
+            <img
+              src="assets/logo.png"
+              alt="mechstem Logo"
+              class="w-full h-full object-contain"
+              onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/mechstem/mechstem.github.io/main/assets/logo.png';"
+            />
+          </div>
+          <div>
+            <div class="font-brand font-bold text-white text-lg lowercase">mechstem</div>
+            <div class="text-[11px] text-white/50 font-mono-code">ESTABLISHED 2017 &bull; APPLIED INGENUITY</div>
+          </div>
+        </div>
+
+        <!-- Single Consolidated Domain Matrix -->
+        <div class="flex flex-wrap gap-2 max-w-xl justify-start md:justify-end">
+          <span class="px-2.5 py-1 rounded bg-white/5 border border-white/10 text-[11px] text-white/70">AUTOMOTIVE</span>
+          <span class="px-2.5 py-1 rounded bg-white/5 border border-white/10 text-[11px] text-white/70">INDUSTRY & MANUFACTURING</span>
+          <span class="px-2.5 py-1 rounded bg-white/5 border border-white/10 text-[11px] text-white/70">AVIATION</span>
+          <span class="px-2.5 py-1 rounded bg-white/5 border border-white/10 text-[11px] text-white/70">SPACE TECH</span>
+          <span class="px-2.5 py-1 rounded bg-white/5 border border-white/10 text-[11px] text-white/70">CONSTRUCTION</span>
+          <span class="px-2.5 py-1 rounded bg-white/5 border border-white/10 text-[11px] text-white/70">RAIL SYSTEMS</span>
+          <span class="px-2.5 py-1 rounded bg-white/5 border border-white/10 text-[11px] text-white/70">MEDICAL MECHATRONICS</span>
+        </div>
+      </div>
+
+      <div class="flex flex-col sm:flex-row justify-between items-center gap-4 pt-8 text-[11px] text-white/40">
+        <div>&copy; 2017–2026 mechstem laboratories. All rights reserved.</div>
+        <a href="#top" class="hover:text-white transition-colors">BACK TO TOP ↑</a>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script>
+    // 1. Swiper Carousel Init
+    const swiper = new Swiper('.updatesSwiper', {
+      slidesPerView: 1,
+      spaceBetween: 24,
+      loop: true,
+      pagination: { el: '.swiper-pagination', clickable: true },
+      breakpoints: { 768: { slidesPerView: 2 } }
+    });
+
+    // 2. Mobile Menu Drawer Toggle
+    const mobileBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    mobileBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    // 3. Multi-View Animated HUD Stage Switcher
+    const hudViews = [
+      {
+        id: 'viewEngine',
+        title: 'ENGINE EXPLOSION',
+        tag: 'ISO // AXIS-Z',
+        p1Label: 'EXPLOSION AXIS',
+        p1Val: 'VERTICAL (Z-SLOT)',
+        p2Label: 'KINEMATIC STATE',
+        p2Val: 'CALIBRATED'
+      },
+      {
+        id: 'viewCpu',
+        title: 'SILICON CPU DIE (ZOOMED)',
+        tag: '5nm // NANO-MATRIX',
+        p1Label: 'BUS LATENCY',
+        p1Val: '< 1.2 MICROSEC',
+        p2Label: 'LOGIC STATE',
+        p2Val: 'DMA ACTIVE'
+      },
+      {
+        id: 'viewCnc',
+        title: '5-AXIS CNC MACHINERY',
+        tag: 'TOOLHEAD // GANTRY',
+        p1Label: 'FEED RESOLUTION',
+        p1Val: '±0.002 MM',
+        p2Label: 'SPINDLE STATE',
+        p2Val: '24,000 RPM'
+      },
+      {
+        id: 'viewArch',
+        title: 'ARCHITECTURAL WIREFRAME',
+        tag: 'BIM // ISOMETRIC',
+        p1Label: 'STRUCTURAL TRUSS',
+        p1Val: 'LOAD BALANCED',
+        p2Label: 'SPATIAL GRID',
+        p2Val: 'ALIGNED'
+      }
+    ];
+
+    let activeHudIndex = 0;
+    let autoHudInterval = null;
+
+    function setHudView(index, manual = true) {
+      activeHudIndex = index;
+      
+      for (let i = 0; i < 4; i++) {
+        const tab = document.getElementById('tab' + i);
+        if (i === index) {
+          tab.className = 'px-2 py-1 rounded bg-[#66e3ff]/20 text-[#66e3ff] border border-[#66e3ff]/40 font-bold transition-all';
+        } else {
+          tab.className = 'px-2 py-1 rounded bg-white/5 text-white/60 border border-white/10 hover:text-white transition-all';
+        }
+      }
+
+      const svgs = ['viewEngine', 'viewCpu', 'viewCnc', 'viewArch'];
+      svgs.forEach((id, i) => {
+        const el = document.getElementById(id);
+        if (i === index) {
+          el.classList.remove('hidden');
+        } else {
+          el.classList.add('hidden');
+        }
+      });
+
+      const data = hudViews[index];
+      document.getElementById('hudViewTitle').textContent = data.title;
+      document.getElementById('hudStatusTag').textContent = data.tag;
+      document.getElementById('hudParam1Label').textContent = data.p1Label;
+      document.getElementById('hudParam1Val').textContent = data.p1Val;
+      document.getElementById('hudParam2Label').textContent = data.p2Label;
+      document.getElementById('hudParam2Val').textContent = data.p2Val;
+
+      if (manual) {
+        clearInterval(autoHudInterval);
+        startAutoHud();
+      }
+    }
+
+    function startAutoHud() {
+      autoHudInterval = setInterval(() => {
+        const next = (activeHudIndex + 1) % 4;
+        setHudView(next, false);
+      }, 5000);
+    }
+    startAutoHud();
+
+    // 4. Core Modules Toggle
+    const syllabusBtn = document.getElementById('syllabusToggleBtn');
+    const moduleGrid = document.getElementById('moduleGrid');
+    syllabusBtn.addEventListener('click', () => {
+      const isHidden = moduleGrid.classList.toggle('hidden');
+      syllabusBtn.textContent = isHidden ? 'View core modules ▾' : 'Hide core modules ▴';
+    });
+
+    // 5. Testimonials Slider Logic
+    const testimonials = [
+      {
+        quote: '"The Embedded Systems course with Mechstem gave me the confidence and skills to land my dream job. The projects were very industry relevant."',
+        author: 'Priya S.'
+      },
+      {
+        quote: '"The AutoCAD Mechanical certification programme is practical and well-structured. The trainers are highly knowledgeable."',
+        author: 'Rajesh K.'
+      },
+      {
+        quote: '"Excellent learning experience for Embedded Linux and Yocto. The weekend classes fit my schedule perfectly."',
+        author: 'Anjali M.'
+      },
+      {
+        quote: '"The AI/ML executive diploma was challenging but rewarding. The capstone project really showcased my skills to recruiters."',
+        author: 'Vikram P.'
+      }
+    ];
+
+    let tIndex = 0;
+    const testText = document.getElementById('testimonialText');
+    const testAuthor = document.getElementById('testimonialAuthor');
+    const testDots = document.getElementById('testimonialDots');
+
+    function renderTestimonial(idx) {
+      tIndex = idx;
+      testText.textContent = testimonials[idx].quote;
+      testAuthor.textContent = '— ' + testimonials[idx].author;
+      
+      testDots.innerHTML = '';
+      testimonials.forEach((_, i) => {
+        const dot = document.createElement('button');
+        dot.className = `w-2.5 h-2.5 rounded-full border border-[#bfe1ff]/40 transition-colors ${i === idx ? 'bg-[#ff6a1a] border-[#ff6a1a]' : 'bg-transparent'}`;
+        dot.onclick = () => renderTestimonial(i);
+        testDots.appendChild(dot);
+      });
+    }
+    renderTestimonial(0);
+    setInterval(() => renderTestimonial((tIndex + 1) % testimonials.length), 6000);
+
+    // 6. Card 3D Tilting Effect
+    const cards = document.querySelectorAll('.tilt-card');
+    cards.forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        card.style.transform = `perspective(1000px) rotateX(${-y * 0.05}deg) rotateY(${x * 0.05}deg) translateZ(10px)`;
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0px)`;
+      });
+    });
+
+    // 7. Interactive Particle Canvas Background Engine
+    const canvas = document.getElementById('particleCanvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    class Particle {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.vx = (Math.random() - 0.5) * 0.4;
+        this.vy = (Math.random() - 0.5) * 0.4;
+        this.radius = Math.random() * 1.5 + 0.5;
+      }
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+        if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+        if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+      }
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = '#66e3ff';
+        ctx.fill();
+      }
+    }
+
+    for (let i = 0; i < 40; i++) particles.push(new Particle());
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let i = 0; i < particles.length; i++) {
+        particles[i].update();
+        particles[i].draw();
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 110) {
+            ctx.beginPath();
+            ctx.strokeStyle = `rgba(102, 227, 255, ${0.15 * (1 - dist / 110)})`;
+            ctx.lineWidth = 0.5;
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.stroke();
+          }
+        }
+      }
+      requestAnimationFrame(animateParticles);
+    }
+    animateParticles();
+  </script>
+</body>
+</html>
